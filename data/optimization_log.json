@@ -1,0 +1,33 @@
+{
+  "optimizations": [
+    {
+      "date": "2026-08-04",
+      "trigger_reason": "每日例行优化（命中率 < 80% 触发）",
+      "game_type": "lottery_engine",
+      "before_hit_rate": 0.0,
+      "optimization_content": [
+        "新增尾数排除杀号策略（tail_kill）",
+        "新增余数排除杀号策略（除3余数分布过滤，remainder_kill）",
+        "调整遗漏值杀号阈值（kill_ratio: 0.2→0.18）",
+        "调整冷热区间杀号阈值（kill_ratio: 0.15→0.12）",
+        "优化前注精选权重分配（frequency: 0.30→0.20, cooccurrence: 0.20→0.25, zone_coverage: 0.20→0.25）",
+        "优化数字型玩法遗漏值回补策略"
+      ],
+      "new_version": "v2.3"
+    },
+    {
+      "date": "2026-08-04",
+      "trigger_reason": "每日例行优化（准确率 < 80% 触发）",
+      "game_type": "sports_engine",
+      "before_accuracy": 0.0,
+      "optimization_content": [
+        "调整足球权重（ranking: 0.20→0.15, recent_form: 0.22→0.25, injuries: 0.10→0.15, weather: 0.07→0.04）",
+        "调整篮球权重（ranking: 0.18→0.15, recent_form: 0.20→0.23, injuries: 0.15→0.18, weather: 0.08→0.05）",
+        "提高串关选择信心门槛（safe: 0.65→0.70, balanced: 0.58→0.62）",
+        "降低串关场次上限（safe: 3→2场, balanced: 4→3场, aggressive: 6→4场）",
+        "历史交锋心理优势权重微调"
+      ],
+      "new_version": "v1.6"
+    }
+  ]
+}
