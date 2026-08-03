@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>彩票预测系统 - 开奖结果与数据看板</title>
+<style>
+  :root {
+    --primary: #1a73e8;
+    --primary-light: #e8f0fe;
+    --success: #0f9d58;
+    --warning: #f9ab00;
+    --danger: #ea4335;
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --text: #202124;
+    --text-secondary: #5f6368;
+    --border: #dadce0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 20px;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+  header {
+    background: linear-gradient(135deg, var(--primary), #1557b0);
+    color: white;
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  header h1 { font-size: 24px; font-weight: 600; }
+  header .subtitle { font-size: 14px; opacity: 0.85; margin-top: 4px; }
+  header .date-badge {
+    background: rgba(255,255,255,0.2);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  .nav-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 20px;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    overflow-x: auto;
+  }
+  .nav-tab {
+    padding: 10px 20px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .nav-tab:hover { background: var(--primary-light); color: var(--primary); }
+  .nav-tab.active { background: var(--primary); color: white; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .section { margin-bottom: 24px; }
+  .section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    border: 1px solid var(--border);
+  }
+  .card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .game-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .badge-dlt { background: #fff3e0; color: #e65100; }
+  .badge-ssq { background: #fce4ec; color: #c62828; }
+  .badge-pl3 { background: #e8f5e9; color: #2e7d32; }
+  .badge-pl5 { background: #e0f2f1; color: #00695c; }
+  .badge-fc3d { background: #f3e5f5; color: #6a1b9a; }
+  .badge-kl8 { background: #e3f2fd; color: #1565c0; }
+  .badge-qxc { background: #fff8e1; color: #f57f17; }
+  .badge-qlc { background: #fce4ec; color: #880e4f; }
+  .ball-row { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0; }
+  .ball {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    color: white;
+  }
+  .ball-red { background: #d32f2f; }
+  .ball-blue { background: #1976d2; }
+  .ball-front { background: #d32f2f; }
+  .ball-back { background: #1976d2; }
+  .ball-digit { background: #546e7a; }
+  .ball-kl8 { background: #388e3c; }
+  .ball-special { background: #f9a825; }
+  .stat-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 8px 0;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .stat-item { display: flex; align-items: center; gap: 4px; }
+  .stat-label { color: var(--text-secondary); }
+  .stat-value { color: var(--text); font-weight: 600; }
+  .hit-rate {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .hit-high { background: #e6f4ea; color: #1e7e34; }
+  .hit-medium { background: #fef7e0; color: #e37400; }
+  .hit-low { background: #fce8e6; color: #c5221f; }
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-secondary);
+  }
+  .empty-state svg { width: 48px; height: 48px; margin-bottom: 12px; opacity: 0.5; }
+  .notice {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #856404;
+    margin-bottom: 16px;
+  }
+  .rule-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+  }
+  .rule-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+  }
+  .rule-item .label { font-size: 12px; color: var(--text-secondary); }
+  .rule-item .value { font-size: 18px; font-weight: 700; color: var(--primary); margin-top: 4px; }
+  .match-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .match-table th, .match-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .match-table th { background: var(--primary-light); font-weight: 600; font-size: 13px; }
+  .match-table tr:hover { background: #f8f9fa; }
+  .prediction-group { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px dashed var(--border); }
+  .prediction-group:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .group-header { font-size: 13px; color: var(--text-secondary); margin-bottom: 6px; }
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--text-secondary);
+    font-size: 12px;
+    margin-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .tag-win { background: #e6f4ea; color: #1e7e34; }
+  .tag-loss { background: #fce8e6; color: #c5221f; }
+  @media (max-width: 640px) {
+    .card-grid { grid-template-columns: 1fr; }
+    header { flex-direction: column; text-align: center; }
+    .ball { width: 30px; height: 30px; font-size: 11px; }
+  }
+  .loading { text-align: center; padding: 40px; color: var(--text-secondary); }
+  .loading::after { content: '...'; animation: dots 1.5s infinite; }
+  @keyframes dots { 0%,20% { content: '.'; } 40% { content: '..'; } 60%,100% { content: '...'; } }
+  .error-state { text-align: center; padding: 40px; color: var(--danger); }
+  .summary-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    border: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+  .summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .summary-header h3 { margin-bottom: 0; }
+  .progress-bar {
+    height: 8px;
+    background: #e8eaed;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 8px 0;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+  }
+  .progress-fill.high { background: var(--success); }
+  .progress-fill.medium { background: var(--warning); }
+  .progress-fill.low { background: var(--danger); }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div>
+      <h1>🎯 彩票预测系统</h1>
+      <div class="subtitle">开奖结果 · 数据看板 · 算法优化</div>
+    </div>
+    <div class="date-badge" id="currentDate">加载中...</div>
+  </header>
+
+  <div class="nav-tabs" id="navTabs">
+    <button class="nav-tab active" data-tab="overview">📊 总览</button>
+    <button class="nav-tab" data-tab="lottery">🎲 彩票</button>
+    <button class="nav-tab" data-tab="sports">⚽ 竞彩</button>
+    <button class="nav-tab" data-tab="rules">📋 规则</button>
+    <button class="nav-tab" data-tab="optimization">🔧 优化日志</button>
+  </div>
+
+  <div class="tab-content active" id="tabOverview">
+    <div class="section">
+      <h2 class="section-title">📊 今日数据概览</h2>
+      <div class="card-grid" id="overviewCards">
+        <div class="card">
+          <h3>🎲 彩票玩法</h3>
+          <div id="overviewLottery">加载中...</div>
+        </div>
+        <div class="card">
+          <h3>⚽ 竞彩预测</h3>
+          <div id="overviewSports">加载中...</div>
+        </div>
+        <div class="card">
+          <h3>📈 月度统计</h3>
+          <div id="overviewMonthly">加载中...</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">📋 今日开奖号码</h2>
+      <div id="todayResults">加载中...</div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tabLottery">
+    <div class="section">
+      <h2 class="section-title">🎲 彩票预测与开奖</h2>
+      <div class="notice">📌 彩票开奖为独立随机事件，预测结果仅供研究参考，请理性购彩</div>
+      <div id="lotteryContent">加载中...</div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tabSports">
+    <div class="section">
+      <h2 class="section-title">⚽ 竞彩预测与赛果</h2>
+      <div id="sportsContent">加载中...</div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tabRules">
+    <div class="section">
+      <h2 class="section-title">📋 玩法金额规则</h2>
+      <div id="rulesContent">加载中...</div>
+    </div>
+    <div class="section">
+      <h2 class="section-title">📅 开奖日历</h2>
+      <div class="card">
+        <table class="match-table">
+          <tr><th>玩法</th><th>开奖日</th></tr>
+          <tr><td>大乐透 (DLT)</td><td>周一、三、六</td></tr>
+          <tr><td>双色球 (SSQ)</td><td>周二、四、日</td></tr>
+          <tr><td>七星彩 (QXC)</td><td>周二、五、日</td></tr>
+          <tr><td>七乐彩 (QLC)</td><td>周一、三、五</td></tr>
+          <tr><td>排列三 (PL3)</td><td>每日开奖</td></tr>
+          <tr><td>排列五 (PL5)</td><td>每日开奖</td></tr>
+          <tr><td>福彩3D (FC3D)</td><td>每日开奖</td></tr>
+          <tr><td>快乐8 (KL8)</td><td>每日开奖</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tabOptimization">
+    <div class="section">
+      <h2 class="section-title">🔧 算法优化日志</h2>
+      <div id="optimizationContent">加载中...</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>⚠️ 免责声明：彩票为独立随机事件，本系统仅供学习研究参考，请理性购彩，切勿沉迷。</p>
+    <p style="margin-top:4px;">数据来源：中国福利彩票官网、中国体育彩票官网 | 预测算法版本 v2.3 / v1.6</p>
+  </div>
+</div>
+
+<script>
+const TODAY = '2026-08-04';
+const MONTH = '2026-08';
+
+async function loadJSON(path) {
+  try {
+    const res = await fetch(path);
+    if (!res.ok) return null;
+    return await res.json();
+  } catch { return null; }
+}
+
+function getGameBadge(type) {
+  const map = {
+    'DLT': 'badge-dlt', 'SSQ': 'badge-ssq', 'PL3': 'badge-pl3',
+    'PL5': 'badge-pl5', 'FC3D': 'badge-fc3d', 'KL8': 'badge-kl8',
+    'QXC': 'badge-qxc', 'QLC': 'badge-qlc'
+  };
+  return map[type] || '';
+}
+
+function getGameName(type) {
+  const map = {
+    'DLT': '大乐透', 'SSQ': '双色球', 'PL3': '排列三',
+    'PL5': '排列五', 'FC3D': '福彩3D', 'KL8': '快乐8',
+    'QXC': '七星彩', 'QLC': '七乐彩'
+  };
+  return map[type] || type;
+}
+
+function renderBalls(type, numbers, opts = {}) {
+  if (!numbers || !numbers.length) return '<span style="color:var(--text-secondary)">暂无数据</span>';
+  if (type === 'KL8') {
+    return '<div class="ball-row">' + numbers.map(n => `<span class="ball ball-kl8">${String(n).padStart(2,'0')}</span>`).join('') + '</div>';
+  }
+  if (type === 'SSQ') {
+    const red = numbers.slice(0, 6);
+    const blue = numbers.slice(6);
+    return '<div class="ball-row">' +
+      red.map(n => `<span class="ball ball-red">${String(n).padStart(2,'0')}</span>`).join('') +
+      blue.map(n => `<span class="ball ball-blue">${String(n).padStart(2,'0')}</span>`).join('') +
+      '</div>';
+  }
+  if (type === 'DLT') {
+    const front = numbers.slice(0, 5);
+    const back = numbers.slice(5);
+    return '<div class="ball-row">' +
+      front.map(n => `<span class="ball ball-front">${String(n).padStart(2,'0')}</span>`).join('') +
+      '<span style="margin:0 4px;color:var(--text-secondary)">+</span>' +
+      back.map(n => `<span class="ball ball-back">${String(n).padStart(2,'0')}</span>`).join('') +
+      '</div>';
+  }
+  return '<div class="ball-row">' +
+    numbers.map(n => `<span class="ball ball-digit">${n}</span>`).join('') +
+    '</div>';
+}
+
+function renderHitRate(rate) {
+  const pct = (rate * 100).toFixed(1);
+  let cls = 'hit-low';
+  if (rate >= 0.6) cls = 'hit-high';
+  else if (rate >= 0.3) cls = 'hit-medium';
+  return `<span class="hit-rate ${cls}">${pct}%</span>`;
+}
+
+function renderProgressBar(rate) {
+  const pct = Math.round(rate * 100);
+  let cls = 'low';
+  if (rate >= 0.6) cls = 'high';
+  else if (rate >= 0.3) cls = 'medium';
+  return `<div class="progress-bar"><div class="progress-fill ${cls}" style="width:${pct}%"></div></div>`;
+}
+
+// Tab switching
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab' + tab.dataset.tab.charAt(0).toUpperCase() + tab.dataset.tab.slice(1)).classList.add('active');
+  });
+});
+
+async function init() {
+  document.getElementById('currentDate').textContent = '📅 ' + TODAY;
+
+  const [results, predictions, sportsPred, sportsRes, summary, monthly, rules, optLog] = await Promise.all([
+    loadJSON(`data/results/${TODAY}.json`),
+    loadJSON(`data/predictions/${TODAY}.json`),
+    loadJSON(`data/sports_predictions/${TODAY}.json`),
+    loadJSON(`data/sports_results/${TODAY}.json`),
+    loadJSON(`data/summary/daily_${TODAY}.json`),
+    loadJSON(`data/summary/monthly_${MONTH}.json`),
+    loadJSON('data/game_rules.json'),
+    loadJSON('data/optimization_log.json')
+  ]);
+
+  renderOverview(summary, monthly);
+  renderTodayResults(results);
+  renderLottery(predictions, results);
+  renderSports(sportsPred, sportsRes);
+  renderRules(rules);
+  renderOptimization(optLog);
+}
+
+function renderOverview(summary, monthly) {
+  const elLottery = document.getElementById('overviewLottery');
+  const elSports = document.getElementById('overviewSports');
+  const elMonthly = document.getElementById('overviewMonthly');
+
+  if (summary && summary.lottery && Object.keys(summary.lottery).length > 0) {
+    const games = Object.entries(summary.lottery);
+    elLottery.innerHTML = games.map(([type, s]) => {
+      const name = getGameName(type);
+      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)">
+        <span><span class="game-badge ${getGameBadge(type)}">${name}</span></span>
+        <span>${renderHitRate(s.hit_rate)} (${s.groups_with_hit}/${s.group_count})</span>
+      </div>`;
+    }).join('') + `<div style="margin-top:8px;font-size:12px;color:var(--text-secondary)">最高奖级: ${games[0]?.[1]?.max_hit_level || '-'}</div>`;
+  } else {
+    elLottery.innerHTML = '<div class="empty-state"><p>今日无开奖数据</p><p style="font-size:12px;margin-top:4px;">开奖结果将在21:15后更新</p></div>';
+  }
+
+  if (summary && summary.sports) {
+    const fb = summary.sports.football || {};
+    const bb = summary.sports.basketball || {};
+    elSports.innerHTML = `
+      <div style="padding:6px 0;border-bottom:1px solid var(--border)">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span>⚽ 足球</span>
+          <span>${fb.total ? renderHitRate(fb.accuracy) + ' (' + fb.correct + '/' + fb.total + ')' : '暂无数据'}</span>
+        </div>
+      </div>
+      <div style="padding:6px 0">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span>🏀 篮球</span>
+          <span>${bb.total ? renderHitRate(bb.accuracy) + ' (' + bb.correct + '/' + bb.total + ')' : '暂无数据'}</span>
+        </div>
+      </div>`;
+  } else {
+    elSports.innerHTML = '<div class="empty-state"><p>暂无竞彩数据</p></div>';
+  }
+
+  if (monthly) {
+    const games = Object.entries(monthly.lottery || {});
+    const sports = Object.entries(monthly.sports || {});
+    elMonthly.innerHTML = `
+      <div style="margin-bottom:8px;font-size:14px;font-weight:600">${monthly.month} 月</div>
+      <div style="font-size:13px;color:var(--text-secondary);margin-bottom:4px">覆盖 ${monthly.days_covered} 天</div>
+      ${games.length ? '<div style="font-size:13px;margin-top:8px">🎲 彩票:</div>' + games.slice(0,3).map(([t,s]) =>
+        `<div style="display:flex;justify-content:space-between;font-size:12px;padding:2px 0">
+          <span>${getGameName(t)}</span>
+          <span>${renderHitRate(s.overall_hit_rate)}</span>
+        </div>`
+      ).join('') : ''}
+      ${sports.length ? '<div style="font-size:13px;margin-top:6px">⚽ 竞彩:</div>' + sports.map(([t,s]) =>
+        `<div style="display:flex;justify-content:space-between;font-size:12px;padding:2px 0">
+          <span>${t === 'football' ? '⚽ 足球' : '🏀 篮球'}</span>
+          <span>${renderHitRate(s.overall_accuracy)}</span>
+        </div>`
+      ).join('') : ''}
+    `;
+  } else {
+    elMonthly.innerHTML = '<div class="empty-state"><p>暂无月度统计</p></div>';
+  }
+}
+
+function renderTodayResults(results) {
+  const el = document.getElementById('todayResults');
+  if (!results || !results.games || Object.keys(results.games).length === 0) {
+    el.innerHTML = `
+      <div class="card">
+        <div class="empty-state">
+          <p>📭 今日开奖结果尚未公布</p>
+          <p style="font-size:12px;margin-top:8px;color:var(--text-secondary)">
+            开奖时间：福彩 21:15 / 体彩 21:25<br>
+            请稍后刷新查看
+          </p>
+        </div>
+      </div>`;
+    return;
+  }
+  const games = Object.entries(results.games);
+  el.innerHTML = '<div class="card-grid">' + games.map(([type, data]) => {
+    const draw = data.draw_result || data.result || data;
+    const numbers = draw.balls || draw.digits || (draw.red ? [...draw.red, ...draw.blue] : draw.front ? [...draw.front, ...draw.back] : []);
+    return `<div class="card">
+      <h3><span class="game-badge ${getGameBadge(type)}">${getGameName(type)}</span></h3>
+      ${renderBalls(type, numbers)}
+      ${draw.period ? `<div style="font-size:12px;color:var(--text-secondary);margin-top:6px">期号: ${draw.period}</div>` : ''}
+    </div>`;
+  }).join('') + '</div>';
+}
+
+function renderLottery(predictions, results) {
+  const el = document.getElementById('lotteryContent');
+  if (!predictions || Object.keys(predictions).length === 0) {
+    el.innerHTML = '<div class="card empty-state"><p>暂无预测数据</p></div>';
+    return;
+  }
+  const games = Object.entries(predictions);
+  el.innerHTML = '<div class="card-grid">' + games.map(([type, data]) => {
+    const preds = data.predictions || (data.prediction ? [data.prediction] : []);
+    const resultData = results?.games?.[type]?.draw_result || results?.games?.[type]?.result;
+    const resultBalls = resultData?.balls || resultData?.digits ||
+      (resultData?.red ? [...resultData.red, ...resultData.blue] : resultData?.front ? [...resultData.front, ...resultData.back] : []);
+
+    return `<div class="card">
+      <h3><span class="game-badge ${getGameBadge(type)}">${getGameName(type)}</span>
+        <span style="font-size:12px;font-weight:400;color:var(--text-secondary)">${data.engine_version || ''}</span>
+      </h3>
+      ${resultBalls.length ? `<div style="font-size:13px;font-weight:600;margin-bottom:4px">开奖号码:</div>${renderBalls(type, resultBalls)}` : '<div style="font-size:12px;color:var(--text-secondary);margin-bottom:8px">⏳ 等待开奖</div>'}
+      <div style="font-size:13px;font-weight:600;margin-top:12px;margin-bottom:6px">预测号码:</div>
+      ${preds.slice(0, 5).map((p, i) => {
+        const nums = p.balls || p.digits || p.red_balls || (p.red_balls && p.blue_balls ? [...p.red_balls, ...p.blue_balls] : []);
+        if (!nums.length) return '';
+        return `<div class="prediction-group">
+          <div class="group-header">第 ${p.group || i+1} 组 ${p.strategy ? '(' + p.strategy + ')' : ''}</div>
+          <div class="ball-row">${nums.map(n => {
+            const isBlue = p.blue_balls && p.blue_balls.includes(n);
+            return `<span class="ball ${isBlue ? 'ball-blue' : type === 'KL8' ? 'ball-kl8' : 'ball-red'}">${String(n).padStart(2,'0')}</span>`;
+          }).join('')}</div>
+          ${p.analysis ? `<div class="stat-row">
+            <span class="stat-item"><span class="stat-label">和值:</span> <span class="stat-value">${p.analysis.sum_value || '-'}</span></span>
+            <span class="stat-item"><span class="stat-label">跨度:</span> <span class="stat-value">${p.analysis.span || '-'}</span></span>
+            <span class="stat-item"><span class="stat-label">奇偶:</span> <span class="stat-value">${p.analysis.odd_even_ratio || '-'}</span></span>
+          </div>` : ''}
+        </div>`;
+      }).join('')}
+      ${preds.length > 5 ? `<div style="font-size:12px;color:var(--text-secondary);margin-top:4px">...共 ${preds.length} 组预测</div>` : ''}
+    </div>`;
+  }).join('') + '</div>';
+}
+
+function renderSports(sportsPred, sportsRes) {
+  const el = document.getElementById('sportsContent');
+  if (!sportsPred) {
+    el.innerHTML = '<div class="card empty-state"><p>暂无竞彩预测数据</p></div>';
+    return;
+  }
+  let html = '';
+  for (const [sport, data] of Object.entries(sportsPred)) {
+    const matches = data.single_predictions || [];
+    const results = sport === 'football' ? sportsRes?.football : sportsRes?.basketball;
+    const resultsList = Array.isArray(results) ? results : results?.results || [];
+    const icon = sport === 'football' ? '⚽' : '🏀';
+    const name = sport === 'football' ? '足球' : '篮球';
+    html += `<div class="summary-card"><h3>${icon} 竞彩${name}预测</h3>`;
+    if (matches.length === 0) {
+      html += '<div style="padding:12px;color:var(--text-secondary);font-size:13px">今日无比赛</div>';
+    } else {
+      html += `<table class="match-table">
+        <tr><th>主队</th><th>客队</th><th>推荐</th><th>信心</th><th>实际比分</th><th>结果</th></tr>`;
+      matches.forEach(m => {
+        const res = resultsList.find(r => r.match_id === m.match_id || (r.home_team === m.home_team));
+        const score = res ? `${res.home_score || '-'}:${res.away_score || '-'}` : '-';
+        const correct = res ? (m.recommendation === (res.result || res.outcome || '')) : null;
+        html += `<tr>
+          <td>${m.home_team}</td>
+          <td>${m.away_team}</td>
+          <td><span class="game-badge badge-dlt">${m.recommendation || '-'}</span></td>
+          <td>${m.confidence ? (m.confidence * 100).toFixed(0) + '%' : '-'}</td>
+          <td>${score}</td>
+          <td>${correct === true ? '<span class="tag tag-win">✓</span>' : correct === false ? '<span class="tag tag-loss">✗</span>' : '-'}</td>
+        </tr>`;
+      });
+      html += '</table>';
+    }
+    html += '</div>';
+  }
+  el.innerHTML = html || '<div class="card empty-state"><p>暂无竞彩数据</p></div>';
+}
+
+function renderRules(rules) {
+  const el = document.getElementById('rulesContent');
+  if (!rules) {
+    el.innerHTML = '<div class="card empty-state"><p>规则文件未加载</p></div>';
+    return;
+  }
+  el.innerHTML = `<div class="rule-box">
+    <div class="rule-item"><div class="label">每期玩法金额</div><div class="value">¥${rules.period_amount || 20}</div></div>
+    <div class="rule-item"><div class="label">每日竞猜限额</div><div class="value">¥${rules.daily_quiz_amount || 100}</div></div>
+    <div class="rule-item"><div class="label">跨期规则</div><div class="value">${rules.cross_period_stack ? '可叠加' : '不结转'}</div></div>
+    <div class="rule-item"><div class="label">玩法限制</div><div class="value">${rules.play_limit === 'unlimited' ? '不限' : rules.play_limit || '不限'}</div></div>
+  </div>
+  <div style="margin-top:8px;font-size:12px;color:var(--text-secondary)">更新于: ${rules.updated_at || '-'}</div>`;
+}
+
+function renderOptimization(log) {
+  const el = document.getElementById('optimizationContent');
+  if (!log || !log.optimizations || log.optimizations.length === 0) {
+    el.innerHTML = '<div class="card empty-state"><p>暂无优化记录</p></div>';
+    return;
+  }
+  el.innerHTML = log.optimizations.slice().reverse().map(opt => `
+    <div class="summary-card">
+      <div class="summary-header">
+        <h3>🔧 ${opt.date}</h3>
+        <span class="game-badge badge-dlt">${opt.game_type === 'lottery_engine' ? '彩票引擎' : '竞彩引擎'}</span>
+      </div>
+      <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px">
+        ${opt.trigger_reason} | ${opt.new_version ? '新版本: ' + opt.new_version : ''}
+        ${opt.before_hit_rate !== undefined ? `| 优化前命中率: ${(opt.before_hit_rate * 100).toFixed(1)}%` : ''}
+        ${opt.before_accuracy !== undefined ? `| 优化前准确率: ${(opt.before_accuracy * 100).toFixed(1)}%` : ''}
+      </div>
+      <ul style="padding-left:20px;font-size:13px;line-height:1.8">
+        ${(opt.optimization_content || []).map(c => `<li>${c}</li>`).join('')}
+      </ul>
+    </div>
+  `).join('');
+}
+
+init();
+</script>
+</body>
+</html>
