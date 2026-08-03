@@ -270,7 +270,8 @@
     <button class="nav-tab active" data-tab="overview">📊 总览</button>
     <button class="nav-tab" data-tab="lottery">🎲 彩票</button>
     <button class="nav-tab" data-tab="sports">⚽ 竞彩</button>
-    <button class="nav-tab" data-tab="rules">📋 规则</button>
+    <button class="nav-tab" data-tab="dailySummary">📅 日总结</button>
+    <button class="nav-tab" data-tab="fifteenDaySummary">📈 15日总结</button>
     <button class="nav-tab" data-tab="optimization">🔧 优化日志</button>
   </div>
 
@@ -314,33 +315,25 @@
     </div>
   </div>
 
-  <div class="tab-content" id="tabRules">
-    <div class="section">
-      <h2 class="section-title">📋 玩法金额规则</h2>
-      <div id="rulesContent">加载中...</div>
-    </div>
-    <div class="section">
-      <h2 class="section-title">📅 开奖日历</h2>
-      <div class="card">
-        <table class="match-table">
-          <tr><th>玩法</th><th>开奖日</th></tr>
-          <tr><td>大乐透 (DLT)</td><td>周一、三、六</td></tr>
-          <tr><td>双色球 (SSQ)</td><td>周二、四、日</td></tr>
-          <tr><td>七星彩 (QXC)</td><td>周二、五、日</td></tr>
-          <tr><td>七乐彩 (QLC)</td><td>周一、三、五</td></tr>
-          <tr><td>排列三 (PL3)</td><td>每日开奖</td></tr>
-          <tr><td>排列五 (PL5)</td><td>每日开奖</td></tr>
-          <tr><td>福彩3D (FC3D)</td><td>每日开奖</td></tr>
-          <tr><td>快乐8 (KL8)</td><td>每日开奖</td></tr>
-        </table>
-      </div>
-    </div>
-  </div>
-
   <div class="tab-content" id="tabOptimization">
     <div class="section">
       <h2 class="section-title">🔧 算法优化日志</h2>
       <div id="optimizationContent">加载中...</div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tabDailySummary">
+    <div class="section">
+      <h2 class="section-title">📅 今日数据总结</h2>
+      <div id="dailySummaryContent">加载中...</div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tabFifteenDaySummary">
+    <div class="section">
+      <h2 class="section-title">📈 近15日数据总结</h2>
+      <div class="notice">📌 展示近15天的彩票命中率与竞彩准确率趋势</div>
+      <div id="fifteenDaySummaryContent">加载中...</div>
     </div>
   </div>
 
@@ -436,14 +429,13 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
 async function init() {
   document.getElementById('currentDate').textContent = '📅 ' + TODAY;
 
-  const [results, predictions, sportsPred, sportsRes, summary, monthly, rules, optLog] = await Promise.all([
+  const [results, predictions, sportsPred, sportsRes, summary, monthly, optLog] = await Promise.all([
     loadJSON(`data/results/${TODAY}.json`),
     loadJSON(`data/predictions/${TODAY}.json`),
     loadJSON(`data/sports_predictions/${TODAY}.json`),
     loadJSON(`data/sports_results/${TODAY}.json`),
     loadJSON(`data/summary/daily_${TODAY}.json`),
     loadJSON(`data/summary/monthly_${MONTH}.json`),
-    loadJSON('data/game_rules.json'),
     loadJSON('data/optimization_log.json')
   ]);
 
@@ -451,8 +443,11 @@ async function init() {
   renderTodayResults(results);
   renderLottery(predictions, results);
   renderSports(sportsPred, sportsRes);
-  renderRules(rules);
+  renderDailySummary(summary, predictions, sportsPred);
   renderOptimization(optLog);
+
+  // 异步加载15日总结数据
+  loadFifteenDaySummaries().then(data => renderFifteenDaySummary(data));
 }
 
 function renderOverview(summary, monthly) {
@@ -623,19 +618,240 @@ function renderSports(sportsPred, sportsRes) {
   el.innerHTML = html || '<div class="card empty-state"><p>暂无竞彩数据</p></div>';
 }
 
-function renderRules(rules) {
-  const el = document.getElementById('rulesContent');
-  if (!rules) {
-    el.innerHTML = '<div class="card empty-state"><p>规则文件未加载</p></div>';
+function renderDailySummary(summary, predictions, sportsPred) {
+  const el = document.getElementById('dailySummaryContent');
+  if (!summary) {
+    el.innerHTML = '<div class="card empty-state"><p>暂无今日总结数据</p></div>';
     return;
   }
-  el.innerHTML = `<div class="rule-box">
-    <div class="rule-item"><div class="label">每期玩法金额</div><div class="value">¥${rules.period_amount || 20}</div></div>
-    <div class="rule-item"><div class="label">每日竞猜限额</div><div class="value">¥${rules.daily_quiz_amount || 100}</div></div>
-    <div class="rule-item"><div class="label">跨期规则</div><div class="value">${rules.cross_period_stack ? '可叠加' : '不结转'}</div></div>
-    <div class="rule-item"><div class="label">玩法限制</div><div class="value">${rules.play_limit === 'unlimited' ? '不限' : rules.play_limit || '不限'}</div></div>
-  </div>
-  <div style="margin-top:8px;font-size:12px;color:var(--text-secondary)">更新于: ${rules.updated_at || '-'}</div>`;
+  let html = '';
+
+  // 彩票总结
+  const lottery = summary.lottery || {};
+  const lotteryGames = Object.entries(lottery);
+  html += '<div class="summary-card"><h3>🎲 彩票命中率</h3>';
+  if (lotteryGames.length > 0) {
+    html += '<table class="match-table"><tr><th>玩法</th><th>命中率</th><th>命中组数</th><th>总组数</th><th>最高奖级</th></tr>';
+    lotteryGames.forEach(([type, s]) => {
+      const pct = (s.hit_rate * 100).toFixed(1);
+      let cls = 'hit-low';
+      if (s.hit_rate >= 0.6) cls = 'hit-high';
+      else if (s.hit_rate >= 0.3) cls = 'hit-medium';
+      html += `<tr>
+        <td><span class="game-badge ${getGameBadge(type)}">${getGameName(type)}</span></td>
+        <td><span class="hit-rate ${cls}">${pct}%</span>${renderProgressBar(s.hit_rate)}</td>
+        <td>${s.groups_with_hit || 0}</td>
+        <td>${s.group_count || 0}</td>
+        <td>${s.max_hit_level || '-'}</td>
+      </tr>`;
+    });
+    html += '</table>';
+  } else {
+    html += '<div class="empty-state"><p>今日无彩票开奖数据</p></div>';
+  }
+  html += '</div>';
+
+  // 竞彩总结
+  const sports = summary.sports || {};
+  html += '<div class="summary-card"><h3>⚽ 竞彩准确率</h3>';
+  const hasSports = (sports.football && sports.football.total > 0) || (sports.basketball && sports.basketball.total > 0);
+  if (hasSports) {
+    html += '<table class="match-table"><tr><th>类型</th><th>准确率</th><th>正确</th><th>总场次</th></tr>';
+    ['football', 'basketball'].forEach(type => {
+      const s = sports[type] || {};
+      if (s.total > 0) {
+        const acc = (s.accuracy * 100).toFixed(1);
+        let cls = 'hit-low';
+        if (s.accuracy >= 0.6) cls = 'hit-high';
+        else if (s.accuracy >= 0.3) cls = 'hit-medium';
+        html += `<tr>
+          <td>${type === 'football' ? '⚽ 足球' : '🏀 篮球'}</td>
+          <td><span class="hit-rate ${cls}">${acc}%</span>${renderProgressBar(s.accuracy)}</td>
+          <td>${s.correct || 0}</td>
+          <td>${s.total}</td>
+        </tr>`;
+      }
+    });
+    html += '</table>';
+  } else {
+    html += '<div class="empty-state"><p>今日无竞彩数据</p></div>';
+  }
+  html += '</div>';
+
+  // 生成时间
+  html += `<div style="text-align:center;font-size:12px;color:var(--text-secondary);padding:8px">总结生成时间: ${summary.generated_at || '-'}</div>`;
+
+  el.innerHTML = html;
+}
+
+function formatDateStr(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+async function loadFifteenDaySummaries() {
+  const summaries = [];
+  const today = new Date(TODAY);
+  for (let i = 0; i < 15; i++) {
+    const d = new Date(today);
+    d.setDate(d.getDate() - i);
+    const dateStr = formatDateStr(d);
+    const data = await loadJSON(`data/summary/daily_${dateStr}.json`);
+    if (data) summaries.push(data);
+  }
+  return summaries;
+}
+
+function renderFifteenDaySummary(summaries) {
+  const el = document.getElementById('fifteenDaySummaryContent');
+  if (!summaries || summaries.length === 0) {
+    el.innerHTML = '<div class="card empty-state"><p>暂无历史总结数据</p><p style="font-size:12px;margin-top:4px;">系统运行后会自动积累数据</p></div>';
+    return;
+  }
+
+  let html = '';
+
+  // 汇总统计
+  const totalDays = summaries.length;
+  const allGameTypes = new Set();
+  const allSportTypes = new Set();
+  summaries.forEach(s => {
+    if (s.lottery) Object.keys(s.lottery).forEach(t => allGameTypes.add(t));
+    if (s.sports) Object.keys(s.sports).forEach(t => allSportTypes.add(t));
+  });
+
+  // 彩票和竞彩的总体统计
+  let totalLotteryGroups = 0;
+  let totalLotteryHits = 0;
+  let totalSportGames = 0;
+  let totalSportCorrect = 0;
+
+  summaries.forEach(s => {
+    if (s.lottery) {
+      Object.values(s.lottery).forEach(v => {
+        totalLotteryGroups += v.group_count || 0;
+        totalLotteryHits += v.groups_with_hit || 0;
+      });
+    }
+    if (s.sports) {
+      Object.values(s.sports).forEach(v => {
+        totalSportGames += v.total || 0;
+        totalSportCorrect += v.correct || 0;
+      });
+    }
+  });
+
+  const overallLotteryRate = totalLotteryGroups > 0 ? (totalLotteryHits / totalLotteryGroups) : 0;
+  const overallSportRate = totalSportGames > 0 ? (totalSportCorrect / totalSportGames) : 0;
+
+  html += `<div class="card-grid" style="margin-bottom:16px">
+    <div class="card">
+      <h3>📅 覆盖天数</h3>
+      <div style="font-size:32px;font-weight:700;color:var(--primary)">${totalDays}<span style="font-size:14px;font-weight:400;color:var(--text-secondary)"> / 15 天</span></div>
+    </div>
+    <div class="card">
+      <h3>🎲 彩票综合命中率</h3>
+      <div style="font-size:32px;font-weight:700;color:${overallLotteryRate >= 0.6 ? 'var(--success)' : overallLotteryRate >= 0.3 ? 'var(--warning)' : 'var(--danger)'}">${(overallLotteryRate * 100).toFixed(1)}%</div>
+      ${renderProgressBar(overallLotteryRate)}
+      <div style="font-size:12px;color:var(--text-secondary)">${totalLotteryHits}/${totalLotteryGroups} 组命中</div>
+    </div>
+    <div class="card">
+      <h3>⚽ 竞彩综合准确率</h3>
+      <div style="font-size:32px;font-weight:700;color:${overallSportRate >= 0.6 ? 'var(--success)' : overallSportRate >= 0.3 ? 'var(--warning)' : 'var(--danger)'}">${(overallSportRate * 100).toFixed(1)}%</div>
+      ${renderProgressBar(overallSportRate)}
+      <div style="font-size:12px;color:var(--text-secondary)">${totalSportCorrect}/${totalSportGames} 场正确</div>
+    </div>
+  </div>`;
+
+  // 每日趋势表
+  html += '<div class="summary-card"><h3>📊 每日趋势</h3>';
+  html += '<table class="match-table"><tr><th>日期</th>';
+  allGameTypes.forEach(t => { html += `<th>${getGameName(t)}</th>`; });
+  allSportTypes.forEach(t => { html += `<th>${t === 'football' ? '⚽足球' : '🏀篮球'}</th>`; });
+  html += '</tr>';
+
+  // 按日期逆序（最近的在最上面）
+  summaries.slice().reverse().forEach(s => {
+    html += `<tr><td style="font-weight:600">${s.date}</td>`;
+    allGameTypes.forEach(t => {
+      const game = s.lottery?.[t];
+      if (game && game.group_count > 0) {
+        const pct = (game.hit_rate * 100).toFixed(1);
+        let cls = 'hit-high';
+        if (game.hit_rate < 0.3) cls = 'hit-low';
+        else if (game.hit_rate < 0.6) cls = 'hit-medium';
+        html += `<td><span class="hit-rate ${cls}">${pct}%</span><br><span style="font-size:11px;color:var(--text-secondary)">${game.groups_with_hit}/${game.group_count}</span></td>`;
+      } else {
+        html += '<td style="color:var(--text-secondary);font-size:12px">-</td>';
+      }
+    });
+    allSportTypes.forEach(t => {
+      const sport = s.sports?.[t];
+      if (sport && sport.total > 0) {
+        const pct = (sport.accuracy * 100).toFixed(1);
+        let cls = 'hit-high';
+        if (sport.accuracy < 0.3) cls = 'hit-low';
+        else if (sport.accuracy < 0.6) cls = 'hit-medium';
+        html += `<td><span class="hit-rate ${cls}">${pct}%</span><br><span style="font-size:11px;color:var(--text-secondary)">${sport.correct}/${sport.total}</span></td>`;
+      } else {
+        html += '<td style="color:var(--text-secondary);font-size:12px">-</td>';
+      }
+    });
+    html += '</tr>';
+  });
+  html += '</table></div>';
+
+  // 各玩法汇总
+  html += '<div class="summary-card"><h3>📋 各玩法15日汇总</h3><div class="card-grid">';
+  allGameTypes.forEach(t => {
+    let total = 0, hits = 0;
+    summaries.forEach(s => {
+      const g = s.lottery?.[t];
+      if (g) {
+        total += g.group_count || 0;
+        hits += g.groups_with_hit || 0;
+      }
+    });
+    if (total > 0) {
+      const rate = hits / total;
+      const pct = (rate * 100).toFixed(1);
+      let cls = 'hit-high';
+      if (rate < 0.3) cls = 'hit-low';
+      else if (rate < 0.6) cls = 'hit-medium';
+      html += `<div class="card" style="text-align:center">
+        <span class="game-badge ${getGameBadge(t)}" style="font-size:14px;padding:4px 14px">${getGameName(t)}</span>
+        <div style="font-size:28px;font-weight:700;margin:8px 0;color:${rate >= 0.6 ? 'var(--success)' : rate >= 0.3 ? 'var(--warning)' : 'var(--danger)'}">${pct}%</div>
+        <span class="hit-rate ${cls}">${hits}/${total}</span>
+      </div>`;
+    }
+  });
+  allSportTypes.forEach(t => {
+    let total = 0, correct = 0;
+    summaries.forEach(s => {
+      const sp = s.sports?.[t];
+      if (sp) {
+        total += sp.total || 0;
+        correct += sp.correct || 0;
+      }
+    });
+    if (total > 0) {
+      const rate = correct / total;
+      const pct = (rate * 100).toFixed(1);
+      let cls = 'hit-high';
+      if (rate < 0.3) cls = 'hit-low';
+      else if (rate < 0.6) cls = 'hit-medium';
+      html += `<div class="card" style="text-align:center">
+        <div style="font-size:16px;font-weight:600;margin-bottom:4px">${t === 'football' ? '⚽ 足球' : '🏀 篮球'}</div>
+        <div style="font-size:28px;font-weight:700;margin:8px 0;color:${rate >= 0.6 ? 'var(--success)' : rate >= 0.3 ? 'var(--warning)' : 'var(--danger)'}">${pct}%</div>
+        <span class="hit-rate ${cls}">${correct}/${total}</span>
+      </div>`;
+    }
+  });
+  html += '</div></div>';
+
+  el.innerHTML = html;
 }
 
 function renderOptimization(log) {

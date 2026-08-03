@@ -177,11 +177,11 @@ class LotteryHitCalculator:
         if not config:
             return {"hit": False, "level": None, "red_hit": 0, "blue_hit": 0}
 
-        # 提取红球和蓝球
-        pred_red = set(prediction.get("red", prediction.get("front", [])))
-        pred_blue = set(prediction.get("blue", prediction.get("back", [])))
-        res_red = set(result.get("red", result.get("front", [])))
-        res_blue = set(result.get("blue", result.get("back", [])))
+        # 提取红球和蓝球（兼容多种字段名）
+        pred_red = set(prediction.get("red", prediction.get("red_balls", prediction.get("front", []))))
+        pred_blue = set(prediction.get("blue", prediction.get("blue_balls", prediction.get("back", []))))
+        res_red = set(result.get("red", result.get("red_balls", result.get("front", []))))
+        res_blue = set(result.get("blue", result.get("blue_balls", result.get("back", []))))
 
         # 兼容数字和字符串
         pred_red = {str(x) for x in pred_red}
@@ -260,8 +260,8 @@ class LotteryHitCalculator:
     @classmethod
     def _calc_qlc_hit(cls, prediction: Dict, result: Dict) -> Dict:
         """计算七乐彩命中"""
-        pred_nums = {str(x) for x in prediction.get("numbers", prediction.get("red", []))}
-        res_nums = {str(x) for x in result.get("numbers", result.get("red", []))}
+        pred_nums = {str(x) for x in prediction.get("numbers", prediction.get("red", prediction.get("red_balls", [])))}
+        res_nums = {str(x) for x in result.get("numbers", result.get("red", result.get("red_balls", [])))}
 
         match_count = len(pred_nums & res_nums)
 
@@ -285,7 +285,7 @@ class LotteryHitCalculator:
         pred_nums = set()
         res_nums = set()
 
-        for key in ["numbers", "red", "front", "digits"]:
+        for key in ["numbers", "red", "red_balls", "front", "digits", "balls"]:
             if key in prediction:
                 pred_nums.update(str(x) for x in prediction[key])
             if key in result:
@@ -320,8 +320,12 @@ def generate_lottery_summary(prediction_data: Dict, result_data: Dict) -> Dict:
         if not isinstance(pred_info, dict):
             continue
 
-        # 获取该彩种的开奖结果
-        result_info = result_data.get(lottery_type)
+        # 获取该彩种的开奖结果（兼容 games 包装和直接格式）
+        if 'games' in result_data:
+            games_data = result_data['games']
+        else:
+            games_data = result_data
+        result_info = games_data.get(lottery_type)
         if not result_info:
             continue
 
@@ -331,6 +335,8 @@ def generate_lottery_summary(prediction_data: Dict, result_data: Dict) -> Dict:
             groups = pred_info["groups"]
         elif "predictions" in pred_info and isinstance(pred_info["predictions"], list):
             groups = pred_info["predictions"]
+        elif "prediction" in pred_info and isinstance(pred_info["prediction"], dict):
+            groups = [pred_info["prediction"]]
         elif "numbers" in pred_info:
             groups = [pred_info]
 
@@ -500,6 +506,13 @@ def _extract_sports_results(data: Dict, sport: str) -> Dict:
             for mid, r in sport_data.items():
                 if isinstance(r, dict) and "result" in r:
                     results[mid] = r
+
+    # 格式1b: 运动数据直接是列表（如 football: [{...}, ...]）
+    if not results and sport in data and isinstance(data[sport], list):
+        for r in data[sport]:
+            mid = r.get("match_id", r.get("id", ""))
+            if mid:
+                results[mid] = r
 
     # 格式2: 整体是列表，按 sport_type 过滤
     if not results and isinstance(data, list):

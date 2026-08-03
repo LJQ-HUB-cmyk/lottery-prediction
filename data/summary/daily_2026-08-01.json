@@ -1,0 +1,197 @@
+{
+  "date": "2026-08-01",
+  "generated_at": "2026-08-03T18:10:10.348189",
+  "lottery": {
+    "SSQ": {
+      "group_count": 3,
+      "groups_with_hit": 2,
+      "hit_rate": 0.6667,
+      "max_hit_level": "五等奖",
+      "hit_details": [
+        {
+          "hit": true,
+          "level": "六等奖",
+          "red_hit": 2,
+          "blue_hit": 1,
+          "hit_desc": "2+1"
+        },
+        {
+          "hit": false,
+          "level": null,
+          "red_hit": 2,
+          "blue_hit": 0,
+          "hit_desc": "2+0"
+        },
+        {
+          "hit": true,
+          "level": "五等奖",
+          "red_hit": 4,
+          "blue_hit": 0,
+          "hit_desc": "4+0"
+        }
+      ]
+    },
+    "DLT": {
+      "group_count": 3,
+      "groups_with_hit": 3,
+      "hit_rate": 1.0,
+      "max_hit_level": "七等奖",
+      "hit_details": [
+        {
+          "hit": true,
+          "level": "九等奖",
+          "red_hit": 2,
+          "blue_hit": 1,
+          "hit_desc": "2+1"
+        },
+        {
+          "hit": true,
+          "level": "九等奖",
+          "red_hit": 2,
+          "blue_hit": 1,
+          "hit_desc": "2+1"
+        },
+        {
+          "hit": true,
+          "level": "七等奖",
+          "red_hit": 4,
+          "blue_hit": 0,
+          "hit_desc": "4+0"
+        }
+      ]
+    },
+    "QLC": {
+      "group_count": 3,
+      "groups_with_hit": 3,
+      "hit_rate": 1.0,
+      "max_hit_level": "五等奖",
+      "hit_details": [
+        {
+          "hit": true,
+          "level": "五等奖",
+          "match_count": 3
+        },
+        {
+          "hit": true,
+          "level": "五等奖",
+          "match_count": 3
+        },
+        {
+          "hit": true,
+          "level": "五等奖",
+          "match_count": 3
+        }
+      ]
+    },
+    "QXC": {
+      "group_count": 3,
+      "groups_with_hit": 3,
+      "hit_rate": 1.0,
+      "max_hit_level": null,
+      "hit_details": [
+        {
+          "hit": true,
+          "level": null,
+          "match_count": 2
+        },
+        {
+          "hit": true,
+          "level": null,
+          "match_count": 1
+        },
+        {
+          "hit": true,
+          "level": null,
+          "match_count": 2
+        }
+      ]
+    },
+    "PL3": {
+      "group_count": 3,
+      "groups_with_hit": 0,
+      "hit_rate": 0.0,
+      "max_hit_level": null,
+      "hit_details": [
+        {
+          "hit": false,
+          "level": null,
+          "exact": false,
+          "group_hit": false
+        },
+        {
+          "hit": false,
+          "level": null,
+          "exact": false,
+          "group_hit": false
+        },
+        {
+          "hit": false,
+          "level": null,
+          "exact": false,
+          "group_hit": false
+        }
+      ]
+    },
+    "PL5": {
+      "group_count": 3,
+      "groups_with_hit": 0,
+      "hit_rate": 0.0,
+      "max_hit_level": null,
+      "hit_details": [
+        {
+          "hit": false,
+          "level": null,
+          "exact": false
+        },
+        {
+          "hit": false,
+          "level": null,
+          "exact": false
+        },
+        {
+          "hit": false,
+          "level": null,
+          "exact": false
+        }
+      ]
+    },
+    "FC3D": {
+      "group_count": 3,
+      "groups_with_hit": 0,
+      "hit_rate": 0.0,
+      "max_hit_level": null,
+      "hit_details": [
+        {
+          "hit": false,
+          "level": null,
+          "exact": false,
+          "group_hit": false
+        },
+        {
+          "hit": false,
+          "level": null,
+          "exact": false,
+          "group_hit": false
+        },
+        {
+          "hit": false,
+          "level": null,
+          "exact": false,
+          "group_hit": false
+        }
+      ]
+    }
+  },
+  "sports": {
+    "football": {
+      "total": 3,
+      "correct": 1,
+      "accuracy": 0.3333
+    },
+    "basketball": {
+      "total": 2,
+      "correct": 1,
+      "accuracy": 0.5
+    }
+  }
+}

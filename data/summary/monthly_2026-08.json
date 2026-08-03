@@ -1,22 +1,93 @@
 {
   "month": "2026-08",
-  "generated_at": "2026-08-03T16:53:50.812712",
-  "days_covered": 1,
-  "lottery": {},
+  "generated_at": "2026-08-03T18:10:12.024801",
+  "days_covered": 4,
+  "lottery": {
+    "SSQ": {
+      "total_days": 3,
+      "total_groups": 9,
+      "total_hit_groups": 6,
+      "overall_hit_rate": 0.6667,
+      "avg_daily_hit_rate": 0.6667,
+      "hit_day_rate": 1.0,
+      "hit_days": 3,
+      "max_hit_level": "四等奖"
+    },
+    "DLT": {
+      "total_days": 3,
+      "total_groups": 9,
+      "total_hit_groups": 9,
+      "overall_hit_rate": 1.0,
+      "avg_daily_hit_rate": 1.0,
+      "hit_day_rate": 1.0,
+      "hit_days": 3,
+      "max_hit_level": "五等奖"
+    },
+    "QLC": {
+      "total_days": 3,
+      "total_groups": 9,
+      "total_hit_groups": 9,
+      "overall_hit_rate": 1.0,
+      "avg_daily_hit_rate": 1.0,
+      "hit_day_rate": 1.0,
+      "hit_days": 3,
+      "max_hit_level": "四等奖"
+    },
+    "QXC": {
+      "total_days": 3,
+      "total_groups": 9,
+      "total_hit_groups": 8,
+      "overall_hit_rate": 0.8889,
+      "avg_daily_hit_rate": 0.8889,
+      "hit_day_rate": 1.0,
+      "hit_days": 3,
+      "max_hit_level": null
+    },
+    "PL3": {
+      "total_days": 3,
+      "total_groups": 9,
+      "total_hit_groups": 0,
+      "overall_hit_rate": 0.0,
+      "avg_daily_hit_rate": 0.0,
+      "hit_day_rate": 0.0,
+      "hit_days": 0,
+      "max_hit_level": null
+    },
+    "PL5": {
+      "total_days": 3,
+      "total_groups": 9,
+      "total_hit_groups": 0,
+      "overall_hit_rate": 0.0,
+      "avg_daily_hit_rate": 0.0,
+      "hit_day_rate": 0.0,
+      "hit_days": 0,
+      "max_hit_level": null
+    },
+    "FC3D": {
+      "total_days": 3,
+      "total_groups": 9,
+      "total_hit_groups": 0,
+      "overall_hit_rate": 0.0,
+      "avg_daily_hit_rate": 0.0,
+      "hit_day_rate": 0.0,
+      "hit_days": 0,
+      "max_hit_level": null
+    }
+  },
   "sports": {
     "football": {
-      "total_days": 0,
-      "total_predictions": 0,
-      "total_correct": 0,
-      "overall_accuracy": 0.0,
-      "avg_daily_accuracy": 0.0
+      "total_days": 3,
+      "total_predictions": 9,
+      "total_correct": 4,
+      "overall_accuracy": 0.4444,
+      "avg_daily_accuracy": 0.4444
     },
     "basketball": {
-      "total_days": 0,
-      "total_predictions": 0,
-      "total_correct": 0,
-      "overall_accuracy": 0.0,
-      "avg_daily_accuracy": 0.0
+      "total_days": 3,
+      "total_predictions": 6,
+      "total_correct": 3,
+      "overall_accuracy": 0.5,
+      "avg_daily_accuracy": 0.5
     }
   }
 }

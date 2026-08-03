@@ -1,0 +1,53 @@
+{
+  "date": "2026-08-03",
+  "note": "模拟竞彩赛果（用于演示）",
+  "football": [
+    {
+      "match_id": "260803001",
+      "home_team": "曼城",
+      "away_team": "利物浦",
+      "home_score": 0,
+      "away_score": 2,
+      "result": "客胜",
+      "outcome": "客胜"
+    },
+    {
+      "match_id": "260803002",
+      "home_team": "皇马",
+      "away_team": "巴萨",
+      "home_score": 0,
+      "away_score": 2,
+      "result": "客胜",
+      "outcome": "客胜"
+    },
+    {
+      "match_id": "260803003",
+      "home_team": "拜仁",
+      "away_team": "多特蒙德",
+      "home_score": 2,
+      "away_score": 0,
+      "result": "主胜",
+      "outcome": "主胜"
+    }
+  ],
+  "basketball": [
+    {
+      "match_id": "260803B01",
+      "home_team": "湖人",
+      "away_team": "勇士",
+      "home_score": 95,
+      "away_score": 110,
+      "result": "客胜",
+      "outcome": "客胜"
+    },
+    {
+      "match_id": "260803B02",
+      "home_team": "凯尔特人",
+      "away_team": "雄鹿",
+      "home_score": 110,
+      "away_score": 95,
+      "result": "主胜",
+      "outcome": "主胜"
+    }
+  ]
+}
