@@ -28,6 +28,23 @@
         "历史交锋心理优势权重微调"
       ],
       "new_version": "v1.6"
+    },
+    {
+      "date": "2026-08-04",
+      "trigger_reason": "每日例行优化（命中率 < 80% 触发）",
+      "game_type": "lottery_engine",
+      "before_hit_rate": 0.231,
+      "after_hit_rate": "待验证",
+      "optimization_content": [
+        "新增近期趋势分析函数（analyze_recent_trend），捕捉短期热点变化",
+        "新增近期趋势选号策略（trend_recent_select），基于趋势偏移和频率综合评分",
+        "提高频率衰减因子（0.995→0.99），加强近期数据权重",
+        "降低各杀号策略的杀号比例（missing_kill: 0.18→0.12, hot_cold: 0.12→0.08, tail: 0.12→0.08, remainder: 0.15→0.10）",
+        "在LottoPredictor中增加第5套选号策略（近期趋势选号），提升候选多样性",
+        "优化数字型玩法位置预测，加入近期趋势加权（trend_score权重0.25）",
+        "优化KL8预测器，加入近期趋势分析"
+      ],
+      "new_version": "v2.4"
     }
   ]
 }

@@ -1,6 +1,37 @@
 {
   "date": "2026-08-04",
-  "note": "竞彩赛果尚未公布",
-  "football": [],
+  "note": "竞彩赛果已更新",
+  "football": [
+    {
+      "match_id": "260804001",
+      "league": "瑞超",
+      "home_team": "哈尔姆斯",
+      "away_team": "天狼星",
+      "home_score": 0,
+      "away_score": 2,
+      "result": "客胜",
+      "outcome": "客胜"
+    },
+    {
+      "match_id": "260804002",
+      "league": "瑞超",
+      "home_team": "佐加顿斯",
+      "away_team": "韦斯特罗",
+      "home_score": 6,
+      "away_score": 0,
+      "result": "主胜",
+      "outcome": "主胜"
+    },
+    {
+      "match_id": "260804003",
+      "league": "巴西杯",
+      "home_team": "巴竞技",
+      "away_team": "维多利亚",
+      "home_score": 2,
+      "away_score": 0,
+      "result": "主胜",
+      "outcome": "主胜"
+    }
+  ],
   "basketball": []
 }

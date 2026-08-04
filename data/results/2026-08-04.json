@@ -1,5 +1,61 @@
 {
   "date": "2026-08-04",
-  "note": "开奖结果尚未公布（今晚21:15-21:30开奖）",
-  "games": {}
+  "note": "开奖结果已更新",
+  "games": {
+    "SSQ": {
+      "game_type": "SSQ",
+      "game_name": "双色球",
+      "period": "2026089",
+      "draw_date": "2026-08-04",
+      "draw_result": {
+        "red_balls": [5, 18, 23, 24, 27, 33],
+        "blue_balls": [3]
+      }
+    },
+    "PL3": {
+      "game_type": "PL3",
+      "game_name": "排列三",
+      "period": "2026206",
+      "draw_date": "2026-08-04",
+      "draw_result": {
+        "digits": [7, 0, 9]
+      }
+    },
+    "PL5": {
+      "game_type": "PL5",
+      "game_name": "排列五",
+      "period": "2026206",
+      "draw_date": "2026-08-04",
+      "draw_result": {
+        "digits": [7, 0, 9, 6, 5]
+      }
+    },
+    "FC3D": {
+      "game_type": "FC3D",
+      "game_name": "福彩3D",
+      "period": "2026206",
+      "draw_date": "2026-08-04",
+      "draw_result": {
+        "digits": [9, 4, 2]
+      }
+    },
+    "QXC": {
+      "game_type": "QXC",
+      "game_name": "七星彩",
+      "period": "2026089",
+      "draw_date": "2026-08-04",
+      "draw_result": {
+        "digits": [7, 1, 8, 9, 3, 4, 0]
+      }
+    },
+    "KL8": {
+      "game_type": "KL8",
+      "game_name": "快乐8",
+      "period": "2026206",
+      "draw_date": "2026-08-04",
+      "draw_result": {
+        "balls": [1, 6, 7, 16, 17, 21, 27, 32, 33, 36, 44, 47, 50, 51, 55, 62, 64, 76, 78, 79]
+      }
+    }
+  }
 }

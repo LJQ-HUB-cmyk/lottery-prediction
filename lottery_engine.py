@@ -2,10 +2,10 @@
 """
 彩票预测算法引擎 Lottery Prediction Engine
 =============================================
-版本: v2.2
+版本: v2.4
 作者: AI Engine Team
 创建日期: 2024-01-15
-最后更新: 2024-06-20
+最后更新: 2026-08-04
 
 版本优化历史:
 ---------------------------------------------
@@ -46,6 +46,14 @@ v2.3 (2026-08-04):
     - 优化数字型玩法遗漏值回补策略（增加冷号回补概率）
     - 优化快乐8八分区选号策略（引入冷热差异度参数）
     - 根据历史命中数据反向调整了策略权重
+
+v2.4 (2026-08-04):
+    - 新增近期趋势分析函数（analyze_recent_trend），捕捉短期热点变化
+    - 新增近期趋势选号策略（trend_recent_select），基于趋势偏移和频率综合评分
+    - 提高频率衰减因子（0.995→0.99），加强近期数据权重
+    - 降低各杀号策略的杀号比例（missing_kill: 0.18→0.12, hot_cold: 0.12→0.08, tail: 0.12→0.08, remainder: 0.15→0.10）
+    - 在LottoPredictor中增加第5套选号策略（近期趋势选号）
+    - 优化数字型玩法位置预测，增加近期趋势加权
 
 功能说明:
 ---------------------------------------------
@@ -286,7 +294,7 @@ def analyze_frequency(history: List[Dict], game_type: str, ball_type: str = 'red
     freq = defaultdict(float)
     total_periods = len(history)
 
-    decay_factor = 0.995  # 衰减因子
+    decay_factor = 0.99  # 衰减因子（v2.4 从0.995提升至0.99，加强近期数据权重）
 
     for idx, draw in enumerate(history):
         weight = decay_factor ** (total_periods - 1 - idx)  # 越近权重越高
@@ -351,6 +359,30 @@ def analyze_missing(history: List[Dict], game_type: str, ball_type: str = 'red')
                 missing[ball] = periods_ago
 
     return missing
+
+
+def analyze_recent_trend(history: List[Dict], game_type: str, ball_type: str = 'red',
+                          recent_periods: int = 20) -> Dict[int, float]:
+    """
+    近期趋势分析（v2.4 新增）
+    仅分析最近 N 期的数据，捕捉短期热点变化
+    """
+    if len(history) <= recent_periods:
+        return analyze_frequency(history, game_type, ball_type)
+
+    recent_history = history[-recent_periods:]
+    recent_freq = analyze_frequency(recent_history, game_type, ball_type)
+
+    # 与全量频率对比，计算趋势偏移
+    full_freq = analyze_frequency(history, game_type, ball_type)
+    trend = {}
+    all_numbers = set(list(recent_freq.keys()) + list(full_freq.keys()))
+    for num in all_numbers:
+        rf = recent_freq.get(num, 0)
+        ff = full_freq.get(num, 0)
+        # 趋势值 = 近期频率 / 全量频率，大于1表示近期走热
+        trend[num] = rf / max(ff, 0.0001)
+    return trend
 
 
 def analyze_cooccurrence(history: List[Dict], game_type: str, ball_type: str = 'red') -> Dict[Tuple[int, int], float]:
@@ -805,6 +837,31 @@ class SelectStrategy:
 
         return sorted(selected[:pick_count])
 
+    @staticmethod
+    def trend_recent_select(trend_stats: Dict[int, float], freq_stats: Dict[int, float],
+                            total_range: Tuple[int, int], pick_count: int,
+                            killed: set = None) -> List[int]:
+        """
+        近期趋势选号（v2.4 新增）
+        基于近期趋势偏移和频率综合评分选号
+        """
+        if killed is None:
+            killed = set()
+
+        low, high = total_range
+        scored = []
+        for num in range(low, high + 1):
+            if num in killed:
+                continue
+            trend_score = trend_stats.get(num, 1.0)
+            freq_score = freq_stats.get(num, 0.001)
+            # 趋势值>1表示近期走热，给予加成
+            combined = freq_score * (0.5 + 0.5 * min(trend_score, 3.0))
+            scored.append((num, combined))
+
+        scored.sort(key=lambda x: x[1], reverse=True)
+        return sorted([n for n, _ in scored[:pick_count]])
+
 
 # ============================================================
 # 前注精选策略模块
@@ -956,15 +1013,18 @@ class LottoPredictor:
         self.red_freq = analyze_frequency(self.history, self.game_type, 'red')
         self.red_missing = analyze_missing(self.history, self.game_type, 'red')
         self.red_cooccur = analyze_cooccurrence(self.history, self.game_type, 'red')
+        self.red_trend = analyze_recent_trend(self.history, self.game_type, 'red')
 
         if self.config['blue_count'] > 0:
             self.blue_freq = analyze_frequency(self.history, self.game_type, 'blue')
             self.blue_missing = analyze_missing(self.history, self.game_type, 'blue')
             self.blue_cooccur = analyze_cooccurrence(self.history, self.game_type, 'blue')
+            self.blue_trend = analyze_recent_trend(self.history, self.game_type, 'blue')
         else:
             self.blue_freq = {}
             self.blue_missing = {}
             self.blue_cooccur = {}
+            self.blue_trend = {}
 
     def _generate_red_candidates(self, count: int = 20) -> List[List[int]]:
         """生成红球候选组合"""
@@ -972,14 +1032,14 @@ class LottoPredictor:
         red_count = self.config['red_count']
         zones = self.config['zones']
 
-        # 杀号 - v2.3 新增尾数/余数杀号维度
+        # 杀号 - v2.4 降低杀号比例，保留更多候选号码
         killed = set()
-        killed |= KillStrategy.missing_kill(self.red_missing, (red_low, red_high), kill_ratio=0.18)
+        killed |= KillStrategy.missing_kill(self.red_missing, (red_low, red_high), kill_ratio=0.12)
         killed |= KillStrategy.hot_cold_zone_kill(self.red_freq, (red_low, red_high),
-                                                   zones=zones, kill_ratio=0.12)
+                                                   zones=zones, kill_ratio=0.08)
         killed |= KillStrategy.odd_even_kill(self.red_freq, red_count)
-        killed |= KillStrategy.tail_kill(self.red_freq, (red_low, red_high), red_count, kill_ratio=0.12)
-        killed |= KillStrategy.remainder_kill(self.red_freq, (red_low, red_high), divisor=3, kill_ratio=0.15)
+        killed |= KillStrategy.tail_kill(self.red_freq, (red_low, red_high), red_count, kill_ratio=0.08)
+        killed |= KillStrategy.remainder_kill(self.red_freq, (red_low, red_high), divisor=3, kill_ratio=0.10)
 
         # 用不同策略生成多组候选
         candidates = []
@@ -1003,6 +1063,11 @@ class LottoPredictor:
         combo4 = SelectStrategy.zone_balance_select(
             self.red_freq, (red_low, red_high), red_count, zones, killed)
         candidates.append(combo4)
+
+        # 策略5：近期趋势选号（v2.4 新增）
+        combo5 = SelectStrategy.trend_recent_select(
+            self.red_trend, self.red_freq, (red_low, red_high), red_count, killed)
+        candidates.append(combo5)
 
         # 生成更多变异组合
         base_pool = sorted(set(n for combo in candidates for n in combo))
@@ -1156,13 +1221,14 @@ class DigitPredictor:
         # 每位的频率
         self.position_freq = []
         self.position_missing = []
+        self.position_trend = []
 
         for pos in range(digit_count):
             freq = defaultdict(float)
             missing = {d: len(self.history) for d in range(d_low, d_high + 1)}
 
             total = len(self.history)
-            decay = 0.995
+            decay = 0.99  # v2.4 提高衰减因子
 
             for idx, draw in enumerate(self.history):
                 weight = decay ** (total - 1 - idx)
@@ -1182,6 +1248,19 @@ class DigitPredictor:
             self.position_freq.append(dict(freq))
             self.position_missing.append(missing)
 
+            # 近期趋势分析（v2.4 新增）
+            recent_pos_freq = defaultdict(float)
+            recent_periods = min(20, total)
+            recent_history = self.history[-recent_periods:]
+            for idx, draw in enumerate(recent_history):
+                digit = draw['digits'][pos]
+                recent_pos_freq[digit] += 1
+            total_recent = sum(recent_pos_freq.values())
+            if total_recent > 0:
+                for k in recent_pos_freq:
+                    recent_pos_freq[k] /= total_recent
+            self.position_trend.append(dict(recent_pos_freq))
+
         # 整体频率
         self.overall_freq = analyze_frequency(self.history, self.game_type, 'digit')
         self.overall_missing = analyze_missing(self.history, self.game_type, 'digit')
@@ -1190,17 +1269,20 @@ class DigitPredictor:
         """生成某一位的预测号码（按频率从高到低）"""
         freq = self.position_freq[pos]
         missing = self.position_missing[pos]
+        trend = self.position_trend[pos] if pos < len(self.position_trend) else {}
         d_low, d_high = self.config['digit_range']
 
-        # 综合评分：频率 + 遗漏值回补预期
+        # 综合评分：频率 + 遗漏值回补预期 + 近期趋势（v2.4）
         scored = []
         avg_missing = sum(missing.values()) / len(missing)
 
         for d in range(d_low, d_high + 1):
             freq_score = freq.get(d, 0.01)
             # 遗漏值得分：超过平均遗漏越多，回补预期越强
-            missing_score = min(missing[d] / max(avg_missing, 1), 2.0) * 0.3
-            total_score = freq_score * 0.7 + missing_score * 0.3
+            missing_score = min(missing[d] / max(avg_missing, 1), 2.0) * 0.25
+            # 近期趋势得分（v2.4 新增）
+            trend_score = trend.get(d, 0.01) * 0.25
+            total_score = freq_score * 0.5 + missing_score + trend_score
             scored.append((d, total_score))
 
         scored.sort(key=lambda x: x[1], reverse=True)
@@ -1327,6 +1409,7 @@ class KL8Predictor:
         self.freq = analyze_frequency(self.history, self.game_type, 'kl8')
         self.missing = analyze_missing(self.history, self.game_type, 'kl8')
         self.cooccur = analyze_cooccurrence(self.history, self.game_type, 'kl8')
+        self.trend = analyze_recent_trend(self.history, self.game_type, 'kl8')
 
     def predict(self) -> Dict:
         """生成快乐8预测结果（20个号码）"""
@@ -1491,7 +1574,7 @@ def generate_prediction(game_type: str, period: str = None,
         'game_type': game_type,
         'game_name': config['name'],
         'period': period,
-        'engine_version': 'v2.3',
+        'engine_version': 'v2.4',
         'type': config['type'],
     }
 
