@@ -263,7 +263,14 @@
       <h1>🎯 彩票预测系统</h1>
       <div class="subtitle">开奖结果 · 数据看板 · 算法优化</div>
     </div>
-    <div class="date-badge" id="currentDate">加载中...</div>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.2);padding:8px 16px;border-radius:8px">
+        <span style="font-size:14px">📅</span>
+        <input type="date" id="datePicker" value="2026-08-04" min="2026-08-01" max="2026-08-04"
+               style="background:transparent;border:none;color:white;font-size:14px;font-weight:500;outline:none;font-family:inherit;color-scheme:dark">
+      </div>
+      <div class="date-badge" id="currentDate" style="display:none">加载中...</div>
+    </div>
   </header>
 
   <div class="nav-tabs" id="navTabs">
@@ -344,8 +351,8 @@
 </div>
 
 <script>
-const TODAY = '2026-08-04';
-const MONTH = '2026-08';
+let TODAY = '2026-08-04';
+let MONTH = '2026-08';
 
 async function loadJSON(path) {
   try {
@@ -427,15 +434,23 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
 });
 
 async function init() {
-  document.getElementById('currentDate').textContent = '📅 ' + TODAY;
+  await loadDataForDate(TODAY);
+}
+
+async function loadDataForDate(dateStr) {
+  const monthStr = dateStr.substring(0, 7);
+  TODAY = dateStr;
+  MONTH = monthStr;
+
+  document.getElementById('datePicker').value = dateStr;
 
   const [results, predictions, sportsPred, sportsRes, summary, monthly, optLog] = await Promise.all([
-    loadJSON(`data/results/${TODAY}.json`),
-    loadJSON(`data/predictions/${TODAY}.json`),
-    loadJSON(`data/sports_predictions/${TODAY}.json`),
-    loadJSON(`data/sports_results/${TODAY}.json`),
-    loadJSON(`data/summary/daily_${TODAY}.json`),
-    loadJSON(`data/summary/monthly_${MONTH}.json`),
+    loadJSON(`data/results/${dateStr}.json`),
+    loadJSON(`data/predictions/${dateStr}.json`),
+    loadJSON(`data/sports_predictions/${dateStr}.json`),
+    loadJSON(`data/sports_results/${dateStr}.json`),
+    loadJSON(`data/summary/daily_${dateStr}.json`),
+    loadJSON(`data/summary/monthly_${monthStr}.json`),
     loadJSON('data/optimization_log.json')
   ]);
 
@@ -449,6 +464,11 @@ async function init() {
   // 异步加载15日总结数据
   loadFifteenDaySummaries().then(data => renderFifteenDaySummary(data));
 }
+
+// 日期选择事件
+document.getElementById('datePicker').addEventListener('change', function(e) {
+  loadDataForDate(e.target.value);
+});
 
 function renderOverview(summary, monthly) {
   const elLottery = document.getElementById('overviewLottery');
