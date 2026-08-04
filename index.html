@@ -454,6 +454,7 @@ async function loadDataForDate(dateStr) {
     loadJSON('data/optimization_log.json')
   ]);
 
+  window.sportsPred = sportsPred;
   renderOverview(summary, monthly);
   renderTodayResults(results);
   renderLottery(predictions, results);
@@ -491,18 +492,33 @@ function renderOverview(summary, monthly) {
   if (summary && summary.sports) {
     const fb = summary.sports.football || {};
     const bb = summary.sports.basketball || {};
+    let fbParlayCount = 0, bbParlayCount = 0;
+    if (window.sportsPred) {
+      const fbData = window.sportsPred.football;
+      const bbData = window.sportsPred.basketball;
+      if (fbData) {
+        const parlays = fbData.parlay_recommendations || {};
+        fbParlayCount = Object.values(parlays).filter(p => p.match_count >= 2).length;
+      }
+      if (bbData) {
+        const parlays = bbData.parlay_recommendations || {};
+        bbParlayCount = Object.values(parlays).filter(p => p.match_count >= 2).length;
+      }
+    }
     elSports.innerHTML = `
       <div style="padding:6px 0;border-bottom:1px solid var(--border)">
         <div style="display:flex;justify-content:space-between;align-items:center">
           <span>⚽ 足球</span>
           <span>${fb.total ? renderHitRate(fb.accuracy) + ' (' + fb.correct + '/' + fb.total + ')' : '暂无数据'}</span>
         </div>
+        ${fbParlayCount > 0 ? `<div style="font-size:11px;color:var(--text-secondary);padding:2px 0">提供 ${fbParlayCount} 种串关方案</div>` : ''}
       </div>
       <div style="padding:6px 0">
         <div style="display:flex;justify-content:space-between;align-items:center">
           <span>🏀 篮球</span>
           <span>${bb.total ? renderHitRate(bb.accuracy) + ' (' + bb.correct + '/' + bb.total + ')' : '暂无数据'}</span>
         </div>
+        ${bbParlayCount > 0 ? `<div style="font-size:11px;color:var(--text-secondary);padding:2px 0">提供 ${bbParlayCount} 种串关方案</div>` : ''}
       </div>`;
   } else {
     elSports.innerHTML = '<div class="empty-state"><p>暂无竞彩数据</p></div>';
@@ -579,13 +595,25 @@ function renderLottery(predictions, results) {
       ${resultBalls.length ? `<div style="font-size:13px;font-weight:600;margin-bottom:4px">开奖号码:</div>${renderBalls(type, resultBalls)}` : '<div style="font-size:12px;color:var(--text-secondary);margin-bottom:8px">⏳ 等待开奖</div>'}
       <div style="font-size:13px;font-weight:600;margin-top:12px;margin-bottom:6px">预测号码:</div>
       ${preds.slice(0, 5).map((p, i) => {
-        const nums = p.balls || p.digits || p.red_balls || (p.red_balls && p.blue_balls ? [...p.red_balls, ...p.blue_balls] : []);
+        // 修复: 先检查red_balls+blue_balls合并，再fallback到单个字段
+        let nums = [];
+        if (p.balls) nums = p.balls;
+        else if (p.digits) nums = p.digits;
+        else if (p.red_balls && p.blue_balls) nums = [...p.red_balls, ...p.blue_balls];
+        else if (p.red_balls) nums = p.red_balls;
+        else if (p.blue_balls) nums = p.blue_balls;
         if (!nums.length) return '';
         return `<div class="prediction-group">
           <div class="group-header">第 ${p.group || i+1} 组 ${p.strategy ? '(' + p.strategy + ')' : ''}</div>
           <div class="ball-row">${nums.map(n => {
             const isBlue = p.blue_balls && p.blue_balls.includes(n);
-            return `<span class="ball ${isBlue ? 'ball-blue' : type === 'KL8' ? 'ball-kl8' : 'ball-red'}">${String(n).padStart(2,'0')}</span>`;
+            const isRed = p.red_balls && p.red_balls.includes(n);
+            let ballClass = 'ball-digit';
+            if (type === 'KL8') ballClass = 'ball-kl8';
+            else if (isBlue) ballClass = 'ball-blue';
+            else if (isRed) ballClass = 'ball-red';
+            else if (p.balls) ballClass = 'ball-kl8';
+            return `<span class="ball ${ballClass}">${String(n).padStart(2,'0')}</span>`;
           }).join('')}</div>
           ${p.analysis ? `<div class="stat-row">
             <span class="stat-item"><span class="stat-label">和值:</span> <span class="stat-value">${p.analysis.sum_value || '-'}</span></span>
@@ -612,21 +640,58 @@ function renderSports(sportsPred, sportsRes) {
     const resultsList = Array.isArray(results) ? results : results?.results || [];
     const icon = sport === 'football' ? '⚽' : '🏀';
     const name = sport === 'football' ? '足球' : '篮球';
-    html += `<div class="summary-card"><h3>${icon} 竞彩${name}预测</h3>`;
+
+    // 赛事卡片
+    html += `<div class="summary-card"><h3>${icon} 竞彩${name}预测 <span style="font-size:12px;font-weight:400;color:var(--text-secondary)">${data.version || ''}</span></h3>`;
     if (matches.length === 0) {
       html += '<div style="padding:12px;color:var(--text-secondary);font-size:13px">今日无比赛</div>';
     } else {
       html += `<table class="match-table">
-        <tr><th>主队</th><th>客队</th><th>推荐</th><th>信心</th><th>实际比分</th><th>结果</th></tr>`;
+        <tr><th>主队</th><th>客队</th><th>胜平负</th><th>信心</th>`;
+      if (sport === 'football') {
+        html += `<th>比分</th><th>让球</th><th>大小球</th>`;
+      } else {
+        html += `<th>让分</th><th>大小分</th>`;
+      }
+      html += `<th>实际比分</th><th>结果</th></tr>`;
       matches.forEach(m => {
         const res = resultsList.find(r => r.match_id === m.match_id || (r.home_team === m.home_team));
         const score = res ? `${res.home_score || '-'}:${res.away_score || '-'}` : '-';
         const correct = res ? (m.recommendation === (res.result || res.outcome || '')) : null;
+        const confidence = m.confidence ? (m.confidence * 100).toFixed(0) + '%' : '-';
+
+        // 胜平负推荐标记
+        let recTag = `<span class="game-badge badge-dlt">${m.recommendation || '-'}</span>`;
+
+        // 足球：显示比分、让球、大小球
+        let extraCols = '';
+        if (sport === 'football') {
+          const ps = m.predicted_score || '-';
+          const hc = m.handicap || {};
+          const hcVal = hc.handicap_value !== undefined ? (hc.handicap_value > 0 ? '+' + hc.handicap_value : hc.handicap_value) : '-';
+          const hcRec = hc.recommendation || '-';
+          const ou = m.over_under || {};
+          const ouLine = ou.line || '-';
+          const ouPred = ou.prediction || '-';
+          extraCols = `<td><strong>${ps}</strong></td>
+            <td><span style="font-size:12px">${hcRec}</span><br><span style="font-size:11px;color:var(--text-secondary)">让${hcVal}</span></td>
+            <td><span style="font-size:12px">${ouPred}</span><br><span style="font-size:11px;color:var(--text-secondary)">${ouLine}球</span></td>`;
+        } else {
+          // 篮球：让分、大小分
+          const sp = m.spread !== undefined ? (m.spread > 0 ? '+' + m.spread : m.spread) : '-';
+          const spRec = m.spread_recommendation || '-';
+          const tp = m.total_points !== undefined ? m.total_points : '-';
+          const ou = m.over_under || '-';
+          extraCols = `<td><span style="font-size:12px">${spRec}</span><br><span style="font-size:11px;color:var(--text-secondary)">${sp}</span></td>
+            <td><span style="font-size:12px">${ou}</span><br><span style="font-size:11px;color:var(--text-secondary)">${tp}分</span></td>`;
+        }
+
         html += `<tr>
-          <td>${m.home_team}</td>
+          <td><strong>${m.home_team}</strong></td>
           <td>${m.away_team}</td>
-          <td><span class="game-badge badge-dlt">${m.recommendation || '-'}</span></td>
-          <td>${m.confidence ? (m.confidence * 100).toFixed(0) + '%' : '-'}</td>
+          <td>${recTag}</td>
+          <td>${confidence}</td>
+          ${extraCols}
           <td>${score}</td>
           <td>${correct === true ? '<span class="tag tag-win">✓</span>' : correct === false ? '<span class="tag tag-loss">✗</span>' : '-'}</td>
         </tr>`;
@@ -634,6 +699,41 @@ function renderSports(sportsPred, sportsRes) {
       html += '</table>';
     }
     html += '</div>';
+
+    // 串关推荐
+    const parlays = data.parlay_recommendations || {};
+    const hasParlay = Object.values(parlays).some(p => p.match_count >= 2);
+    if (hasParlay) {
+      html += `<div class="summary-card"><h3>${icon} ${name}串关推荐</h3>`;
+      html += `<div class="card-grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr))">`;
+      for (const [strategy, parlay] of Object.entries(parlays)) {
+        if (parlay.match_count < 2) continue;
+        const strategyNames = {safe: '稳健型', balanced: '平衡型', aggressive: '进取型'};
+        const riskColors = {低: 'var(--success)', '中低': 'var(--warning)', 中: '#f9ab00', '中高': '#e37400', 高: 'var(--danger)'};
+        html += `<div class="card" style="border-left:4px solid ${riskColors[parlay.risk_level] || 'var(--primary)'}">
+          <h3>${strategyNames[strategy] || strategy}</h3>
+          <div style="font-size:13px;margin-bottom:8px">
+            <span class="tag ${parlay.risk_level === '低' ? 'tag-win' : 'tag-loss'}">${parlay.risk_level}风险</span>
+          </div>
+          <div style="font-size:13px;margin-bottom:8px">
+            <strong>${parlay.match_count}场</strong>串关 ·
+            综合胜率 <strong>${(parlay.combined_probability * 100).toFixed(1)}%</strong> ·
+            预估赔率 <strong>${parlay.estimated_odds}</strong>
+          </div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-bottom:8px">选场:</div>
+          ${(parlay.selected_matches || []).map(sm =>
+            `<div style="font-size:12px;padding:2px 0;display:flex;justify-content:space-between">
+              <span>${sm.home_team} vs ${sm.away_team}</span>
+              <span class="game-badge badge-dlt">${sm.recommendation}</span>
+            </div>`
+          ).join('')}
+          <div style="margin-top:8px;padding-top:8px;border-top:1px dashed var(--border);font-size:12px;color:var(--text-secondary)">
+            可选方式: ${(parlay.parlay_variants || []).map(v => `${v.type}(${v.count}种)`).join(' · ')}
+          </div>
+        </div>`;
+      }
+      html += '</div></div>';
+    }
   }
   el.innerHTML = html || '<div class="card empty-state"><p>暂无竞彩数据</p></div>';
 }

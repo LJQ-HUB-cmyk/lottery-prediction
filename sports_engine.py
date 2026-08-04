@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 from typing import List, Dict, Tuple, Optional
 
 
-VERSION = "v1.6"
+VERSION = "v1.7"
 
 
 # ============================================================
@@ -381,7 +381,7 @@ class MatchPredictor:
         total_score: float,
         home_win_prob: float
     ) -> Dict:
-        """构建预测结果"""
+        """构建预测结果，包含多种玩法"""
         away_win_prob = 1.0 - home_win_prob
 
         if self.sport_type == "football":
@@ -396,7 +396,7 @@ class MatchPredictor:
             home_prob = home_win_prob * non_draw
             away_prob = away_win_prob * non_draw
 
-            # 推荐结果
+            # 推荐结果（胜平负）
             max_prob = max(home_prob, draw_prob, away_prob)
             if max_prob == home_prob:
                 recommendation = "主胜"
@@ -408,6 +408,21 @@ class MatchPredictor:
             # 信心指数
             confidence = max_prob
 
+            # 预测比分
+            predicted_score = self._predict_football_score(
+                home_prob, draw_prob, away_prob, match_data
+            )
+
+            # 让球胜平负预测
+            handicap = self._predict_football_handicap(
+                home_prob, draw_prob, away_prob, match_data
+            )
+
+            # 大小球预测
+            over_under = self._predict_football_over_under(
+                home_prob, away_prob, match_data
+            )
+
             prediction = {
                 "match_id": match_data.get("match_id", ""),
                 "league": match_data.get("league", ""),
@@ -416,6 +431,7 @@ class MatchPredictor:
                 "sport_type": "football",
                 "dimension_scores": {k: round(v, 4) for k, v in dimension_scores.items()},
                 "total_score": round(total_score, 4),
+                # 玩法1: 胜平负
                 "probabilities": {
                     "home_win": round(home_prob, 4),
                     "draw": round(draw_prob, 4),
@@ -423,9 +439,12 @@ class MatchPredictor:
                 },
                 "recommendation": recommendation,
                 "confidence": round(confidence, 4),
-                "predicted_score": self._predict_football_score(
-                    home_prob, draw_prob, away_prob, match_data
-                )
+                # 玩法2: 比分预测
+                "predicted_score": predicted_score,
+                # 玩法3: 让球胜平负
+                "handicap": handicap,
+                # 玩法4: 大小球
+                "over_under": over_under,
             }
         else:
             # 篮球：胜负
@@ -436,11 +455,14 @@ class MatchPredictor:
 
             confidence = max(home_win_prob, away_win_prob)
 
-            # 让分预测（简化模型）
+            # 让分预测（篮球）
             spread = self._predict_basketball_spread(home_win_prob, match_data)
 
             # 大小分预测
             total_points = self._predict_total_points(match_data)
+
+            # 让分胜负预测
+            spread_recommendation = "主让胜" if spread > 0 else "客让胜"
 
             prediction = {
                 "match_id": match_data.get("match_id", ""),
@@ -450,15 +472,20 @@ class MatchPredictor:
                 "sport_type": "basketball",
                 "dimension_scores": {k: round(v, 4) for k, v in dimension_scores.items()},
                 "total_score": round(total_score, 4),
+                # 玩法1: 胜负
                 "probabilities": {
                     "home_win": round(home_win_prob, 4),
                     "away_win": round(away_win_prob, 4)
                 },
                 "recommendation": recommendation,
                 "confidence": round(confidence, 4),
+                # 玩法2: 让分
                 "spread": round(spread, 1),
+                "spread_recommendation": spread_recommendation,
+                # 玩法3: 大小分
                 "total_points": round(total_points, 1),
-                "over_under": "大分" if home_win_prob > 0.5 else "小分"  # 简化
+                "over_under": "大分" if home_win_prob > 0.5 else "小分",
+                "over_under_confidence": round(abs(home_win_prob - 0.5) * 2, 4),
             }
 
         return prediction
@@ -466,22 +493,118 @@ class MatchPredictor:
     def _predict_football_score(
         self, home_prob: float, draw_prob: float, away_prob: float, match_data: Dict
     ) -> str:
-        """预测足球比分（简化模型）"""
+        """预测足球比分（改进模型）"""
         # 基于概率估算期望进球数
-        base_goals = 1.3  # 基础场均进球
-        home_goals = base_goals * (1 + home_prob * 0.8)
-        away_goals = base_goals * (1 + away_prob * 0.8)
+        # 根据联赛调整进球基数
+        league = match_data.get("league", "")
+        base_goals = 1.3
+        if any(k in league for k in ["英超", "德甲", "荷甲", "美职联"]):
+            base_goals = 1.5
+        elif any(k in league for k in ["法甲", "意甲", "中超"]):
+            base_goals = 1.2
+        elif any(k in league for k in ["瑞超", "挪超"]):
+            base_goals = 1.4
 
-        # 取最可能的整数比分
-        home_int = int(round(home_goals))
-        away_int = int(round(away_goals))
+        home_goals = base_goals * (1 + home_prob * 0.6)
+        away_goals = base_goals * (1 + away_prob * 0.6)
 
-        # 平局时微调
-        if draw_prob > 0.3 and home_int != away_int:
-            avg = (home_int + away_int) / 2
-            home_int = away_int = int(round(avg))
+        # 引入随机抖动，避免全部相同
+        import random
+        seed = hash(match_data.get("match_id", "")) % 1000
+        rng = random.Random(seed)
+        home_jitter = rng.uniform(-0.3, 0.3)
+        away_jitter = rng.uniform(-0.3, 0.3)
+
+        home_int = max(0, int(round(home_goals + home_jitter)))
+        away_int = max(0, int(round(away_goals + away_jitter)))
+
+        # 平局调整：如果平局概率高，比分应接近
+        if draw_prob > 0.22 and abs(home_int - away_int) <= 1:
+            # 已经接近，不需要调整
+            pass
+        elif draw_prob > 0.25:
+            # 高平局概率，让比分更接近
+            if home_int > away_int:
+                home_int = max(0, home_int - 1)
+            elif away_int > home_int:
+                away_int = max(0, away_int - 1)
 
         return f"{home_int}-{away_int}"
+
+    def _predict_football_handicap(
+        self, home_prob: float, draw_prob: float, away_prob: float, match_data: Dict
+    ) -> Dict:
+        """预测足球让球胜平负"""
+        # 计算让球数（基于主胜概率）
+        # 胜率60%≈让0.5球，胜率70%≈让1球
+        prob_diff = home_prob - away_prob
+        handicap_value = round(prob_diff * 2.5, 1)
+
+        # 限制让球范围 -1.5 到 +1.5
+        handicap_value = max(-1.5, min(1.5, handicap_value))
+
+        # 根据让球后的概率分布
+        # 让球后主队胜率 = 原主队胜率 + 让球数 * 调整系数
+        adjusted_home = home_prob + handicap_value * 0.12
+        adjusted_away = away_prob - handicap_value * 0.12
+        adjusted_draw = 1.0 - adjusted_home - adjusted_away
+
+        # 归一化
+        total_adj = adjusted_home + adjusted_draw + adjusted_away
+        adjusted_home /= total_adj
+        adjusted_draw /= total_adj
+        adjusted_away /= total_adj
+
+        # 推荐让球结果
+        max_adj = max(adjusted_home, adjusted_draw, adjusted_away)
+        if max_adj == adjusted_home:
+            handicap_recommendation = f"主让{handicap_value:.1f}胜"
+        elif max_adj == adjusted_away:
+            handicap_recommendation = f"客让{abs(handicap_value):.1f}胜"
+        else:
+            handicap_recommendation = f"{'主' if handicap_value >= 0 else '客'}让{abs(handicap_value):.1f}平"
+
+        return {
+            "handicap_value": handicap_value,
+            "probabilities": {
+                "home_win": round(adjusted_home, 4),
+                "draw": round(adjusted_draw, 4),
+                "away_win": round(adjusted_away, 4),
+            },
+            "recommendation": handicap_recommendation,
+            "confidence": round(max_adj, 4),
+        }
+
+    def _predict_football_over_under(
+        self, home_prob: float, away_prob: float, match_data: Dict
+    ) -> Dict:
+        """预测足球大小球"""
+        league = match_data.get("league", "")
+        # 根据联赛设定大小球线
+        if any(k in league for k in ["英超", "德甲", "荷甲", "美职联"]):
+            ou_line = 2.75
+        elif any(k in league for k in ["法甲", "意甲", "中超"]):
+            ou_line = 2.25
+        elif any(k in league for k in ["瑞超", "挪超"]):
+            ou_line = 2.5
+        else:
+            ou_line = 2.5
+
+        # 预计总进球数
+        expected_goals = 2.6 * (1 + (home_prob - 0.5) * 0.3 + (away_prob - 0.5) * 0.3)
+        expected_goals = max(1.5, min(4.5, expected_goals))
+
+        # 判断大小球
+        is_over = expected_goals > ou_line
+        over_confidence = abs(expected_goals - ou_line) / ou_line
+        over_confidence = min(0.85, 0.5 + over_confidence * 0.5)
+
+        return {
+            "line": ou_line,
+            "expected_total": round(expected_goals, 1),
+            "prediction": "大球" if is_over else "小球",
+            "confidence": round(over_confidence, 4),
+        }
 
     def _predict_basketball_spread(self, home_win_prob: float, match_data: Dict) -> float:
         """预测篮球让分"""
@@ -527,11 +650,11 @@ class ParlaySelector:
             - "balanced": 平衡，3-4场，中高信心
             - "aggressive": 高风险，4-6场，中等信心
         """
-        # 策略参数
+        # 策略参数（v1.7 降低信心门槛，让更多比赛进入串关）
         strategies = {
-            "safe": {"min_conf": 0.70, "min_games": 2, "max_games": 2},  # v1.6 提高门槛，减少场次
-            "balanced": {"min_conf": 0.62, "min_games": 2, "max_games": min(3, max_matches)},  # v1.6 提高信心门槛
-            "aggressive": {"min_conf": 0.55, "min_games": 2, "max_games": min(4, max_matches)},  # v1.6 降低场次上限
+            "safe": {"min_conf": 0.45, "min_games": 2, "max_games": 2},
+            "balanced": {"min_conf": 0.40, "min_games": 2, "max_games": min(3, max_matches)},
+            "aggressive": {"min_conf": 0.35, "min_games": 2, "max_games": min(4, max_matches)},
         }
         params = strategies.get(strategy, strategies["balanced"])
 

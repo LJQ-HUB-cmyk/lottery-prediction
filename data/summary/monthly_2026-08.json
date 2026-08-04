@@ -1,6 +1,6 @@
 {
   "month": "2026-08",
-  "generated_at": "2026-08-03T18:10:12.024801",
+  "generated_at": "2026-08-04T03:37:18.763100",
   "days_covered": 4,
   "lottery": {
     "SSQ": {
@@ -77,17 +77,17 @@
   "sports": {
     "football": {
       "total_days": 3,
-      "total_predictions": 9,
-      "total_correct": 4,
-      "overall_accuracy": 0.4444,
-      "avg_daily_accuracy": 0.4444
+      "total_predictions": 8,
+      "total_correct": 3,
+      "overall_accuracy": 0.375,
+      "avg_daily_accuracy": 0.3889
     },
     "basketball": {
       "total_days": 3,
-      "total_predictions": 6,
-      "total_correct": 3,
-      "overall_accuracy": 0.5,
-      "avg_daily_accuracy": 0.5
+      "total_predictions": 4,
+      "total_correct": 1,
+      "overall_accuracy": 0.25,
+      "avg_daily_accuracy": 0.1667
     }
   }
 }

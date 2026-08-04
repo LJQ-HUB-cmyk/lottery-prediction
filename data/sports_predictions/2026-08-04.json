@@ -1,10 +1,10 @@
 {
   "football": {
-    "version": "v1.5",
+    "version": "v1.7",
     "sport_type": "football",
-    "timestamp": "2026-08-03T16:53:31.065101",
+    "timestamp": "2026-08-04T03:36:53.821892",
     "total_matches": 3,
-    "average_confidence": 0.4236,
+    "average_confidence": 0.5764,
     "single_predictions": [
       {
         "match_id": "260804001",
@@ -13,23 +13,39 @@
         "away_team": "天狼星",
         "sport_type": "football",
         "dimension_scores": {
-          "ranking": -0.7895,
+          "ranking": -0.4667,
           "head_to_head": 0.0,
-          "recent_form": 0.0,
-          "home_away": 0.15,
+          "recent_form": -0.7067,
+          "home_away": 0.0667,
           "injuries": 0.0,
-          "schedule_density": 0.0,
-          "weather": 0.0
+          "schedule_density": 0.28,
+          "weather": 0.53
         },
-        "total_score": -0.1354,
+        "total_score": -0.1931,
         "probabilities": {
-          "home_win": 0.3221,
-          "draw": 0.2246,
-          "away_win": 0.4533
+          "home_win": 0.2982,
+          "draw": 0.2138,
+          "away_win": 0.488
         },
         "recommendation": "客胜",
-        "confidence": 0.4533,
-        "predicted_score": "2-2"
+        "confidence": 0.488,
+        "predicted_score": "2-2",
+        "handicap": {
+          "handicap_value": -0.5,
+          "probabilities": {
+            "home_win": 0.2382,
+            "draw": 0.2138,
+            "away_win": 0.548
+          },
+          "recommendation": "客让0.5胜",
+          "confidence": 0.548
+        },
+        "over_under": {
+          "line": 2.5,
+          "expected_total": 2.4,
+          "prediction": "小球",
+          "confidence": 0.5134
+        }
       },
       {
         "match_id": "260804002",
@@ -38,23 +54,39 @@
         "away_team": "韦斯特罗",
         "sport_type": "football",
         "dimension_scores": {
-          "ranking": 0.1053,
+          "ranking": 0.6667,
           "head_to_head": 0.0,
-          "recent_form": 0.0,
-          "home_away": 0.15,
+          "recent_form": 1.0,
+          "home_away": 0.6083,
           "injuries": 0.0,
-          "schedule_density": 0.0,
-          "weather": 0.0
+          "schedule_density": -0.2134,
+          "weather": 0.575
         },
-        "total_score": 0.0436,
+        "total_score": 0.4472,
         "probabilities": {
-          "home_win": 0.3997,
-          "draw": 0.2418,
-          "away_win": 0.3584
+          "home_win": 0.65,
+          "draw": 0.1662,
+          "away_win": 0.1839
         },
         "recommendation": "主胜",
-        "confidence": 0.3997,
-        "predicted_score": "2-2"
+        "confidence": 0.65,
+        "predicted_score": "2-2",
+        "handicap": {
+          "handicap_value": 1.2,
+          "probabilities": {
+            "home_win": 0.794,
+            "draw": 0.1662,
+            "away_win": 0.0399
+          },
+          "recommendation": "主让1.2胜",
+          "confidence": 0.794
+        },
+        "over_under": {
+          "line": 2.5,
+          "expected_total": 2.5,
+          "prediction": "小球",
+          "confidence": 0.5059
+        }
       },
       {
         "match_id": "260804003",
@@ -63,73 +95,214 @@
         "away_team": "维多利亚",
         "sport_type": "football",
         "dimension_scores": {
-          "ranking": 0.2632,
+          "ranking": 0.4211,
           "head_to_head": 0.0,
-          "recent_form": 0.0,
-          "home_away": 0.15,
+          "recent_form": 1.0,
+          "home_away": 0.5167,
           "injuries": 0.0,
-          "schedule_density": 0.0,
-          "weather": 0.0
+          "schedule_density": -0.605,
+          "weather": 0.39
         },
-        "total_score": 0.0751,
+        "total_score": 0.3579,
         "probabilities": {
-          "home_win": 0.4179,
-          "draw": 0.2359,
-          "away_win": 0.3462
+          "home_win": 0.5913,
+          "draw": 0.1829,
+          "away_win": 0.2258
         },
         "recommendation": "主胜",
-        "confidence": 0.4179,
-        "predicted_score": "2-2"
+        "confidence": 0.5913,
+        "predicted_score": "2-1",
+        "handicap": {
+          "handicap_value": 0.9,
+          "probabilities": {
+            "home_win": 0.6993,
+            "draw": 0.1829,
+            "away_win": 0.1178
+          },
+          "recommendation": "主让0.9胜",
+          "confidence": 0.6993
+        },
+        "over_under": {
+          "line": 2.5,
+          "expected_total": 2.5,
+          "prediction": "小球",
+          "confidence": 0.5085
+        }
       }
     ],
     "parlay_recommendations": {
       "safe": {
         "sport_type": "football",
         "strategy": "safe",
-        "selected_matches": [],
-        "match_count": 0,
-        "combined_probability": 1.0,
-        "estimated_odds": 1.0,
-        "parlay_variants": [],
-        "risk_level": "低"
+        "selected_matches": [
+          {
+            "match_id": "260804002",
+            "home_team": "佐加顿斯",
+            "away_team": "韦斯特罗",
+            "recommendation": "主胜",
+            "confidence": 0.65,
+            "league": "瑞超"
+          },
+          {
+            "match_id": "260804003",
+            "home_team": "巴竞技",
+            "away_team": "维多利亚",
+            "recommendation": "主胜",
+            "confidence": 0.5913,
+            "league": "巴西杯"
+          }
+        ],
+        "match_count": 2,
+        "combined_probability": 0.3843,
+        "estimated_odds": 1.88,
+        "parlay_variants": [
+          {
+            "type": "单关",
+            "count": 2,
+            "description": "2场单关，分散风险"
+          },
+          {
+            "type": "2串1",
+            "count": 1,
+            "description": "全部1组2串1组合"
+          },
+          {
+            "type": "2串1",
+            "count": 1,
+            "description": "2场全串，高风险高回报"
+          }
+        ],
+        "risk_level": "中低"
       },
       "balanced": {
         "sport_type": "football",
         "strategy": "balanced",
-        "selected_matches": [],
-        "match_count": 0,
-        "combined_probability": 1.0,
-        "estimated_odds": 1.0,
-        "parlay_variants": [],
-        "risk_level": "低"
+        "selected_matches": [
+          {
+            "match_id": "260804002",
+            "home_team": "佐加顿斯",
+            "away_team": "韦斯特罗",
+            "recommendation": "主胜",
+            "confidence": 0.65,
+            "league": "瑞超"
+          },
+          {
+            "match_id": "260804003",
+            "home_team": "巴竞技",
+            "away_team": "维多利亚",
+            "recommendation": "主胜",
+            "confidence": 0.5913,
+            "league": "巴西杯"
+          },
+          {
+            "match_id": "260804001",
+            "home_team": "哈尔姆斯",
+            "away_team": "天狼星",
+            "recommendation": "客胜",
+            "confidence": 0.488,
+            "league": "瑞超"
+          }
+        ],
+        "match_count": 3,
+        "combined_probability": 0.1876,
+        "estimated_odds": 3.27,
+        "parlay_variants": [
+          {
+            "type": "单关",
+            "count": 3,
+            "description": "3场单关，分散风险"
+          },
+          {
+            "type": "2串1",
+            "count": 3,
+            "description": "全部3组2串1组合"
+          },
+          {
+            "type": "3串1",
+            "count": 1,
+            "description": "全部1组3串1组合"
+          },
+          {
+            "type": "3串1",
+            "count": 1,
+            "description": "3场全串，高风险高回报"
+          }
+        ],
+        "risk_level": "中"
       },
       "aggressive": {
         "sport_type": "football",
         "strategy": "aggressive",
-        "selected_matches": [],
-        "match_count": 0,
-        "combined_probability": 1.0,
-        "estimated_odds": 1.0,
-        "parlay_variants": [],
-        "risk_level": "低"
+        "selected_matches": [
+          {
+            "match_id": "260804002",
+            "home_team": "佐加顿斯",
+            "away_team": "韦斯特罗",
+            "recommendation": "主胜",
+            "confidence": 0.65,
+            "league": "瑞超"
+          },
+          {
+            "match_id": "260804003",
+            "home_team": "巴竞技",
+            "away_team": "维多利亚",
+            "recommendation": "主胜",
+            "confidence": 0.5913,
+            "league": "巴西杯"
+          },
+          {
+            "match_id": "260804001",
+            "home_team": "哈尔姆斯",
+            "away_team": "天狼星",
+            "recommendation": "客胜",
+            "confidence": 0.488,
+            "league": "瑞超"
+          }
+        ],
+        "match_count": 3,
+        "combined_probability": 0.1876,
+        "estimated_odds": 3.27,
+        "parlay_variants": [
+          {
+            "type": "单关",
+            "count": 3,
+            "description": "3场单关，分散风险"
+          },
+          {
+            "type": "2串1",
+            "count": 3,
+            "description": "全部3组2串1组合"
+          },
+          {
+            "type": "3串1",
+            "count": 1,
+            "description": "全部1组3串1组合"
+          },
+          {
+            "type": "3串1",
+            "count": 1,
+            "description": "3场全串，高风险高回报"
+          }
+        ],
+        "risk_level": "中"
       }
     },
     "weights": {
-      "ranking": 0.2,
+      "ranking": 0.15,
       "head_to_head": 0.18,
-      "recent_form": 0.22,
+      "recent_form": 0.25,
       "home_away": 0.15,
-      "injuries": 0.1,
+      "injuries": 0.15,
       "schedule_density": 0.08,
-      "weather": 0.07
+      "weather": 0.04
     }
   },
   "basketball": {
-    "version": "v1.5",
+    "version": "v1.7",
     "sport_type": "basketball",
-    "timestamp": "2026-08-03T16:53:31.065166",
+    "timestamp": "2026-08-04T03:36:53.822802",
     "total_matches": 1,
-    "average_confidence": 0.51,
+    "average_confidence": 0.5826,
     "single_predictions": [
       {
         "match_id": "260804301",
@@ -138,66 +311,95 @@
         "away_team": "女武神",
         "sport_type": "basketball",
         "dimension_scores": {
-          "ranking": 0.0,
+          "ranking": 0.0909,
           "head_to_head": 0.0,
-          "recent_form": 0.0,
-          "home_away": 0.1,
+          "recent_form": 0.4,
+          "home_away": 0.2667,
           "injuries": 0.0,
-          "schedule_density": 0.0,
+          "schedule_density": -0.0666,
           "weather": 0.05
         },
-        "total_score": 0.016,
+        "total_score": 0.1321,
         "probabilities": {
-          "home_win": 0.51,
-          "away_win": 0.49
+          "home_win": 0.5826,
+          "away_win": 0.4174
         },
         "recommendation": "主胜",
-        "confidence": 0.51,
-        "spread": 0.2,
+        "confidence": 0.5826,
+        "spread": 1.7,
+        "spread_recommendation": "主让胜",
         "total_points": 225.0,
-        "over_under": "大分"
+        "over_under": "大分",
+        "over_under_confidence": 0.1652
       }
     ],
     "parlay_recommendations": {
       "safe": {
         "sport_type": "basketball",
         "strategy": "safe",
-        "selected_matches": [],
-        "match_count": 0,
-        "combined_probability": 1.0,
-        "estimated_odds": 1.0,
+        "selected_matches": [
+          {
+            "match_id": "260804301",
+            "home_team": "节奏",
+            "away_team": "女武神",
+            "recommendation": "主胜",
+            "confidence": 0.5826,
+            "league": "WNBA"
+          }
+        ],
+        "match_count": 1,
+        "combined_probability": 0.5826,
+        "estimated_odds": 1.46,
         "parlay_variants": [],
         "risk_level": "低"
       },
       "balanced": {
         "sport_type": "basketball",
         "strategy": "balanced",
-        "selected_matches": [],
-        "match_count": 0,
-        "combined_probability": 1.0,
-        "estimated_odds": 1.0,
+        "selected_matches": [
+          {
+            "match_id": "260804301",
+            "home_team": "节奏",
+            "away_team": "女武神",
+            "recommendation": "主胜",
+            "confidence": 0.5826,
+            "league": "WNBA"
+          }
+        ],
+        "match_count": 1,
+        "combined_probability": 0.5826,
+        "estimated_odds": 1.46,
         "parlay_variants": [],
         "risk_level": "低"
       },
       "aggressive": {
         "sport_type": "basketball",
         "strategy": "aggressive",
-        "selected_matches": [],
-        "match_count": 0,
-        "combined_probability": 1.0,
-        "estimated_odds": 1.0,
+        "selected_matches": [
+          {
+            "match_id": "260804301",
+            "home_team": "节奏",
+            "away_team": "女武神",
+            "recommendation": "主胜",
+            "confidence": 0.5826,
+            "league": "WNBA"
+          }
+        ],
+        "match_count": 1,
+        "combined_probability": 0.5826,
+        "estimated_odds": 1.46,
         "parlay_variants": [],
         "risk_level": "低"
       }
     },
     "weights": {
-      "ranking": 0.18,
+      "ranking": 0.15,
       "head_to_head": 0.15,
-      "recent_form": 0.2,
+      "recent_form": 0.23,
       "home_away": 0.12,
-      "injuries": 0.15,
+      "injuries": 0.18,
       "schedule_density": 0.12,
-      "weather": 0.08
+      "weather": 0.05
     }
   }
 }
