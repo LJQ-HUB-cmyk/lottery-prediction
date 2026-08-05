@@ -1,23 +1,23 @@
 {
   "month": "2026-08",
-  "generated_at": "2026-08-05T16:21:20.182469",
+  "generated_at": "2026-08-05T17:43:41.689819",
   "days_covered": 5,
   "lottery": {
     "SSQ": {
       "total_days": 5,
-      "total_groups": 19,
-      "total_hit_groups": 8,
-      "overall_hit_rate": 0.4211,
-      "avg_daily_hit_rate": 0.48,
-      "hit_day_rate": 0.8,
-      "hit_days": 4,
+      "total_groups": 22,
+      "total_hit_groups": 6,
+      "overall_hit_rate": 0.2727,
+      "avg_daily_hit_rate": 0.4,
+      "hit_day_rate": 0.6,
+      "hit_days": 3,
       "max_hit_level": "四等奖"
     },
     "DLT": {
       "total_days": 4,
-      "total_groups": 14,
+      "total_groups": 17,
       "total_hit_groups": 9,
-      "overall_hit_rate": 0.6429,
+      "overall_hit_rate": 0.5294,
       "avg_daily_hit_rate": 0.75,
       "hit_day_rate": 0.75,
       "hit_days": 3,
@@ -25,27 +25,27 @@
     },
     "QLC": {
       "total_days": 4,
-      "total_groups": 14,
-      "total_hit_groups": 11,
-      "overall_hit_rate": 0.7857,
-      "avg_daily_hit_rate": 0.85,
-      "hit_day_rate": 1.0,
-      "hit_days": 4,
+      "total_groups": 17,
+      "total_hit_groups": 9,
+      "overall_hit_rate": 0.5294,
+      "avg_daily_hit_rate": 0.75,
+      "hit_day_rate": 0.75,
+      "hit_days": 3,
       "max_hit_level": "四等奖"
     },
     "QXC": {
       "total_days": 5,
-      "total_groups": 19,
-      "total_hit_groups": 14,
-      "overall_hit_rate": 0.7368,
-      "avg_daily_hit_rate": 0.7733,
-      "hit_day_rate": 1.0,
-      "hit_days": 5,
-      "max_hit_level": "五等奖"
+      "total_groups": 22,
+      "total_hit_groups": 13,
+      "overall_hit_rate": 0.5909,
+      "avg_daily_hit_rate": 0.7333,
+      "hit_day_rate": 0.8,
+      "hit_days": 4,
+      "max_hit_level": "0/7位"
     },
     "PL3": {
       "total_days": 5,
-      "total_groups": 19,
+      "total_groups": 22,
       "total_hit_groups": 0,
       "overall_hit_rate": 0.0,
       "avg_daily_hit_rate": 0.0,
@@ -55,7 +55,7 @@
     },
     "PL5": {
       "total_days": 5,
-      "total_groups": 19,
+      "total_groups": 22,
       "total_hit_groups": 0,
       "overall_hit_rate": 0.0,
       "avg_daily_hit_rate": 0.0,
@@ -65,7 +65,7 @@
     },
     "FC3D": {
       "total_days": 5,
-      "total_groups": 19,
+      "total_groups": 22,
       "total_hit_groups": 0,
       "overall_hit_rate": 0.0,
       "avg_daily_hit_rate": 0.0,
@@ -95,9 +95,9 @@
     "basketball": {
       "total_days": 4,
       "total_predictions": 6,
-      "total_correct": 1,
-      "overall_accuracy": 0.1667,
-      "avg_daily_accuracy": 0.125
+      "total_correct": 2,
+      "overall_accuracy": 0.3333,
+      "avg_daily_accuracy": 0.25
     }
   }
 }

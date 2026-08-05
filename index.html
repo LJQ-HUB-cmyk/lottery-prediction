@@ -129,7 +129,8 @@
   .ball-front { background: #d32f2f; }
   .ball-back { background: #1976d2; }
   .ball-digit { background: #546e7a; }
-  .ball-kl8 { background: #388e3c; }
+  .ball-kl8 { background: #1565c0; }
+  .ball-kl8-pred { background: #5c6bc0; }
   .ball-special { background: #f9a825; }
   .ball-hit {
     background: #0f9d58 !important;
@@ -647,6 +648,7 @@ function renderLottery(predictions, results) {
     const resBlueSet = new Set(resBlue.map(n => String(n)));
     const resDigitArr = resDigits.map(d => String(d));
     const resBallSet = new Set(resBalls.map(n => String(n)));
+    const resSpecialSet = new Set(resSpecial.map(n => String(n)));
 
     return `<div class="card">
       <h3><span class="game-badge ${getGameBadge(type)}">${getGameName(type)}</span>
@@ -660,23 +662,24 @@ function renderLottery(predictions, results) {
         if (p.balls) nums = p.balls;
         else if (p.digits) { nums = p.digits; isDigitType = true; }
         else if (p.red_balls && p.blue_balls) nums = [...p.red_balls, ...p.blue_balls];
-        else if (p.red_balls) nums = p.red_balls;
+        else if (p.red_balls) nums = [...p.red_balls, ...(p.special_ball !== undefined ? [p.special_ball] : [])];
         else if (p.blue_balls) nums = p.blue_balls;
         if (!nums.length) return '';
 
         let hitCount = 0;
-        let hitDesc = '';
 
         return `<div class="prediction-group">
           <div class="group-header">第 ${p.group || i+1} 组 ${p.strategy ? '(' + p.strategy + ')' : ''}</div>
           <div class="ball-row">${nums.map((n, idx) => {
             const isBlue = p.blue_balls && p.blue_balls.includes(n);
             const isRed = p.red_balls && p.red_balls.includes(n);
+            const isSpecial = p.special_ball !== undefined && p.special_ball === n;
             let ballClass = 'ball-digit';
-            if (type === 'KL8') ballClass = 'ball-kl8';
+            if (type === 'KL8' && p.balls) ballClass = 'ball-kl8-pred';
+            else if (isSpecial) ballClass = 'ball-special';
             else if (isBlue) ballClass = 'ball-blue';
             else if (isRed) ballClass = 'ball-red';
-            else if (p.balls) ballClass = 'ball-kl8';
+            else if (p.balls) ballClass = 'ball-kl8-pred';
 
             // 命中检查
             let isHit = false;
@@ -687,6 +690,8 @@ function renderLottery(predictions, results) {
               isHit = resBlueSet.has(String(n));
             } else if (isRed) {
               isHit = resRedSet.has(String(n));
+            } else if (isSpecial) {
+              isHit = resSpecialSet.has(String(n));
             } else if (p.balls) {
               isHit = resBallSet.has(String(n));
             } else {

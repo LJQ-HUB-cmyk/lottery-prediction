@@ -1411,79 +1411,113 @@ class KL8Predictor:
         self.cooccur = analyze_cooccurrence(self.history, self.game_type, 'kl8')
         self.trend = analyze_recent_trend(self.history, self.game_type, 'kl8')
 
-    def predict(self) -> Dict:
-        """生成快乐8预测结果（20个号码）"""
+    def predict(self, groups: int = 5) -> List[Dict]:
+        """生成快乐8多组预测结果（每组20个号码）
+
+        通过调整杀号比例、增加随机扰动、更换选号策略等手段生成多组差异化预测
+        """
         ball_low, ball_high = self.config['ball_range']
         pick_count = self.config['pick_count']
         zones = self.config['zones']
         zone_size = (ball_high - ball_low + 1) // zones
 
-        # 杀号
-        killed = set()
-        killed |= KillStrategy.missing_kill(self.missing, (ball_low, ball_high), kill_ratio=0.15)
-        killed |= KillStrategy.hot_cold_zone_kill(self.freq, (ball_low, ball_high),
-                                                   zones=zones, kill_ratio=0.1)
+        # 生成多组策略参数
+        strategy_configs = []
+        for g in range(groups):
+            # 每组使用不同的杀号比例和选号侧重
+            kill_missing = 0.15 - g * 0.015  # 0.15, 0.135, 0.12, 0.105, 0.09
+            kill_hotcold = 0.10 - g * 0.01   # 0.10, 0.09, 0.08, 0.07, 0.06
+            freq_weight = 0.60 + g * 0.05    # 0.60, 0.65, 0.70, 0.75, 0.80
+            missing_weight = 0.40 - g * 0.05  # 0.40, 0.35, 0.30, 0.25, 0.20
+            # 限制范围
+            kill_missing = max(0.05, min(0.20, kill_missing))
+            kill_hotcold = max(0.03, min(0.12, kill_hotcold))
+            strategy_configs.append({
+                "kill_missing": kill_missing,
+                "kill_hotcold": kill_hotcold,
+                "freq_weight": freq_weight,
+                "missing_weight": missing_weight,
+            })
 
-        # 分区选号策略
-        zone_picks = []
-        for z in range(zones):
-            zone_start = ball_low + z * zone_size
-            zone_end = ball_low + (z + 1) * zone_size - 1
-            if z == zones - 1:
-                zone_end = ball_high
+        results = []
+        for g, config in enumerate(strategy_configs):
+            # 杀号（每组不同比例）
+            killed = set()
+            killed |= KillStrategy.missing_kill(self.missing, (ball_low, ball_high),
+                                                 kill_ratio=config["kill_missing"])
+            killed |= KillStrategy.hot_cold_zone_kill(self.freq, (ball_low, ball_high),
+                                                       zones=zones, kill_ratio=config["kill_hotcold"])
+            # 每组增加少量随机排除，增加组间差异性
+            rng = random.Random(g * 137 + 42)
+            extra_kill = rng.sample(
+                [n for n in range(ball_low, ball_high + 1) if n not in killed],
+                min(3, 80 - len(killed))
+            )
+            killed.update(extra_kill)
 
-            zone_nums = [n for n in range(zone_start, zone_end + 1) if n not in killed]
-            zone_nums.sort(key=lambda n: self.freq.get(n, 0), reverse=True)
+            # 分区选号
+            zone_picks = []
+            for z in range(zones):
+                zone_start = ball_low + z * zone_size
+                zone_end = ball_low + (z + 1) * zone_size - 1
+                if z == zones - 1:
+                    zone_end = ball_high
 
-            # 每区选2-3个
-            pick_in_zone = pick_count // zones
-            if z < pick_count % zones:
-                pick_in_zone += 1
+                zone_nums = [n for n in range(zone_start, zone_end + 1) if n not in killed]
+                # 综合评分排序
+                zone_nums.sort(key=lambda n: (
+                    self.freq.get(n, 0) * config["freq_weight"] +
+                    self.trend.get(n, 0) * 0.3 +
+                    (1.0 / (1.0 + self.missing.get(n, 50))) * config["missing_weight"]
+                ), reverse=True)
 
-            zone_picks.append(zone_nums[:pick_in_zone])
+                pick_in_zone = pick_count // zones
+                if z < pick_count % zones:
+                    pick_in_zone += 1
+                zone_picks.append(zone_nums[:pick_in_zone])
 
-        # 汇总基础号码
-        selected = []
-        for zone_pick in zone_picks:
-            selected.extend(zone_pick)
+            # 汇总
+            selected = []
+            for zone_pick in zone_picks:
+                selected.extend(zone_pick)
 
-        # 如果数量不够，从高频候选中补充
-        if len(selected) < pick_count:
-            all_available = [n for n in range(ball_low, ball_high + 1)
-                             if n not in killed and n not in selected]
-            all_available.sort(key=lambda n: self.freq.get(n, 0), reverse=True)
-            selected.extend(all_available[:pick_count - len(selected)])
+            # 补充不足
+            if len(selected) < pick_count:
+                all_available = [n for n in range(ball_low, ball_high + 1)
+                                 if n not in killed and n not in selected]
+                all_available.sort(key=lambda n: self.freq.get(n, 0), reverse=True)
+                selected.extend(all_available[:pick_count - len(selected)])
 
-        # 如果数量过多，按综合评分裁剪
-        if len(selected) > pick_count:
-            scored = []
-            for num in selected:
-                freq_score = self.freq.get(num, 0)
-                missing_score = 1.0 / (1.0 + self.missing.get(num, 50))
-                total = freq_score * 0.6 + missing_score * 0.4
-                scored.append((num, total))
-            scored.sort(key=lambda x: x[1], reverse=True)
-            selected = [n for n, _ in scored[:pick_count]]
+            # 裁剪过多
+            if len(selected) > pick_count:
+                scored = []
+                for num in selected:
+                    f_score = self.freq.get(num, 0)
+                    m_score = 1.0 / (1.0 + self.missing.get(num, 50))
+                    total = f_score * config["freq_weight"] + m_score * config["missing_weight"]
+                    scored.append((num, total))
+                scored.sort(key=lambda x: x[1], reverse=True)
+                selected = [n for n, _ in scored[:pick_count]]
 
-        # 确保区间均衡
-        final_selected = self._balance_zones(selected, killed)
+            # 区间均衡
+            final_selected = self._balance_zones(selected, killed)
 
-        # 分析信息
-        result = {
-            'balls': sorted(final_selected),
-            'analysis': {
-                'sum_value': calculate_sum(final_selected),
-                'span': calculate_span(final_selected),
-                'odd_even_ratio': f"{calculate_odd_even_ratio(final_selected)[0]}:{calculate_odd_even_ratio(final_selected)[1]}",
-                'zone_distribution': calculate_zone_distribution(
-                    final_selected, (ball_low, ball_high), zones),
-                'consecutive_groups': calculate_consecutive_count(final_selected),
-                'average_missing': round(
-                    sum(self.missing.get(n, 0) for n in final_selected) / len(final_selected), 2),
-            }
-        }
+            results.append({
+                'group': g + 1,
+                'balls': sorted(final_selected),
+                'analysis': {
+                    'sum_value': calculate_sum(final_selected),
+                    'span': calculate_span(final_selected),
+                    'odd_even_ratio': f"{calculate_odd_even_ratio(final_selected)[0]}:{calculate_odd_even_ratio(final_selected)[1]}",
+                    'zone_distribution': calculate_zone_distribution(
+                        final_selected, (ball_low, ball_high), zones),
+                    'consecutive_groups': calculate_consecutive_count(final_selected),
+                    'average_missing': round(
+                        sum(self.missing.get(n, 0) for n in final_selected) / len(final_selected), 2),
+                }
+            })
 
-        return result
+        return results
 
     def _balance_zones(self, selected: List[int], killed: set) -> List[int]:
         """平衡区间分布"""
@@ -1592,9 +1626,9 @@ def generate_prediction(game_type: str, period: str = None,
 
     elif config['type'] == 'kl8':
         predictor = KL8Predictor(game_type)
-        prediction = predictor.predict()
-        result['prediction'] = prediction
-        result['prediction_count'] = 1
+        predictions = predictor.predict(groups=groups)
+        result['predictions'] = predictions
+        result['prediction_count'] = len(predictions)
 
     return result
 
