@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-竞彩预测算法引擎 v1.5
+竞彩预测算法引擎 v1.9
 支持足球和篮球预测，多维度分析，综合加权评分
+v1.9 新增冷门概率模型：基于实力差距、状态波动、联赛冷门系数、伤停不确定性、H2H波动性综合估算冷门概率，并校准胜平负概率分布
 """
 
 import json
@@ -11,7 +12,7 @@ from datetime import datetime, timedelta
 from typing import List, Dict, Tuple, Optional
 
 
-VERSION = "v1.8"
+VERSION = "v1.9"
 
 
 # ============================================================
@@ -36,6 +37,25 @@ BASKETBALL_WEIGHTS = {
     "schedule_density": 0.12,  # 赛程密集度
     "weather": 0.04,        # 天气因素（v1.8 降低权重）
 }
+
+
+# ============================================================
+# 联赛冷门系数配置（v1.9 新增）
+# 基于历史冷门频率统计，值越高表示该联赛冷门越常见
+# ============================================================
+LEAGUE_COLD_FACTOR = {
+    # 足球联赛
+    "英超": 0.22, "西甲": 0.20, "德甲": 0.18, "意甲": 0.20, "法甲": 0.24,
+    "荷甲": 0.22, "葡超": 0.25, "瑞超": 0.24, "挪超": 0.26, "美职联": 0.30,
+    "中超": 0.25, "J联赛": 0.25, "K联赛": 0.22, "日职": 0.28, "澳超": 0.28,
+    "俄超": 0.23, "土超": 0.26, "比甲": 0.23, "奥甲": 0.22, "丹超": 0.24,
+    "苏超": 0.22, "欧冠": 0.18, "欧联": 0.22, "欧协联": 0.24, "世界杯": 0.20,
+    "欧洲杯": 0.18, "美洲杯": 0.22, "亚冠": 0.25,
+    # 篮球联赛
+    "NBA": 0.28, "CBA": 0.25, "Euro": 0.20, "WNBA": 0.25,
+    "NBL": 0.26, "VTB": 0.22, "ACB": 0.20,
+}
+DEFAULT_COLD_FACTOR = 0.22  # 默认冷门系数
 
 
 # ============================================================
@@ -281,6 +301,146 @@ class MatchPredictor:
             raise ValueError(f"不支持的运动类型: {sport_type}")
         self.scorer = DimensionScorer()
 
+    def _calculate_upset_probability(self, match_data: Dict) -> Dict:
+        """
+        计算冷门概率（v1.9 优化版）
+
+        基于多个维度综合估算冷门发生的可能性：
+        1. 实力差距因子：双方排名差越大，冷门概率越低（sigmoid转换，增强区分度）
+        2. 状态波动性：使用信息熵衡量球队近期结果的不可预测性
+        3. 联赛冷门系数：不同联赛历史冷门频率不同
+        4. 伤停不确定性：关键球员伤停增加不确定性
+        5. H2H波动性：历史交锋结果越不稳定，冷门概率越高
+
+        使用 sigmoid(raw_score) 将加权和压缩到合理范围，避免大面积触及上限
+        """
+        import math
+
+        # 1. 实力差距因子（sigmoid转换，增强区分度）
+        home_rank = match_data.get("home_rank", 10)
+        away_rank = match_data.get("away_rank", 10)
+        total_teams = match_data.get("total_teams", 20)
+        rank_gap = abs(home_rank - away_rank) / max(total_teams, 1)
+        # 使用 sigmoid 映射：rank_gap 接近0时 uncertainty 高，接近1时 uncertainty 低
+        # 转换点设在 rank_gap=0.5 处，斜率 6 使区分更明显
+        strength_uncertainty = 1.0 - (1.0 / (1.0 + math.exp(-6 * (rank_gap - 0.5))))
+
+        # 2. 状态波动性（使用信息熵衡量）
+        home_form = match_data.get("home_form", [])
+        away_form = match_data.get("away_form", [])
+
+        def form_entropy(form_list):
+            """使用信息熵衡量状态不可预测性"""
+            if len(form_list) < 3:
+                return 0.3
+            total = len(form_list)
+            w_count = form_list.count("W")
+            d_count = form_list.count("D")
+            l_count = form_list.count("L")
+            probs = [c / total for c in [w_count, d_count, l_count] if c > 0]
+            # 信息熵：H = -sum(p * log2(p))
+            entropy = -sum(p * math.log2(p) for p in probs)
+            # 归一化：max entropy for 3 outcomes = log2(3) ≈ 1.585
+            return min(1.0, entropy / math.log2(3))
+
+        form_uncertainty = (form_entropy(home_form) + form_entropy(away_form)) / 2
+
+        # 3. 联赛冷门系数
+        league = match_data.get("league", "")
+        cold_factor = DEFAULT_COLD_FACTOR
+        for league_key, cf in LEAGUE_COLD_FACTOR.items():
+            if league_key in league or league in league_key:
+                cold_factor = cf
+                break
+
+        # 4. 伤停不确定性
+        home_injuries = match_data.get("home_injuries", [])
+        away_injuries = match_data.get("away_injuries", [])
+        total_injuries = len(home_injuries) + len(away_injuries)
+        all_importance = [p.get("importance", 5) for p in home_injuries] + \
+                         [p.get("importance", 5) for p in away_injuries]
+        injury_severity = sum(all_importance) / max(len(all_importance), 1) / 10.0
+        injury_uncertainty = min(0.6, (total_injuries / 5.0) * (0.3 + 0.7 * injury_severity))
+
+        # 5. H2H波动性（使用信息熵）
+        h2h = match_data.get("h2h", [])
+        h2h_volatility = 0.2
+        if len(h2h) >= 3:
+            total = len(h2h)
+            results = [r.get("result", "") for r in h2h]
+            w_count = results.count("win")
+            d_count = results.count("draw")
+            l_count = results.count("lose")
+            probs = [c / total for c in [w_count, d_count, l_count] if c > 0]
+            entropy = -sum(p * math.log2(p) for p in probs)
+            h2h_volatility = min(1.0, entropy / math.log2(3))
+
+        # 综合冷门概率——使用 sigmoid 将加权和压缩到合理范围
+        # 权重：strength 0.30, form 0.18, cold 0.20, injury 0.15, h2h 0.17
+        raw_score = (
+            strength_uncertainty * 0.30 +
+            form_uncertainty * 0.18 +
+            cold_factor * 0.20 +
+            injury_uncertainty * 0.15 +
+            h2h_volatility * 0.17
+        )
+
+        # 使用 sigmoid 将 raw_score 映射到合理范围
+        # 偏移量 -0.25 确保中等风险场景的冷门概率在 15-20% 左右
+        scaled = 1.0 / (1.0 + math.exp(-6 * (raw_score - 0.25)))
+        upset_prob = 0.05 + scaled * 0.25  # 映射到 5%-30% 范围
+
+        return {
+            "upset_probability": round(upset_prob, 4),
+            "strength_uncertainty": round(strength_uncertainty, 4),
+            "form_volatility": round(form_uncertainty, 4),
+            "league_cold_factor": cold_factor,
+            "injury_uncertainty": round(injury_uncertainty, 4),
+            "h2h_volatility": round(h2h_volatility, 4),
+        }
+
+    def _calibrate_probabilities(
+        self, home_win_prob: float, draw_prob: float, upset_info: Dict
+    ) -> Tuple[float, float, float]:
+        """
+        根据冷门概率校准胜平负概率（v1.9 新增）
+
+        冷门概率主要从高置信度方向分流：
+        - 主胜概率越高，冷门意味着主队翻车，分流向客胜和平局
+        - 客胜概率越高，冷门意味着客队翻车，分流向主胜和平局
+        """
+        upset_prob = upset_info["upset_probability"]
+
+        # 判断当前推荐方向，计算冷门冲击强度
+        if home_win_prob >= 0.5:
+            # 看好主队：冷门从主胜分流
+            confidence = home_win_prob
+            upset_impact = upset_prob * (0.3 + 0.4 * confidence)
+            calibrated_home = home_win_prob * (1 - upset_impact)
+            upset_to_away = upset_impact * 0.55
+            upset_to_draw = upset_impact * 0.45
+            calibrated_draw = draw_prob * (1 - upset_impact * 0.3) + upset_to_draw
+            calibrated_away = (1 - home_win_prob - draw_prob) * (1 - upset_impact * 0.3) + upset_to_away
+        else:
+            # 看好客队：冷门从客胜分流
+            away_win_prob = 1.0 - home_win_prob
+            confidence = away_win_prob
+            upset_impact = upset_prob * (0.3 + 0.4 * confidence)
+            calibrated_away = away_win_prob * (1 - upset_impact)
+            upset_to_home = upset_impact * 0.55
+            upset_to_draw = upset_impact * 0.45
+            calibrated_draw = draw_prob * (1 - upset_impact * 0.3) + upset_to_draw
+            calibrated_home = home_win_prob * (1 - upset_impact * 0.3) + upset_to_home
+
+        # 归一化
+        total = calibrated_home + calibrated_draw + calibrated_away
+        if total > 0:
+            calibrated_home /= total
+            calibrated_draw /= total
+            calibrated_away /= total
+
+        return calibrated_home, calibrated_draw, calibrated_away
+
     def predict(self, match_data: Dict) -> Dict:
         """
         预测单场比赛
@@ -367,9 +527,12 @@ class MatchPredictor:
         # 转换为主队胜率
         home_win_prob = normalize_score(total_score, scale=0.8)
 
-        # 生成预测结果
+        # 计算冷门概率（v1.9 新增）
+        upset_info = self._calculate_upset_probability(match_data)
+
+        # 生成预测结果（含冷门校准）
         result = self._build_prediction(
-            match_data, dimension_scores, total_score, home_win_prob
+            match_data, dimension_scores, total_score, home_win_prob, upset_info
         )
 
         return result
@@ -379,9 +542,13 @@ class MatchPredictor:
         match_data: Dict,
         dimension_scores: Dict,
         total_score: float,
-        home_win_prob: float
+        home_win_prob: float,
+        upset_info: Dict = None  # v1.9 新增冷门信息
     ) -> Dict:
-        """构建预测结果，包含多种玩法"""
+        """构建预测结果，包含多种玩法（v1.9 新增冷门概率校准）"""
+        if upset_info is None:
+            upset_info = {"upset_probability": 0.3}
+
         away_win_prob = 1.0 - home_win_prob
 
         if self.sport_type == "football":
@@ -391,36 +558,43 @@ class MatchPredictor:
             strength_diff = abs(home_win_prob - 0.5) * 2  # 0 到 1
             draw_prob = draw_prob * (1 - strength_diff * 0.6)
 
-            # 重新分配概率
+            # 先做基础概率分配（确保非负且总和为1）
             non_draw = 1.0 - draw_prob
-            home_prob = home_win_prob * non_draw
-            away_prob = away_win_prob * non_draw
+            base_home = home_win_prob * non_draw
+            base_away = (1 - home_win_prob) * non_draw
 
-            # 推荐结果（胜平负）
-            max_prob = max(home_prob, draw_prob, away_prob)
-            if max_prob == home_prob:
+            # 冷门概率校准（v1.9）- 在基础概率上校准
+            calibrated_home, calibrated_draw, calibrated_away = self._calibrate_probabilities(
+                base_home, draw_prob, upset_info
+            )
+
+            # 推荐结果（胜平负）- 使用校准后的概率
+            max_prob = max(calibrated_home, calibrated_draw, calibrated_away)
+            if max_prob == calibrated_home:
                 recommendation = "主胜"
-            elif max_prob == away_prob:
+            elif max_prob == calibrated_away:
                 recommendation = "客胜"
             else:
                 recommendation = "平局"
 
-            # 信心指数
-            confidence = max_prob
+            # 校准后的信心指数（考虑冷门不确定性）
+            raw_confidence = max_prob
+            # 冷门概率越高，信心越要打折（v1.9 降幅从0.3调整为0.2）
+            confidence = raw_confidence * (1.0 - upset_info["upset_probability"] * 0.2)
 
             # 预测比分
             predicted_score = self._predict_football_score(
-                home_prob, draw_prob, away_prob, match_data
+                calibrated_home, calibrated_draw, calibrated_away, match_data
             )
 
             # 让球胜平负预测
             handicap = self._predict_football_handicap(
-                home_prob, draw_prob, away_prob, match_data
+                calibrated_home, calibrated_draw, calibrated_away, match_data
             )
 
             # 大小球预测
             over_under = self._predict_football_over_under(
-                home_prob, away_prob, match_data
+                calibrated_home, calibrated_away, match_data
             )
 
             prediction = {
@@ -431,11 +605,11 @@ class MatchPredictor:
                 "sport_type": "football",
                 "dimension_scores": {k: round(v, 4) for k, v in dimension_scores.items()},
                 "total_score": round(total_score, 4),
-                # 玩法1: 胜平负
+                # 玩法1: 胜平负（校准后）
                 "probabilities": {
-                    "home_win": round(home_prob, 4),
-                    "draw": round(draw_prob, 4),
-                    "away_win": round(away_prob, 4)
+                    "home_win": round(calibrated_home, 4),
+                    "draw": round(calibrated_draw, 4),
+                    "away_win": round(calibrated_away, 4)
                 },
                 "recommendation": recommendation,
                 "confidence": round(confidence, 4),
@@ -445,18 +619,39 @@ class MatchPredictor:
                 "handicap": handicap,
                 # 玩法4: 大小球
                 "over_under": over_under,
+                # v1.9 新增冷门信息
+                "upset_analysis": {
+                    "upset_probability": upset_info["upset_probability"],
+                    "strength_uncertainty": upset_info.get("strength_uncertainty", 0),
+                    "form_volatility": upset_info.get("form_volatility", 0),
+                    "league_cold_factor": upset_info.get("league_cold_factor", 0.3),
+                    "injury_uncertainty": upset_info.get("injury_uncertainty", 0),
+                    "h2h_volatility": upset_info.get("h2h_volatility", 0),
+                }
             }
         else:
             # 篮球：胜负
-            if home_win_prob >= 0.5:
+            # 先做基础概率分配
+            base_home = home_win_prob
+            base_away = 1 - home_win_prob
+            base_draw = 0.0  # 篮球无平局
+
+            # 冷门概率校准（v1.9）
+            calibrated_home, _, calibrated_away = self._calibrate_probabilities(
+                base_home, base_draw, upset_info
+            )
+
+            if calibrated_home >= 0.5:
                 recommendation = "主胜"
             else:
                 recommendation = "客胜"
 
-            confidence = max(home_win_prob, away_win_prob)
+            # 校准后的信心指数（篮球）
+            raw_confidence = max(calibrated_home, calibrated_away)
+            confidence = raw_confidence * (1.0 - upset_info["upset_probability"] * 0.2)
 
             # 让分预测（篮球）
-            spread = self._predict_basketball_spread(home_win_prob, match_data)
+            spread = self._predict_basketball_spread(calibrated_home, match_data)
 
             # 大小分预测
             total_points = self._predict_total_points(match_data)
@@ -472,10 +667,10 @@ class MatchPredictor:
                 "sport_type": "basketball",
                 "dimension_scores": {k: round(v, 4) for k, v in dimension_scores.items()},
                 "total_score": round(total_score, 4),
-                # 玩法1: 胜负
+                # 玩法1: 胜负（校准后）
                 "probabilities": {
-                    "home_win": round(home_win_prob, 4),
-                    "away_win": round(away_win_prob, 4)
+                    "home_win": round(calibrated_home, 4),
+                    "away_win": round(calibrated_away, 4)
                 },
                 "recommendation": recommendation,
                 "confidence": round(confidence, 4),
@@ -484,8 +679,17 @@ class MatchPredictor:
                 "spread_recommendation": spread_recommendation,
                 # 玩法3: 大小分
                 "total_points": round(total_points, 1),
-                "over_under": "大分" if home_win_prob > 0.5 else "小分",
-                "over_under_confidence": round(abs(home_win_prob - 0.5) * 2, 4),
+                "over_under": "大分" if calibrated_home > 0.5 else "小分",
+                "over_under_confidence": round(abs(calibrated_home - 0.5) * 2, 4),
+                # v1.9 新增冷门信息
+                "upset_analysis": {
+                    "upset_probability": upset_info["upset_probability"],
+                    "strength_uncertainty": upset_info.get("strength_uncertainty", 0),
+                    "form_volatility": upset_info.get("form_volatility", 0),
+                    "league_cold_factor": upset_info.get("league_cold_factor", 0.3),
+                    "injury_uncertainty": upset_info.get("injury_uncertainty", 0),
+                    "h2h_volatility": upset_info.get("h2h_volatility", 0),
+                }
             }
 
         return prediction
@@ -672,10 +876,26 @@ class ParlaySelector:
         selected_count = max(params["min_games"], min(selected_count, params["max_games"]))
         selected = filtered[:selected_count]
 
-        # 计算串关综合胜率（假设独立事件）
+        # 计算串关综合胜率（v1.9 加入冷门相关性修正）
         combined_prob = 1.0
+        avg_upset = 0.0
+        upset_count = 0
         for p in selected:
             combined_prob *= p.get("confidence", 0.5)
+            upset = p.get("upset_analysis", {}).get("upset_probability", 0.3)
+            avg_upset += upset
+            upset_count += 1
+
+        if upset_count > 0:
+            avg_upset /= upset_count
+
+        # 冷门相关性修正：同一轮比赛冷门可能集中出现
+        # 修正系数 = 0.95^(n-1)，n为比赛场数
+        correlation_penalty = (0.95 ** (len(selected) - 1)) if len(selected) >= 2 else 1.0
+        # 冷门平均概率越高，修正越强
+        upset_penalty = 1.0 - (avg_upset * 0.15 * (len(selected) - 1))
+        upset_penalty = max(0.70, min(1.0, upset_penalty))
+        adjusted_combined_prob = combined_prob * correlation_penalty * upset_penalty
 
         # 估算奖金倍数（简化模型）
         # 实际赔率 ≈ 1 / 胜率 * 0.85（庄家抽水）
@@ -698,15 +918,19 @@ class ParlaySelector:
                     "away_team": p["away_team"],
                     "recommendation": p["recommendation"],
                     "confidence": p["confidence"],
-                    "league": p.get("league", "")
+                    "league": p.get("league", ""),
+                    "upset_probability": p.get("upset_analysis", {}).get("upset_probability", 0)
                 }
                 for p in selected
             ],
             "match_count": len(selected),
             "combined_probability": round(combined_prob, 4),
+            "adjusted_combined_probability": round(adjusted_combined_prob, 4),  # v1.9 修正后
             "estimated_odds": round(total_odds, 2),
             "parlay_variants": parlays,
-            "risk_level": self._assess_risk(combined_prob, len(selected))
+            "risk_level": self._assess_risk(adjusted_combined_prob, len(selected)),  # v1.9 使用修正后概率
+            "upset_penalty": round(1.0 - upset_penalty, 4),  # v1.9 冷门折损率
+            "average_upset_rate": round(avg_upset, 4),  # v1.9 平均冷门率
         }
 
     def _generate_parlay_variants(self, selected: List[Dict], strategy: str) -> List[Dict]:
@@ -834,6 +1058,15 @@ def generate_sports_prediction(sport_type: str, matches: List[Dict]) -> Dict:
         sum(p.get("confidence", 0) for p in single_predictions) / total_matches
         if total_matches > 0 else 0
     )
+    # v1.9 新增冷门统计
+    avg_upset = (
+        sum(p.get("upset_analysis", {}).get("upset_probability", 0) for p in single_predictions) / total_matches
+        if total_matches > 0 else 0
+    )
+    max_upset = max(
+        (p.get("upset_analysis", {}).get("upset_probability", 0) for p in single_predictions),
+        default=0
+    )
 
     result = {
         "version": VERSION,
@@ -841,6 +1074,8 @@ def generate_sports_prediction(sport_type: str, matches: List[Dict]) -> Dict:
         "timestamp": datetime.now().isoformat(),
         "total_matches": total_matches,
         "average_confidence": round(avg_confidence, 4),
+        "average_upset_probability": round(avg_upset, 4),  # v1.9 新增
+        "max_upset_probability": round(max_upset, 4),  # v1.9 新增
         "single_predictions": single_predictions,
         "parlay_recommendations": parlays,
         "weights": FOOTBALL_WEIGHTS if sport_type == "football" else BASKETBALL_WEIGHTS

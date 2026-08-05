@@ -366,7 +366,7 @@
 
   <div class="footer">
     <p>⚠️ 免责声明：彩票为独立随机事件，本系统仅供学习研究参考，请理性购彩，切勿沉迷。</p>
-    <p style="margin-top:4px;">数据来源：中国福利彩票官网、中国体育彩票官网 | 预测算法版本 v2.5 / v1.8</p>
+    <p style="margin-top:4px;">数据来源：中国福利彩票官网、中国体育彩票官网 | 预测算法版本 v2.5 / v1.9</p>
   </div>
 </div>
 
@@ -441,6 +441,15 @@ function renderHitRate(rate) {
   if (rate >= 0.6) cls = 'hit-high';
   else if (rate >= 0.3) cls = 'hit-medium';
   return `<span class="hit-rate ${cls}">${pct}%</span>`;
+}
+
+function renderUpsetBadge(ua) {
+  if (!ua || !ua.upset_probability) return '<span style="font-size:12px;color:var(--text-secondary)">-</span>';
+  const pct = (ua.upset_probability * 100).toFixed(0);
+  let bg = '#e6f4ea', color = '#1e7e34', label = '低';
+  if (ua.upset_probability >= 0.23) { bg = '#fce8e6'; color = '#c5221f'; label = '高'; }
+  else if (ua.upset_probability >= 0.15) { bg = '#fef7e0'; color = '#e37400'; label = '中'; }
+  return `<span title="实力${(ua.strength_uncertainty*100).toFixed(0)}%·状态${(ua.form_volatility*100).toFixed(0)}%·联赛${(ua.league_cold_factor*100).toFixed(0)}%·伤停${(ua.injury_uncertainty*100).toFixed(0)}%·H2H${(ua.h2h_volatility*100).toFixed(0)}%" style="cursor:help;font-size:12px;padding:2px 6px;border-radius:4px;font-weight:600;background:${bg};color:${color}">${pct}% ${label}</span>`;
 }
 
 function renderProgressBar(rate) {
@@ -540,6 +549,7 @@ function renderOverview(summary, monthly) {
           <span>${fb.total ? renderHitRate(fb.accuracy) + ' (' + fb.correct + '/' + fb.total + ')' : '暂无数据'}</span>
         </div>
         ${fbParlayCount > 0 ? `<div style="font-size:11px;color:var(--text-secondary);padding:2px 0">提供 ${fbParlayCount} 种串关方案</div>` : ''}
+        ${typeof fbData !== 'undefined' && fbData && fbData.average_upset_probability ? `<div style="font-size:11px;color:var(--text-secondary);padding:2px 0">冷门风险: ${(fbData.average_upset_probability*100).toFixed(0)}%</div>` : ''}
       </div>
       <div style="padding:6px 0">
         <div style="display:flex;justify-content:space-between;align-items:center">
@@ -547,6 +557,7 @@ function renderOverview(summary, monthly) {
           <span>${bb.total ? renderHitRate(bb.accuracy) + ' (' + bb.correct + '/' + bb.total + ')' : '暂无数据'}</span>
         </div>
         ${bbParlayCount > 0 ? `<div style="font-size:11px;color:var(--text-secondary);padding:2px 0">提供 ${bbParlayCount} 种串关方案</div>` : ''}
+        ${typeof bbData !== 'undefined' && bbData && bbData.average_upset_probability ? `<div style="font-size:11px;color:var(--text-secondary);padding:2px 0">冷门风险: ${(bbData.average_upset_probability*100).toFixed(0)}%</div>` : ''}
       </div>`;
   } else {
     elSports.innerHTML = '<div class="empty-state"><p>暂无竞彩数据</p></div>';
@@ -718,7 +729,7 @@ function renderSports(sportsPred, sportsRes) {
       html += '<div style="padding:12px;color:var(--text-secondary);font-size:13px">今日无比赛</div>';
     } else {
       html += `<table class="match-table">
-        <tr><th>主队</th><th>客队</th><th>胜平负</th><th>信心</th>`;
+        <tr><th>主队</th><th>客队</th><th>胜平负</th><th>信心</th><th>冷门</th>`;
       if (sport === 'football') {
         html += `<th>比分</th><th>让球</th><th>大小球</th>`;
       } else {
@@ -762,6 +773,7 @@ function renderSports(sportsPred, sportsRes) {
           <td>${m.away_team}</td>
           <td>${recTag}</td>
           <td>${confidence}</td>
+          <td>${renderUpsetBadge(m.upset_analysis)}</td>
           ${extraCols}
           <td>${score}</td>
           <td>${correct === true ? '<span class="tag tag-win">✓</span>' : correct === false ? '<span class="tag tag-loss">✗</span>' : '-'}</td>
@@ -785,10 +797,12 @@ function renderSports(sportsPred, sportsRes) {
           <h3>${strategyNames[strategy] || strategy}</h3>
           <div style="font-size:13px;margin-bottom:8px">
             <span class="tag ${parlay.risk_level === '低' ? 'tag-win' : 'tag-loss'}">${parlay.risk_level}风险</span>
+            ${parlay.average_upset_rate ? `<span class="tag tag-loss" style="margin-left:4px">冷门${(parlay.average_upset_rate*100).toFixed(0)}%</span>` : ''}
           </div>
           <div style="font-size:13px;margin-bottom:8px">
             <strong>${parlay.match_count}场</strong>串关 ·
-            综合胜率 <strong>${(parlay.combined_probability * 100).toFixed(1)}%</strong> ·
+            综合胜率 <strong>${(parlay.combined_probability * 100).toFixed(1)}%</strong>
+            ${parlay.adjusted_combined_probability ? `<span style="font-size:11px;color:var(--text-secondary)">（修正后${(parlay.adjusted_combined_probability*100).toFixed(1)}%${parlay.upset_penalty ? '，冷门折损'+(parlay.upset_penalty*100).toFixed(0)+'%' : ''}）</span>` : ''} ·
             预估赔率 <strong>${parlay.estimated_odds}</strong>
           </div>
           <div style="font-size:12px;color:var(--text-secondary);margin-bottom:8px">选场:</div>
