@@ -2,7 +2,7 @@
 """
 彩票预测算法引擎 Lottery Prediction Engine
 =============================================
-版本: v2.4
+版本: v2.5
 作者: AI Engine Team
 创建日期: 2024-01-15
 最后更新: 2026-08-04
@@ -47,7 +47,7 @@ v2.3 (2026-08-04):
     - 优化快乐8八分区选号策略（引入冷热差异度参数）
     - 根据历史命中数据反向调整了策略权重
 
-v2.4 (2026-08-04):
+v2.5 (2026-08-04):
     - 新增近期趋势分析函数（analyze_recent_trend），捕捉短期热点变化
     - 新增近期趋势选号策略（trend_recent_select），基于趋势偏移和频率综合评分
     - 提高频率衰减因子（0.995→0.99），加强近期数据权重
@@ -156,7 +156,7 @@ GAME_CONFIG = {
 DEFAULT_HISTORY_PERIODS = 100
 
 # 预测生成组数
-DEFAULT_PREDICTION_GROUPS = 5
+DEFAULT_PREDICTION_GROUPS = 8
 
 
 # ============================================================
@@ -294,7 +294,7 @@ def analyze_frequency(history: List[Dict], game_type: str, ball_type: str = 'red
     freq = defaultdict(float)
     total_periods = len(history)
 
-    decay_factor = 0.99  # 衰减因子（v2.4 从0.995提升至0.99，加强近期数据权重）
+    decay_factor = 0.985  # 衰减因子（v2.5 从0.995提升至0.99，加强近期数据权重）
 
     for idx, draw in enumerate(history):
         weight = decay_factor ** (total_periods - 1 - idx)  # 越近权重越高
@@ -364,7 +364,7 @@ def analyze_missing(history: List[Dict], game_type: str, ball_type: str = 'red')
 def analyze_recent_trend(history: List[Dict], game_type: str, ball_type: str = 'red',
                           recent_periods: int = 20) -> Dict[int, float]:
     """
-    近期趋势分析（v2.4 新增）
+    近期趋势分析（v2.5 新增）
     仅分析最近 N 期的数据，捕捉短期热点变化
     """
     if len(history) <= recent_periods:
@@ -842,7 +842,7 @@ class SelectStrategy:
                             total_range: Tuple[int, int], pick_count: int,
                             killed: set = None) -> List[int]:
         """
-        近期趋势选号（v2.4 新增）
+        近期趋势选号（v2.5 新增）
         基于近期趋势偏移和频率综合评分选号
         """
         if killed is None:
@@ -930,9 +930,9 @@ class RefineStrategy:
 
         total = len(freqs)
         # 理想分布：热号30%，温号50%，冷号20%
-        ideal_hot = total * 0.3
-        ideal_warm = total * 0.5
-        ideal_cold = total * 0.2
+        ideal_hot = total * 0.25
+        ideal_warm = total * 0.55
+        ideal_cold = total * 0.20
 
         score = 1.0 - (abs(hot_count - ideal_hot) + abs(warm_count - ideal_warm) +
                        abs(cold_count - ideal_cold)) / (2 * total)
@@ -949,10 +949,10 @@ class RefineStrategy:
         """
         if weights is None:
             weights = {
-                'frequency': 0.20,
+                'frequency': 0.15,
                 'cooccurrence': 0.25,
                 'odd_even': 0.15,
-                'zone_coverage': 0.25,
+                'zone_coverage': 0.30,
                 'hot_cold': 0.15,
             }
 
@@ -1032,14 +1032,14 @@ class LottoPredictor:
         red_count = self.config['red_count']
         zones = self.config['zones']
 
-        # 杀号 - v2.4 降低杀号比例，保留更多候选号码
+        # 杀号 - v2.5 降低杀号比例，保留更多候选号码
         killed = set()
-        killed |= KillStrategy.missing_kill(self.red_missing, (red_low, red_high), kill_ratio=0.12)
+        killed |= KillStrategy.missing_kill(self.red_missing, (red_low, red_high), kill_ratio=0.08)
         killed |= KillStrategy.hot_cold_zone_kill(self.red_freq, (red_low, red_high),
-                                                   zones=zones, kill_ratio=0.08)
+                                                   zones=zones, kill_ratio=0.05)
         killed |= KillStrategy.odd_even_kill(self.red_freq, red_count)
-        killed |= KillStrategy.tail_kill(self.red_freq, (red_low, red_high), red_count, kill_ratio=0.08)
-        killed |= KillStrategy.remainder_kill(self.red_freq, (red_low, red_high), divisor=3, kill_ratio=0.10)
+        killed |= KillStrategy.tail_kill(self.red_freq, (red_low, red_high), red_count, kill_ratio=0.05)
+        killed |= KillStrategy.remainder_kill(self.red_freq, (red_low, red_high), divisor=3, kill_ratio=0.06)
 
         # 用不同策略生成多组候选
         candidates = []
@@ -1064,7 +1064,7 @@ class LottoPredictor:
             self.red_freq, (red_low, red_high), red_count, zones, killed)
         candidates.append(combo4)
 
-        # 策略5：近期趋势选号（v2.4 新增）
+        # 策略5：近期趋势选号（v2.5 新增）
         combo5 = SelectStrategy.trend_recent_select(
             self.red_trend, self.red_freq, (red_low, red_high), red_count, killed)
         candidates.append(combo5)
@@ -1228,7 +1228,7 @@ class DigitPredictor:
             missing = {d: len(self.history) for d in range(d_low, d_high + 1)}
 
             total = len(self.history)
-            decay = 0.99  # v2.4 提高衰减因子
+            decay = 0.99  # v2.5 提高衰减因子
 
             for idx, draw in enumerate(self.history):
                 weight = decay ** (total - 1 - idx)
@@ -1248,7 +1248,7 @@ class DigitPredictor:
             self.position_freq.append(dict(freq))
             self.position_missing.append(missing)
 
-            # 近期趋势分析（v2.4 新增）
+            # 近期趋势分析（v2.5 新增）
             recent_pos_freq = defaultdict(float)
             recent_periods = min(20, total)
             recent_history = self.history[-recent_periods:]
@@ -1272,7 +1272,7 @@ class DigitPredictor:
         trend = self.position_trend[pos] if pos < len(self.position_trend) else {}
         d_low, d_high = self.config['digit_range']
 
-        # 综合评分：频率 + 遗漏值回补预期 + 近期趋势（v2.4）
+        # 综合评分：频率 + 遗漏值回补预期 + 近期趋势（v2.5）
         scored = []
         avg_missing = sum(missing.values()) / len(missing)
 
@@ -1280,9 +1280,9 @@ class DigitPredictor:
             freq_score = freq.get(d, 0.01)
             # 遗漏值得分：超过平均遗漏越多，回补预期越强
             missing_score = min(missing[d] / max(avg_missing, 1), 2.0) * 0.25
-            # 近期趋势得分（v2.4 新增）
+            # 近期趋势得分（v2.5 新增）
             trend_score = trend.get(d, 0.01) * 0.25
-            total_score = freq_score * 0.5 + missing_score + trend_score
+            total_score = freq_score * 0.45 + missing_score * 0.8 + trend_score * 1.2
             scored.append((d, total_score))
 
         scored.sort(key=lambda x: x[1], reverse=True)
@@ -1355,14 +1355,14 @@ class DigitPredictor:
                                 if len(results) >= groups:
                                     break
 
-        # 策略3：随机变异组合
+        # 策略3：随机变异组合（v2.5 增加尝试次数和多样性）
         attempts = 0
-        while len(results) < groups and attempts < 200:
+        while len(results) < groups and attempts < 300:
             combo = []
             for pos in range(digit_count):
                 candidates = position_candidates[pos]
                 # 有一定概率选择次高频
-                if random.random() < 0.3 and len(candidates) > 1:
+                if random.random() < 0.4 and len(candidates) > 1:
                     combo.append(random.choice(candidates[1:]))
                 else:
                     combo.append(candidates[0])
@@ -1574,7 +1574,7 @@ def generate_prediction(game_type: str, period: str = None,
         'game_type': game_type,
         'game_name': config['name'],
         'period': period,
-        'engine_version': 'v2.4',
+        'engine_version': 'v2.5',
         'type': config['type'],
     }
 

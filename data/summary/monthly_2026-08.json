@@ -1,51 +1,51 @@
 {
   "month": "2026-08",
-  "generated_at": "2026-08-04T03:37:18.763100",
-  "days_covered": 4,
+  "generated_at": "2026-08-05T14:46:13.954697",
+  "days_covered": 5,
   "lottery": {
     "SSQ": {
-      "total_days": 3,
-      "total_groups": 9,
-      "total_hit_groups": 6,
-      "overall_hit_rate": 0.6667,
-      "avg_daily_hit_rate": 0.6667,
-      "hit_day_rate": 1.0,
-      "hit_days": 3,
+      "total_days": 5,
+      "total_groups": 19,
+      "total_hit_groups": 8,
+      "overall_hit_rate": 0.4211,
+      "avg_daily_hit_rate": 0.48,
+      "hit_day_rate": 0.8,
+      "hit_days": 4,
       "max_hit_level": "四等奖"
     },
     "DLT": {
-      "total_days": 3,
-      "total_groups": 9,
+      "total_days": 4,
+      "total_groups": 14,
       "total_hit_groups": 9,
-      "overall_hit_rate": 1.0,
-      "avg_daily_hit_rate": 1.0,
-      "hit_day_rate": 1.0,
+      "overall_hit_rate": 0.6429,
+      "avg_daily_hit_rate": 0.75,
+      "hit_day_rate": 0.75,
       "hit_days": 3,
       "max_hit_level": "五等奖"
     },
     "QLC": {
-      "total_days": 3,
-      "total_groups": 9,
-      "total_hit_groups": 9,
-      "overall_hit_rate": 1.0,
-      "avg_daily_hit_rate": 1.0,
+      "total_days": 4,
+      "total_groups": 14,
+      "total_hit_groups": 11,
+      "overall_hit_rate": 0.7857,
+      "avg_daily_hit_rate": 0.85,
       "hit_day_rate": 1.0,
-      "hit_days": 3,
+      "hit_days": 4,
       "max_hit_level": "四等奖"
     },
     "QXC": {
-      "total_days": 3,
-      "total_groups": 9,
-      "total_hit_groups": 8,
-      "overall_hit_rate": 0.8889,
-      "avg_daily_hit_rate": 0.8889,
+      "total_days": 5,
+      "total_groups": 19,
+      "total_hit_groups": 18,
+      "overall_hit_rate": 0.9474,
+      "avg_daily_hit_rate": 0.9333,
       "hit_day_rate": 1.0,
-      "hit_days": 3,
+      "hit_days": 5,
       "max_hit_level": null
     },
     "PL3": {
-      "total_days": 3,
-      "total_groups": 9,
+      "total_days": 5,
+      "total_groups": 19,
       "total_hit_groups": 0,
       "overall_hit_rate": 0.0,
       "avg_daily_hit_rate": 0.0,
@@ -54,8 +54,8 @@
       "max_hit_level": null
     },
     "PL5": {
-      "total_days": 3,
-      "total_groups": 9,
+      "total_days": 5,
+      "total_groups": 19,
       "total_hit_groups": 0,
       "overall_hit_rate": 0.0,
       "avg_daily_hit_rate": 0.0,
@@ -64,30 +64,40 @@
       "max_hit_level": null
     },
     "FC3D": {
-      "total_days": 3,
-      "total_groups": 9,
+      "total_days": 5,
+      "total_groups": 19,
       "total_hit_groups": 0,
       "overall_hit_rate": 0.0,
       "avg_daily_hit_rate": 0.0,
       "hit_day_rate": 0.0,
       "hit_days": 0,
       "max_hit_level": null
+    },
+    "KL8": {
+      "total_days": 2,
+      "total_groups": 2,
+      "total_hit_groups": 2,
+      "overall_hit_rate": 1.0,
+      "avg_daily_hit_rate": 1.0,
+      "hit_day_rate": 1.0,
+      "hit_days": 2,
+      "max_hit_level": null
     }
   },
   "sports": {
     "football": {
-      "total_days": 3,
-      "total_predictions": 8,
-      "total_correct": 3,
-      "overall_accuracy": 0.375,
-      "avg_daily_accuracy": 0.3889
+      "total_days": 5,
+      "total_predictions": 15,
+      "total_correct": 8,
+      "overall_accuracy": 0.5333,
+      "avg_daily_accuracy": 0.5333
     },
     "basketball": {
-      "total_days": 3,
-      "total_predictions": 4,
+      "total_days": 4,
+      "total_predictions": 6,
       "total_correct": 1,
-      "overall_accuracy": 0.25,
-      "avg_daily_accuracy": 0.1667
+      "overall_accuracy": 0.1667,
+      "avg_daily_accuracy": 0.125
     }
   }
 }

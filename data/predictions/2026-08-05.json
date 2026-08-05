@@ -1,0 +1,851 @@
+{
+  "SSQ": {
+    "game_type": "SSQ",
+    "game_name": "双色球",
+    "period": "2026-08-05",
+    "engine_version": "v2.4",
+    "type": "lotto",
+    "predictions": [
+      {
+        "group": 1,
+        "red_balls": [
+          4,
+          7,
+          13,
+          14,
+          19,
+          26
+        ],
+        "red_score": 64.8026,
+        "blue_balls": [
+          12
+        ],
+        "analysis": {
+          "sum_value": 83,
+          "span": 22,
+          "ac_value": 7,
+          "odd_even_ratio": "3:3",
+          "consecutive_groups": 1,
+          "zone_distribution": [
+            2,
+            3,
+            1
+          ]
+        }
+      },
+      {
+        "group": 2,
+        "red_balls": [
+          7,
+          13,
+          14,
+          19,
+          20,
+          29
+        ],
+        "red_score": 57.8297,
+        "blue_balls": [
+          13
+        ],
+        "analysis": {
+          "sum_value": 102,
+          "span": 22,
+          "ac_value": 6,
+          "odd_even_ratio": "4:2",
+          "consecutive_groups": 2,
+          "zone_distribution": [
+            1,
+            4,
+            1
+          ]
+        }
+      },
+      {
+        "group": 3,
+        "red_balls": [
+          4,
+          8,
+          11,
+          19,
+          22,
+          23
+        ],
+        "red_score": 52.9063,
+        "blue_balls": [
+          15
+        ],
+        "analysis": {
+          "sum_value": 87,
+          "span": 19,
+          "ac_value": 6,
+          "odd_even_ratio": "3:3",
+          "consecutive_groups": 1,
+          "zone_distribution": [
+            3,
+            2,
+            1
+          ]
+        }
+      },
+      {
+        "group": 4,
+        "red_balls": [
+          4,
+          10,
+          13,
+          20,
+          22,
+          29
+        ],
+        "red_score": 49.5306,
+        "blue_balls": [
+          5
+        ],
+        "analysis": {
+          "sum_value": 98,
+          "span": 25,
+          "ac_value": 6,
+          "odd_even_ratio": "2:4",
+          "consecutive_groups": 0,
+          "zone_distribution": [
+            2,
+            3,
+            1
+          ]
+        }
+      },
+      {
+        "group": 5,
+        "red_balls": [
+          4,
+          7,
+          10,
+          19,
+          20,
+          23
+        ],
+        "red_score": 48.5888,
+        "blue_balls": [
+          5
+        ],
+        "analysis": {
+          "sum_value": 83,
+          "span": 19,
+          "ac_value": 6,
+          "odd_even_ratio": "3:3",
+          "consecutive_groups": 1,
+          "zone_distribution": [
+            3,
+            2,
+            1
+          ]
+        }
+      }
+    ],
+    "prediction_count": 5
+  },
+  "DLT": {
+    "game_type": "DLT",
+    "game_name": "大乐透",
+    "period": "2026-08-05",
+    "engine_version": "v2.4",
+    "type": "lotto",
+    "predictions": [
+      {
+        "group": 1,
+        "red_balls": [
+          4,
+          8,
+          17,
+          28,
+          34
+        ],
+        "red_score": 40.5783,
+        "blue_balls": [
+          2,
+          12
+        ],
+        "analysis": {
+          "sum_value": 91,
+          "span": 30,
+          "ac_value": 6,
+          "odd_even_ratio": "1:4",
+          "consecutive_groups": 0,
+          "zone_distribution": [
+            2,
+            1,
+            2
+          ]
+        }
+      },
+      {
+        "group": 2,
+        "red_balls": [
+          1,
+          5,
+          13,
+          22,
+          28
+        ],
+        "red_score": 39.4439,
+        "blue_balls": [
+          2,
+          9
+        ],
+        "analysis": {
+          "sum_value": 69,
+          "span": 27,
+          "ac_value": 6,
+          "odd_even_ratio": "3:2",
+          "consecutive_groups": 0,
+          "zone_distribution": [
+            2,
+            2,
+            1
+          ]
+        }
+      },
+      {
+        "group": 3,
+        "red_balls": [
+          13,
+          22,
+          23,
+          31,
+          34
+        ],
+        "red_score": 36.6702,
+        "blue_balls": [
+          4,
+          7
+        ],
+        "analysis": {
+          "sum_value": 123,
+          "span": 21,
+          "ac_value": 5,
+          "odd_even_ratio": "3:2",
+          "consecutive_groups": 1,
+          "zone_distribution": [
+            0,
+            3,
+            2
+          ]
+        }
+      },
+      {
+        "group": 4,
+        "red_balls": [
+          4,
+          8,
+          17,
+          23,
+          29
+        ],
+        "red_score": 34.9524,
+        "blue_balls": [
+          2,
+          7
+        ],
+        "analysis": {
+          "sum_value": 81,
+          "span": 25,
+          "ac_value": 5,
+          "odd_even_ratio": "3:2",
+          "consecutive_groups": 0,
+          "zone_distribution": [
+            2,
+            2,
+            1
+          ]
+        }
+      },
+      {
+        "group": 5,
+        "red_balls": [
+          4,
+          13,
+          17,
+          22,
+          23
+        ],
+        "red_score": 33.4283,
+        "blue_balls": [
+          4,
+          9
+        ],
+        "analysis": {
+          "sum_value": 79,
+          "span": 19,
+          "ac_value": 5,
+          "odd_even_ratio": "3:2",
+          "consecutive_groups": 1,
+          "zone_distribution": [
+            1,
+            4,
+            0
+          ]
+        }
+      }
+    ],
+    "prediction_count": 5
+  },
+  "QLC": {
+    "game_type": "QLC",
+    "game_name": "七乐彩",
+    "period": "2026-08-05",
+    "engine_version": "v2.4",
+    "type": "lotto",
+    "predictions": [
+      {
+        "group": 1,
+        "red_balls": [
+          1,
+          10,
+          11,
+          13,
+          14,
+          17,
+          23
+        ],
+        "red_score": 98.6334,
+        "special_ball": 5,
+        "analysis": {
+          "sum_value": 89,
+          "span": 22,
+          "ac_value": 6,
+          "odd_even_ratio": "5:2",
+          "consecutive_groups": 2,
+          "zone_distribution": [
+            2,
+            4,
+            1
+          ]
+        }
+      },
+      {
+        "group": 2,
+        "red_balls": [
+          2,
+          11,
+          13,
+          14,
+          17,
+          23,
+          25
+        ],
+        "red_score": 94.8545,
+        "special_ball": 5,
+        "analysis": {
+          "sum_value": 105,
+          "span": 23,
+          "ac_value": 8,
+          "odd_even_ratio": "5:2",
+          "consecutive_groups": 1,
+          "zone_distribution": [
+            1,
+            4,
+            2
+          ]
+        }
+      },
+      {
+        "group": 3,
+        "red_balls": [
+          1,
+          2,
+          11,
+          13,
+          14,
+          23,
+          25
+        ],
+        "red_score": 94.7295,
+        "special_ball": 5,
+        "analysis": {
+          "sum_value": 89,
+          "span": 24,
+          "ac_value": 7,
+          "odd_even_ratio": "5:2",
+          "consecutive_groups": 2,
+          "zone_distribution": [
+            2,
+            3,
+            2
+          ]
+        }
+      },
+      {
+        "group": 4,
+        "red_balls": [
+          2,
+          10,
+          11,
+          14,
+          17,
+          19,
+          25
+        ],
+        "red_score": 92.5519,
+        "special_ball": 5,
+        "analysis": {
+          "sum_value": 98,
+          "span": 23,
+          "ac_value": 9,
+          "odd_even_ratio": "4:3",
+          "consecutive_groups": 1,
+          "zone_distribution": [
+            2,
+            4,
+            1
+          ]
+        }
+      },
+      {
+        "group": 5,
+        "red_balls": [
+          1,
+          10,
+          11,
+          14,
+          19,
+          20,
+          23
+        ],
+        "red_score": 91.7879,
+        "special_ball": 5,
+        "analysis": {
+          "sum_value": 98,
+          "span": 22,
+          "ac_value": 7,
+          "odd_even_ratio": "4:3",
+          "consecutive_groups": 2,
+          "zone_distribution": [
+            2,
+            4,
+            1
+          ]
+        }
+      }
+    ],
+    "prediction_count": 5
+  },
+  "QXC": {
+    "game_type": "QXC",
+    "game_name": "七星彩",
+    "period": "2026-08-05",
+    "engine_version": "v2.4",
+    "type": "digit",
+    "predictions": [
+      {
+        "group": 1,
+        "digits": [
+          3,
+          0,
+          7,
+          7,
+          1,
+          0,
+          2
+        ],
+        "strategy": "高频直选",
+        "analysis": {
+          "sum_value": 20,
+          "span": 7,
+          "odd_even_ratio": "4:3",
+          "big_small_ratio": "2:5"
+        }
+      },
+      {
+        "group": 2,
+        "digits": [
+          8,
+          0,
+          7,
+          7,
+          1,
+          7,
+          0
+        ],
+        "strategy": "变异组合",
+        "analysis": {
+          "sum_value": 30,
+          "span": 8,
+          "odd_even_ratio": "4:3",
+          "big_small_ratio": "4:3"
+        }
+      },
+      {
+        "group": 3,
+        "digits": [
+          3,
+          4,
+          7,
+          7,
+          1,
+          0,
+          2
+        ],
+        "strategy": "变异组合",
+        "analysis": {
+          "sum_value": 24,
+          "span": 7,
+          "odd_even_ratio": "4:3",
+          "big_small_ratio": "2:5"
+        }
+      },
+      {
+        "group": 4,
+        "digits": [
+          3,
+          0,
+          7,
+          7,
+          1,
+          7,
+          2
+        ],
+        "strategy": "变异组合",
+        "analysis": {
+          "sum_value": 27,
+          "span": 7,
+          "odd_even_ratio": "5:2",
+          "big_small_ratio": "3:4"
+        }
+      },
+      {
+        "group": 5,
+        "digits": [
+          3,
+          4,
+          7,
+          4,
+          1,
+          2,
+          2
+        ],
+        "strategy": "变异组合",
+        "analysis": {
+          "sum_value": 23,
+          "span": 6,
+          "odd_even_ratio": "3:4",
+          "big_small_ratio": "1:6"
+        }
+      }
+    ],
+    "prediction_count": 5
+  },
+  "PL3": {
+    "game_type": "PL3",
+    "game_name": "排列三",
+    "period": "2026-08-05",
+    "engine_version": "v2.4",
+    "type": "digit",
+    "predictions": [
+      {
+        "group": 1,
+        "digits": [
+          1,
+          7,
+          1
+        ],
+        "strategy": "高频直选",
+        "analysis": {
+          "sum_value": 9,
+          "span": 6,
+          "odd_even_ratio": "3:0",
+          "big_small_ratio": "1:2"
+        }
+      },
+      {
+        "group": 2,
+        "digits": [
+          0,
+          1,
+          7
+        ],
+        "strategy": "组选六",
+        "analysis": {
+          "sum_value": 8,
+          "span": 7,
+          "odd_even_ratio": "2:1",
+          "big_small_ratio": "1:2"
+        }
+      },
+      {
+        "group": 3,
+        "digits": [
+          0,
+          2,
+          7
+        ],
+        "strategy": "组选六",
+        "analysis": {
+          "sum_value": 9,
+          "span": 7,
+          "odd_even_ratio": "1:2",
+          "big_small_ratio": "1:2"
+        }
+      },
+      {
+        "group": 4,
+        "digits": [
+          0,
+          3,
+          7
+        ],
+        "strategy": "组选六",
+        "analysis": {
+          "sum_value": 10,
+          "span": 7,
+          "odd_even_ratio": "2:1",
+          "big_small_ratio": "1:2"
+        }
+      },
+      {
+        "group": 5,
+        "digits": [
+          0,
+          4,
+          7
+        ],
+        "strategy": "组选六",
+        "analysis": {
+          "sum_value": 11,
+          "span": 7,
+          "odd_even_ratio": "1:2",
+          "big_small_ratio": "1:2"
+        }
+      }
+    ],
+    "prediction_count": 5
+  },
+  "PL5": {
+    "game_type": "PL5",
+    "game_name": "排列五",
+    "period": "2026-08-05",
+    "engine_version": "v2.4",
+    "type": "digit",
+    "predictions": [
+      {
+        "group": 1,
+        "digits": [
+          1,
+          0,
+          8,
+          7,
+          1
+        ],
+        "strategy": "高频直选",
+        "analysis": {
+          "sum_value": 17,
+          "span": 8,
+          "odd_even_ratio": "3:2",
+          "big_small_ratio": "2:3"
+        }
+      },
+      {
+        "group": 2,
+        "digits": [
+          1,
+          0,
+          7,
+          7,
+          1
+        ],
+        "strategy": "变异组合",
+        "analysis": {
+          "sum_value": 16,
+          "span": 7,
+          "odd_even_ratio": "4:1",
+          "big_small_ratio": "2:3"
+        }
+      },
+      {
+        "group": 3,
+        "digits": [
+          0,
+          5,
+          8,
+          1,
+          1
+        ],
+        "strategy": "变异组合",
+        "analysis": {
+          "sum_value": 15,
+          "span": 8,
+          "odd_even_ratio": "3:2",
+          "big_small_ratio": "2:3"
+        }
+      },
+      {
+        "group": 4,
+        "digits": [
+          6,
+          0,
+          8,
+          7,
+          1
+        ],
+        "strategy": "变异组合",
+        "analysis": {
+          "sum_value": 22,
+          "span": 8,
+          "odd_even_ratio": "2:3",
+          "big_small_ratio": "3:2"
+        }
+      },
+      {
+        "group": 5,
+        "digits": [
+          1,
+          6,
+          3,
+          7,
+          1
+        ],
+        "strategy": "变异组合",
+        "analysis": {
+          "sum_value": 18,
+          "span": 6,
+          "odd_even_ratio": "4:1",
+          "big_small_ratio": "2:3"
+        }
+      }
+    ],
+    "prediction_count": 5
+  },
+  "FC3D": {
+    "game_type": "FC3D",
+    "game_name": "福彩3D",
+    "period": "2026-08-05",
+    "engine_version": "v2.4",
+    "type": "digit",
+    "predictions": [
+      {
+        "group": 1,
+        "digits": [
+          0,
+          2,
+          0
+        ],
+        "strategy": "高频直选",
+        "analysis": {
+          "sum_value": 2,
+          "span": 2,
+          "odd_even_ratio": "0:3",
+          "big_small_ratio": "0:3"
+        }
+      },
+      {
+        "group": 2,
+        "digits": [
+          0,
+          1,
+          7
+        ],
+        "strategy": "组选六",
+        "analysis": {
+          "sum_value": 8,
+          "span": 7,
+          "odd_even_ratio": "2:1",
+          "big_small_ratio": "1:2"
+        }
+      },
+      {
+        "group": 3,
+        "digits": [
+          0,
+          2,
+          7
+        ],
+        "strategy": "组选六",
+        "analysis": {
+          "sum_value": 9,
+          "span": 7,
+          "odd_even_ratio": "1:2",
+          "big_small_ratio": "1:2"
+        }
+      },
+      {
+        "group": 4,
+        "digits": [
+          0,
+          3,
+          7
+        ],
+        "strategy": "组选六",
+        "analysis": {
+          "sum_value": 10,
+          "span": 7,
+          "odd_even_ratio": "2:1",
+          "big_small_ratio": "1:2"
+        }
+      },
+      {
+        "group": 5,
+        "digits": [
+          0,
+          4,
+          7
+        ],
+        "strategy": "组选六",
+        "analysis": {
+          "sum_value": 11,
+          "span": 7,
+          "odd_even_ratio": "1:2",
+          "big_small_ratio": "1:2"
+        }
+      }
+    ],
+    "prediction_count": 5
+  },
+  "KL8": {
+    "game_type": "KL8",
+    "game_name": "快乐8",
+    "period": "2026-08-05",
+    "engine_version": "v2.4",
+    "type": "kl8",
+    "prediction": {
+      "balls": [
+        2,
+        4,
+        9,
+        11,
+        15,
+        18,
+        22,
+        23,
+        26,
+        34,
+        37,
+        38,
+        45,
+        46,
+        52,
+        56,
+        63,
+        65,
+        78,
+        80
+      ],
+      "analysis": {
+        "sum_value": 724,
+        "span": 78,
+        "odd_even_ratio": "8:12",
+        "zone_distribution": [
+          3,
+          3,
+          3,
+          3,
+          2,
+          2,
+          2,
+          2
+        ],
+        "consecutive_groups": 3,
+        "average_missing": 2.1
+      }
+    },
+    "prediction_count": 1
+  }
+}

@@ -11,30 +11,30 @@ from datetime import datetime, timedelta
 from typing import List, Dict, Tuple, Optional
 
 
-VERSION = "v1.7"
+VERSION = "v1.8"
 
 
 # ============================================================
 # 维度权重配置
 # ============================================================
 FOOTBALL_WEIGHTS = {
-    "ranking": 0.15,        # 球队排名（v1.6 降低权重）
-    "head_to_head": 0.18,   # 历史交锋（含心理优势）
-    "recent_form": 0.25,    # 近期状态（v1.6 提升权重，关键因素）
+    "ranking": 0.12,        # 球队排名（v1.8 进一步降低权重）
+    "head_to_head": 0.20,   # 历史交锋（v1.8 提升权重，关键因素）
+    "recent_form": 0.28,    # 近期状态（v1.8 持续提升权重，最关键因素）
     "home_away": 0.15,      # 主客场优势
-    "injuries": 0.15,       # 球员伤停（v1.6 提升权重，关键因素）
+    "injuries": 0.15,       # 球员伤停
     "schedule_density": 0.08,  # 赛程密集度
-    "weather": 0.04,        # 天气因素（v1.6 降低权重）
+    "weather": 0.02,        # 天气因素（v1.8 进一步降低权重）
 }
 
 BASKETBALL_WEIGHTS = {
-    "ranking": 0.15,        # 球队排名（v1.6 降低权重）
-    "head_to_head": 0.15,   # 历史交锋
-    "recent_form": 0.23,    # 近期状态（v1.6 提升权重）
+    "ranking": 0.12,        # 球队排名（v1.8 降低权重）
+    "head_to_head": 0.17,   # 历史交锋（v1.8 提升权重）
+    "recent_form": 0.25,    # 近期状态（v1.8 提升权重）
     "home_away": 0.12,      # 主客场优势
-    "injuries": 0.18,       # 球员伤停（v1.6 提升权重，篮球更依赖球星）
-    "schedule_density": 0.12,  # 赛程密集度（背靠背影响大）
-    "weather": 0.05,        # 天气因素（v1.6 降低权重，室内场馆影响极小）
+    "injuries": 0.18,       # 球员伤停
+    "schedule_density": 0.12,  # 赛程密集度
+    "weather": 0.04,        # 天气因素（v1.8 降低权重）
 }
 
 
@@ -519,7 +519,7 @@ class MatchPredictor:
         away_int = max(0, int(round(away_goals + away_jitter)))
 
         # 平局调整：如果平局概率高，比分应接近
-        if draw_prob > 0.22 and abs(home_int - away_int) <= 1:
+        if draw_prob > 0.18 and abs(home_int - away_int) <= 1:
             # 已经接近，不需要调整
             pass
         elif draw_prob > 0.25:
@@ -591,7 +591,7 @@ class MatchPredictor:
             ou_line = 2.5
 
         # 预计总进球数
-        expected_goals = 2.6 * (1 + (home_prob - 0.5) * 0.3 + (away_prob - 0.5) * 0.3)
+        expected_goals = 2.8 * (1 + (home_prob - 0.5) * 0.35 + (away_prob - 0.5) * 0.35)
         expected_goals = max(1.5, min(4.5, expected_goals))
 
         # 判断大小球
@@ -652,9 +652,9 @@ class ParlaySelector:
         """
         # 策略参数（v1.7 降低信心门槛，让更多比赛进入串关）
         strategies = {
-            "safe": {"min_conf": 0.45, "min_games": 2, "max_games": 2},
-            "balanced": {"min_conf": 0.40, "min_games": 2, "max_games": min(3, max_matches)},
-            "aggressive": {"min_conf": 0.35, "min_games": 2, "max_games": min(4, max_matches)},
+            "safe": {"min_conf": 0.40, "min_games": 2, "max_games": 2},
+            "balanced": {"min_conf": 0.35, "min_games": 2, "max_games": min(3, max_matches)},
+            "aggressive": {"min_conf": 0.30, "min_games": 2, "max_games": min(4, max_matches)},
         }
         params = strategies.get(strategy, strategies["balanced"])
 

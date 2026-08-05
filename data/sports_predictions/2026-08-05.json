@@ -1,0 +1,554 @@
+{
+  "football": {
+    "version": "v1.7",
+    "sport_type": "football",
+    "timestamp": "2026-08-05T14:40:53.454859",
+    "total_matches": 4,
+    "average_confidence": 0.504,
+    "single_predictions": [
+      {
+        "match_id": "260805001",
+        "league": "日职",
+        "home_team": "横滨水手",
+        "away_team": "神户胜利",
+        "sport_type": "football",
+        "dimension_scores": {
+          "ranking": -0.1053,
+          "head_to_head": 0.02,
+          "recent_form": -0.18,
+          "home_away": 0.2167,
+          "injuries": -0.14,
+          "schedule_density": 0.325,
+          "weather": 0.395
+        },
+        "total_score": -0.0039,
+        "probabilities": {
+          "home_win": 0.3735,
+          "draw": 0.2493,
+          "away_win": 0.3772
+        },
+        "recommendation": "客胜",
+        "confidence": 0.3772,
+        "predicted_score": "2-1",
+        "handicap": {
+          "handicap_value": -0.0,
+          "probabilities": {
+            "home_win": 0.3735,
+            "draw": 0.2493,
+            "away_win": 0.3772
+          },
+          "recommendation": "客让0.0胜",
+          "confidence": 0.3772
+        },
+        "over_under": {
+          "line": 2.5,
+          "expected_total": 2.4,
+          "prediction": "小球",
+          "confidence": 0.5189
+        }
+      },
+      {
+        "match_id": "260805002",
+        "league": "日职",
+        "home_team": "川崎前锋",
+        "away_team": "鹿岛鹿角",
+        "sport_type": "football",
+        "dimension_scores": {
+          "ranking": -0.0526,
+          "head_to_head": 0.42,
+          "recent_form": -0.18,
+          "home_away": 0.2833,
+          "injuries": 0.16,
+          "schedule_density": 0.605,
+          "weather": 0.385
+        },
+        "total_score": 0.153,
+        "probabilities": {
+          "home_win": 0.4638,
+          "draw": 0.2213,
+          "away_win": 0.3149
+        },
+        "recommendation": "主胜",
+        "confidence": 0.4638,
+        "predicted_score": "2-1",
+        "handicap": {
+          "handicap_value": 0.4,
+          "probabilities": {
+            "home_win": 0.5118,
+            "draw": 0.2213,
+            "away_win": 0.2669
+          },
+          "recommendation": "主让0.4胜",
+          "confidence": 0.5118
+        },
+        "over_under": {
+          "line": 2.5,
+          "expected_total": 2.4,
+          "prediction": "小球",
+          "confidence": 0.5145
+        }
+      },
+      {
+        "match_id": "260805003",
+        "league": "中超",
+        "home_team": "上海海港",
+        "away_team": "山东泰山",
+        "sport_type": "football",
+        "dimension_scores": {
+          "ranking": 0.2667,
+          "head_to_head": 0.42,
+          "recent_form": 0.54,
+          "home_away": 0.5204,
+          "injuries": 0.18,
+          "schedule_density": 0.2584,
+          "weather": 0.37
+        },
+        "total_score": 0.3911,
+        "probabilities": {
+          "home_win": 0.6129,
+          "draw": 0.1767,
+          "away_win": 0.2104
+        },
+        "recommendation": "主胜",
+        "confidence": 0.6129,
+        "predicted_score": "1-1",
+        "handicap": {
+          "handicap_value": 1.0,
+          "probabilities": {
+            "home_win": 0.7329,
+            "draw": 0.1767,
+            "away_win": 0.0904
+          },
+          "recommendation": "主让1.0胜",
+          "confidence": 0.7329
+        },
+        "over_under": {
+          "line": 2.25,
+          "expected_total": 2.5,
+          "prediction": "大球",
+          "confidence": 0.5472
+        }
+      },
+      {
+        "match_id": "260805004",
+        "league": "欧冠",
+        "home_team": "拜仁",
+        "away_team": "巴黎",
+        "sport_type": "football",
+        "dimension_scores": {
+          "ranking": 0.0588,
+          "head_to_head": 0.42,
+          "recent_form": 0.32,
+          "home_away": 0.5204,
+          "injuries": 0.04,
+          "schedule_density": 0.515,
+          "weather": 0.56
+        },
+        "total_score": 0.3121,
+        "probabilities": {
+          "home_win": 0.562,
+          "draw": 0.1915,
+          "away_win": 0.2466
+        },
+        "recommendation": "主胜",
+        "confidence": 0.562,
+        "predicted_score": "2-2",
+        "handicap": {
+          "handicap_value": 0.8,
+          "probabilities": {
+            "home_win": 0.658,
+            "draw": 0.1915,
+            "away_win": 0.1506
+          },
+          "recommendation": "主让0.8胜",
+          "confidence": 0.658
+        },
+        "over_under": {
+          "line": 2.5,
+          "expected_total": 2.5,
+          "prediction": "小球",
+          "confidence": 0.5099
+        }
+      }
+    ],
+    "parlay_recommendations": {
+      "safe": {
+        "sport_type": "football",
+        "strategy": "safe",
+        "selected_matches": [
+          {
+            "match_id": "260805003",
+            "home_team": "上海海港",
+            "away_team": "山东泰山",
+            "recommendation": "主胜",
+            "confidence": 0.6129,
+            "league": "中超"
+          },
+          {
+            "match_id": "260805004",
+            "home_team": "拜仁",
+            "away_team": "巴黎",
+            "recommendation": "主胜",
+            "confidence": 0.562,
+            "league": "欧冠"
+          }
+        ],
+        "match_count": 2,
+        "combined_probability": 0.3444,
+        "estimated_odds": 2.1,
+        "parlay_variants": [
+          {
+            "type": "单关",
+            "count": 2,
+            "description": "2场单关，分散风险"
+          },
+          {
+            "type": "2串1",
+            "count": 1,
+            "description": "全部1组2串1组合"
+          },
+          {
+            "type": "2串1",
+            "count": 1,
+            "description": "2场全串，高风险高回报"
+          }
+        ],
+        "risk_level": "中低"
+      },
+      "balanced": {
+        "sport_type": "football",
+        "strategy": "balanced",
+        "selected_matches": [
+          {
+            "match_id": "260805003",
+            "home_team": "上海海港",
+            "away_team": "山东泰山",
+            "recommendation": "主胜",
+            "confidence": 0.6129,
+            "league": "中超"
+          },
+          {
+            "match_id": "260805004",
+            "home_team": "拜仁",
+            "away_team": "巴黎",
+            "recommendation": "主胜",
+            "confidence": 0.562,
+            "league": "欧冠"
+          },
+          {
+            "match_id": "260805002",
+            "home_team": "川崎前锋",
+            "away_team": "鹿岛鹿角",
+            "recommendation": "主胜",
+            "confidence": 0.4638,
+            "league": "日职"
+          }
+        ],
+        "match_count": 3,
+        "combined_probability": 0.1598,
+        "estimated_odds": 3.84,
+        "parlay_variants": [
+          {
+            "type": "单关",
+            "count": 3,
+            "description": "3场单关，分散风险"
+          },
+          {
+            "type": "2串1",
+            "count": 3,
+            "description": "全部3组2串1组合"
+          },
+          {
+            "type": "3串1",
+            "count": 1,
+            "description": "全部1组3串1组合"
+          },
+          {
+            "type": "3串1",
+            "count": 1,
+            "description": "3场全串，高风险高回报"
+          }
+        ],
+        "risk_level": "中"
+      },
+      "aggressive": {
+        "sport_type": "football",
+        "strategy": "aggressive",
+        "selected_matches": [
+          {
+            "match_id": "260805003",
+            "home_team": "上海海港",
+            "away_team": "山东泰山",
+            "recommendation": "主胜",
+            "confidence": 0.6129,
+            "league": "中超"
+          },
+          {
+            "match_id": "260805004",
+            "home_team": "拜仁",
+            "away_team": "巴黎",
+            "recommendation": "主胜",
+            "confidence": 0.562,
+            "league": "欧冠"
+          },
+          {
+            "match_id": "260805002",
+            "home_team": "川崎前锋",
+            "away_team": "鹿岛鹿角",
+            "recommendation": "主胜",
+            "confidence": 0.4638,
+            "league": "日职"
+          },
+          {
+            "match_id": "260805001",
+            "home_team": "横滨水手",
+            "away_team": "神户胜利",
+            "recommendation": "客胜",
+            "confidence": 0.3772,
+            "league": "日职"
+          }
+        ],
+        "match_count": 4,
+        "combined_probability": 0.0603,
+        "estimated_odds": 8.66,
+        "parlay_variants": [
+          {
+            "type": "单关",
+            "count": 4,
+            "description": "4场单关，分散风险"
+          },
+          {
+            "type": "2串1",
+            "count": 6,
+            "description": "全部6组2串1组合"
+          },
+          {
+            "type": "3串1",
+            "count": 4,
+            "description": "全部4组3串1组合"
+          },
+          {
+            "type": "4串1",
+            "count": 1,
+            "description": "4场全串，高风险高回报"
+          }
+        ],
+        "risk_level": "中高"
+      }
+    },
+    "weights": {
+      "ranking": 0.15,
+      "head_to_head": 0.18,
+      "recent_form": 0.25,
+      "home_away": 0.15,
+      "injuries": 0.15,
+      "schedule_density": 0.08,
+      "weather": 0.04
+    }
+  },
+  "basketball": {
+    "version": "v1.7",
+    "sport_type": "basketball",
+    "timestamp": "2026-08-05T14:40:53.454941",
+    "total_matches": 2,
+    "average_confidence": 0.5643,
+    "single_predictions": [
+      {
+        "match_id": "260805301",
+        "league": "NBA夏季联赛",
+        "home_team": "热火",
+        "away_team": "凯尔特人",
+        "sport_type": "basketball",
+        "dimension_scores": {
+          "ranking": -0.1034,
+          "head_to_head": 0.3333,
+          "recent_form": -0.2667,
+          "home_away": 0.0091,
+          "injuries": 0.3333,
+          "schedule_density": 0.7,
+          "weather": 0.05
+        },
+        "total_score": 0.1207,
+        "probabilities": {
+          "home_win": 0.5755,
+          "away_win": 0.4245
+        },
+        "recommendation": "主胜",
+        "confidence": 0.5755,
+        "spread": 1.5,
+        "spread_recommendation": "主让胜",
+        "total_points": 225.0,
+        "over_under": "大分",
+        "over_under_confidence": 0.1509
+      },
+      {
+        "match_id": "260805302",
+        "league": "WNBA",
+        "home_team": "王牌",
+        "away_team": "自由人",
+        "sport_type": "basketball",
+        "dimension_scores": {
+          "ranking": -0.0909,
+          "head_to_head": 0.0,
+          "recent_form": -0.1333,
+          "home_away": 0.1769,
+          "injuries": -0.3333,
+          "schedule_density": -0.0366,
+          "weather": 0.05
+        },
+        "total_score": -0.085,
+        "probabilities": {
+          "home_win": 0.4469,
+          "away_win": 0.5531
+        },
+        "recommendation": "客胜",
+        "confidence": 0.5531,
+        "spread": -1.1,
+        "spread_recommendation": "客让胜",
+        "total_points": 225.0,
+        "over_under": "小分",
+        "over_under_confidence": 0.1062
+      }
+    ],
+    "parlay_recommendations": {
+      "safe": {
+        "sport_type": "basketball",
+        "strategy": "safe",
+        "selected_matches": [
+          {
+            "match_id": "260805301",
+            "home_team": "热火",
+            "away_team": "凯尔特人",
+            "recommendation": "主胜",
+            "confidence": 0.5755,
+            "league": "NBA夏季联赛"
+          },
+          {
+            "match_id": "260805302",
+            "home_team": "王牌",
+            "away_team": "自由人",
+            "recommendation": "客胜",
+            "confidence": 0.5531,
+            "league": "WNBA"
+          }
+        ],
+        "match_count": 2,
+        "combined_probability": 0.3183,
+        "estimated_odds": 2.27,
+        "parlay_variants": [
+          {
+            "type": "单关",
+            "count": 2,
+            "description": "2场单关，分散风险"
+          },
+          {
+            "type": "2串1",
+            "count": 1,
+            "description": "全部1组2串1组合"
+          },
+          {
+            "type": "2串1",
+            "count": 1,
+            "description": "2场全串，高风险高回报"
+          }
+        ],
+        "risk_level": "中低"
+      },
+      "balanced": {
+        "sport_type": "basketball",
+        "strategy": "balanced",
+        "selected_matches": [
+          {
+            "match_id": "260805301",
+            "home_team": "热火",
+            "away_team": "凯尔特人",
+            "recommendation": "主胜",
+            "confidence": 0.5755,
+            "league": "NBA夏季联赛"
+          },
+          {
+            "match_id": "260805302",
+            "home_team": "王牌",
+            "away_team": "自由人",
+            "recommendation": "客胜",
+            "confidence": 0.5531,
+            "league": "WNBA"
+          }
+        ],
+        "match_count": 2,
+        "combined_probability": 0.3183,
+        "estimated_odds": 2.27,
+        "parlay_variants": [
+          {
+            "type": "单关",
+            "count": 2,
+            "description": "2场单关，分散风险"
+          },
+          {
+            "type": "2串1",
+            "count": 1,
+            "description": "全部1组2串1组合"
+          },
+          {
+            "type": "2串1",
+            "count": 1,
+            "description": "2场全串，高风险高回报"
+          }
+        ],
+        "risk_level": "中低"
+      },
+      "aggressive": {
+        "sport_type": "basketball",
+        "strategy": "aggressive",
+        "selected_matches": [
+          {
+            "match_id": "260805301",
+            "home_team": "热火",
+            "away_team": "凯尔特人",
+            "recommendation": "主胜",
+            "confidence": 0.5755,
+            "league": "NBA夏季联赛"
+          },
+          {
+            "match_id": "260805302",
+            "home_team": "王牌",
+            "away_team": "自由人",
+            "recommendation": "客胜",
+            "confidence": 0.5531,
+            "league": "WNBA"
+          }
+        ],
+        "match_count": 2,
+        "combined_probability": 0.3183,
+        "estimated_odds": 2.27,
+        "parlay_variants": [
+          {
+            "type": "单关",
+            "count": 2,
+            "description": "2场单关，分散风险"
+          },
+          {
+            "type": "2串1",
+            "count": 1,
+            "description": "全部1组2串1组合"
+          },
+          {
+            "type": "2串1",
+            "count": 1,
+            "description": "2场全串，高风险高回报"
+          }
+        ],
+        "risk_level": "中低"
+      }
+    },
+    "weights": {
+      "ranking": 0.15,
+      "head_to_head": 0.15,
+      "recent_form": 0.23,
+      "home_away": 0.12,
+      "injuries": 0.18,
+      "schedule_density": 0.12,
+      "weather": 0.05
+    }
+  }
+}
