@@ -131,6 +131,26 @@
   .ball-digit { background: #546e7a; }
   .ball-kl8 { background: #388e3c; }
   .ball-special { background: #f9a825; }
+  .ball-hit {
+    background: #0f9d58 !important;
+    box-shadow: 0 0 0 2px #0f9d58, 0 0 8px rgba(15,157,88,0.6);
+    animation: pulseHit 0.6s ease;
+  }
+  @keyframes pulseHit {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+  }
+  .hit-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    background: #e6f4ea;
+    color: #1e7e34;
+    margin-left: 6px;
+  }
   .stat-row {
     display: flex;
     gap: 12px;
@@ -402,6 +422,14 @@ function renderBalls(type, numbers, opts = {}) {
       back.map(n => `<span class="ball ball-back">${String(n).padStart(2,'0')}</span>`).join('') +
       '</div>';
   }
+  if (type === 'QLC') {
+    const red = numbers.slice(0, 7);
+    const special = numbers.slice(7);
+    return '<div class="ball-row">' +
+      red.map(n => `<span class="ball ball-red">${String(n).padStart(2,'0')}</span>`).join('') +
+      (special.length ? '<span style="margin:0 4px;color:var(--text-secondary)">+</span>' + special.map(n => `<span class="ball ball-special">${String(n).padStart(2,'0')}</span>`).join('') : '') +
+      '</div>';
+  }
   return '<div class="ball-row">' +
     numbers.map(n => `<span class="ball ball-digit">${n}</span>`).join('') +
     '</div>';
@@ -566,11 +594,14 @@ function renderTodayResults(results) {
   const games = Object.entries(results.games);
   el.innerHTML = '<div class="card-grid">' + games.map(([type, data]) => {
     const draw = data.draw_result || data.result || data;
-    const numbers = draw.balls || draw.digits || (draw.red ? [...draw.red, ...draw.blue] : draw.front ? [...draw.front, ...draw.back] : []);
+    const numbers = draw.balls || draw.digits ||
+      (draw.red_balls ? [...draw.red_balls, ...(draw.blue_balls || []), ...(draw.special_ball !== undefined ? [draw.special_ball] : [])] :
+       draw.red ? [...draw.red, ...draw.blue] :
+       draw.front ? [...draw.front, ...draw.back] : []);
     return `<div class="card">
       <h3><span class="game-badge ${getGameBadge(type)}">${getGameName(type)}</span></h3>
       ${renderBalls(type, numbers)}
-      ${draw.period ? `<div style="font-size:12px;color:var(--text-secondary);margin-top:6px">期号: ${draw.period}</div>` : ''}
+      ${data.period ? `<div style="font-size:12px;color:var(--text-secondary);margin-top:6px">期号: ${data.period}</div>` : ''}
     </div>`;
   }).join('') + '</div>';
 }
@@ -585,27 +616,49 @@ function renderLottery(predictions, results) {
   el.innerHTML = '<div class="card-grid">' + games.map(([type, data]) => {
     const preds = data.predictions || (data.prediction ? [data.prediction] : []);
     const resultData = results?.games?.[type]?.draw_result || results?.games?.[type]?.result;
-    const resultBalls = resultData?.balls || resultData?.digits ||
-      (resultData?.red ? [...resultData.red, ...resultData.blue] : resultData?.front ? [...resultData.front, ...resultData.back] : []);
+
+    // 提取开奖号码（兼容所有字段名）
+    const resRed = resultData?.red_balls || resultData?.red || resultData?.front || [];
+    const resBlue = resultData?.blue_balls || resultData?.blue || resultData?.back || [];
+    const resDigits = resultData?.digits || [];
+    const resBalls = resultData?.balls || [];
+    const resSpecial = resultData?.special_ball !== undefined ? [resultData.special_ball] : [];
+
+    // 构建开奖号码展示
+    let resultNums = [];
+    if (resBalls.length) resultNums = resBalls;
+    else if (resDigits.length) resultNums = resDigits;
+    else if (resRed.length || resBlue.length) resultNums = [...resRed, ...resBlue, ...resSpecial];
+    const resultBallsHtml = resultNums.length ? renderBalls(type, resultNums) : '';
+
+    // 构建命中检查集合
+    const resRedSet = new Set(resRed.map(n => String(n)));
+    const resBlueSet = new Set(resBlue.map(n => String(n)));
+    const resDigitArr = resDigits.map(d => String(d));
+    const resBallSet = new Set(resBalls.map(n => String(n)));
 
     return `<div class="card">
       <h3><span class="game-badge ${getGameBadge(type)}">${getGameName(type)}</span>
         <span style="font-size:12px;font-weight:400;color:var(--text-secondary)">${data.engine_version || ''}</span>
       </h3>
-      ${resultBalls.length ? `<div style="font-size:13px;font-weight:600;margin-bottom:4px">开奖号码:</div>${renderBalls(type, resultBalls)}` : '<div style="font-size:12px;color:var(--text-secondary);margin-bottom:8px">⏳ 等待开奖</div>'}
-      <div style="font-size:13px;font-weight:600;margin-top:12px;margin-bottom:6px">预测号码:</div>
+      ${resultBallsHtml ? `<div style="font-size:13px;font-weight:600;margin-bottom:4px">🎯 开奖号码:</div>${resultBallsHtml}` : '<div style="font-size:12px;color:var(--text-secondary);margin-bottom:8px">⏳ 等待开奖</div>'}
+      <div style="font-size:13px;font-weight:600;margin-top:12px;margin-bottom:6px">📋 预测号码 <span style="font-size:11px;font-weight:400;color:var(--success)">（命中号码绿色标记）</span>:</div>
       ${preds.slice(0, 5).map((p, i) => {
-        // 修复: 先检查red_balls+blue_balls合并，再fallback到单个字段
         let nums = [];
+        let isDigitType = false;
         if (p.balls) nums = p.balls;
-        else if (p.digits) nums = p.digits;
+        else if (p.digits) { nums = p.digits; isDigitType = true; }
         else if (p.red_balls && p.blue_balls) nums = [...p.red_balls, ...p.blue_balls];
         else if (p.red_balls) nums = p.red_balls;
         else if (p.blue_balls) nums = p.blue_balls;
         if (!nums.length) return '';
+
+        let hitCount = 0;
+        let hitDesc = '';
+
         return `<div class="prediction-group">
           <div class="group-header">第 ${p.group || i+1} 组 ${p.strategy ? '(' + p.strategy + ')' : ''}</div>
-          <div class="ball-row">${nums.map(n => {
+          <div class="ball-row">${nums.map((n, idx) => {
             const isBlue = p.blue_balls && p.blue_balls.includes(n);
             const isRed = p.red_balls && p.red_balls.includes(n);
             let ballClass = 'ball-digit';
@@ -613,8 +666,26 @@ function renderLottery(predictions, results) {
             else if (isBlue) ballClass = 'ball-blue';
             else if (isRed) ballClass = 'ball-red';
             else if (p.balls) ballClass = 'ball-kl8';
-            return `<span class="ball ${ballClass}">${String(n).padStart(2,'0')}</span>`;
+
+            // 命中检查
+            let isHit = false;
+            if (isDigitType && resDigitArr.length) {
+              // 数字型玩法按位置匹配（七星彩/排列三/排列五/福彩3D）
+              isHit = resDigitArr[idx] === String(n);
+            } else if (isBlue) {
+              isHit = resBlueSet.has(String(n));
+            } else if (isRed) {
+              isHit = resRedSet.has(String(n));
+            } else if (p.balls) {
+              isHit = resBallSet.has(String(n));
+            } else {
+              isHit = resRedSet.has(String(n)) || resBlueSet.has(String(n)) || resBallSet.has(String(n));
+            }
+
+            if (isHit) hitCount++;
+            return `<span class="ball ${ballClass} ${isHit ? 'ball-hit' : ''}">${String(n).padStart(2,'0')}</span>`;
           }).join('')}</div>
+          ${hitCount > 0 ? `<div style="margin-top:4px"><span class="hit-badge">✓ 命中 ${hitCount} 个</span></div>` : ''}
           ${p.analysis ? `<div class="stat-row">
             <span class="stat-item"><span class="stat-label">和值:</span> <span class="stat-value">${p.analysis.sum_value || '-'}</span></span>
             <span class="stat-item"><span class="stat-label">跨度:</span> <span class="stat-value">${p.analysis.span || '-'}</span></span>

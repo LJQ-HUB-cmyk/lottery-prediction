@@ -1,6 +1,6 @@
 {
   "date": "2026-08-05",
-  "generated_at": "2026-08-05T14:41:12.457843",
+  "generated_at": "2026-08-05T16:21:20.180475",
   "lottery": {
     "SSQ": {
       "group_count": 5,
@@ -123,34 +123,39 @@
     },
     "QXC": {
       "group_count": 5,
-      "groups_with_hit": 5,
-      "hit_rate": 1.0,
-      "max_hit_level": null,
+      "groups_with_hit": 1,
+      "hit_rate": 0.2,
+      "max_hit_level": "五等奖",
       "hit_details": [
         {
-          "hit": true,
+          "hit": false,
           "level": null,
-          "match_count": 3
+          "position_hits": 1,
+          "hit_desc": "1/7位"
         },
         {
           "hit": true,
-          "level": null,
-          "match_count": 3
+          "level": "五等奖",
+          "position_hits": 3,
+          "hit_desc": "3/7位"
         },
         {
-          "hit": true,
+          "hit": false,
           "level": null,
-          "match_count": 4
+          "position_hits": 1,
+          "hit_desc": "1/7位"
         },
         {
-          "hit": true,
+          "hit": false,
           "level": null,
-          "match_count": 3
+          "position_hits": 1,
+          "hit_desc": "1/7位"
         },
         {
-          "hit": true,
+          "hit": false,
           "level": null,
-          "match_count": 3
+          "position_hits": 0,
+          "hit_desc": "0/7位"
         }
       ]
     },

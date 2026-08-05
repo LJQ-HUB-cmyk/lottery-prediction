@@ -166,6 +166,8 @@ class LotteryHitCalculator:
             return cls._calc_pl5_hit(prediction, result)
         elif lottery_type == "QLC":
             return cls._calc_qlc_hit(prediction, result)
+        elif lottery_type == "QXC":
+            return cls._calc_qxc_hit(prediction, result)
         else:
             # 通用：尝试匹配数字
             return cls._calc_generic_hit(prediction, result)
@@ -276,6 +278,40 @@ class LotteryHitCalculator:
             "hit": hit_level is not None,
             "level": hit_level,
             "match_count": match_count
+        }
+
+    @classmethod
+    def _calc_qxc_hit(cls, prediction: Dict, result: Dict) -> Dict:
+        """计算七星彩命中（按位置匹配）"""
+        pred_digits = [str(d) for d in prediction.get("digits", prediction.get("numbers", []))]
+        res_digits = [str(d) for d in result.get("digits", result.get("numbers", []))]
+
+        if len(pred_digits) != 7 or len(res_digits) != 7:
+            return {"hit": False, "level": None, "position_hits": 0}
+
+        # 按位置匹配
+        position_hits = sum(1 for p, r in zip(pred_digits, res_digits) if p == r)
+
+        # 七星彩奖级：按连续命中位数判断
+        hit_level = None
+        if position_hits == 7:
+            hit_level = "一等奖"
+        elif position_hits >= 6:
+            hit_level = "二等奖"
+        elif position_hits >= 5:
+            hit_level = "三等奖"
+        elif position_hits >= 4:
+            hit_level = "四等奖"
+        elif position_hits >= 3:
+            hit_level = "五等奖"
+        elif position_hits >= 2:
+            hit_level = "六等奖"
+
+        return {
+            "hit": position_hits >= 2,
+            "level": hit_level,
+            "position_hits": position_hits,
+            "hit_desc": f"{position_hits}/7位"
         }
 
     @classmethod

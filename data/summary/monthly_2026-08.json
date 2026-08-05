@@ -1,6 +1,6 @@
 {
   "month": "2026-08",
-  "generated_at": "2026-08-05T14:46:13.954697",
+  "generated_at": "2026-08-05T16:21:20.182469",
   "days_covered": 5,
   "lottery": {
     "SSQ": {
@@ -36,12 +36,12 @@
     "QXC": {
       "total_days": 5,
       "total_groups": 19,
-      "total_hit_groups": 18,
-      "overall_hit_rate": 0.9474,
-      "avg_daily_hit_rate": 0.9333,
+      "total_hit_groups": 14,
+      "overall_hit_rate": 0.7368,
+      "avg_daily_hit_rate": 0.7733,
       "hit_day_rate": 1.0,
       "hit_days": 5,
-      "max_hit_level": null
+      "max_hit_level": "五等奖"
     },
     "PL3": {
       "total_days": 5,

@@ -27,14 +27,14 @@
       "period": "2026090",
       "draw_date": "2026-08-05",
       "draw_result": {
-        "front": [
+        "red_balls": [
           3,
           6,
           7,
           28,
           35
         ],
-        "back": [
+        "blue_balls": [
           1,
           2
         ]
