@@ -1,0 +1,70 @@
+{
+  "date": "2026-08-07",
+  "note": "开奖结果已更新",
+  "games": {
+    "SSQ": {
+      "game_type": "SSQ",
+      "game_name": "双色球",
+      "period": "N/A",
+      "draw_date": "2026-08-07",
+      "no_draw": true,
+      "note": "双色球今日无开奖"
+    },
+    "QLC": {
+      "game_type": "QLC",
+      "game_name": "七乐彩",
+      "period": "N/A",
+      "draw_date": "2026-08-07",
+      "no_draw": true,
+      "note": "七乐彩今日数据尚未发布"
+    },
+    "FC3D": {
+      "game_type": "FC3D",
+      "game_name": "福彩3D",
+      "period": "N/A",
+      "draw_date": "2026-08-07",
+      "no_draw": true,
+      "note": "福彩3D今日数据尚未发布"
+    },
+    "KL8": {
+      "game_type": "KL8",
+      "game_name": "快乐8",
+      "period": "N/A",
+      "draw_date": "2026-08-07",
+      "no_draw": true,
+      "note": "快乐8今日数据尚未发布"
+    },
+    "PL3": {
+      "game_type": "PL3",
+      "game_name": "排列三",
+      "period": "N/A",
+      "draw_date": "2026-08-07",
+      "no_draw": true,
+      "note": "排列三今日数据尚未发布"
+    },
+    "PL5": {
+      "game_type": "PL5",
+      "game_name": "排列五",
+      "period": "N/A",
+      "draw_date": "2026-08-07",
+      "no_draw": true,
+      "note": "排列五今日数据尚未发布"
+    },
+    "QXC": {
+      "game_type": "QXC",
+      "game_name": "七星彩",
+      "period": "N/A",
+      "draw_date": "2026-08-07",
+      "no_draw": true,
+      "note": "七星彩今日数据尚未发布"
+    },
+    "DLT": {
+      "game_type": "DLT",
+      "game_name": "大乐透",
+      "period": "N/A",
+      "draw_date": "2026-08-07",
+      "no_draw": true,
+      "note": "大乐透每周一、三、六开奖，今日无开奖"
+    }
+  }
+}
