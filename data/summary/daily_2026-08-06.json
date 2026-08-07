@@ -1,0 +1,17 @@
+{
+  "date": "2026-08-06",
+  "generated_at": "2026-08-07T10:44:33.515883",
+  "lottery": {},
+  "sports": {
+    "football": {
+      "total": 0,
+      "correct": 0,
+      "accuracy": 0.0
+    },
+    "basketball": {
+      "total": 0,
+      "correct": 0,
+      "accuracy": 0.0
+    }
+  }
+}

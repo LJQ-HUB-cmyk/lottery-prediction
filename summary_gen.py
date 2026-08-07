@@ -17,7 +17,7 @@ from collections import defaultdict
 # ============================================================
 # 路径配置
 # ============================================================
-BASE_DIR = "/workspace/data"
+BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 PREDICTIONS_DIR = os.path.join(BASE_DIR, "predictions")
 RESULTS_DIR = os.path.join(BASE_DIR, "results")
 SPORTS_PREDICTIONS_DIR = os.path.join(BASE_DIR, "sports_predictions")

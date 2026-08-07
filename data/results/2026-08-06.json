@@ -1,0 +1,76 @@
+{
+  "date": "2026-08-06",
+  "note": "开奖结果已更新",
+  "games": {
+    "SSQ": {
+      "game_type": "SSQ",
+      "game_name": "双色球",
+      "period": "2026090",
+      "draw_date": "2026-08-06",
+      "draw_result": {
+        "red_balls": [2, 4, 15, 23, 25, 27],
+        "blue_balls": [3]
+      }
+    },
+    "DLT": {
+      "game_type": "DLT",
+      "game_name": "大乐透",
+      "period": "N/A",
+      "draw_date": "2026-08-06",
+      "no_draw": true,
+      "note": "大乐透每周一、三、六开奖，今日无开奖"
+    },
+    "QLC": {
+      "game_type": "QLC",
+      "game_name": "七乐彩",
+      "period": "N/A",
+      "draw_date": "2026-08-06",
+      "no_draw": true,
+      "note": "七乐彩每周一、三、五开奖，今日无开奖"
+    },
+    "QXC": {
+      "game_type": "QXC",
+      "game_name": "七星彩",
+      "period": "N/A",
+      "draw_date": "2026-08-06",
+      "no_draw": true,
+      "note": "七星彩每周二、五、日开奖，今日无开奖"
+    },
+    "PL3": {
+      "game_type": "PL3",
+      "game_name": "排列三",
+      "period": "2026208",
+      "draw_date": "2026-08-06",
+      "draw_result": {
+        "digits": [4, 7, 1]
+      }
+    },
+    "PL5": {
+      "game_type": "PL5",
+      "game_name": "排列五",
+      "period": "2026208",
+      "draw_date": "2026-08-06",
+      "draw_result": {
+        "digits": [4, 7, 1, 8, 6]
+      }
+    },
+    "FC3D": {
+      "game_type": "FC3D",
+      "game_name": "福彩3D",
+      "period": "2026208",
+      "draw_date": "2026-08-06",
+      "draw_result": {
+        "digits": [6, 3, 2]
+      }
+    },
+    "KL8": {
+      "game_type": "KL8",
+      "game_name": "快乐8",
+      "period": "2026208",
+      "draw_date": "2026-08-06",
+      "draw_result": {
+        "balls": [8, 11, 12, 13, 14, 15, 16, 23, 25, 28, 34, 37, 38, 43, 45, 48, 58, 70, 73, 77]
+      }
+    }
+  }
+}
