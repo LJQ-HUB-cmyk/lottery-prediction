@@ -3,88 +3,135 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>彩票预测综合日报 2026-08-07</title>
+<title>彩票预测综合日报 2026-08-08</title>
 <style>
-  body { font-family: "Microsoft YaHei", "PingFang SC", sans-serif; background: #f5f6fa; margin: 0; padding: 20px; color: #2d3436; }
-  .container { max-width: 980px; margin: 0 auto; }
-  h1 { color: #e17055; text-align: center; margin: 8px 0 4px; }
-  .page-sub { text-align: center; color: #636e72; font-size: 13px; margin-bottom: 18px; }
-  h2 { border-left: 4px solid #0984e3; padding-left: 10px; margin: 0 0 10px; font-size: 18px; }
-  .card { background: #fff; border-radius: 10px; padding: 16px 20px; margin: 14px 0; box-shadow: 0 2px 6px rgba(0,0,0,.06); }
-  .sub { color: #636e72; font-size: 13px; margin: 4px 0 10px; }
-  .note { color: #b2bec3; font-size: 12px; margin-top: 8px; }
-  .stat-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 10px 0 14px; }
-  .stat { background: #f8f9fb; border-radius: 8px; padding: 10px 14px; flex: 1; min-width: 120px; text-align: center; }
-  .stat div { color: #636e72; font-size: 12px; }
-  .stat b { font-size: 20px; color: #2d3436; display: block; }
-  .stat small { color: #b2bec3; font-size: 11px; display: block; }
-  .stat b.win { color: #00b894; }
-  .stat b.loss { color: #d63031; }
-  table { width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 13px; }
-  th, td { border: 1px solid #dfe6e9; padding: 8px; text-align: center; }
-  th { background: #0984e3; color: #fff; }
-  td.nums { font-size: 13px; }
-  td.left { text-align: left; }
-  td.prize { color: #00b894; font-weight: bold; }
-  td.prize small { color: #b2bec3; font-weight: normal; }
-  td.ok { color: #00b894; font-weight: bold; }
-  td.bad { color: #d63031; font-weight: bold; }
-  td.wait { color: #636e72; }
-  .ball { display: inline-block; background: #e17055; color: #fff; border-radius: 50%; width: 26px; height: 26px; line-height: 26px; margin: 1px; font-size: 11px; }
-  .ball.blue { background: #0984e3; }
-  .bar { color: #0984e3; letter-spacing: 1px; }
-  .badge { display: inline-block; background: #00b894; color: #fff; border-radius: 4px; padding: 2px 8px; font-size: 12px; }
-  .tip { color: #636e72; font-size: 13px; text-align: center; margin-top: 22px; line-height: 1.7; }
-</style>
+  :root{--primary:#0984e3;--accent:#e17055;--ok:#00b894;--bad:#d63031;--ink:#2d3436;--muted:#636e72;--bg:#eef1f7;}
+  *{box-sizing:border-box}
+  body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);margin:0;padding:0;color:var(--ink);}
+  .container{max-width:1100px;margin:0 auto;padding:0 14px 30px;}
+  .hero{background:linear-gradient(135deg,#0f4c81 0%,#0984e3 55%,#6c5ce7 100%);color:#fff;border-radius:0 0 22px 22px;padding:26px 20px 30px;text-align:center;box-shadow:0 6px 22px rgba(9,132,227,.25);}
+  .hero h1{margin:0;font-size:26px;letter-spacing:2px;text-shadow:0 2px 8px rgba(0,0,0,.25);}
+  .hero .sub{margin:8px 0 0;font-size:13px;opacity:.92;}
+  .hero .badges{margin-top:10px;}
+  .hero .badge{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:20px;padding:3px 12px;font-size:12px;margin:0 3px;display:inline-block;}
+  .card{background:#fff;border-radius:14px;padding:18px 20px;margin:16px 0;box-shadow:0 2px 10px rgba(45,52,64,.06);}
+  .card h2{margin:0 0 4px;font-size:19px;color:#1e272e;display:flex;align-items:center;gap:8px;}
+  .card h2::before{content:"";width:5px;height:20px;border-radius:3px;background:linear-gradient(180deg,var(--primary),#6c5ce7);display:inline-block;}
+  .sub{color:var(--muted);font-size:13px;margin:6px 0 12px;}
+  .stat-row{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0 16px;}
+  .stat{flex:1;min-width:130px;border-radius:12px;padding:14px 10px;text-align:center;color:#fff;background:linear-gradient(135deg,#74b9ff,#0984e3);}
+  .stat:nth-child(1){background:linear-gradient(135deg,#ff9f43,#e17055);}
+  .stat:nth-child(2){background:linear-gradient(135deg,#74b9ff,#0984e3);}
+  .stat:nth-child(3){background:linear-gradient(135deg,#55efc4,#00b894);}
+  .stat:nth-child(4){background:linear-gradient(135deg,#a29bfe,#6c5ce7);}
+  .stat:nth-child(5){background:linear-gradient(135deg,#ffeaa7,#fdcb6e);color:#2d3436;}
+  .stat div{font-size:12px;opacity:.9;}
+  .stat b{font-size:24px;display:block;margin:2px 0;text-shadow:0 1px 4px rgba(0,0,0,.15);}
+  .stat small{font-size:11px;opacity:.85;display:block;}
+  table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin-top:6px;}
+  th,td{border-bottom:1px solid #ecf0f4;padding:9px 8px;text-align:center;vertical-align:middle;}
+  th{background:#f4f7fb;color:#57606f;font-weight:600;position:sticky;top:0;}
+  tr:hover td{background:#f8fbfe;}
+  td.nums{font-size:13px;line-height:1.7;}
+  td.left{text-align:left;}
+  td.small{font-size:12px;color:#57606f;}
+  td.ways{font-size:12px;line-height:1.8;color:#0984e3;}
+  td.prize{color:var(--ok);font-weight:700;}
+  td.prize small{color:#b2bec3;font-weight:400;}
+  td.ok{color:var(--ok);font-weight:700;}
+  td.bad{color:var(--bad);font-weight:700;}
+  td.wait{color:var(--muted);}
+  .ball{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#ff7f50,#e17055);color:#fff;border-radius:50%;width:24px;height:24px;margin:1px;font-size:11px;box-shadow:0 1px 3px rgba(225,112,85,.4);}
+  .ball.blue{background:linear-gradient(145deg,#4a9df5,#0984e3);box-shadow:0 1px 3px rgba(9,132,227,.4);}
+  .dg{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#74b9ff,#0984e3);color:#fff;border-radius:6px;min-width:22px;height:22px;padding:0 4px;margin:1px;font-size:12px;font-weight:700;}
+  .badge{display:inline-block;border-radius:20px;padding:2px 10px;font-size:11px;font-weight:700;}
+  .badge.risk-h{background:#ffe0e0;color:#d63031;}
+  .badge.risk-m{background:#fff3d6;color:#e17055;}
+  .badge.risk-l{background:#dcf6ec;color:#00a884;}
+  .parlay-card{border-radius:12px;padding:12px 16px;margin:10px 0;background:#fafcff;box-shadow:0 1px 4px rgba(45,52,64,.06);}
+  .par-head{display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:13px;margin-bottom:8px;}
+  .par-head b{font-size:15px;}
+  .par-head span{color:var(--muted);}
+  .par-head span:nth-child(3){color:#0984e3;font-weight:700;}
+  .par-head span:nth-child(4){color:#00b894;font-weight:700;}
+  .par-body{display:flex;flex-direction:column;gap:4px;font-size:13px;}
+  .par-team{color:#2d3436;}
+  .par-pick{margin-left:8px;color:#0984e3;font-weight:700;background:#e8f2ff;border-radius:4px;padding:0 6px;font-size:12px;}
+  .spark{width:100%;height:auto;margin:6px 0;}
+  .spark-line{fill:none;stroke:#0984e3;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+  .spark-d{fill:#e17055;}
+  .spark-t{fill:#8395a7;font-size:10px;}
+  .bar-cell{min-width:120px;}
+  .bar-bg{background:#ecf0f4;border-radius:6px;height:12px;overflow:hidden;}
+  .bar-fill{background:linear-gradient(90deg,#74b9ff,#0984e3);height:100%;border-radius:6px;}
+  .tip{color:var(--muted);font-size:13px;text-align:center;margin-top:24px;line-height:1.8;}
+  .wrap{overflow-x:auto;}
+  @media (max-width:720px){.hero h1{font-size:20px}.card{padding:14px}.stat{min-width:100px}.stat b{font-size:19px}}
+    </style>
 </head>
 <body>
-<div class="container">
-<h1>🎱 彩票预测综合日报</h1>
-<div class="page-sub">2026-08-07 ｜ 预测日报 + 15天滚动报告 ｜ 彩票引擎 v2.6.0 / 竞彩引擎 v1.2.0</div>
-
-<div class="card">
-  <h2>📊 昨日命中回顾（2026-08-06）</h2>
-  <div class="stat-row">
-    <div class="stat"><div>总命中率</div><b>15.0%</b><small>5 个玩法</small></div>
-    <div class="stat"><div>投入（¥20/玩法）</div><b>¥100</b></div>
-    <div class="stat"><div>估算中奖</div><b class="win">¥50</b></div>
-    <div class="stat"><div>净收益</div><b class="loss">¥-50</b></div>
-    <div class="stat"><div>中奖玩法</div><b>1 / 5</b></div>
+<div class="hero">
+  <h1>🎱 彩票预测综合日报</h1>
+  <div class="sub">2026-08-08 ｜ 预测日报 + 15天滚动报告 + 玩法规则速查</div>
+  <div class="badges">
+    <span class="badge">彩票引擎 v2.6.0</span>
+    <span class="badge">竞彩引擎 v1.3.0</span>
+    <span class="badge">彩票 ¥20/玩法 形式不限</span>
+    <span class="badge">竞彩 ¥100/日 最低2串1</span>
   </div>
-  <table><tr><th>玩法</th><th>预测号码</th><th>开奖号码</th><th>命中率</th><th>中奖判定</th><th>估算奖金(¥20)</th><th>状态</th></tr><tr><td>双色球<br><small>SSQ</small></td><td class="nums"><span class="ball red">03</span><span class="ball red">12</span><span class="ball red">15</span><span class="ball red">18</span><span class="ball red">19</span><span class="ball red">28</span><span class="ball blue">02</span></td><td class="nums"><span class="ball red">02</span><span class="ball red">04</span><span class="ball red">15</span><span class="ball red">23</span><span class="ball red">25</span><span class="ball red">27</span><span class="ball blue">03</span></td><td>11.67%</td><td>未中奖</td><td class="prize">¥0</td><td class="bad">❌ 未中奖</td></tr><tr><td>福彩3D<br><small>FC3D</small></td><td class="nums">6 0 3</td><td class="nums">6 3 2</td><td>33.33%</td><td>未中奖</td><td class="prize">¥0</td><td class="bad">❌ 未中奖</td></tr><tr><td>排列三<br><small>PL3</small></td><td class="nums">0 3 7</td><td class="nums">4 7 1</td><td>0.0%</td><td>未中奖</td><td class="prize">¥0</td><td class="bad">❌ 未中奖</td></tr><tr><td>排列五<br><small>PL5</small></td><td class="nums">9 9 0 2 3</td><td class="nums">4 7 1 8 6</td><td>0.0%</td><td>未中奖</td><td class="prize">¥0</td><td class="bad">❌ 未中奖</td></tr><tr><td>快乐8<br><small>KL8</small></td><td class="nums"><span class="ball">03</span><span class="ball">07</span><span class="ball">11</span><span class="ball">16</span><span class="ball">18</span><span class="ball">24</span><span class="ball">26</span><span class="ball">27</span><span class="ball">37</span><span class="ball">38</span><span class="ball">41</span><span class="ball">48</span><span class="ball">55</span><span class="ball">56</span><span class="ball">57</span><span class="ball">63</span><span class="ball">69</span><span class="ball">70</span><span class="ball">71</span><span class="ball">72</span></td><td class="nums"><span class="ball">08</span><span class="ball">11</span><span class="ball">12</span><span class="ball">13</span><span class="ball">14</span><span class="ball">15</span><span class="ball">16</span><span class="ball">23</span><span class="ball">25</span><span class="ball">28</span><span class="ball">34</span><span class="ball">37</span><span class="ball">38</span><span class="ball">43</span><span class="ball">45</span><span class="ball">48</span><span class="ball">58</span><span class="ball">70</span><span class="ball">73</span><span class="ball">77</span></td><td>30.0%</td><td>选十中六</td><td class="prize">¥50<small>（单注5元×10注）</small></td><td class="ok">✅ 中奖</td></tr></table>
-  <p class="note">* 中奖估算按单式 1 注 ¥2、¥20=10 注计算；浮动奖未计入，实际奖金以官方公告为准。</p>
 </div>
+<div class="container">
 
 <div class="card">
-  <h2>🔮 今日彩票预测（2026-08-07）</h2>
-  <p class="sub">每种玩法预算 <b>¥20</b>，共 6 个玩法、合计 <b>¥120</b>（购买形式不限，建议仅供参考）</p>
-  <table><tr><th>玩法</th><th>预测号码</th><th>预算</th><th>购买建议（形式不限）</th></tr><tr><td>福彩3D<br><small>FC3D</small></td><td class="nums">0 7 3</td><td>¥20</td><td>直选 10 注 或 组选倍投</td></tr><tr><td>排列三<br><small>PL3</small></td><td class="nums">0 4 3</td><td>¥20</td><td>直选 10 注 或 组选倍投</td></tr><tr><td>排列五<br><small>PL5</small></td><td class="nums">4 9 8 9 8</td><td>¥20</td><td>直选 10 注（1注×10倍）</td></tr><tr><td>七星彩<br><small>QXC</small></td><td class="nums">0 1 7 6 1 8 9</td><td>¥20</td><td>直选 10 注（1注×10倍）</td></tr><tr><td>七乐彩<br><small>QLC</small></td><td class="nums"><span class="ball red">04</span><span class="ball red">05</span><span class="ball red">08</span><span class="ball red">19</span><span class="ball red">20</span><span class="ball red">25</span><span class="ball red">26</span> + <span class="ball blue">24</span></td><td>¥20</td><td>单式 10 注 或 复式自选</td></tr><tr><td>快乐8<br><small>KL8</small></td><td class="nums"><span class="ball">02</span><span class="ball">05</span><span class="ball">09</span><span class="ball">14</span><span class="ball">18</span><span class="ball">25</span><span class="ball">30</span><span class="ball">31</span><span class="ball">33</span><span class="ball">40</span><span class="ball">43</span><span class="ball">49</span><span class="ball">53</span><span class="ball">56</span><span class="ball">58</span><span class="ball">61</span><span class="ball">66</span><span class="ball">70</span><span class="ball">77</span><span class="ball">78</span></td><td>¥20</td><td>选十 10 注 或 选五复式</td></tr></table>
-</div>
-
-<div class="card">
-  <h2>⚽ 竞彩预测（2026-08-07，预算 ¥100）</h2>
-  <p class="sub">昨日竞彩准确率：<b>待赛果（明日自动核对）</b>（9 场，总投入 ¥100）</p>
-  <table><tr><th>联赛</th><th>对阵</th><th>预测比分</th><th>胜平负</th><th>让球</th><th>大小</th><th>信心</th><th>投注</th></tr><tr><td>NBA</td><td>湖人 vs 勇士</td><td>106:97</td><td>胜</td><td>让胜</td><td>小</td><td>0.66</td><td>¥10.0</td></tr><tr><td>CBA</td><td>广东 vs 辽宁</td><td>112:85</td><td>胜</td><td>让胜</td><td>小</td><td>0.67</td><td>¥10.0</td></tr><tr><td>NBA</td><td>凯尔特人 vs 雄鹿</td><td>93:101</td><td>负</td><td>让负</td><td>小</td><td>0.46</td><td>¥10.0</td></tr><tr><td>法甲</td><td>摩纳哥 vs 里尔</td><td>2:1</td><td>胜</td><td>让胜</td><td>大</td><td>0.59</td><td>¥10.0</td></tr><tr><td>英超</td><td>曼联 vs 阿森纳</td><td>2:1</td><td>胜</td><td>让平</td><td>小</td><td>0.64</td><td>¥10.0</td></tr><tr><td>西甲</td><td>巴萨 vs 皇马</td><td>0:1</td><td>负</td><td>让负</td><td>小</td><td>0.81</td><td>¥13.92</td></tr><tr><td>德甲</td><td>拜仁 vs 多特</td><td>3:0</td><td>胜</td><td>让胜</td><td>小</td><td>0.47</td><td>¥10.0</td></tr><tr><td>意甲</td><td>尤文 vs AC米兰</td><td>1:2</td><td>负</td><td>让负</td><td>大</td><td>0.69</td><td>¥11.82</td></tr><tr><td>中超</td><td>上海海港 vs 山东泰山</td><td>2:2</td><td>平</td><td>让负</td><td>大</td><td>0.83</td><td>¥14.26</td></tr></table>
-</div>
-
-<div class="card">
-  <h2>📈 15天滚动报告（截至 2026-08-07）</h2>
+  <h2>📊 昨日命中回顾（2026-08-07）</h2>
   <div class="stat-row">
-    <div class="stat"><div>平均命中率</div><b>12.41%</b></div>
-    <div class="stat"><div>统计天数</div><b>5</b></div>
+    <div class="stat"><div>总命中率</div><b>—%</b><small>待开奖核对</small></div>
+    <div class="stat"><div>投入（¥20/玩法）</div><b>¥0</b></div>
+    <div class="stat"><div>估算中奖</div><b>¥0</b></div>
+    <div class="stat"><div>净收益</div><b>¥0</b></div>
+    <div class="stat"><div>中奖玩法</div><b>0 / 0</b></div>
+  </div>
+  <div class="wrap"><table><tr><th>玩法</th><th>预测号码</th><th>开奖号码</th><th>命中率</th><th>中奖判定</th><th>估算奖金</th><th>状态</th></tr></table></div>
+  <p class="sub">* 中奖估算按单式 1 注 ¥2、¥20=10 注折算；浮动奖未计入，实际奖金以官方公告为准。</p>
+</div>
+
+<div class="card">
+  <h2>🔮 今日彩票预测（2026-08-08）</h2>
+  <p class="sub">每种玩法预算 <b>¥20</b>、共 0 个玩法、合计 <b>¥0</b>；下注形式不限（复式/胆拖/组选/倍投均可），保证总金额 ¥20 即可</p>
+  <div class="wrap"><table><tr><th>玩法（规则）</th><th>预测号码</th><th>预算</th><th>购买形式建议（任选其一或组合）</th></tr></table></div>
+</div>
+
+<div class="card">
+  <h2>📖 玩法规则速查</h2>
+  <p class="sub">精研各玩法开奖规则与中奖判定，预测与估算均按此执行</p>
+  <div class="wrap"><table><tr><th>玩法</th><th>开奖规则</th><th>中奖要点</th><th>¥20 参考花法</th></tr><tr><td><b>双色球</b><br><small>SSQ</small></td><td class="left small">6红(1-33)+1蓝(1-16)，周二/四/日开奖</td><td class="left small">6+1一等(浮动)、5+1三等3000、5+0/4+1四等200、4+0/3+1五等10、2+1/1+1/0+1六等5</td><td class="left small">单式10注（2元/注）；7+1复式(¥14)＋3注单式</td></tr><tr><td><b>大乐透</b><br><small>DLT</small></td><td class="left small">前区5(1-35)+后区2(1-12)，周一/三/六开奖</td><td class="left small">5+2一等(浮动)、5+0三等1万、4+2四等3000、4+1五等300、3+2六等200、4+0七等100、3+1/2+2八等15、3+0/2+1/1+2/0+2九等5</td><td class="left small">单式10注（2元/注）；6+2复式(¥12)＋4注单式</td></tr><tr><td><b>福彩3D</b><br><small>FC3D</small></td><td class="left small">3位数字0-9，每日开奖；直选/组三/组六</td><td class="left small">直选1040、组三346、组六173</td><td class="left small">直选10注；组三10注</td></tr><tr><td><b>排列三</b><br><small>PL3</small></td><td class="left small">3位数字0-9，每日开奖；直选/组选</td><td class="left small">直选1040、组三346、组六173</td><td class="left small">直选10注；组三10注</td></tr><tr><td><b>排列五</b><br><small>PL5</small></td><td class="left small">5位数字0-9，每日开奖，需逐位对位</td><td class="left small">直选10万</td><td class="left small">直选10注；直选1注×10倍</td></tr><tr><td><b>七星彩</b><br><small>QXC</small></td><td class="left small">7位数字0-9，周二/五/日开奖，需逐位对位</td><td class="left small">7位全中一等(浮动)</td><td class="left small">单式10注；复式：某位选2码</td></tr><tr><td><b>七乐彩</b><br><small>QLC</small></td><td class="left small">7球(1-30)+特别号，周一/三/五开奖</td><td class="left small">7中一(浮动)、6+特二(浮动)、6三2000、5四200、4五10</td><td class="left small">单式10注；8码复式(¥16)＋2注单式</td></tr><tr><td><b>快乐8</b><br><small>KL8</small></td><td class="left small">1-80选20个，每日开奖；可选选一~选十玩法</td><td class="left small">选十中10一(浮动)、中9 8000、中8 800、中7 80、中6 5</td><td class="left small">选十单式10注；选五复式10注</td></tr></table></div>
+</div>
+
+<div class="card">
+  <h2>⚽ 竞彩预测（2026-08-08，预算 ¥100 不限玩法）</h2>
+  <p class="sub">昨日竞彩准确率：<b>待赛果（明日自动核对）</b>｜单场 9 场 + 串关（最低 2串1，可跨足球/篮球）｜总投入 ¥40｜每场均含多角度分析与爆冷风险提示</p>
+  <div class="parlay-card" style="border-top:4px solid #e17055"><div class="par-head"><b>2串1</b><span>组合赔率 2.04</span><span>投入 ¥36.0</span><span>理论中奖 ¥73.44</span></div><div class="par-body"><span class="par-team">神秘人vs梦想</span><span class="par-pick">胜</span><br><span class="par-team">太阳vs水星</span><span class="par-pick">胜</span></div></div><div class="parlay-card" style="border-top:4px solid #6c5ce7"><div class="par-head"><b>3串1</b><span>组合赔率 4.02</span><span>投入 ¥24.0</span><span>理论中奖 ¥96.48</span></div><div class="par-body"><span class="par-team">神秘人vs梦想</span><span class="par-pick">胜</span><br><span class="par-team">太阳vs水星</span><span class="par-pick">胜</span><br><span class="par-team">飞马vs女武神</span><span class="par-pick">胜</span></div></div>
+  <div class="wrap"><table><tr><th>对阵</th><th>联赛/编号</th><th>预测比分</th><th>胜平负/让球</th><th>信心</th><th>爆冷</th><th>多角度分析</th><th>投注</th></tr><tr><td><b>太阳</b><br><small>vs 水星</small></td><td>美职女篮<br><small>[周五301]</small></td><td>101:90</td><td><b>胜</b><br><small>让负</small></td><td>0.79</td><td><span class="badge risk-m">爆冷中</span></td><td class="left small">模拟101:90｜主胜73% 客胜27%｜赔率 主1.48/客3.96｜主客场+联赛强度综合｜爆冷概率27%</td><td>¥6.23</td></tr><tr><td><b>神秘人</b><br><small>vs 梦想</small></td><td>美职女篮<br><small>[周五302]</small></td><td>102:89</td><td><b>胜</b><br><small>让胜</small></td><td>0.84</td><td><span class="badge risk-m">爆冷中</span></td><td class="left small">模拟102:89｜主胜78% 客胜22%｜赔率 主1.38/客4.91｜主客场+联赛强度综合｜爆冷概率22%</td><td>¥6.63</td></tr><tr><td><b>飞马</b><br><small>vs 女武神</small></td><td>美职女篮<br><small>[周五303]</small></td><td>95:87</td><td><b>胜</b><br><small>让负</small></td><td>0.59</td><td><span class="badge risk-h">爆冷高</span></td><td class="left small">模拟95:87｜主胜55% 客胜45%｜赔率 主1.97/客2.39｜主客场+联赛强度综合｜爆冷概率45%</td><td>¥4.65</td></tr><tr><td><b>坎布尔</b><br><small>vs SBV精英</small></td><td>荷甲<br><small>[周五005]</small></td><td>2:0</td><td><b>胜</b><br><small>让胜</small></td><td>0.54</td><td><span class="badge risk-h">爆冷高</span></td><td class="left small">模拟2:0｜主胜50% 平29% 客胜21%｜赔率 主2.17/平3.69/客5.14｜主客场+联赛强度综合｜爆冷概率50%</td><td>¥4.26</td></tr><tr><td><b>奥斯</b><br><small>vs 布雷达</small></td><td>荷乙<br><small>[周五006]</small></td><td>0:2</td><td><b>负</b><br><small>让负</small></td><td>0.45</td><td><span class="badge risk-h">爆冷高</span></td><td class="left small">模拟0:2｜主胜32% 平33% 客胜34%｜赔率 主3.35/平3.25/客3.13｜主客场+联赛强度综合｜爆冷概率66%</td><td>¥3.55</td></tr><tr><td><b>埃门</b><br><small>vs 罗达JC</small></td><td>荷乙<br><small>[周五007]</small></td><td>2:0</td><td><b>胜</b><br><small>让胜</small></td><td>0.46</td><td><span class="badge risk-h">爆冷高</span></td><td class="left small">模拟2:0｜主胜42% 平32% 客胜25%｜赔率 主2.54/平3.32/客4.32｜主客场+联赛强度综合｜爆冷概率57%</td><td>¥3.63</td></tr><tr><td><b>波鸿</b><br><small>vs 柏林赫塔</small></td><td>德乙<br><small>[周五008]</small></td><td>2:0</td><td><b>胜</b><br><small>让胜</small></td><td>0.48</td><td><span class="badge risk-h">爆冷高</span></td><td class="left small">模拟2:0｜主胜45% 平32% 客胜24%｜赔率 主2.41/平3.4/客4.6｜主客场+联赛强度综合｜爆冷概率55%</td><td>¥3.79</td></tr><tr><td><b>米德尔斯堡</b><br><small>vs 雷克斯汉姆</small></td><td>英联赛杯<br><small>[周五009]</small></td><td>2:0</td><td><b>胜</b><br><small>让胜</small></td><td>0.45</td><td><span class="badge risk-h">爆冷高</span></td><td class="left small">模拟2:0｜主胜42% 平34% 客胜24%｜赔率 主2.6/平3.13/客4.5｜主客场+联赛强度综合｜爆冷概率58%</td><td>¥3.55</td></tr><tr><td><b>埃斯托里尔</b><br><small>vs 法马利康</small></td><td>葡超<br><small>[周五010]</small></td><td>2:0</td><td><b>胜</b><br><small>让胜</small></td><td>0.47</td><td><span class="badge risk-h">爆冷高</span></td><td class="left small">模拟2:0｜主胜43% 平30% 客胜27%｜赔率 主2.5/平3.6/客4.04｜主客场+联赛强度综合｜爆冷概率57%</td><td>¥3.71</td></tr></table></div>
+</div>
+
+<div class="card">
+  <h2>📈 15天滚动报告（截至 2026-08-08）</h2>
+  <div class="stat-row">
+    <div class="stat"><div>平均命中率</div><b>12.41%</b><small>5 天</small></div>
     <div class="stat"><div>最佳</div><b>08-02<small>19.0%</small></b></div>
     <div class="stat"><div>最差</div><b>08-05<small>7.33%</small></b></div>
   </div>
-  <table><tr><th>日期</th><th>命中率</th><th>核对玩法</th><th>走势</th></tr><tr><td>2026-08-06</td><td>15.0%</td><td>5</td><td><span class="bar">███</span></td></tr><tr><td>2026-08-05</td><td>7.33%</td><td>6</td><td><span class="bar">█</span></td></tr><tr><td>2026-08-04</td><td>10.83%</td><td>6</td><td><span class="bar">██</span></td></tr><tr><td>2026-08-03</td><td>9.88%</td><td>6</td><td><span class="bar">█</span></td></tr><tr><td>2026-08-02</td><td>19.0%</td><td>5</td><td><span class="bar">███</span></td></tr></table>
-  <p class="note">* 仅统计已有开奖结果核对的天数；数据随每日自动更新累积。</p>
+  <svg viewBox="0 0 900 140" class="spark" preserveAspectRatio="xMidYMid meet"><polyline points="24,24 237,96 450,88 663,116 876,56" class="spark-line"/><circle cx="24" cy="24" r="3.5" class="spark-d"/><circle cx="237" cy="96" r="3.5" class="spark-d"/><circle cx="450" cy="88" r="3.5" class="spark-d"/><circle cx="663" cy="116" r="3.5" class="spark-d"/><circle cx="876" cy="56" r="3.5" class="spark-d"/><text x="24" y="134" class="spark-t">08-02</text><text x="237" y="134" class="spark-t">08-03</text><text x="450" y="134" class="spark-t">08-04</text><text x="663" y="134" class="spark-t">08-05</text><text x="876" y="134" class="spark-t">08-06</text></svg>
+  <div class="wrap"><table><tr><th>日期</th><th>命中率</th><th>核对玩法</th><th>走势</th></tr><tr><td>2026-08-02</td><td><b>19.0%</b></td><td>5</td><td class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:57%"></div></div></td></tr><tr><td>2026-08-03</td><td><b>9.88%</b></td><td>6</td><td class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:29%"></div></div></td></tr><tr><td>2026-08-04</td><td><b>10.83%</b></td><td>6</td><td class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:32%"></div></div></td></tr><tr><td>2026-08-05</td><td><b>7.33%</b></td><td>6</td><td class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:21%"></div></div></td></tr><tr><td>2026-08-06</td><td><b>15.0%</b></td><td>5</td><td class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:45%"></div></div></td></tr></table></div>
 </div>
 
 <div class="card">
   <h2>⚙️ 算法状态与优化记录</h2>
-  <p class="sub">彩票引擎 <span class="badge">v2.6.0</span> ｜ 竞彩引擎 <span class="badge">v1.2.0</span> ｜ 历史优化 9 次</p>
-  <table><tr><th>日期</th><th>组件</th><th>版本变化</th><th>触发原因</th><th>优化内容</th></tr><tr><td>2026-08-02</td><td>lottery_engine</td><td>1.0.0 → 2.0.0</td><td>命中率66.67%（<100%）</td><td class="left">奇偶平衡、大小区间、杀号机制、四分区均衡、三分区均衡、数字逐位生成、蓝球杀号、权重优化</td></tr><tr><td>2026-08-03</td><td>lottery_engine</td><td>2.0.0 → 2.1.0</td><td>命中率19.0%（<100%）</td><td class="left">冷热双向杀号、杀号阈值调整(热5→6/冷2,快乐8热10→12)、回归均值权重、和值区间约束、跨度约束、AC值约束、尾号约束</td></tr><tr><td>2026-08-03</td><td>lottery_engine</td><td>2.1.0 → 2.2.0</td><td>命中率9.88%（<100%）：DLT/FC3D/PL3/PL5 均0%，数字型纯随机无历史依据</td><td class="left">数字型位置频率加权(回归均值,首入往期数据机制)、跨期重复抑制(SSQ红≤2/DLT前区≤1/QLC≤2/KL8≤7)、三区间均衡(SSQ/DLT前区每区至少1个)、DLT前区和值中枢收紧(60-110→70-100)</td></tr><tr><td>2026-08-04</td><td>lottery_engine</td><td>2.2.0 → 2.3.0</td><td>v2.2.0 首次实评 08-04 命中率10.83%（<100%）：KL8 45%→20%回落（排除热号反噬）、FC3D/PL5/QXC 仍0%（全历史均值回归无效）、跨期关联性强（SSQ 6红中4个与上期重号/邻号相关）</td><td class="left">跨期关联号加权(SSQ/DLT/QLC上期号码±1邻号1.25倍)、快乐8热号策略反转(排除热号→近10期频率60%+全历史40%加权保留,仅排冷号2个)、快乐8跨期重复上限7→6、数字型混合位置权重(近10期+全历史各50%,上期同位置及±1邻号1.3倍)</td></tr><tr><td>2026-08-05</td><td>lottery_engine</td><td>2.3.0 → 2.4.0</td><td>v2.3.0 实评 08-04 命中率10.83%（<100%）：SSQ 6红仅中1（实际 05 18 23 24 27 33 中 18/33 为上期重号、05/23 为上期邻号，但热号排除可能将重号/邻号剔除，使关联加权失效）；SSQ 实际和值 130 超出固定区间上限 125；KL8 有4重号+多邻号回补却无跨期关联加权；PL3 位置2 连续两期重号 0</td><td class="left">跨期关联号排除保护(排除集合移除上期号码及±1邻号,使关联加权生效)、快乐8跨期关联加权(上期20码及±1邻号1.15倍)+排除保护、数字型重号/邻号区分加权(同位置重号1.4倍、邻号1.2倍,原统一1.3倍)、动态和值区间(历史≥3期时取均值±1.5σ与固定区间并集,解决SSQ实际和值130超出125)</td></tr><tr><td>2026-08-06</td><td>lottery_engine</td><td>2.4.0 → 2.5.0</td><td>v2.4.0 实评 08-05 命中率7.33%（<100%）：FC3D 连续4日0%、PL3/PL5 多日0%（数字型回归均值策略在样本少时导致号码过度聚中）；DLT 实际前区奇偶 4:1 被固定 (3,2) 排除（预测仅中 03 一个）；DLT 后区 08-03 [4,10] → 08-05 [5,11] 两个邻号全部回补（后区无跨期加权错失）；QLC 特别号 7→9 邻号回补</td><td class="left">数字型近10期权重50%→60%+全历史40%(近期信号加强),权重衰减20→18(曲线平缓避免聚中)、数字型重号1.4→1.5倍、邻号1.2→1.3倍(加强跨期回补)、球型主号码奇偶比例动态化(50%默认+50%历史奇偶分布采样,覆盖4:1形态)、后区/蓝球跨期邻号加权1.3倍+排除保护(后区关联回补)、QLC特别号上期±1邻号加权1.3倍</td></tr><tr><td>2026-08-06</td><td>sports_engine</td><td>1.0.0 → 1.1.0</td><td>竞彩准确率连续5日无配对样本（模拟预测池 vs 真实赛程编号/球队不一致，准确率无法评估，<80%目标），需先解决配对评估机制</td><td class="left">球队名归一化匹配find_result_for_match(先编号后球队名,供sports_summary_gen配对)、联赛强度真实校准(基础强度50%+真实赛果场均50%,比分更贴近真实水平)</td></tr><tr><td>2026-08-07</td><td>lottery_engine</td><td>2.5.0 → 2.6.0</td><td>v2.5.0 实评 08-06 命中率15.0%（<100%）：SSQ 实际 6 红中 4 个与上期重号/邻号相关（23/27重号+04/25邻号）但 1.25 倍关联加权不足，预测仅中 15 一个（11.67%）；FC3D/PL3/PL5 三玩法位置2 全部出现邻号回补（3←1/7←6/7←6）模型邻号权重不足未抓到（PL3/PL5 仍 0%）；SSQ 蓝球 03 为上期重号未中</td><td class="left">SSQ/DLT主区跨期关联加权1.25→1.45(08-06 SSQ 4/6关联实锤)、数字型邻号1.3→1.5、重号1.5→1.6(三玩法位置2邻号回补实锤)、后区/蓝球邻号加权1.3→1.4(SSQ蓝球03重号未中)、QLC主区关联加权1.25→1.35(特别号7→9邻号回补)</td></tr><tr><td>2026-08-07</td><td>sports_engine</td><td>1.1.0 → 1.2.0</td><td>用户要求接入真实赛程数据源生成预测池（此前预测池为模拟比赛池，连续6日无法与真实赛程配对评估）</td><td class="left">真实赛程缓存data/sports_schedule/YYYY-MM-DD.json(官方sporttery.cn赛程页抓取,按实际开赛日聚合)、predict_sports优先读真实赛程生成预测池(真实球队/联赛/编号),缓存缺失回退模拟池,输出source字段、选场策略:足球优先已开售按信心取6场、篮球取已开售全部≤3场,过滤距生成时刻不足6h场次、配对增强:(group,code)唯一键解决同开赛日跨官网分组编号重复+球队名包含匹配与别名映射、修复篮球80:80伪平局(强度缺失)与美职女篮基础强度95.0</td></tr></table>
+  <p class="sub">彩票引擎 v2.6.0 ｜ 竞彩引擎 v1.3.0 ｜ 历史优化 9 次（分析→预测→对比→优化闭环）</p>
+  <div class="wrap"><table><tr><th>日期</th><th>组件</th><th>版本变化</th><th>触发原因</th><th>优化内容</th></tr><tr><td>2026-08-02</td><td>lottery_engine</td><td>1.0.0 → 2.0.0</td><td>命中率66.67%（<100%）</td><td class="left small">奇偶平衡、大小区间、杀号机制、四分区均衡、三分区均衡、数字逐位生成、蓝球杀号、权重优化</td></tr><tr><td>2026-08-03</td><td>lottery_engine</td><td>2.0.0 → 2.1.0</td><td>命中率19.0%（<100%）</td><td class="left small">冷热双向杀号、杀号阈值调整(热5→6/冷2,快乐8热10→12)、回归均值权重、和值区间约束、跨度约束、AC值约束、尾号约束</td></tr><tr><td>2026-08-03</td><td>lottery_engine</td><td>2.1.0 → 2.2.0</td><td>命中率9.88%（<100%）：DLT/FC3D/PL3/PL5 均0%，数字型纯随机无历史依据</td><td class="left small">数字型位置频率加权(回归均值,首入往期数据机制)、跨期重复抑制(SSQ红≤2/DLT前区≤1/QLC≤2/KL8≤7)、三区间均衡(SSQ/DLT前区每区至少1个)、DLT前区和值中枢收紧(60-110→70-100)</td></tr><tr><td>2026-08-04</td><td>lottery_engine</td><td>2.2.0 → 2.3.0</td><td>v2.2.0 首次实评 08-04 命中率10.83%（<100%）：KL8 45%→20%回落（排除热号反噬）、FC3D/PL5/QXC 仍0%（全历史均值回归无效）、跨期关联性强（SSQ 6红中4个与上期重号/邻号相关）</td><td class="left small">跨期关联号加权(SSQ/DLT/QLC上期号码±1邻号1.25倍)、快乐8热号策略反转(排除热号→近10期频率60%+全历史40%加权保留,仅排冷号2个)、快乐8跨期重复上限7→6、数字型混合位置权重(近10期+全历史各50%,上期同位置及±1邻号1.3倍)</td></tr><tr><td>2026-08-05</td><td>lottery_engine</td><td>2.3.0 → 2.4.0</td><td>v2.3.0 实评 08-04 命中率10.83%（<100%）：SSQ 6红仅中1（实际 05 18 23 24 27 33 中 18/33 为上期重号、05/23 为上期邻号，但热号排除可能将重号/邻号剔除，使关联加权失效）；SSQ 实际和值 130 超出固定区间上限 125；KL8 有4重号+多邻号回补却无跨期关联加权；PL3 位置2 连续两期重号 0</td><td class="left small">跨期关联号排除保护(排除集合移除上期号码及±1邻号,使关联加权生效)、快乐8跨期关联加权(上期20码及±1邻号1.15倍)+排除保护、数字型重号/邻号区分加权(同位置重号1.4倍、邻号1.2倍,原统一1.3倍)、动态和值区间(历史≥3期时取均值±1.5σ与固定区间并集,解决SSQ实际和值130超出125)</td></tr><tr><td>2026-08-06</td><td>lottery_engine</td><td>2.4.0 → 2.5.0</td><td>v2.4.0 实评 08-05 命中率7.33%（<100%）：FC3D 连续4日0%、PL3/PL5 多日0%（数字型回归均值策略在样本少时导致号码过度聚中）；DLT 实际前区奇偶 4:1 被固定 (3,2) 排除（预测仅中 03 一个）；DLT 后区 08-03 [4,10] → 08-05 [5,11] 两个邻号全部回补（后区无跨期加权错失）；QLC 特别号 7→9 邻号回补</td><td class="left small">数字型近10期权重50%→60%+全历史40%(近期信号加强),权重衰减20→18(曲线平缓避免聚中)、数字型重号1.4→1.5倍、邻号1.2→1.3倍(加强跨期回补)、球型主号码奇偶比例动态化(50%默认+50%历史奇偶分布采样,覆盖4:1形态)、后区/蓝球跨期邻号加权1.3倍+排除保护(后区关联回补)、QLC特别号上期±1邻号加权1.3倍</td></tr><tr><td>2026-08-06</td><td>sports_engine</td><td>1.0.0 → 1.1.0</td><td>竞彩准确率连续5日无配对样本（模拟预测池 vs 真实赛程编号/球队不一致，准确率无法评估，<80%目标），需先解决配对评估机制</td><td class="left small">球队名归一化匹配find_result_for_match(先编号后球队名,供sports_summary_gen配对)、联赛强度真实校准(基础强度50%+真实赛果场均50%,比分更贴近真实水平)</td></tr><tr><td>2026-08-07</td><td>lottery_engine</td><td>2.5.0 → 2.6.0</td><td>v2.5.0 实评 08-06 命中率15.0%（<100%）：SSQ 实际 6 红中 4 个与上期重号/邻号相关（23/27重号+04/25邻号）但 1.25 倍关联加权不足，预测仅中 15 一个（11.67%）；FC3D/PL3/PL5 三玩法位置2 全部出现邻号回补（3←1/7←6/7←6）模型邻号权重不足未抓到（PL3/PL5 仍 0%）；SSQ 蓝球 03 为上期重号未中</td><td class="left small">SSQ/DLT主区跨期关联加权1.25→1.45(08-06 SSQ 4/6关联实锤)、数字型邻号1.3→1.5、重号1.5→1.6(三玩法位置2邻号回补实锤)、后区/蓝球邻号加权1.3→1.4(SSQ蓝球03重号未中)、QLC主区关联加权1.25→1.35(特别号7→9邻号回补)</td></tr><tr><td>2026-08-07</td><td>sports_engine</td><td>1.1.0 → 1.2.0</td><td>用户要求接入真实赛程数据源生成预测池（此前预测池为模拟比赛池，连续6日无法与真实赛程配对评估）</td><td class="left small">真实赛程缓存data/sports_schedule/YYYY-MM-DD.json(官方sporttery.cn赛程页抓取,按实际开赛日聚合)、predict_sports优先读真实赛程生成预测池(真实球队/联赛/编号),缓存缺失回退模拟池,输出source字段、选场策略:足球优先已开售按信心取6场、篮球取已开售全部≤3场,过滤距生成时刻不足6h场次、配对增强:(group,code)唯一键解决同开赛日跨官网分组编号重复+球队名包含匹配与别名映射、修复篮球80:80伪平局(强度缺失)与美职女篮基础强度95.0</td></tr></table></div>
 </div>
-<p class="tip">彩票与竞彩均为独立随机事件，本系统仅供娱乐参考，请理性购彩。<br>中奖是小概率事件，量力而行，切勿沉迷。</p>
+
+<p class="tip">彩票与竞彩均为独立随机事件，本系统仅供娱乐参考，请理性购彩。<br>中奖是小概率事件，量力而行，切勿沉迷。投注请以官方渠道规则为准。</p>
 </div>
 </body>
 </html>
