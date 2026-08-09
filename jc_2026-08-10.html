@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>彩票预测门户 · 竞猜 2026-08-10</title>
+<style>
+  .portal-nav{background:linear-gradient(135deg,#0b2a4a,#123a63);color:#fff;padding:0 16px;
+    position:sticky;top:0;z-index:99;display:flex;align-items:center;gap:4px;flex-wrap:wrap;min-height:48px;
+    font-family:"Microsoft YaHei","PingFang SC",sans-serif;}
+  .portal-nav .bn{font-weight:700;margin-right:14px;font-size:15px;}
+  .portal-nav a{color:#dbe7f5;text-decoration:none;padding:7px 14px;border-radius:7px;font-size:13px;}
+  .portal-nav a:hover{background:rgba(255,255,255,.15);color:#fff;}
+  .portal-nav a.on{background:#e53935;color:#fff;font-weight:600;}
+  .portal-nav select{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.3);
+    border-radius:6px;padding:4px 8px;font-size:12px;margin-left:auto;}
+  .portal-nav select option{color:#1f2937;}
+
+  .portal-nav{background:linear-gradient(135deg,#0b2a4a,#123a63);color:#fff;padding:0 16px;
+    position:sticky;top:0;z-index:99;display:flex;align-items:center;gap:4px;flex-wrap:wrap;min-height:48px;
+    font-family:"Microsoft YaHei","PingFang SC",sans-serif;}
+  .portal-nav .bn{font-weight:700;margin-right:14px;font-size:15px;}
+  .portal-nav a{color:#dbe7f5;text-decoration:none;padding:7px 14px;border-radius:7px;font-size:13px;}
+  .portal-nav a:hover{background:rgba(255,255,255,.15);color:#fff;}
+  .portal-nav a.on{background:#e53935;color:#fff;font-weight:600;}
+  .portal-nav select{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.3);
+    border-radius:6px;padding:4px 8px;font-size:12px;margin-left:auto;}
+  .portal-nav select option{color:#1f2937;}
+  *{box-sizing:border-box}
+  body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;margin:0;background:#eef1f6;color:#1f2937;}
+  .nav{background:linear-gradient(135deg,#0b2a4a,#123a63);color:#fff;position:sticky;top:0;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.2);}
+  .nav-inner{max-width:1120px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-height:54px;}
+  .nav .brand{font-weight:700;font-size:16px;margin-right:18px;letter-spacing:.5px;}
+  .nav a{color:#dbe7f5;text-decoration:none;padding:8px 16px;border-radius:8px;font-size:14px;transition:.15s;}
+  .nav a:hover{background:rgba(255,255,255,.14);color:#fff;}
+  .nav a.active{background:#e53935;color:#fff;font-weight:600;}
+  .container{max-width:1120px;margin:0 auto;padding:18px 20px 40px;}
+  .card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:18px 20px;margin:14px 0;box-shadow:0 1px 3px rgba(16,42,84,.05);}
+  h2{margin:0 0 4px;font-size:17px;color:#0b2a4a;}
+  h2::before{content:"";display:inline-block;width:4px;height:16px;background:#e53935;border-radius:2px;margin-right:8px;vertical-align:-2px;}
+  .sub{color:#6b7280;font-size:13px;margin:6px 0 12px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th{background:#0b2a4a;color:#fff;padding:9px 8px;}
+  td{border-bottom:1px solid #e2e8f0;padding:8px;text-align:center;}
+  tr:nth-child(even) td{background:#f8fafd;}
+  td.l{text-align:left;} td.small{font-size:12px;color:#57606f;}
+  .badge{display:inline-block;border-radius:20px;padding:2px 10px;font-size:11px;font-weight:700;}
+  .badge.rh{background:#fdeaea;color:#d64545;} .badge.rm{background:#fdf3e2;color:#d97706;} .badge.rl{background:#e5f6ee;color:#0e9f6e;}
+  .ud-wrap{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px;max-width:280px;}
+  .ud{display:inline-block;font-size:10px;border-radius:4px;padding:1px 5px;color:#1f2937;background:#eef1f6;border:1px solid #dbe2ea;cursor:help;}
+  .ud.rh{background:#fdeaea;color:#d64545;border-color:#f5c2c2;} .ud.rm{background:#fdf3e2;color:#d97706;border-color:#f0d9a8;} .ud.rl{background:#e5f6ee;color:#0e9f6e;border-color:#b8e6d3;}
+  .parlay{border:1px solid #e2e8f0;border-left:4px solid #e53935;border-radius:8px;padding:12px 16px;margin:10px 0;background:#fafcff;}
+  .parlay.t3{border-left-color:#8e44ad;}
+  .ph{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;margin-bottom:8px;}
+  .ph b{color:#0b2a4a;font-size:15px;}
+  .ph .pot{color:#0e9f6e;}
+  .pt{color:#1f2937;} .pp{color:#1565c0;font-weight:700;background:#e8f1fb;border-radius:4px;padding:0 7px;font-size:12px;}
+  .wrap{overflow-x:auto;}
+  .foot{margin:24px 0 0;padding:14px 20px;background:#0b2a4a;border-radius:10px;color:#c9d8ea;font-size:12px;line-height:2;}
+  .foot b{color:#fff;}
+  @media(max-width:720px){.nav .brand{width:100%;margin-bottom:4px;}}
+</style></head>
+<body><div class="portal-nav"><span class="bn">🎱 彩票预测门户</span><a href="index.html" class="on">竞猜</a><a href="daily.html" class="">日报</a><a href="weekly.html" class="">周报</a><a href="jc_weekly.html" class="">竞猜周报</a><a href="jc_daily.html" class="">竞猜日报</a><select onchange="location.href=this.value"><option value="index.html">⚽ 跨天·最新</option><option value="jc_2026-08-10.html">📅 2026-08-10</option><option value="jc_2026-08-08.html">📅 2026-08-08</option><option value="jc_2026-08-07.html">📅 2026-08-07</option><option value="jc_2026-08-06.html">📅 2026-08-06</option><option value="jc_2026-08-05.html">📅 2026-08-05</option><option value="jc_2026-08-04.html">📅 2026-08-04</option><option value="jc_2026-08-03.html">📅 2026-08-03</option></select></div>
+<div class="container" style="max-width:1120px;margin:0 auto;padding:18px 20px 40px;">
+  
+<div class="card">
+  <h2>⚽ 竞猜预测（2026-08-10）</h2>
+  <p class="sub">规则：每日限额 <b>¥100</b> · 不限玩法（足球/篮球混搭）· 最低 <b>2串1</b> · 串关可<b>跨天买入</b> · 每场多角度分析并评估爆冷｜数据源：单天（真实赛程缓存）</p>
+  <div class="parlay"><div class="ph"><b>2串1</b><span>比赛日：</span><span>组合赔率 <b>1.94</b></span><span>投入 ¥36.0</span><span>理论中奖 <b class="pot">¥69.84</b></span></div><div class="pb"><span class="pt">广东vs辽宁</span> <span class="pp">胜</span><br><span class="pt">凯尔特人vs雄鹿</span> <span class="pp">胜</span></div></div><div class="parlay t3"><div class="ph"><b>3串1</b><span>比赛日：</span><span>组合赔率 <b>2.97</b></span><span>投入 ¥24.0</span><span>理论中奖 <b class="pot">¥71.28</b></span></div><div class="pb"><span class="pt">广东vs辽宁</span> <span class="pp">胜</span><br><span class="pt">凯尔特人vs雄鹿</span> <span class="pp">胜</span><br><span class="pt">湖人vs勇士</span> <span class="pp">胜</span></div></div>
+  <div class="wrap"><table>
+    <tr><th>对阵（比赛日）</th><th>联赛</th><th>预测比分</th><th>胜平负/让球</th><th>信心</th><th>爆冷（5维度）</th><th>多角度分析</th><th>投注</th></tr>
+    <tr><td class="l"><b>湖人</b> vs <b>勇士</b><br><small>[2026-08-10 B01]</small></td><td>NBA</td><td>114:104</td><td><b>胜</b><br><small>让胜</small></td><td>0.76</td><td><span class="badge rh">爆冷高</span><div class="ud-wrap"><span class="ud rl" title="主推胜概率71%，其余合计29%">实力差距 29</span><span class="ud rm" title="主推71% vs 次选29%，差距42个百分点">状态波动 53</span><span class="ud rm" title="NBA 系数 0.50">联赛冷门系数 50</span><span class="ud rh" title="待开售/杯赛，信息较少">伤停不确定性 65</span><span class="ud rl" title="模拟交锋10场非主推方向出现20次">H2H波动性 20</span></div></td><td class="l small">模拟114:104｜主胜71% 客胜29%｜赔率 主1.53/客3.69｜冷门综合37%（实力差距29 状态波动53 联赛冷门系数50 伤停不确定性65 H2H波动性20）</td><td>¥7.04</td></tr><tr><td class="l"><b>广东</b> vs <b>辽宁</b><br><small>[2026-08-10 B02]</small></td><td>CBA</td><td>101:90</td><td><b>胜</b><br><small>让胜</small></td><td>0.85</td><td><span class="badge rm">爆冷中</span><div class="ud-wrap"><span class="ud rl" title="主推胜概率80%，其余合计20%">实力差距 20</span><span class="ud rl" title="主推80% vs 次选20%，差距60个百分点">状态波动 36</span><span class="ud rh" title="CBA 系数 0.62">联赛冷门系数 62</span><span class="ud rm" title="待开售/杯赛，信息较少">伤停不确定性 58</span><span class="ud rl" title="模拟交锋10场非主推方向出现10次">H2H波动性 10</span></div></td><td class="l small">模拟101:90｜主胜80% 客胜20%｜赔率 主1.35/客5.33｜冷门综合30%（实力差距20 状态波动36 联赛冷门系数62 伤停不确定性58 H2H波动性10）</td><td>¥9.9</td></tr><tr><td class="l"><b>凯尔特人</b> vs <b>雄鹿</b><br><small>[2026-08-10 B03]</small></td><td>NBA</td><td>113:101</td><td><b>胜</b><br><small>让胜</small></td><td>0.81</td><td><span class="badge rm">爆冷中</span><div class="ud-wrap"><span class="ud rl" title="主推胜概率75%，其余合计25%">实力差距 25</span><span class="ud rm" title="主推75% vs 次选25%，差距50个百分点">状态波动 45</span><span class="ud rm" title="NBA 系数 0.50">联赛冷门系数 50</span><span class="ud rm" title="待开售/杯赛，信息较少">伤停不确定性 57</span><span class="ud rl" title="模拟交锋10场非主推方向出现30次">H2H波动性 30</span></div></td><td class="l small">模拟113:101｜主胜75% 客胜25%｜赔率 主1.44/客4.28｜冷门综合34%（实力差距25 状态波动45 联赛冷门系数50 伤停不确定性57 H2H波动性30）</td><td>¥7.85</td></tr><tr><td class="l"><b>摩纳哥</b> vs <b>里尔</b><br><small>[2026-08-10 F01]</small></td><td>法甲</td><td>2:0</td><td><b>胜</b><br><small>让胜</small></td><td>0.49</td><td><span class="badge rh">爆冷高</span><div class="ud-wrap"><span class="ud rm" title="主推胜概率45%，其余合计55%">实力差距 55</span><span class="ud rh" title="主推45% vs 次选30%，差距16个百分点（接近、难预测）">状态波动 76</span><span class="ud rm" title="法甲 系数 0.55">联赛冷门系数 55</span><span class="ud rh" title="待开售/杯赛，信息较少">伤停不确定性 64</span><span class="ud rm" title="模拟交锋10场非主推方向出现40次">H2H波动性 40</span></div></td><td class="l small">模拟2:0｜主胜45% 平25% 客胜30%｜赔率 主2.39/平4.28/客3.66｜冷门综合58%（实力差距55 状态波动76 联赛冷门系数55 伤停不确定性64 H2H波动性40）</td><td>¥2.65</td></tr><tr><td class="l"><b>曼联</b> vs <b>阿森纳</b><br><small>[2026-08-10 F02]</small></td><td>英超</td><td>3:1</td><td><b>胜</b><br><small>让胜</small></td><td>0.51</td><td><span class="badge rh">爆冷高</span><div class="ud-wrap"><span class="ud rm" title="主推胜概率47%，其余合计53%">实力差距 53</span><span class="ud rh" title="主推47% vs 次选30%，差距17个百分点（接近、难预测）">状态波动 75</span><span class="ud rm" title="英超 系数 0.55">联赛冷门系数 55</span><span class="ud rh" title="待开售/杯赛，信息较少">伤停不确定性 66</span><span class="ud rm" title="模拟交锋10场非主推方向出现50次">H2H波动性 50</span></div></td><td class="l small">模拟3:1｜主胜47% 平22% 客胜30%｜赔率 主2.29/平4.85/客3.54｜冷门综合57%（实力差距53 状态波动75 联赛冷门系数55 伤停不确定性66 H2H波动性50）</td><td>¥2.88</td></tr><tr><td class="l"><b>巴萨</b> vs <b>皇马</b><br><small>[2026-08-10 F03]</small></td><td>西甲</td><td>2:1</td><td><b>胜</b><br><small>让胜</small></td><td>0.49</td><td><span class="badge rh">爆冷高</span><div class="ud-wrap"><span class="ud rm" title="主推胜概率46%，其余合计54%">实力差距 54</span><span class="ud rh" title="主推46% vs 次选32%，差距14个百分点（接近、难预测）">状态波动 77</span><span class="ud rm" title="西甲 系数 0.55">联赛冷门系数 55</span><span class="ud rh" title="待开售/杯赛，信息较少">伤停不确定性 70</span><span class="ud rh" title="模拟交锋10场非主推方向出现60次">H2H波动性 60</span></div></td><td class="l small">模拟2:1｜主胜46% 平23% 客胜32%｜赔率 主2.36/平4.75/客3.43｜冷门综合59%（实力差距54 状态波动77 联赛冷门系数55 伤停不确定性70 H2H波动性60）</td><td>¥2.65</td></tr><tr><td class="l"><b>拜仁</b> vs <b>多特</b><br><small>[2026-08-10 F04]</small></td><td>德甲</td><td>3:1</td><td><b>胜</b><br><small>让胜</small></td><td>0.45</td><td><span class="badge rh">爆冷高</span><div class="ud-wrap"><span class="ud rm" title="主推胜概率41%，其余合计59%">实力差距 59</span><span class="ud rh" title="主推41% vs 次选36%，差距5个百分点（接近、难预测）">状态波动 85</span><span class="ud rm" title="德甲 系数 0.55">联赛冷门系数 55</span><span class="ud rh" title="待开售/杯赛，信息较少">伤停不确定性 69</span><span class="ud rm" title="模拟交锋10场非主推方向出现40次">H2H波动性 40</span></div></td><td class="l small">模拟3:1｜主胜41% 平24% 客胜36%｜赔率 主2.65/平4.55/客3.04｜冷门综合62%（实力差距59 状态波动85 联赛冷门系数55 伤停不确定性69 H2H波动性40）</td><td>¥2.19</td></tr><tr><td class="l"><b>尤文</b> vs <b>AC米兰</b><br><small>[2026-08-10 F05]</small></td><td>意甲</td><td>2:1</td><td><b>胜</b><br><small>让胜</small></td><td>0.45</td><td><span class="badge rh">爆冷高</span><div class="ud-wrap"><span class="ud rm" title="主推胜概率41%，其余合计59%">实力差距 59</span><span class="ud rh" title="主推41% vs 次选34%，差距6个百分点（接近、难预测）">状态波动 84</span><span class="ud rm" title="意甲 系数 0.55">联赛冷门系数 55</span><span class="ud rh" title="待开售/杯赛，信息较少">伤停不确定性 67</span><span class="ud rh" title="模拟交锋10场非主推方向出现90次">H2H波动性 90</span></div></td><td class="l small">模拟2:1｜主胜41% 平25% 客胜34%｜赔率 主2.65/平4.36/客3.13｜冷门综合64%（实力差距59 状态波动84 联赛冷门系数55 伤停不确定性67 H2H波动性90）</td><td>¥2.19</td></tr><tr><td class="l"><b>上海海港</b> vs <b>山东泰山</b><br><small>[2026-08-10 F06]</small></td><td>中超</td><td>2:1</td><td><b>胜</b><br><small>让平</small></td><td>0.49</td><td><span class="badge rh">爆冷高</span><div class="ud-wrap"><span class="ud rm" title="主推胜概率46%，其余合计54%">实力差距 54</span><span class="ud rh" title="主推46% vs 次选28%，差距17个百分点（接近、难预测）">状态波动 74</span><span class="ud rh" title="中超 系数 0.65">联赛冷门系数 65</span><span class="ud rh" title="待开售/杯赛，信息较少">伤停不确定性 63</span><span class="ud rm" title="模拟交锋10场非主推方向出现50次">H2H波动性 50</span></div></td><td class="l small">模拟2:1｜主胜46% 平28% 客胜26%｜赔率 主2.36/平3.79/客4.19｜冷门综合59%（实力差距54 状态波动74 联赛冷门系数65 伤停不确定性63 H2H波动性50）</td><td>¥2.65</td></tr>
+  </table></div>
+</div>
+  <p style="color:#6b7280;font-size:12px;text-align:center;">彩票/竞彩为独立随机事件，本系统仅供娱乐参考，请理性购彩。</p>
+</div>
+</body></html>
