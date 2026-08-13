@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>彩票预测总结报告 - 2026-07-17 ~ 2026-08-01</title>
+<style>
+  .portal-nav{background:linear-gradient(135deg,#0b2a4a,#1e4a7a);color:#fff;padding:0 16px;
+    position:sticky;top:0;z-index:99;display:flex;align-items:center;gap:4px;flex-wrap:wrap;min-height:50px;
+    font-family:"Microsoft YaHei","PingFang SC",sans-serif;box-shadow:0 2px 10px rgba(11,42,74,.25);}
+  .portal-nav .bn{font-weight:700;margin-right:14px;font-size:15px;letter-spacing:.4px;}
+  .portal-nav a{color:#dbe7f5;text-decoration:none;padding:7px 15px;border-radius:8px;font-size:13px;transition:all .18s;}
+  .portal-nav a:hover{background:rgba(255,255,255,.15);color:#fff;}
+  .portal-nav a.on{background:linear-gradient(135deg,#e53935,#d32f2f);color:#fff;font-weight:600;box-shadow:0 2px 8px rgba(229,57,53,.4);}
+  .portal-nav select{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.3);
+    border-radius:6px;padding:5px 8px;font-size:12px;margin-left:auto;}
+  .portal-nav select option{color:#1f2937;}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #f0f2f5; color: #1a1a2e; line-height: 1.6; }
+
+.header { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 50%, #e67e22 100%); color: white; padding: 40px 20px; text-align: center; }
+.header h1 { font-size: 28px; margin-bottom: 8px; }
+.header p { opacity: 0.85; font-size: 14px; }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+/* 总览卡片 */
+.overview { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; margin-top: -30px; position: relative; z-index: 10; }
+.card { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); text-align: center; }
+.card .label { font-size: 13px; color: #888; margin-bottom: 8px; }
+.card .value { font-size: 28px; font-weight: 700; }
+.card .sub { font-size: 12px; color: #aaa; margin-top: 4px; }
+
+/* 排名 */
+.section { background: white; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.section h2 { font-size: 18px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid #f0f0f0; display: flex; align-items: center; gap: 8px; }
+
+/* 中奖率排名 */
+.rank-item { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #f5f5f5; gap: 12px; }
+.rank-item:last-child { border-bottom: none; }
+.rank-badge { font-size: 24px; width: 40px; text-align: center; flex-shrink: 0; }
+.rank-info { flex: 1; min-width: 0; }
+.rank-name { font-weight: 600; margin-bottom: 4px; font-size: 15px; }
+.rank-bar-bg { height: 6px; background: #f0f0f0; border-radius: 3px; overflow: hidden; }
+.rank-bar { height: 100%; background: linear-gradient(90deg, #e74c3c, #e67e22); border-radius: 3px; }
+.rank-value { font-weight: 700; font-size: 16px; color: #e74c3c; min-width: 50px; text-align: right; }
+
+/* 表格 */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { background: #fafafa; padding: 12px 16px; text-align: left; font-weight: 600; color: #555; border-bottom: 2px solid #eee; white-space: nowrap; }
+td { padding: 12px 16px; border-bottom: 1px solid #f5f5f5; }
+tr:hover td { background: #fafafa; }
+
+.positive { color: #22c55e; font-weight: 600; }
+.negative { color: #ef4444; font-weight: 600; }
+
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+.badge-福彩 { background: #fff3e0; color: #e65100; }
+.badge-体彩 { background: #e3f2fd; color: #1565c0; }
+
+/* 号码球 */
+.num-row { display: flex; flex-wrap: wrap; gap: 5px; margin: 4px 0; }
+.ball { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; font-size: 13px; font-weight: 700; border: 1.5px solid #ddd; color: #999; background: #fafafa; }
+.ball-red { border-color: #e74c3c; color: #e74c3c; }
+.ball-blue { border-color: #2980b9; color: #2980b9; }
+.ball-hit { background: #22c55e; color: #fff; border-color: #22c55e; }
+.sep { margin: 0 6px; color: #bbb; font-weight: 700; }
+.digit-box { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 34px; border-radius: 6px; font-size: 15px; font-weight: 700; border: 1.5px solid #ddd; background: #fafafa; color: #666; }
+.digit-hit { background: #22c55e; color: #fff; border-color: #22c55e; }
+
+/* 详细对比 */
+.detail-day { margin-bottom: 26px; }
+.day-title { font-size: 17px; margin-bottom: 12px; color: #c0392b; border-left: 4px solid #e74c3c; padding-left: 10px; }
+.detail-game { background: white; border: 1px solid #eee; border-radius: 12px; padding: 16px 18px; margin-bottom: 14px; box-shadow: 0 1px 5px rgba(0,0,0,0.04); }
+.detail-game h4 { font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.win-tag { font-size: 12px; padding: 2px 10px; border-radius: 12px; font-weight: 700; }
+.win-yes { background: #e8f5e9; color: #2e7d32; }
+.win-no { background: #fdecea; color: #c62828; }
+.grp-stat { font-size: 12px; color: #888; margin-left: auto; }
+.win-block { background: #fff8f0; border: 1px dashed #ffcc80; border-radius: 8px; padding: 10px 12px; margin-bottom: 12px; }
+.win-label { font-size: 12px; font-weight: 700; color: #e67e22; margin-bottom: 6px; }
+.win-meta { font-size: 12px; color: #aaa; margin-top: 6px; }
+.pred-label { font-size: 12px; font-weight: 700; color: #2980b9; margin-bottom: 6px; }
+.legend-hit { color: #22c55e; font-weight: 700; }
+.pred-group { background: #fafcff; border: 1px solid #eef2f7; border-radius: 8px; padding: 8px 10px; margin-bottom: 6px; }
+.grp-head { font-size: 12px; color: #888; margin-bottom: 4px; }
+.grp-prize { font-size: 12px; font-weight: 700; margin-top: 5px; padding: 2px 8px; border-radius: 6px; display: inline-block; }
+.grp-prize.win { background: #e8f5e9; color: #2e7d32; }
+.grp-prize.none { background: #f5f5f5; color: #999; font-weight: 500; }
+.grp-prize.ref { background: #fff8e1; color: #e67e22; }
+.grp-prize.pending { background: #f3f4ff; color: #7986cb; font-weight: 500; }
+.ref-note { font-size: 11px; color: #e67e22; }
+
+.footer { text-align: center; padding: 24px; color: #999; font-size: 12px; }
+.disclaimer { background: #fff8e1; border: 1px solid #ffe082; border-radius: 8px; padding: 16px; margin: 20px 0; color: #795548; font-size: 13px; text-align: center; }
+
+@media (max-width: 768px) {
+    .overview { grid-template-columns: repeat(2, 1fr); }
+    .header h1 { font-size: 22px; }
+}
+</style>
+</head>
+<body><div class="portal-nav"><span class="bn">🎱 彩票预测门户</span><a href="index.html" class="">竞猜</a><a href="daily.html" class="">日报</a><a href="weekly.html" class="on">周报</a><a href="jc_weekly.html" class="">竞猜周报</a><a href="jc_daily.html" class="">竞猜日报</a></div><div style="max-width:1120px;margin:12px auto 0;padding:0 20px;"><div class="switch" style="display:inline-flex;border:1px solid #cbd5e1;border-radius:8px;overflow:hidden;font-size:13px;background:#fff;"><a href="weekly.html" style="padding:7px 18px;text-decoration:none;color:#fff;background:#e53935;font-weight:600;">📊 彩票周报</a><a href="jc_weekly.html" style="padding:7px 18px;text-decoration:none;color:#0b2a4a;">⚽ 竞猜周报</a></div></div>
+
+<div class="header">
+    <h1>🎱 彩票预测追踪报告</h1>
+    <p>统计周期：2026-07-17 ~ 2026-08-01 ｜ 生成时间：2026-08-01 21:55</p>
+</div>
+
+<div class="container">
+    <!-- 总览 -->
+    <div class="overview">
+        <div class="card">
+            <div class="label">📅 统计天数</div>
+            <div class="value">16</div>
+            <div class="sub">天</div>
+        </div>
+        <div class="card">
+            <div class="label">💰 总投入</div>
+            <div class="value">¥320</div>
+            <div class="sub">各玩法每日预测</div>
+        </div>
+        <div class="card">
+            <div class="label">🏆 总中奖</div>
+            <div class="value" style="color:#22c55e">¥17</div>
+            <div class="sub">累计奖金</div>
+        </div>
+        <div class="card">
+            <div class="label">📊 净收益</div>
+            <div class="value" style="color:#ef4444">¥-303</div>
+            <div class="sub">回报率 -94.69%</div>
+        </div>
+    </div>
+
+    <!-- 中奖率排名 -->
+    <div class="section">
+        <h2>🏅 各玩法中奖率排名（中奖率 = 有中奖的期数/参与期数）</h2>
+        
+        <div class="rank-item">
+            <div class="rank-badge">🥇</div>
+            <div class="rank-info">
+                <div class="rank-name">双色球</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:100.0%"></div></div>
+            </div>
+            <div class="rank-value">100.0%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">🥈</div>
+            <div class="rank-info">
+                <div class="rank-name">七星彩</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:100.0%"></div></div>
+            </div>
+            <div class="rank-value">100.0%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">🥉</div>
+            <div class="rank-info">
+                <div class="rank-name">快乐8</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:33.33%"></div></div>
+            </div>
+            <div class="rank-value">33.33%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">#4</div>
+            <div class="rank-info">
+                <div class="rank-name">排列三</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:0.0%"></div></div>
+            </div>
+            <div class="rank-value">0.0%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">#5</div>
+            <div class="rank-info">
+                <div class="rank-name">福彩3D</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:0.0%"></div></div>
+            </div>
+            <div class="rank-value">0.0%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">#6</div>
+            <div class="rank-info">
+                <div class="rank-name">排列五</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:0.0%"></div></div>
+            </div>
+            <div class="rank-value">0.0%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">#7</div>
+            <div class="rank-info">
+                <div class="rank-name">七乐彩</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:0.0%"></div></div>
+            </div>
+            <div class="rank-value">0.0%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">#8</div>
+            <div class="rank-info">
+                <div class="rank-name">大乐透</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:0.0%"></div></div>
+            </div>
+            <div class="rank-value">0.0%</div>
+        </div>
+        <p style="margin-top:12px;font-size:12px;color:#999;">中奖率：预测号码命中任意奖级的期数占比。数值越高说明该玩法更容易中小奖。</p>
+    </div>
+
+    <!-- 详细数据 -->
+    <div class="section">
+        <h2>📋 详细数据表</h2>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>玩法</th>
+                        <th>参与期数</th>
+                        <th>总投入</th>
+                        <th>总中奖</th>
+                        <th>净收益</th>
+                        <th>中奖率</th>
+                        <th>号码命中率</th>
+                        <th>ROI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="badge badge-福彩">福彩</span> 双色球</td>
+            <td>1期</td>
+            <td>¥20</td>
+            <td>¥5</td>
+            <td class="negative">¥-15</td>
+            <td>100.0%</td>
+            <td>3.17%</td>
+            <td>-75.0%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-体彩">体彩</span> 排列三</td>
+            <td>3期</td>
+            <td>¥60</td>
+            <td>¥0</td>
+            <td class="negative">¥-60</td>
+            <td>0.0%</td>
+            <td>6.67%</td>
+            <td>-100.0%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-福彩">福彩</span> 福彩3D</td>
+            <td>3期</td>
+            <td>¥60</td>
+            <td>¥0</td>
+            <td class="negative">¥-60</td>
+            <td>0.0%</td>
+            <td>5.56%</td>
+            <td>-100.0%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-体彩">体彩</span> 排列五</td>
+            <td>3期</td>
+            <td>¥60</td>
+            <td>¥0</td>
+            <td class="negative">¥-60</td>
+            <td>0.0%</td>
+            <td>12.67%</td>
+            <td>-100.0%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-福彩">福彩</span> 快乐8</td>
+            <td>3期</td>
+            <td>¥60</td>
+            <td>¥2</td>
+            <td class="negative">¥-58</td>
+            <td>33.33%</td>
+            <td>23.33%</td>
+            <td>-96.67%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-体彩">体彩</span> 七星彩</td>
+            <td>1期</td>
+            <td>¥20</td>
+            <td>¥10</td>
+            <td class="negative">¥-10</td>
+            <td>100.0%</td>
+            <td>10.0%</td>
+            <td>-50.0%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-福彩">福彩</span> 七乐彩</td>
+            <td>1期</td>
+            <td>¥20</td>
+            <td>¥0</td>
+            <td class="negative">¥-20</td>
+            <td>0.0%</td>
+            <td>22.86%</td>
+            <td>-100.0%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-体彩">体彩</span> 大乐透</td>
+            <td>1期</td>
+            <td>¥20</td>
+            <td>¥0</td>
+            <td class="negative">¥-20</td>
+            <td>0.0%</td>
+            <td>15.71%</td>
+            <td>-100.0%</td>
+        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 逐期号码对比明细 -->
+    <div class="section">
+        <h2>🔍 逐期号码对比明细（预测号码 vs 开奖号码）</h2>
+        <div class="detail-day"><h3 class="day-title">📆 2026-07-30</h3>
+            <div class="detail-game">
+                <h4>
+                    <span class="badge badge-福彩">福彩</span>
+                    双色球
+                    <span class="win-tag win-yes">🎉 已中奖</span>
+                    <span class="grp-stat">投入 ¥20 ｜ 中奖 ¥5 ｜ 命中率 3.17%</span>
+                </h4>
+                <div class="win-block">
+                    <div class="win-label">🎯 开奖号码 </div>
+                    <div class="num-row"><span class="ball ball-red">04</span><span class="ball ball-red">06</span><span class="ball ball-red">10</span><span class="ball ball-red">18</span><span class="ball ball-red">23</span><span class="ball ball-red">31</span><span class="sep">+</span><span class="ball ball-blue">11</span></div>
+                    <div class="win-meta">期号 2026087 ｜ 红球 + 蓝球</div>
+                </div>
+                <div class="pred-block">
+                    <div class="pred-label">🔮 预测号码（共 5 组，<span class="legend-hit">绿底=命中</span>）</div>
+                    
+                <div class="pred-group">
+                    <div class="grp-head">第1组 · hot_balanced · 6+2复试</div>
+                    <div class="num-row"><span class="ball ball-red">02</span><span class="ball ball-red">08</span><span class="ball ball-red">14</span><span class="ball ball-red">16</span><span class="ball ball-red">24</span><span class="ball ball-red">33</span></div><div class="num-row"><span class="ball ball-blue">05</span><span class="ball ball-blue">04</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第2组 · cold_hot_mix · 6+2复试</div>
+                    <div class="num-row"><span class="ball ball-red">01</span><span class="ball ball-red">14</span><span class="ball ball-red">24</span><span class="ball ball-red">25</span><span class="ball ball-red">26</span><span class="ball ball-red">28</span></div><div class="num-row"><span class="ball ball-blue">05</span><span class="ball ball-blue">14</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第3组 · omission_bounce · 6+2复试</div>
+                    <div class="num-row"><span class="ball ball-red">08</span><span class="ball ball-red">14</span><span class="ball ball-red">24</span><span class="ball ball-red">28</span><span class="ball ball-red">30</span><span class="ball ball-red ball-hit">31</span></div><div class="num-row"><span class="ball ball-blue">08</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第4组 · zone_balanced · 6+2复试</div>
+                    <div class="num-row"><span class="ball ball-red">03</span><span class="ball ball-red">05</span><span class="ball ball-red">12</span><span class="ball ball-red">14</span><span class="ball ball-red">25</span><span class="ball ball-red">27</span></div><div class="num-row"><span class="ball ball-blue">05</span><span class="ball ball-blue">04</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第5组 · pattern_match · 6+2复试</div>
+                    <div class="num-row"><span class="ball ball-red">02</span><span class="ball ball-red">07</span><span class="ball ball-red">20</span><span class="ball ball-red">25</span><span class="ball ball-red">27</span><span class="ball ball-red">29</span></div><div class="num-row"><span class="ball ball-blue ball-hit">11</span><span class="ball ball-blue">01</span></div>
+                    <div class="grp-prize win">💰 本组中奖 ¥5</div>
+                </div>
+                </div>
+            </div>
+            <div class="detail-game">
+                <h4>
+                    <span class="badge badge-体彩">体彩</span>
+                    排列三
+                    <span class="win-tag win-no">未中奖</span>
+                    <span class="grp-stat">投入 ¥20 ｜ 中奖 ¥0 ｜ 命中率 3.33%</span>
+                </h4>
+                <div class="win-block">
+                    <div class="win-label">🎯 开奖号码 </div>
+                    <div class="num-row"><span class="digit-box">8</span><span class="digit-box">6</span><span class="digit-box">2</span></div>
+                    <div class="win-meta">期号 26201 ｜ 三位号码</div>
+                </div>
+                <div class="pred-block">
+                    <div class="pred-label">🔮 预测号码（共 10 组，<span class="legend-hit">绿底=命中</span>）</div>
+                    
+                <div class="pred-group">
+                    <div class="grp-head">第1组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">2</span><span class="digit-box">0</span><span class="digit-box">0</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第2组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">1</span><span class="digit-box">2</span><span class="digit-box">1</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第3组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">2</span><span class="digit-box">2</span><span class="digit-box">4</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第4组 · 组三 · 组三</div>
+                    <div class="num-row"><span class="digit-box">3</span><span class="digit-box">3</span><span class="digit-box">0</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第5组 · 组三 · 组三</div>
+                    <div class="num-row"><span class="digit-box">0</span><span class="digit-box">2</span><span class="digit-box digit-hit">2</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第6组 · 组三 · 组三</div>
+                    <div class="num-row"><span class="digit-box">0</span><span class="digit-box">0</span><span class="digit-box">3</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第7组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box">3</span><span class="digit-box">0</span><span class="digit-box">1</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第8组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box">2</span><span class="digit-box">3</span><span class="digit-box">1</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第9组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box">2</span><span class="digit-box">1</span><span class="digit-box">4</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第10组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box">4</span><span class="digit-box">3</span><span class="digit-box">0</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                </div>
+            </div>
+            <div class="detail-game">
+                <h4>
+                    <span class="badge badge-福彩">福彩</span>
+                    福彩3D
+                    <span class="win-tag win-no">未中奖</span>
+                    <span class="grp-stat">投入 ¥20 ｜ 中奖 ¥0 ｜ 命中率 6.67%</span>
+                </h4>
+                <div class="win-block">
+                    <div class="win-label">🎯 开奖号码 </div>
+                    <div class="num-row"><span class="digit-box">3</span><span class="digit-box">2</span><span class="digit-box">1</span></div>
+                    <div class="win-meta">期号 2026201 ｜ 三位号码</div>
+                </div>
+                <div class="pred-block">
+                    <div class="pred-label">🔮 预测号码（共 10 组，<span class="legend-hit">绿底=命中</span>）</div>
+                    
+                <div class="pred-group">
+                    <div class="grp-head">第1组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">1</span><span class="digit-box">9</span><span class="digit-box">8</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第2组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">8</span><span class="digit-box">1</span><span class="digit-box">8</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第3组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">1</span><span class="digit-box">8</span><span class="digit-box">2</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第4组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">2</span><span class="digit-box">8</span><span class="digit-box">7</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第5组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">8</span><span class="digit-box">8</span><span class="digit-box digit-hit">1</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第6组 · 组三 · 组三</div>
+                    <div class="num-row"><span class="digit-box">8</span><span class="digit-box">8</span><span class="digit-box">5</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第7组 · 组三 · 组三</div>
+                    <div class="num-row"><span class="digit-box">2</span><span class="digit-box digit-hit">2</span><span class="digit-box">7</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第8组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box">8</span><span class="digit-box">9</span><span class="digit-box">3</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第9组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box">4</span><span class="digit-box">6</span><span class="digit-box">3</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第10组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box">7</span><span class="digit-box">4</span><span class="digit-box">9</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                </div>
+            </div>
+            <div class="detail-game">
+                <h4>
+                    <span class="badge badge-体彩">体彩</span>
+                    排列五
+                    <span class="win-tag win-no">未中奖</span>
+                    <span class="grp-stat">投入 ¥20 ｜ 中奖 ¥0 ｜ 命中率 12.0%</span>
+                </h4>
+                <div class="win-block">
+                    <div class="win-label">🎯 开奖号码 </div>
+                    <div class="num-row"><span class="digit-box">8</span><span class="digit-box">6</span><span class="digit-box">2</span><span class="digit-box">7</span><span class="digit-box">1</span></div>
+                    <div class="win-meta">期号 26201 ｜ 五位号码</div>
+                </div>
+                <div class="pred-block">
+                    <div class="pred-label">🔮 预测号码（共 10 组，<span class="legend-hit">绿底=命中</span>）</div>
+                    
+                <div class="pred-group">
+                    <div class="grp-head">第1组 · 策略1 · 单式</div>
+                    <div class="num-row"><span class="digit-box">7</span><span class="digit-box digit-hit">6</span><span class="digit-box">9</span><span class="digit-box">4</span><span class="digit-box digit-hit">1</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第2组 · 策略2 · 单式</div>
+                    <div class="num-row"><span class="digit-box digit-hit">8</span><span class="digit-box">5</span><span class="digit-box">1</span><span class="digit-box">1</span><span class="digit-box">8</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第3组 · 策略3 · 单式</div>
+                    <div class="num-row"><span class="digit-box">0</span><span class="digit-box">1</span><span class="digit-box">7</span><span class="digit-box">5</span><span class="digit-box">4</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第4组 · 策略4 · 单式</div>
+                    <div class="num-row"><span class="digit-box">5</span><span class="digit-box">1</span><span class="digit-box digit-hit">2</span><span class="digit-box">1</span><span class="digit-box">5</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第5组 · 策略5 · 单式</div>
+                    <div class="num-row"><span class="digit-box">6</span><span class="digit-box">5</span><span class="digit-box">0</span><span class="digit-box">5</span><span class="digit-box digit-hit">1</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第6组 · 策略6 · 单式</div>
+                    <div class="num-row"><span class="digit-box">2</span><span class="digit-box">0</span><span class="digit-box">3</span><span class="digit-box">0</span><span class="digit-box">8</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第7组 · 策略7 · 单式</div>
+                    <div class="num-row"><span class="digit-box">5</span><span class="digit-box">8</span><span class="digit-box">9</span><span class="digit-box">1</span><span class="digit-box">7</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第8组 · 策略8 · 单式</div>
+                    <div class="num-row"><span class="digit-box">2</span><span class="digit-box">5</span><span class="digit-box">6</span><span class="digit-box">4</span><span class="digit-box">3</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第9组 · 策略9 · 单式</div>
+                    <div class="num-row"><span class="digit-box">1</span><span class="digit-box">2</span><span class="digit-box">4</span><span class="digit-box">6</span><span class="digit-box digit-hit">1</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第10组 · 策略10 · 单式</div>
+                    <div class="num-row"><span class="digit-box">3</span><span class="digit-box">1</span><span class="digit-box">9</span><span class="digit-box">8</span><span class="digit-box">5</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                </div>
+            </div>
+            <div class="detail-game">
+                <h4>
+                    <span class="badge badge-福彩">福彩</span>
+                    快乐8
+                    <span class="win-tag win-yes">🎉 已中奖</span>
+                    <span class="grp-stat">投入 ¥20 ｜ 中奖 ¥2 ｜ 命中率 23.0%</span>
+                </h4>
+                <div class="win-block">
+                    <div class="win-label">🎯 开奖号码 </div>
+                    <div class="num-row"><span class="ball ball-red">02</span><span class="ball ball-red">03</span><span class="ball ball-red">12</span><span class="ball ball-red">13</span><span class="ball ball-red">17</span><span class="ball ball-red">20</span><span class="ball ball-red">24</span><span class="ball ball-red">27</span><span class="ball ball-red">31</span><span class="ball ball-red">32</span><span class="ball ball-red">40</span><span class="ball ball-red">45</span><span class="ball ball-red">50</span><span class="ball ball-red">52</span><span class="ball ball-red">61</span><span class="ball ball-red">67</span><span class="ball ball-red">71</span><span class="ball ball-red">76</span><span class="ball ball-red">79</span><span class="ball ball-red">80</span></div>
+                    <div class="win-meta">期号 2026201 ｜ 选十号码</div>
+                </div>
+                <div class="pred-block">
+                    <div class="pred-label">🔮 预测号码（共 10 组，<span class="legend-hit">绿底=命中</span>）</div>
+                    
+                <div class="pred-group">
+                    <div class="grp-head">第1组 · 热号 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red">01</span><span class="ball ball-red ball-hit">02</span><span class="ball ball-red">04</span><span class="ball ball-red ball-hit">12</span><span class="ball ball-red">23</span><span class="ball ball-red">30</span><span class="ball ball-red ball-hit">32</span><span class="ball ball-red">37</span><span class="ball ball-red">46</span><span class="ball ball-red">51</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第2组 · 热号 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red">06</span><span class="ball ball-red">23</span><span class="ball ball-red">30</span><span class="ball ball-red">35</span><span class="ball ball-red">39</span><span class="ball ball-red">44</span><span class="ball ball-red ball-hit">45</span><span class="ball ball-red">46</span><span class="ball ball-red">51</span><span class="ball ball-red">69</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第3组 · 热号 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red">04</span><span class="ball ball-red">06</span><span class="ball ball-red ball-hit">27</span><span class="ball ball-red">35</span><span class="ball ball-red">37</span><span class="ball ball-red">39</span><span class="ball ball-red">49</span><span class="ball ball-red ball-hit">61</span><span class="ball ball-red">62</span><span class="ball ball-red">66</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第4组 · 冷热结合 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red ball-hit">02</span><span class="ball ball-red">21</span><span class="ball ball-red ball-hit">24</span><span class="ball ball-red ball-hit">27</span><span class="ball ball-red">30</span><span class="ball ball-red ball-hit">31</span><span class="ball ball-red">35</span><span class="ball ball-red">68</span><span class="ball ball-red">69</span><span class="ball ball-red">73</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第5组 · 冷热结合 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red ball-hit">12</span><span class="ball ball-red">14</span><span class="ball ball-red">18</span><span class="ball ball-red">21</span><span class="ball ball-red">22</span><span class="ball ball-red">37</span><span class="ball ball-red">44</span><span class="ball ball-red">49</span><span class="ball ball-red">59</span><span class="ball ball-red">65</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第6组 · 冷热结合 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red ball-hit">12</span><span class="ball ball-red">18</span><span class="ball ball-red ball-hit">20</span><span class="ball ball-red">21</span><span class="ball ball-red">35</span><span class="ball ball-red">44</span><span class="ball ball-red">49</span><span class="ball ball-red">65</span><span class="ball ball-red ball-hit">67</span><span class="ball ball-red">73</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第7组 · 遗漏回补 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red">01</span><span class="ball ball-red ball-hit">03</span><span class="ball ball-red">07</span><span class="ball ball-red">08</span><span class="ball ball-red">15</span><span class="ball ball-red">22</span><span class="ball ball-red">23</span><span class="ball ball-red">38</span><span class="ball ball-red">63</span><span class="ball ball-red ball-hit">80</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第8组 · 遗漏回补 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red">01</span><span class="ball ball-red">10</span><span class="ball ball-red">15</span><span class="ball ball-red">16</span><span class="ball ball-red">23</span><span class="ball ball-red">28</span><span class="ball ball-red">41</span><span class="ball ball-red">63</span><span class="ball ball-red">77</span><span class="ball ball-red">78</span></div>
+                    <div class="grp-prize win">💰 本组中奖 ¥2</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第9组 · 区间均衡 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red">06</span><span class="ball ball-red">09</span><span class="ball ball-red ball-hit">13</span><span class="ball ball-red ball-hit">20</span><span class="ball ball-red">21</span><span class="ball ball-red ball-hit">32</span><span class="ball ball-red">41</span><span class="ball ball-red">53</span><span class="ball ball-red">65</span><span class="ball ball-red ball-hit">80</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第10组 · 区间均衡 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red">09</span><span class="ball ball-red">14</span><span class="ball ball-red">25</span><span class="ball ball-red ball-hit">40</span><span class="ball ball-red">41</span><span class="ball ball-red">54</span><span class="ball ball-red">59</span><span class="ball ball-red ball-hit">61</span><span class="ball ball-red">77</span><span class="ball ball-red ball-hit">80</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                </div>
+            </div></div><div class="detail-day"><h3 class="day-title">📆 2026-07-31</h3>
+            <div class="detail-game">
+                <h4>
+                    <span class="badge badge-体彩">体彩</span>
+                    排列三
+                    <span class="win-tag win-no">未中奖</span>
+                    <span class="grp-stat">投入 ¥20 ｜ 中奖 ¥0 ｜ 命中率 10.0%</span>
+                </h4>
+                <div class="win-block">
+                    <div class="win-label">🎯 开奖号码 </div>
+                    <div class="num-row"><span class="digit-box">9</span><span class="digit-box">6</span><span class="digit-box">1</span></div>
+                    <div class="win-meta">期号 26202 ｜ 三位号码</div>
+                </div>
+                <div class="pred-block">
+                    <div class="pred-label">🔮 预测号码（共 10 组，<span class="legend-hit">绿底=命中</span>）</div>
+                    
+                <div class="pred-group">
+                    <div class="grp-head">第1组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">7</span><span class="digit-box digit-hit">6</span><span class="digit-box">0</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第2组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">5</span><span class="digit-box">0</span><span class="digit-box">7</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第3组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">3</span><span class="digit-box">0</span><span class="digit-box">6</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第4组 · 组三 · 组三</div>
+                    <div class="num-row"><span class="digit-box">5</span><span class="digit-box">7</span><span class="digit-box">7</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第5组 · 组三 · 组三</div>
+                    <div class="num-row"><span class="digit-box">5</span><span class="digit-box">0</span><span class="digit-box">0</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第6组 · 组三 · 组三</div>
+                    <div class="num-row"><span class="digit-box">7</span><span class="digit-box digit-hit">6</span><span class="digit-box">6</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第7组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box">5</span><span class="digit-box">8</span><span class="digit-box">0</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第8组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box">3</span><span class="digit-box">5</span><span class="digit-box">4</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第9组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box">0</span><span class="digit-box">5</span><span class="digit-box">2</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第10组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box digit-hit">9</span><span class="digit-box">5</span><span class="digit-box">8</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                </div>
+            </div>
+            <div class="detail-game">
+                <h4>
+                    <span class="badge badge-福彩">福彩</span>
+                    福彩3D
+                    <span class="win-tag win-no">未中奖</span>
+                    <span class="grp-stat">投入 ¥20 ｜ 中奖 ¥0 ｜ 命中率 3.33%</span>
+                </h4>
+                <div class="win-block">
+                    <div class="win-label">🎯 开奖号码 </div>
+                    <div class="num-row"><span class="digit-box">9</span><span class="digit-box">8</span><span class="digit-box">8</span></div>
+                    <div class="win-meta">期号 2026202 ｜ 三位号码</div>
+                </div>
+                <div class="pred-block">
+                    <div class="pred-label">🔮 预测号码（共 10 组，<span class="legend-hit">绿底=命中</span>）</div>
+                    
+                <div class="pred-group">
+                    <div class="grp-head">第1组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">3</span><span class="digit-box">0</span><span class="digit-box">0</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第2组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">6</span><span class="digit-box">0</span><span class="digit-box">9</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第3组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">4</span><span class="digit-box">6</span><span class="digit-box">1</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第4组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box digit-hit">9</span><span class="digit-box">0</span><span class="digit-box">3</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第5组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">3</span><span class="digit-box">0</span><span class="digit-box">5</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第6组 · 组三 · 组三</div>
+                    <div class="num-row"><span class="digit-box">7</span><span class="digit-box">7</span><span class="digit-box">5</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第7组 · 组三 · 组三</div>
+                    <div class="num-row"><span class="digit-box">0</span><span class="digit-box">0</span><span class="digit-box">9</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第8组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box">5</span><span class="digit-box">0</span><span class="digit-box">2</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第9组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box">6</span><span class="digit-box">2</span><span class="digit-box">1</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第10组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box">1</span><span class="digit-box">2</span><span class="digit-box">7</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                </div>
+            </div>
+            <div class="detail-game">
+                <h4>
+                    <span class="badge badge-体彩">体彩</span>
+                    排列五
+                    <span class="win-tag win-no">未中奖</span>
+                    <span class="grp-stat">投入 ¥20 ｜ 中奖 ¥0 ｜ 命中率 14.0%</span>
+                </h4>
+                <div class="win-block">
+                    <div class="win-label">🎯 开奖号码 </div>
+                    <div class="num-row"><span class="digit-box">9</span><span class="digit-box">6</span><span class="digit-box">1</span><span class="digit-box">7</span><span class="digit-box">0</span></div>
+                    <div class="win-meta">期号 26202 ｜ 五位号码</div>
+                </div>
+                <div class="pred-block">
+                    <div class="pred-label">🔮 预测号码（共 10 组，<span class="legend-hit">绿底=命中</span>）</div>
+                    
+                <div class="pred-group">
+                    <div class="grp-head">第1组 · 策略1 · 单式</div>
+                    <div class="num-row"><span class="digit-box">7</span><span class="digit-box">0</span><span class="digit-box">2</span><span class="digit-box">1</span><span class="digit-box">2</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第2组 · 策略2 · 单式</div>
+                    <div class="num-row"><span class="digit-box digit-hit">9</span><span class="digit-box digit-hit">6</span><span class="digit-box">9</span><span class="digit-box digit-hit">7</span><span class="digit-box">8</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第3组 · 策略3 · 单式</div>
+                    <div class="num-row"><span class="digit-box">4</span><span class="digit-box">2</span><span class="digit-box">5</span><span class="digit-box">0</span><span class="digit-box">1</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第4组 · 策略4 · 单式</div>
+                    <div class="num-row"><span class="digit-box">0</span><span class="digit-box">0</span><span class="digit-box">9</span><span class="digit-box digit-hit">7</span><span class="digit-box digit-hit">0</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第5组 · 策略5 · 单式</div>
+                    <div class="num-row"><span class="digit-box">3</span><span class="digit-box">7</span><span class="digit-box">5</span><span class="digit-box">0</span><span class="digit-box">8</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第6组 · 策略6 · 单式</div>
+                    <div class="num-row"><span class="digit-box">4</span><span class="digit-box digit-hit">6</span><span class="digit-box">9</span><span class="digit-box">5</span><span class="digit-box">6</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第7组 · 策略7 · 单式</div>
+                    <div class="num-row"><span class="digit-box">6</span><span class="digit-box">2</span><span class="digit-box">5</span><span class="digit-box">2</span><span class="digit-box">7</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第8组 · 策略8 · 单式</div>
+                    <div class="num-row"><span class="digit-box">3</span><span class="digit-box">2</span><span class="digit-box">5</span><span class="digit-box">0</span><span class="digit-box digit-hit">0</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第9组 · 策略9 · 单式</div>
+                    <div class="num-row"><span class="digit-box">4</span><span class="digit-box">2</span><span class="digit-box">6</span><span class="digit-box">2</span><span class="digit-box">1</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第10组 · 策略10 · 单式</div>
+                    <div class="num-row"><span class="digit-box">7</span><span class="digit-box">2</span><span class="digit-box">7</span><span class="digit-box">2</span><span class="digit-box">6</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                </div>
+            </div>
+            <div class="detail-game">
+                <h4>
+                    <span class="badge badge-体彩">体彩</span>
+                    七星彩
+                    <span class="win-tag win-yes">🎉 已中奖</span>
+                    <span class="grp-stat">投入 ¥20 ｜ 中奖 ¥10 ｜ 命中率 10.0%</span>
+                </h4>
+                <div class="win-block">
+                    <div class="win-label">🎯 开奖号码 </div>
+                    <div class="num-row"><span class="digit-box">3</span><span class="digit-box">9</span><span class="digit-box">9</span><span class="digit-box">2</span><span class="digit-box">8</span><span class="digit-box">6</span><span class="sep">+</span><span class="digit-box">10</span></div>
+                    <div class="win-meta">期号 26087 ｜ 七位号码</div>
+                </div>
+                <div class="pred-block">
+                    <div class="pred-label">🔮 预测号码（共 10 组，<span class="legend-hit">绿底=命中</span>）</div>
+                    
+                <div class="pred-group">
+                    <div class="grp-head">第1组 · 策略1 · 单式</div>
+                    <div class="num-row"><span class="digit-box">8</span><span class="digit-box">1</span><span class="digit-box">7</span><span class="digit-box">1</span><span class="digit-box">2</span><span class="digit-box digit-hit">6</span><span class="sep">+</span><span class="digit-box">0</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第2组 · 策略2 · 单式</div>
+                    <div class="num-row"><span class="digit-box">4</span><span class="digit-box">0</span><span class="digit-box">6</span><span class="digit-box">3</span><span class="digit-box">1</span><span class="digit-box">9</span><span class="sep">+</span><span class="digit-box">12</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第3组 · 策略3 · 单式</div>
+                    <div class="num-row"><span class="digit-box">2</span><span class="digit-box">2</span><span class="digit-box digit-hit">9</span><span class="digit-box">4</span><span class="digit-box">0</span><span class="digit-box">0</span><span class="sep">+</span><span class="digit-box">4</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第4组 · 策略4 · 单式</div>
+                    <div class="num-row"><span class="digit-box">7</span><span class="digit-box digit-hit">9</span><span class="digit-box">5</span><span class="digit-box">0</span><span class="digit-box">9</span><span class="digit-box">7</span><span class="sep">+</span><span class="digit-box">2</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第5组 · 策略5 · 单式</div>
+                    <div class="num-row"><span class="digit-box">2</span><span class="digit-box">5</span><span class="digit-box">8</span><span class="digit-box digit-hit">2</span><span class="digit-box">4</span><span class="digit-box">9</span><span class="sep">+</span><span class="digit-box digit-hit">10</span></div>
+                    <div class="grp-prize win">💰 本组中奖 ¥5</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第6组 · 策略6 · 单式</div>
+                    <div class="num-row"><span class="digit-box">9</span><span class="digit-box">1</span><span class="digit-box">3</span><span class="digit-box">5</span><span class="digit-box digit-hit">8</span><span class="digit-box">5</span><span class="sep">+</span><span class="digit-box">3</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第7组 · 策略7 · 单式</div>
+                    <div class="num-row"><span class="digit-box">8</span><span class="digit-box">1</span><span class="digit-box">7</span><span class="digit-box">0</span><span class="digit-box">5</span><span class="digit-box">8</span><span class="sep">+</span><span class="digit-box">4</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第8组 · 策略8 · 单式</div>
+                    <div class="num-row"><span class="digit-box">6</span><span class="digit-box">5</span><span class="digit-box">1</span><span class="digit-box">5</span><span class="digit-box">9</span><span class="digit-box">2</span><span class="sep">+</span><span class="digit-box">7</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第9组 · 策略9 · 单式</div>
+                    <div class="num-row"><span class="digit-box">6</span><span class="digit-box">1</span><span class="digit-box">2</span><span class="digit-box">1</span><span class="digit-box">4</span><span class="digit-box">1</span><span class="sep">+</span><span class="digit-box digit-hit">10</span></div>
+                    <div class="grp-prize win">💰 本组中奖 ¥5</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第10组 · 策略10 · 单式</div>
+                    <div class="num-row"><span class="digit-box">9</span><span class="digit-box">4</span><span class="digit-box">0</span><span class="digit-box">4</span><span class="digit-box">3</span><span class="digit-box">9</span><span class="sep">+</span><span class="digit-box">2</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                </div>
+            </div>
+            <div class="detail-game">
+                <h4>
+                    <span class="badge badge-福彩">福彩</span>
+                    七乐彩
+                    <span class="win-tag win-no">未中奖</span>
+                    <span class="grp-stat">投入 ¥20 ｜ 中奖 ¥0 ｜ 命中率 22.86%</span>
+                </h4>
+                <div class="win-block">
+                    <div class="win-label">🎯 开奖号码 </div>
+                    <div class="num-row"><span class="ball ball-red">05</span><span class="ball ball-red">08</span><span class="ball ball-red">12</span><span class="ball ball-red">19</span><span class="ball ball-red">21</span><span class="ball ball-red">29</span><span class="ball ball-red">30</span><span class="sep">+</span><span class="ball ball-blue">02</span></div>
+                    <div class="win-meta">期号 2026087 ｜ 基本 + 特别</div>
+                </div>
+                <div class="pred-block">
+                    <div class="pred-label">🔮 预测号码（共 10 组，<span class="legend-hit">绿底=命中</span>）</div>
+                    
+                <div class="pred-group">
+                    <div class="grp-head">第1组 · hot · 单式</div>
+                    <div class="num-row"><span class="ball ball-red">10</span><span class="ball ball-red">14</span><span class="ball ball-red">16</span><span class="ball ball-red">25</span><span class="ball ball-red">26</span><span class="ball ball-red">27</span><span class="ball ball-red ball-hit">30</span></div><div class="num-row"></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第2组 · zone · 单式</div>
+                    <div class="num-row"><span class="ball ball-red">02</span><span class="ball ball-red ball-hit">12</span><span class="ball ball-red">13</span><span class="ball ball-red">18</span><span class="ball ball-red">24</span><span class="ball ball-red">27</span><span class="ball ball-red ball-hit">29</span></div><div class="num-row"></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第3组 · cold_hot · 单式</div>
+                    <div class="num-row"><span class="ball ball-red">01</span><span class="ball ball-red ball-hit">05</span><span class="ball ball-red">11</span><span class="ball ball-red">14</span><span class="ball ball-red">25</span><span class="ball ball-red">27</span><span class="ball ball-red ball-hit">30</span></div><div class="num-row"></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第4组 · omission · 单式</div>
+                    <div class="num-row"><span class="ball ball-red">01</span><span class="ball ball-red">02</span><span class="ball ball-red">03</span><span class="ball ball-red">04</span><span class="ball ball-red ball-hit">05</span><span class="ball ball-red">06</span><span class="ball ball-red">07</span></div><div class="num-row"></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第5组 · omission · 单式</div>
+                    <div class="num-row"><span class="ball ball-red">01</span><span class="ball ball-red">02</span><span class="ball ball-red">03</span><span class="ball ball-red">04</span><span class="ball ball-red ball-hit">05</span><span class="ball ball-red">06</span><span class="ball ball-red">07</span></div><div class="num-row"></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第6组 · balanced · 单式</div>
+                    <div class="num-row"><span class="ball ball-red">06</span><span class="ball ball-red ball-hit">08</span><span class="ball ball-red">09</span><span class="ball ball-red">11</span><span class="ball ball-red">14</span><span class="ball ball-red">16</span><span class="ball ball-red">24</span></div><div class="num-row"></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第7组 · balanced · 单式</div>
+                    <div class="num-row"><span class="ball ball-red">01</span><span class="ball ball-red">03</span><span class="ball ball-red ball-hit">05</span><span class="ball ball-red">11</span><span class="ball ball-red">13</span><span class="ball ball-red">17</span><span class="ball ball-red">22</span></div><div class="num-row"></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第8组 · zone · 单式</div>
+                    <div class="num-row"><span class="ball ball-red">01</span><span class="ball ball-red">03</span><span class="ball ball-red">13</span><span class="ball ball-red">17</span><span class="ball ball-red ball-hit">21</span><span class="ball ball-red">26</span><span class="ball ball-red">27</span></div><div class="num-row"></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第9组 · zone · 单式</div>
+                    <div class="num-row"><span class="ball ball-red">06</span><span class="ball ball-red ball-hit">12</span><span class="ball ball-red">24</span><span class="ball ball-red">25</span><span class="ball ball-red">26</span><span class="ball ball-red">27</span><span class="ball ball-red ball-hit">29</span></div><div class="num-row"></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第10组 · hot · 单式</div>
+                    <div class="num-row"><span class="ball ball-red">10</span><span class="ball ball-red">14</span><span class="ball ball-red">16</span><span class="ball ball-red">25</span><span class="ball ball-red">26</span><span class="ball ball-red">27</span><span class="ball ball-red ball-hit">30</span></div><div class="num-row"></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                </div>
+            </div>
+            <div class="detail-game">
+                <h4>
+                    <span class="badge badge-福彩">福彩</span>
+                    快乐8
+                    <span class="win-tag win-no">未中奖</span>
+                    <span class="grp-stat">投入 ¥20 ｜ 中奖 ¥0 ｜ 命中率 29.0%</span>
+                </h4>
+                <div class="win-block">
+                    <div class="win-label">🎯 开奖号码 </div>
+                    <div class="num-row"><span class="ball ball-red">01</span><span class="ball ball-red">04</span><span class="ball ball-red">07</span><span class="ball ball-red">10</span><span class="ball ball-red">12</span><span class="ball ball-red">15</span><span class="ball ball-red">16</span><span class="ball ball-red">17</span><span class="ball ball-red">26</span><span class="ball ball-red">29</span><span class="ball ball-red">32</span><span class="ball ball-red">40</span><span class="ball ball-red">42</span><span class="ball ball-red">44</span><span class="ball ball-red">49</span><span class="ball ball-red">65</span><span class="ball ball-red">68</span><span class="ball ball-red">73</span><span class="ball ball-red">77</span><span class="ball ball-red">78</span></div>
+                    <div class="win-meta">期号 2026202 ｜ 选十号码</div>
+                </div>
+                <div class="pred-block">
+                    <div class="pred-label">🔮 预测号码（共 10 组，<span class="legend-hit">绿底=命中</span>）</div>
+                    
+                <div class="pred-group">
+                    <div class="grp-head">第1组 · 热号 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red ball-hit">12</span><span class="ball ball-red">13</span><span class="ball ball-red ball-hit">17</span><span class="ball ball-red">24</span><span class="ball ball-red ball-hit">32</span><span class="ball ball-red">50</span><span class="ball ball-red">61</span><span class="ball ball-red">67</span><span class="ball ball-red">76</span><span class="ball ball-red">80</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第2组 · 热号 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red">02</span><span class="ball ball-red ball-hit">17</span><span class="ball ball-red">20</span><span class="ball ball-red">24</span><span class="ball ball-red ball-hit">29</span><span class="ball ball-red ball-hit">42</span><span class="ball ball-red">52</span><span class="ball ball-red">61</span><span class="ball ball-red">79</span><span class="ball ball-red">80</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第3组 · 热号 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red">02</span><span class="ball ball-red ball-hit">29</span><span class="ball ball-red ball-hit">32</span><span class="ball ball-red">33</span><span class="ball ball-red">35</span><span class="ball ball-red">45</span><span class="ball ball-red">59</span><span class="ball ball-red">61</span><span class="ball ball-red">67</span><span class="ball ball-red">80</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第4组 · 冷热结合 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red ball-hit">10</span><span class="ball ball-red">19</span><span class="ball ball-red">20</span><span class="ball ball-red">22</span><span class="ball ball-red">28</span><span class="ball ball-red ball-hit">29</span><span class="ball ball-red">31</span><span class="ball ball-red ball-hit">32</span><span class="ball ball-red ball-hit">44</span><span class="ball ball-red">50</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第5组 · 冷热结合 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red">02</span><span class="ball ball-red">09</span><span class="ball ball-red ball-hit">17</span><span class="ball ball-red">23</span><span class="ball ball-red ball-hit">32</span><span class="ball ball-red">38</span><span class="ball ball-red">43</span><span class="ball ball-red ball-hit">44</span><span class="ball ball-red">50</span><span class="ball ball-red">79</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第6组 · 冷热结合 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red ball-hit">04</span><span class="ball ball-red">11</span><span class="ball ball-red">20</span><span class="ball ball-red">27</span><span class="ball ball-red ball-hit">29</span><span class="ball ball-red">36</span><span class="ball ball-red">38</span><span class="ball ball-red">41</span><span class="ball ball-red">59</span><span class="ball ball-red">67</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第7组 · 遗漏回补 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red ball-hit">01</span><span class="ball ball-red">08</span><span class="ball ball-red">09</span><span class="ball ball-red ball-hit">10</span><span class="ball ball-red">11</span><span class="ball ball-red">28</span><span class="ball ball-red">46</span><span class="ball ball-red">47</span><span class="ball ball-red">75</span><span class="ball ball-red ball-hit">77</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第8组 · 遗漏回补 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red">06</span><span class="ball ball-red ball-hit">07</span><span class="ball ball-red ball-hit">10</span><span class="ball ball-red">38</span><span class="ball ball-red">41</span><span class="ball ball-red">46</span><span class="ball ball-red">58</span><span class="ball ball-red">69</span><span class="ball ball-red">72</span><span class="ball ball-red ball-hit">78</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第9组 · 区间均衡 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red">03</span><span class="ball ball-red ball-hit">04</span><span class="ball ball-red ball-hit">12</span><span class="ball ball-red">25</span><span class="ball ball-red">31</span><span class="ball ball-red ball-hit">44</span><span class="ball ball-red">48</span><span class="ball ball-red">56</span><span class="ball ball-red">66</span><span class="ball ball-red">80</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第10组 · 区间均衡 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red ball-hit">07</span><span class="ball ball-red ball-hit">12</span><span class="ball ball-red">14</span><span class="ball ball-red">23</span><span class="ball ball-red">30</span><span class="ball ball-red ball-hit">32</span><span class="ball ball-red">50</span><span class="ball ball-red">59</span><span class="ball ball-red">61</span><span class="ball ball-red">80</span></div>
+                    <div class="grp-prize none">未中奖</div>
+                </div>
+                </div>
+            </div></div><div class="detail-day"><h3 class="day-title">📆 2026-08-01</h3>
+            <div class="detail-game">
+                <h4>
+                    <span class="badge badge-体彩">体彩</span>
+                    大乐透
+                    <span class="win-tag win-no">未中奖</span>
+                    <span class="grp-stat">投入 ¥20 ｜ 中奖 ¥15 ｜ 命中率 15.71%</span>
+                </h4>
+                <div class="win-block">
+                    <div class="win-label">🎯 开奖号码 <span class="ref-note">（参考期，非当日开奖）</span></div>
+                    <div class="num-row"><span class="ball ball-red">03</span><span class="ball ball-red">04</span><span class="ball ball-red">14</span><span class="ball ball-red">28</span><span class="ball ball-red">31</span><span class="sep">+</span><span class="ball ball-blue">05</span><span class="ball ball-blue">07</span></div>
+                    <div class="win-meta">期号 26085 ｜ 前区 + 后区</div>
+                </div>
+                <div class="pred-block">
+                    <div class="pred-label">🔮 预测号码（共 10 组，<span class="legend-hit">绿底=命中</span>）</div>
+                    
+                <div class="pred-group">
+                    <div class="grp-head">第1组 · hot · 单式</div>
+                    <div class="num-row"><span class="ball ball-red">07</span><span class="ball ball-red">12</span><span class="ball ball-red">15</span><span class="ball ball-red">21</span><span class="ball ball-red">26</span></div><div class="num-row"><span class="ball ball-blue">03</span><span class="ball ball-blue">04</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第2组 · balanced · 单式</div>
+                    <div class="num-row"><span class="ball ball-red">05</span><span class="ball ball-red">08</span><span class="ball ball-red">13</span><span class="ball ball-red">29</span><span class="ball ball-red">34</span></div><div class="num-row"><span class="ball ball-blue">02</span><span class="ball ball-blue">08</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第3组 · cold_hot · 单式</div>
+                    <div class="num-row"><span class="ball ball-red">06</span><span class="ball ball-red">15</span><span class="ball ball-red">16</span><span class="ball ball-red">26</span><span class="ball ball-red">32</span></div><div class="num-row"><span class="ball ball-blue">04</span><span class="ball ball-blue">10</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第4组 · omission · 单式</div>
+                    <div class="num-row"><span class="ball ball-red">08</span><span class="ball ball-red">10</span><span class="ball ball-red">13</span><span class="ball ball-red">18</span><span class="ball ball-red">29</span></div><div class="num-row"><span class="ball ball-blue">02</span><span class="ball ball-blue ball-hit">05</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第5组 · zone · 单式</div>
+                    <div class="num-row"><span class="ball ball-red">01</span><span class="ball ball-red">06</span><span class="ball ball-red">23</span><span class="ball ball-red">27</span><span class="ball ball-red ball-hit">28</span></div><div class="num-row"><span class="ball ball-blue">01</span><span class="ball ball-blue">03</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第6组 · random1 · 单式</div>
+                    <div class="num-row"><span class="ball ball-red ball-hit">04</span><span class="ball ball-red">18</span><span class="ball ball-red">22</span><span class="ball ball-red">29</span><span class="ball ball-red">35</span></div><div class="num-row"><span class="ball ball-blue">02</span><span class="ball ball-blue ball-hit">07</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第7组 · random2 · 单式</div>
+                    <div class="num-row"><span class="ball ball-red ball-hit">04</span><span class="ball ball-red">12</span><span class="ball ball-red">16</span><span class="ball ball-red">22</span><span class="ball ball-red">25</span></div><div class="num-row"><span class="ball ball-blue">04</span><span class="ball ball-blue">11</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第8组 · random3 · 单式</div>
+                    <div class="num-row"><span class="ball ball-red ball-hit">04</span><span class="ball ball-red">07</span><span class="ball ball-red">15</span><span class="ball ball-red">34</span><span class="ball ball-red">35</span></div><div class="num-row"><span class="ball ball-blue ball-hit">05</span><span class="ball ball-blue">12</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第9组 · pattern · 单式</div>
+                    <div class="num-row"><span class="ball ball-red">08</span><span class="ball ball-red ball-hit">14</span><span class="ball ball-red">18</span><span class="ball ball-red">26</span><span class="ball ball-red">29</span></div><div class="num-row"><span class="ball ball-blue">02</span><span class="ball ball-blue">04</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第10组 · weighted · 单式</div>
+                    <div class="num-row"><span class="ball ball-red ball-hit">04</span><span class="ball ball-red">06</span><span class="ball ball-red">13</span><span class="ball ball-red ball-hit">14</span><span class="ball ball-red">35</span></div><div class="num-row"><span class="ball ball-blue">04</span><span class="ball ball-blue ball-hit">07</span></div>
+                    <div class="grp-prize ref">理论中奖 ¥15（参考，非当日开奖）</div>
+                </div>
+                </div>
+            </div>
+            <div class="detail-game">
+                <h4>
+                    <span class="badge badge-体彩">体彩</span>
+                    排列三
+                    <span class="win-tag win-no">未中奖</span>
+                    <span class="grp-stat">投入 ¥20 ｜ 中奖 ¥0 ｜ 命中率 6.67%</span>
+                </h4>
+                <div class="win-block">
+                    <div class="win-label">🎯 开奖号码 <span class="ref-note">（参考期，非当日开奖）</span></div>
+                    <div class="num-row"><span class="digit-box">9</span><span class="digit-box">6</span><span class="digit-box">1</span></div>
+                    <div class="win-meta">期号 26202 ｜ 三位号码</div>
+                </div>
+                <div class="pred-block">
+                    <div class="pred-label">🔮 预测号码（共 10 组，<span class="legend-hit">绿底=命中</span>）</div>
+                    
+                <div class="pred-group">
+                    <div class="grp-head">第1组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">3</span><span class="digit-box">9</span><span class="digit-box">5</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第2组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">0</span><span class="digit-box">2</span><span class="digit-box">8</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第3组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">7</span><span class="digit-box">5</span><span class="digit-box digit-hit">1</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第4组 · 组三 · 组三</div>
+                    <div class="num-row"><span class="digit-box">4</span><span class="digit-box">4</span><span class="digit-box">8</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第5组 · 组三 · 组三</div>
+                    <div class="num-row"><span class="digit-box">4</span><span class="digit-box">0</span><span class="digit-box">0</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第6组 · 组三 · 组三</div>
+                    <div class="num-row"><span class="digit-box">5</span><span class="digit-box">5</span><span class="digit-box">9</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第7组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box">4</span><span class="digit-box">5</span><span class="digit-box">3</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第8组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box">6</span><span class="digit-box">8</span><span class="digit-box">0</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第9组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box digit-hit">9</span><span class="digit-box">7</span><span class="digit-box">0</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第10组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box">2</span><span class="digit-box">4</span><span class="digit-box">3</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                </div>
+            </div>
+            <div class="detail-game">
+                <h4>
+                    <span class="badge badge-福彩">福彩</span>
+                    福彩3D
+                    <span class="win-tag win-no">未中奖</span>
+                    <span class="grp-stat">投入 ¥20 ｜ 中奖 ¥0 ｜ 命中率 6.67%</span>
+                </h4>
+                <div class="win-block">
+                    <div class="win-label">🎯 开奖号码 <span class="ref-note">（参考期，非当日开奖）</span></div>
+                    <div class="num-row"><span class="digit-box">9</span><span class="digit-box">8</span><span class="digit-box">8</span></div>
+                    <div class="win-meta">期号 2026202 ｜ 三位号码</div>
+                </div>
+                <div class="pred-block">
+                    <div class="pred-label">🔮 预测号码（共 10 组，<span class="legend-hit">绿底=命中</span>）</div>
+                    
+                <div class="pred-group">
+                    <div class="grp-head">第1组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box digit-hit">9</span><span class="digit-box">6</span><span class="digit-box digit-hit">8</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第2组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">4</span><span class="digit-box">7</span><span class="digit-box">5</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第3组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">6</span><span class="digit-box">5</span><span class="digit-box">1</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第4组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">2</span><span class="digit-box">2</span><span class="digit-box">9</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第5组 · 直选 · 直选</div>
+                    <div class="num-row"><span class="digit-box">5</span><span class="digit-box">1</span><span class="digit-box">2</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第6组 · 组三 · 组三</div>
+                    <div class="num-row"><span class="digit-box">4</span><span class="digit-box">5</span><span class="digit-box">5</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第7组 · 组三 · 组三</div>
+                    <div class="num-row"><span class="digit-box">1</span><span class="digit-box">9</span><span class="digit-box">9</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第8组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box">1</span><span class="digit-box">7</span><span class="digit-box">4</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第9组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box">5</span><span class="digit-box">1</span><span class="digit-box">0</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第10组 · 组六 · 组六</div>
+                    <div class="num-row"><span class="digit-box">7</span><span class="digit-box">5</span><span class="digit-box">3</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                </div>
+            </div>
+            <div class="detail-game">
+                <h4>
+                    <span class="badge badge-体彩">体彩</span>
+                    排列五
+                    <span class="win-tag win-no">未中奖</span>
+                    <span class="grp-stat">投入 ¥20 ｜ 中奖 ¥0 ｜ 命中率 12.0%</span>
+                </h4>
+                <div class="win-block">
+                    <div class="win-label">🎯 开奖号码 <span class="ref-note">（参考期，非当日开奖）</span></div>
+                    <div class="num-row"><span class="digit-box">9</span><span class="digit-box">6</span><span class="digit-box">1</span><span class="digit-box">7</span><span class="digit-box">0</span></div>
+                    <div class="win-meta">期号 26202 ｜ 五位号码</div>
+                </div>
+                <div class="pred-block">
+                    <div class="pred-label">🔮 预测号码（共 10 组，<span class="legend-hit">绿底=命中</span>）</div>
+                    
+                <div class="pred-group">
+                    <div class="grp-head">第1组 · 策略1 · 单式</div>
+                    <div class="num-row"><span class="digit-box">2</span><span class="digit-box">5</span><span class="digit-box">5</span><span class="digit-box digit-hit">7</span><span class="digit-box">1</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第2组 · 策略2 · 单式</div>
+                    <div class="num-row"><span class="digit-box">8</span><span class="digit-box">8</span><span class="digit-box">6</span><span class="digit-box">2</span><span class="digit-box">2</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第3组 · 策略3 · 单式</div>
+                    <div class="num-row"><span class="digit-box">7</span><span class="digit-box">1</span><span class="digit-box">0</span><span class="digit-box">1</span><span class="digit-box">3</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第4组 · 策略4 · 单式</div>
+                    <div class="num-row"><span class="digit-box digit-hit">9</span><span class="digit-box">9</span><span class="digit-box">4</span><span class="digit-box">6</span><span class="digit-box">9</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第5组 · 策略5 · 单式</div>
+                    <div class="num-row"><span class="digit-box">3</span><span class="digit-box">0</span><span class="digit-box">0</span><span class="digit-box digit-hit">7</span><span class="digit-box digit-hit">0</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第6组 · 策略6 · 单式</div>
+                    <div class="num-row"><span class="digit-box">3</span><span class="digit-box">7</span><span class="digit-box">9</span><span class="digit-box">8</span><span class="digit-box">7</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第7组 · 策略7 · 单式</div>
+                    <div class="num-row"><span class="digit-box">6</span><span class="digit-box digit-hit">6</span><span class="digit-box">4</span><span class="digit-box">0</span><span class="digit-box">3</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第8组 · 策略8 · 单式</div>
+                    <div class="num-row"><span class="digit-box">0</span><span class="digit-box">3</span><span class="digit-box">7</span><span class="digit-box">4</span><span class="digit-box digit-hit">0</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第9组 · 策略9 · 单式</div>
+                    <div class="num-row"><span class="digit-box">0</span><span class="digit-box">5</span><span class="digit-box">2</span><span class="digit-box">0</span><span class="digit-box">6</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第10组 · 策略10 · 单式</div>
+                    <div class="num-row"><span class="digit-box">4</span><span class="digit-box">9</span><span class="digit-box">9</span><span class="digit-box">6</span><span class="digit-box">6</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                </div>
+            </div>
+            <div class="detail-game">
+                <h4>
+                    <span class="badge badge-福彩">福彩</span>
+                    快乐8
+                    <span class="win-tag win-no">未中奖</span>
+                    <span class="grp-stat">投入 ¥20 ｜ 中奖 ¥11 ｜ 命中率 18.0%</span>
+                </h4>
+                <div class="win-block">
+                    <div class="win-label">🎯 开奖号码 <span class="ref-note">（参考期，非当日开奖）</span></div>
+                    <div class="num-row"><span class="ball ball-red">01</span><span class="ball ball-red">04</span><span class="ball ball-red">07</span><span class="ball ball-red">10</span><span class="ball ball-red">12</span><span class="ball ball-red">15</span><span class="ball ball-red">16</span><span class="ball ball-red">17</span><span class="ball ball-red">26</span><span class="ball ball-red">29</span><span class="ball ball-red">32</span><span class="ball ball-red">40</span><span class="ball ball-red">42</span><span class="ball ball-red">44</span><span class="ball ball-red">49</span><span class="ball ball-red">65</span><span class="ball ball-red">68</span><span class="ball ball-red">73</span><span class="ball ball-red">77</span><span class="ball ball-red">78</span></div>
+                    <div class="win-meta">期号 2026202 ｜ 选十号码</div>
+                </div>
+                <div class="pred-block">
+                    <div class="pred-label">🔮 预测号码（共 10 组，<span class="legend-hit">绿底=命中</span>）</div>
+                    
+                <div class="pred-group">
+                    <div class="grp-head">第1组 · 热号 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red">08</span><span class="ball ball-red">09</span><span class="ball ball-red">31</span><span class="ball ball-red">35</span><span class="ball ball-red">39</span><span class="ball ball-red">55</span><span class="ball ball-red">57</span><span class="ball ball-red">63</span><span class="ball ball-red">66</span><span class="ball ball-red">76</span></div>
+                    <div class="grp-prize ref">理论中奖 ¥2（参考，非当日开奖）</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第2组 · 热号 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red">19</span><span class="ball ball-red">21</span><span class="ball ball-red">28</span><span class="ball ball-red">33</span><span class="ball ball-red">37</span><span class="ball ball-red">45</span><span class="ball ball-red">46</span><span class="ball ball-red">52</span><span class="ball ball-red">61</span><span class="ball ball-red">64</span></div>
+                    <div class="grp-prize ref">理论中奖 ¥2（参考，非当日开奖）</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第3组 · 热号 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red">03</span><span class="ball ball-red ball-hit">12</span><span class="ball ball-red ball-hit">15</span><span class="ball ball-red">20</span><span class="ball ball-red">30</span><span class="ball ball-red ball-hit">32</span><span class="ball ball-red">34</span><span class="ball ball-red">38</span><span class="ball ball-red">51</span><span class="ball ball-red">63</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第4组 · 冷热结合 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red ball-hit">04</span><span class="ball ball-red ball-hit">10</span><span class="ball ball-red">21</span><span class="ball ball-red">25</span><span class="ball ball-red ball-hit">29</span><span class="ball ball-red">36</span><span class="ball ball-red ball-hit">49</span><span class="ball ball-red">55</span><span class="ball ball-red">69</span><span class="ball ball-red ball-hit">73</span></div>
+                    <div class="grp-prize ref">理论中奖 ¥3（参考，非当日开奖）</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第5组 · 冷热结合 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red">05</span><span class="ball ball-red ball-hit">10</span><span class="ball ball-red">14</span><span class="ball ball-red">20</span><span class="ball ball-red">25</span><span class="ball ball-red">36</span><span class="ball ball-red">39</span><span class="ball ball-red ball-hit">40</span><span class="ball ball-red">62</span><span class="ball ball-red">70</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第6组 · 冷热结合 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red ball-hit">01</span><span class="ball ball-red">02</span><span class="ball ball-red">05</span><span class="ball ball-red ball-hit">10</span><span class="ball ball-red ball-hit">15</span><span class="ball ball-red">19</span><span class="ball ball-red ball-hit">40</span><span class="ball ball-red">50</span><span class="ball ball-red">51</span><span class="ball ball-red">59</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第7组 · 遗漏回补 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red">02</span><span class="ball ball-red">06</span><span class="ball ball-red">08</span><span class="ball ball-red">22</span><span class="ball ball-red">34</span><span class="ball ball-red">35</span><span class="ball ball-red">37</span><span class="ball ball-red">55</span><span class="ball ball-red">64</span><span class="ball ball-red">66</span></div>
+                    <div class="grp-prize ref">理论中奖 ¥2（参考，非当日开奖）</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第8组 · 遗漏回补 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red">08</span><span class="ball ball-red">09</span><span class="ball ball-red">11</span><span class="ball ball-red">14</span><span class="ball ball-red">18</span><span class="ball ball-red">34</span><span class="ball ball-red">41</span><span class="ball ball-red">43</span><span class="ball ball-red">53</span><span class="ball ball-red">63</span></div>
+                    <div class="grp-prize ref">理论中奖 ¥2（参考，非当日开奖）</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第9组 · 区间均衡 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red">03</span><span class="ball ball-red">18</span><span class="ball ball-red ball-hit">26</span><span class="ball ball-red">38</span><span class="ball ball-red">45</span><span class="ball ball-red">47</span><span class="ball ball-red">52</span><span class="ball ball-red">60</span><span class="ball ball-red">62</span><span class="ball ball-red">72</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                <div class="pred-group">
+                    <div class="grp-head">第10组 · 区间均衡 · 选十</div>
+                    <div class="num-row"><span class="ball ball-red">09</span><span class="ball ball-red ball-hit">16</span><span class="ball ball-red">21</span><span class="ball ball-red ball-hit">26</span><span class="ball ball-red">36</span><span class="ball ball-red">37</span><span class="ball ball-red ball-hit">42</span><span class="ball ball-red">54</span><span class="ball ball-red">67</span><span class="ball ball-red">75</span></div>
+                    <div class="grp-prize pending">待开奖</div>
+                </div>
+                </div>
+            </div></div>
+        <p style="margin-top:12px;font-size:12px;color:#999;">说明：开奖号码来自当日官方开奖数据；预测号码为当日生成的各组方案；<span style="color:#22c55e;font-weight:700;">绿色高亮</span>表示命中对应开奖号码。数字型玩法按位比对，双色球/快乐8等按号码集合比对。</p>
+    </div>
+
+    <!-- 免责声明 -->
+    <div class="disclaimer">
+        ⚠️ <strong>免责声明：</strong>本报告中的预测基于历史数据的统计分析，仅供娱乐参考，不构成任何购彩建议。
+        彩票开奖是独立随机事件，历史规律不代表未来走势。请理性购彩，量力而行，未满18周岁不得购彩。
+        报告中中奖金额为理论估算值，实际奖金以官方公布为准。
+    </div>
+</div>
+
+<div class="footer">
+    <p>Powered by WorkBuddy 彩票预测系统 ｜ 数据来源：中国福利彩票官网(cwl.gov.cn) & 500.com</p>
+</div>
+
+</body>
+</html>
