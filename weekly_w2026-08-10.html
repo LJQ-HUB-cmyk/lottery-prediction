@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>彩票预测总结报告 - 2026-08-10 ~ 2026-08-16</title>
+<style>
+  .portal-nav{background:linear-gradient(135deg,#0b2a4a,#1e4a7a);color:#fff;padding:0 16px;
+    position:sticky;top:0;z-index:99;display:flex;align-items:center;gap:4px;flex-wrap:wrap;min-height:50px;
+    font-family:"Microsoft YaHei","PingFang SC",sans-serif;box-shadow:0 2px 10px rgba(11,42,74,.25);}
+  .portal-nav .bn{font-weight:700;margin-right:14px;font-size:15px;letter-spacing:.4px;}
+  .portal-nav a{color:#dbe7f5;text-decoration:none;padding:7px 15px;border-radius:8px;font-size:13px;transition:all .18s;}
+  .portal-nav a:hover{background:rgba(255,255,255,.15);color:#fff;}
+  .portal-nav a.on{background:linear-gradient(135deg,#e53935,#d32f2f);color:#fff;font-weight:600;box-shadow:0 2px 8px rgba(229,57,53,.4);}
+  .portal-nav select{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.3);
+    border-radius:6px;padding:5px 8px;font-size:12px;margin-left:auto;}
+  .portal-nav select option{color:#1f2937;}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #f0f2f5; color: #1a1a2e; line-height: 1.6; }
+
+.header { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 50%, #e67e22 100%); color: white; padding: 40px 20px; text-align: center; }
+.header h1 { font-size: 28px; margin-bottom: 8px; }
+.header p { opacity: 0.85; font-size: 14px; }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+/* 总览卡片 */
+.overview { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; margin-top: -30px; position: relative; z-index: 10; }
+.card { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); text-align: center; }
+.card .label { font-size: 13px; color: #888; margin-bottom: 8px; }
+.card .value { font-size: 28px; font-weight: 700; }
+.card .sub { font-size: 12px; color: #aaa; margin-top: 4px; }
+
+/* 排名 */
+.section { background: white; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.section h2 { font-size: 18px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid #f0f0f0; display: flex; align-items: center; gap: 8px; }
+
+/* 中奖率排名 */
+.rank-item { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #f5f5f5; gap: 12px; }
+.rank-item:last-child { border-bottom: none; }
+.rank-badge { font-size: 24px; width: 40px; text-align: center; flex-shrink: 0; }
+.rank-info { flex: 1; min-width: 0; }
+.rank-name { font-weight: 600; margin-bottom: 4px; font-size: 15px; }
+.rank-bar-bg { height: 6px; background: #f0f0f0; border-radius: 3px; overflow: hidden; }
+.rank-bar { height: 100%; background: linear-gradient(90deg, #e74c3c, #e67e22); border-radius: 3px; }
+.rank-value { font-weight: 700; font-size: 16px; color: #e74c3c; min-width: 50px; text-align: right; }
+
+/* 表格 */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { background: #fafafa; padding: 12px 16px; text-align: left; font-weight: 600; color: #555; border-bottom: 2px solid #eee; white-space: nowrap; }
+td { padding: 12px 16px; border-bottom: 1px solid #f5f5f5; }
+tr:hover td { background: #fafafa; }
+
+.positive { color: #22c55e; font-weight: 600; }
+.negative { color: #ef4444; font-weight: 600; }
+
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+.badge-福彩 { background: #fff3e0; color: #e65100; }
+.badge-体彩 { background: #e3f2fd; color: #1565c0; }
+
+/* 号码球 */
+.num-row { display: flex; flex-wrap: wrap; gap: 5px; margin: 4px 0; }
+.ball { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; font-size: 13px; font-weight: 700; border: 1.5px solid #ddd; color: #999; background: #fafafa; }
+.ball-red { border-color: #e74c3c; color: #e74c3c; }
+.ball-blue { border-color: #2980b9; color: #2980b9; }
+.ball-hit { background: #22c55e; color: #fff; border-color: #22c55e; }
+.sep { margin: 0 6px; color: #bbb; font-weight: 700; }
+.digit-box { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 34px; border-radius: 6px; font-size: 15px; font-weight: 700; border: 1.5px solid #ddd; background: #fafafa; color: #666; }
+.digit-hit { background: #22c55e; color: #fff; border-color: #22c55e; }
+
+/* 详细对比 */
+.detail-day { margin-bottom: 26px; }
+.day-title { font-size: 17px; margin-bottom: 12px; color: #c0392b; border-left: 4px solid #e74c3c; padding-left: 10px; }
+.detail-game { background: white; border: 1px solid #eee; border-radius: 12px; padding: 16px 18px; margin-bottom: 14px; box-shadow: 0 1px 5px rgba(0,0,0,0.04); }
+.detail-game h4 { font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.win-tag { font-size: 12px; padding: 2px 10px; border-radius: 12px; font-weight: 700; }
+.win-yes { background: #e8f5e9; color: #2e7d32; }
+.win-no { background: #fdecea; color: #c62828; }
+.grp-stat { font-size: 12px; color: #888; margin-left: auto; }
+.win-block { background: #fff8f0; border: 1px dashed #ffcc80; border-radius: 8px; padding: 10px 12px; margin-bottom: 12px; }
+.win-label { font-size: 12px; font-weight: 700; color: #e67e22; margin-bottom: 6px; }
+.win-meta { font-size: 12px; color: #aaa; margin-top: 6px; }
+.pred-label { font-size: 12px; font-weight: 700; color: #2980b9; margin-bottom: 6px; }
+.legend-hit { color: #22c55e; font-weight: 700; }
+.pred-group { background: #fafcff; border: 1px solid #eef2f7; border-radius: 8px; padding: 8px 10px; margin-bottom: 6px; }
+.grp-head { font-size: 12px; color: #888; margin-bottom: 4px; }
+.grp-prize { font-size: 12px; font-weight: 700; margin-top: 5px; padding: 2px 8px; border-radius: 6px; display: inline-block; }
+.grp-prize.win { background: #e8f5e9; color: #2e7d32; }
+.grp-prize.none { background: #f5f5f5; color: #999; font-weight: 500; }
+.grp-prize.ref { background: #fff8e1; color: #e67e22; }
+.grp-prize.pending { background: #f3f4ff; color: #7986cb; font-weight: 500; }
+.ref-note { font-size: 11px; color: #e67e22; }
+
+.footer { text-align: center; padding: 24px; color: #999; font-size: 12px; }
+.disclaimer { background: #fff8e1; border: 1px solid #ffe082; border-radius: 8px; padding: 16px; margin: 20px 0; color: #795548; font-size: 13px; text-align: center; }
+
+@media (max-width: 768px) {
+    .overview { grid-template-columns: repeat(2, 1fr); }
+    .header h1 { font-size: 22px; }
+}
+</style>
+</head>
+<body><div class="portal-nav"><span class="bn">🎱 彩票预测门户</span><a href="index.html" class="">竞猜</a><a href="daily.html" class="">日报</a><a href="weekly.html" class="on">周报</a><a href="jc_weekly.html" class="">竞猜周报</a><a href="jc_daily.html" class="">竞猜日报</a></div><div style="max-width:1120px;margin:12px auto 0;padding:0 20px;"><div class="switch" style="display:inline-flex;border:1px solid #cbd5e1;border-radius:8px;overflow:hidden;font-size:13px;background:#fff;"><a href="weekly.html" style="padding:7px 18px;text-decoration:none;color:#fff;background:#e53935;font-weight:600;">📊 彩票周报</a><a href="jc_weekly.html" style="padding:7px 18px;text-decoration:none;color:#0b2a4a;">⚽ 竞猜周报</a></div></div>
+
+<div class="header">
+    <h1>🎱 彩票预测追踪报告</h1>
+    <p>统计周期：2026-08-10 ~ 2026-08-16 ｜ 生成时间：2026-08-17 12:38</p><div style="margin-top:10px;">统计周期：<select onchange="location.href=this.value" style="margin-left:6px;padding:5px 10px;border-radius:6px;border:1px solid rgba(255,255,255,.5);font-size:13px;background:rgba(255,255,255,.18);color:#fff;"><option value="weekly.html">本周 2026-08-17 ~ 2026-08-23</option><option value="weekly_w2026-08-10.html" selected>上周 2026-08-10 ~ 2026-08-16</option><option value="weekly_w2026-08-03.html">2周前 2026-08-03 ~ 2026-08-09</option><option value="weekly_w2026-07-27.html">3周前 2026-07-27 ~ 2026-08-02</option></select></div>
+</div>
+
+<div class="container">
+    <!-- 总览 -->
+    <div class="overview">
+        <div class="card">
+            <div class="label">📅 统计天数</div>
+            <div class="value">7</div>
+            <div class="sub">天</div>
+        </div>
+        <div class="card">
+            <div class="label">💰 总投入</div>
+            <div class="value">¥350.0</div>
+            <div class="sub">各玩法每日预测</div>
+        </div>
+        <div class="card">
+            <div class="label">🏆 总中奖</div>
+            <div class="value" style="color:#22c55e">¥20</div>
+            <div class="sub">累计奖金</div>
+        </div>
+        <div class="card">
+            <div class="label">📊 净收益</div>
+            <div class="value" style="color:#ef4444">¥-330.0</div>
+            <div class="sub">回报率 -94.29%</div>
+        </div>
+    </div>
+
+    <!-- 中奖率排名 -->
+    <div class="section">
+        <h2>🏅 各玩法中奖率排名（中奖率 = 有真实中奖的期数/参与期数）</h2>
+        
+        <div class="rank-item">
+            <div class="rank-badge">🥇</div>
+            <div class="rank-info">
+                <div class="rank-name">双色球</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:66.67%"></div></div>
+            </div>
+            <div class="rank-value">66.67%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">🥈</div>
+            <div class="rank-info">
+                <div class="rank-name">七星彩</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:33.33%"></div></div>
+            </div>
+            <div class="rank-value">33.33%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">🥉</div>
+            <div class="rank-info">
+                <div class="rank-name">大乐透</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:0.0%"></div></div>
+            </div>
+            <div class="rank-value">0.0%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">#4</div>
+            <div class="rank-info">
+                <div class="rank-name">排列三</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:0.0%"></div></div>
+            </div>
+            <div class="rank-value">0.0%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">#5</div>
+            <div class="rank-info">
+                <div class="rank-name">福彩3D</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:0.0%"></div></div>
+            </div>
+            <div class="rank-value">0.0%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">#6</div>
+            <div class="rank-info">
+                <div class="rank-name">排列五</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:0.0%"></div></div>
+            </div>
+            <div class="rank-value">0.0%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">#7</div>
+            <div class="rank-info">
+                <div class="rank-name">七乐彩</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:0.0%"></div></div>
+            </div>
+            <div class="rank-value">0.0%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">#8</div>
+            <div class="rank-info">
+                <div class="rank-name">快乐8</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:0.0%"></div></div>
+            </div>
+            <div class="rank-value">0.0%</div>
+        </div>
+        <p style="margin-top:12px;font-size:12px;color:#999;">评估口径（v1.1 收益制）：只认<b>真实中奖</b>——方案注命中官方奖级才算中奖，金额=官方奖金；号码"选中多但未中奖"不计入。核心指标：方案中奖注数、中奖金额、ROI。</p>
+    </div>
+
+    <!-- 详细数据 -->
+    <div class="section">
+        <h2>📋 详细数据表</h2>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>玩法</th>
+                        <th>参与期数</th>
+                        <th>总投入</th>
+                        <th>总中奖</th>
+                        <th>净收益</th>
+                        <th>中奖率</th>
+                        <th>方案中奖注数(中/总·注率)</th>
+                        <th>ROI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><span class="badge badge-体彩">体彩</span> 大乐透</td>
+            <td>3期</td>
+            <td>¥36.0</td>
+            <td>¥0</td>
+            <td class="negative">¥-36.0</td>
+            <td>0.0%</td>
+            <td>0/18注 0.0%</td>
+            <td>-100.0%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-体彩">体彩</span> 排列三</td>
+            <td>7期</td>
+            <td>¥70.0</td>
+            <td>¥0</td>
+            <td class="negative">¥-70.0</td>
+            <td>0.0%</td>
+            <td>0/35注 0.0%</td>
+            <td>-100.0%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-福彩">福彩</span> 福彩3D</td>
+            <td>7期</td>
+            <td>¥70.0</td>
+            <td>¥0</td>
+            <td class="negative">¥-70.0</td>
+            <td>0.0%</td>
+            <td>0/35注 0.0%</td>
+            <td>-100.0%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-体彩">体彩</span> 排列五</td>
+            <td>7期</td>
+            <td>¥42.0</td>
+            <td>¥0</td>
+            <td class="negative">¥-42.0</td>
+            <td>0.0%</td>
+            <td>0/21注 0.0%</td>
+            <td>-100.0%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-福彩">福彩</span> 七乐彩</td>
+            <td>3期</td>
+            <td>¥30.0</td>
+            <td>¥0</td>
+            <td class="negative">¥-30.0</td>
+            <td>0.0%</td>
+            <td>0/15注 0.0%</td>
+            <td>-100.0%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-福彩">福彩</span> 快乐8</td>
+            <td>7期</td>
+            <td>¥42.0</td>
+            <td>¥0</td>
+            <td class="negative">¥-42.0</td>
+            <td>0.0%</td>
+            <td>0/21注 0.0%</td>
+            <td>-100.0%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-福彩">福彩</span> 双色球</td>
+            <td>3期</td>
+            <td>¥30.0</td>
+            <td>¥10</td>
+            <td class="negative">¥-20.0</td>
+            <td>66.67%</td>
+            <td>2/15注 13.33%</td>
+            <td>-66.67%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-体彩">体彩</span> 七星彩</td>
+            <td>3期</td>
+            <td>¥30.0</td>
+            <td>¥10</td>
+            <td class="negative">¥-20.0</td>
+            <td>33.33%</td>
+            <td>2/15注 13.33%</td>
+            <td>-66.67%</td>
+        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 免责声明 -->
+    <div class="disclaimer">
+        ⚠️ <strong>免责声明：</strong>本报告中的预测基于历史数据的统计分析，仅供娱乐参考，不构成任何购彩建议。
+        彩票开奖是独立随机事件，历史规律不代表未来走势。请理性购彩，量力而行，未满18周岁不得购彩。
+        报告中中奖金额为理论估算值，实际奖金以官方公布为准。
+    </div>
+</div>
+
+<div class="footer">
+    <p>Powered by WorkBuddy 彩票预测系统 ｜ 数据来源：中国福利彩票官网(cwl.gov.cn) & 500.com</p>
+</div>
+
+</body>
+</html>
