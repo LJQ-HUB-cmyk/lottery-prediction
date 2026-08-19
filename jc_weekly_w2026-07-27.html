@@ -77,19 +77,6 @@ td.ok{color:#059669;font-weight:700;} td.bad{color:#d64545;font-weight:700;}
 </div>
 
 
-<div class="card">
-  <h2>🎯 模型校准度（v1.6.0 起追踪：预测概率 vs 实际结果）</h2>
-  <p class="sub">方法论：持续记录预测概率/赔率/结果/收益，检查<b>校准度</b>而非只看猜中次数。Brier score 越低越好（0=完美）；分桶列=预测概率区间内"期望命中率 vs 实际命中率"，偏差越小校准越好。</p>
-  <div class="kpis">
-    <div class="kpi"><div>已结算样本</div><b>9</b><small>已回填实际结果</small></div>
-    <div class="kpi"><div>Brier Score</div><b>0.2069</b><small>概率预测误差（低=好）</small></div>
-    <div class="kpi"><div>总命中率</div><b>55.56%</b><small>预测主推胜平负命中</small></div>
-  </div>
-  <div class="wrap"><table>
-    <tr><th>预测概率区间</th><th>样本</th><th>期望命中率</th><th>实际命中率</th><th>偏差</th></tr>
-    <tr><td>0-50%</td><td>6</td><td>44.3%</td><td class="">33.3%</td><td>-11.0pp</td></tr><tr><td>50-60%</td><td>1</td><td>54.0%</td><td class="bad">100.0%</td><td>+46.0pp</td></tr><tr><td>60-70%</td><td>2</td><td>65.3%</td><td class="bad">100.0%</td><td>+34.7pp</td></tr>
-  </table></div>
-</div>
 
 <div class="card">
   <h2>📅 每日明细</h2>
