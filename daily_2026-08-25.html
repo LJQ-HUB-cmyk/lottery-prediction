@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>彩票每日预测日报 - 2026-08-25</title>
+<style>
+  .portal-nav{background:linear-gradient(135deg,#0b2a4a,#1e4a7a);color:#fff;padding:0 16px;
+    position:sticky;top:0;z-index:99;display:flex;align-items:center;gap:4px;flex-wrap:wrap;min-height:50px;
+    font-family:"Microsoft YaHei","PingFang SC",sans-serif;box-shadow:0 2px 10px rgba(11,42,74,.25);}
+  .portal-nav .bn{font-weight:700;margin-right:14px;font-size:15px;letter-spacing:.4px;}
+  .portal-nav a{color:#dbe7f5;text-decoration:none;padding:7px 15px;border-radius:8px;font-size:13px;transition:all .18s;}
+  .portal-nav a:hover{background:rgba(255,255,255,.15);color:#fff;}
+  .portal-nav a.on{background:linear-gradient(135deg,#e53935,#d32f2f);color:#fff;font-weight:600;box-shadow:0 2px 8px rgba(229,57,53,.4);}
+  .portal-nav select{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.3);
+    border-radius:6px;padding:5px 8px;font-size:12px;margin-left:auto;}
+  .portal-nav select option{color:#1f2937;}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #f0f2f5; color: #1a1a2e; line-height: 1.6; }
+.header { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 50%, #e67e22 100%); color: white; padding: 36px 20px; text-align: center; }
+.header h1 { font-size: 26px; margin-bottom: 8px; }
+.header p { opacity: 0.85; font-size: 14px; }
+.container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+
+.overview { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-bottom: 22px; margin-top: -30px; position: relative; z-index: 10; }
+.card { background: white; border-radius: 12px; padding: 22px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); text-align: center; }
+.card .label { font-size: 13px; color: #888; margin-bottom: 8px; }
+.card .value { font-size: 26px; font-weight: 700; }
+.card .sub { font-size: 12px; color: #aaa; margin-top: 4px; }
+
+.status { text-align: center; padding: 14px; border-radius: 10px; margin-bottom: 20px; font-weight: 600; }
+.status-done { background: #e8f5e9; color: #2e7d32; }
+.status-pending { background: #fff8e1; color: #e67e22; }
+
+.section { background: white; border-radius: 12px; padding: 22px; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.section h2 { font-size: 18px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 2px solid #f0f0f0; }
+
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+.badge-福彩 { background: #fff3e0; color: #e65100; }
+.badge-体彩 { background: #e3f2fd; color: #1565c0; }
+
+.num-row { display: flex; flex-wrap: wrap; gap: 5px; margin: 4px 0; }
+.ball { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; font-size: 13px; font-weight: 700; border: 1.5px solid #ddd; color: #999; background: #fafafa; }
+.ball-red { border-color: #e74c3c; color: #e74c3c; }
+.ball-blue { border-color: #2980b9; color: #2980b9; }
+.ball-hit { background: #22c55e; color: #fff; border-color: #22c55e; }
+.sep { margin: 0 6px; color: #bbb; font-weight: 700; }
+.digit-box { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 34px; border-radius: 6px; font-size: 15px; font-weight: 700; border: 1.5px solid #ddd; background: #fafafa; color: #666; }
+.digit-hit { background: #22c55e; color: #fff; border-color: #22c55e; }
+
+.detail-game { border: 1px solid #eee; border-radius: 12px; padding: 16px 18px; margin-bottom: 14px; box-shadow: 0 1px 5px rgba(0,0,0,0.04); }
+.detail-game h4 { font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.grp-stat { font-size: 12px; color: #888; margin-left: auto; }
+.win-block { background: #fff8f0; border: 1px dashed #ffcc80; border-radius: 8px; padding: 10px 12px; margin-bottom: 12px; }
+.win-block.pending { background: #f3f4ff; border-color: #c5cae9; }
+.win-label { font-size: 12px; font-weight: 700; color: #e67e22; margin-bottom: 6px; }
+.win-meta { font-size: 12px; color: #aaa; margin-top: 6px; }
+.pred-label { font-size: 12px; font-weight: 700; color: #2980b9; margin-bottom: 6px; }
+.legend-hit { color: #22c55e; font-weight: 700; }
+.pred-group { background: #fafcff; border: 1px solid #eef2f7; border-radius: 8px; padding: 8px 10px; margin-bottom: 6px; }
+.grp-head { font-size: 12px; color: #888; margin-bottom: 4px; }
+.compound-plan { background: #eef7ff; border: 1px solid #b8d9f5; border-radius: 8px; padding: 8px 12px; margin-bottom: 10px; font-size: 12px; color: #1f4e79; }
+.compound-plan b { color: #1565c0; }
+.cp-desc { margin-top: 3px; color: #5a7da0; font-size: 11px; word-break: break-all; }
+.cp-bets { margin-top: 6px; line-height: 2; }
+.cp-bets .bet { display: inline-block; background: #fff; border: 1px solid #d8e4ef; border-radius: 5px; padding: 0 6px; margin: 2px 3px 0 0; font-size: 11px; color: #3a5a7a; }
+.cp-bets .bet-win { display: inline-block; background: #e8f8ef; border: 1px solid #7ed6a5; border-radius: 5px; padding: 0 6px; margin: 2px 3px 0 0; font-size: 11px; color: #0e9f6e; font-weight: 700; }
+.fun-tag { display: inline-block; font-style: normal; font-size: 10px; border-radius: 4px; padding: 0 4px; margin-right: 4px; vertical-align: 1px; }
+.fun-div { background: #f3e8ff; color: #7c3aed; border: 1px solid #d8b4fe; }
+.fun-pi { background: #e0f2fe; color: #0369a1; border: 1px solid #7dd3fc; }
+.cp-bets .bn { display: inline-block; min-width: 14px; text-align: center; background: #eef1f6; border-radius: 3px; margin: 0 1px; padding: 0 2px; font-weight: 600; color: #3a5a7a; }
+.cp-bets .bn.hit { background: #22c55e; color: #fff; }
+.cp-verdict { margin-top: 6px; font-size: 12px; color: #0e9f6e; font-weight: 700; }
+.cp-verdict.none { color: #9aa5b1; font-weight: 400; }
+.grp-prize { font-size: 12px; font-weight: 700; margin-top: 5px; padding: 2px 8px; border-radius: 6px; display: inline-block; }
+.grp-prize.win { background: #e8f5e9; color: #2e7d32; }
+.grp-prize.none { background: #f5f5f5; color: #999; font-weight: 500; }
+.grp-prize.ref { background: #fff8e1; color: #e67e22; }
+.grp-prize.pending { background: #f3f4ff; color: #7986cb; font-weight: 500; }
+
+.footer { text-align: center; padding: 24px; color: #999; font-size: 12px; }
+.disclaimer { background: #fff8e1; border: 1px solid #ffe082; border-radius: 8px; padding: 16px; margin: 20px 0; color: #795548; font-size: 13px; text-align: center; }
+@media (max-width: 768px) { .overview { grid-template-columns: repeat(2, 1fr); } .header h1 { font-size: 22px; } }
+</style>
+</head>
+<body><div class="portal-nav"><span class="bn">🎱 彩票预测门户</span><a href="index.html" class="">竞猜</a><a href="daily.html" class="on">日报</a><a href="weekly.html" class="">周报</a><a href="jc_weekly.html" class="">竞猜周报</a><a href="jc_daily.html" class="">竞猜日报</a><select onchange="location.href=this.value"><option value="daily_2026-08-25.html" selected>📅 2026-08-25</option><option value="daily_2026-08-24.html">📅 2026-08-24</option><option value="daily_2026-08-23.html">📅 2026-08-23</option><option value="daily_2026-08-22.html">📅 2026-08-22</option><option value="daily_2026-08-21.html">📅 2026-08-21</option><option value="daily_2026-08-20.html">📅 2026-08-20</option><option value="daily_2026-08-19.html">📅 2026-08-19</option></select></div>
+
+<div class="header">
+    <h1>🎱 彩票每日预测日报</h1>
+    <p>2026-08-25（周二）｜ 生成时间：2026-08-25 12:44</p>
+</div>
+
+<div class="container">
+    <div class="overview">
+        <div class="card">
+            <div class="label">📅 日期</div>
+            <div class="value">08-25</div>
+            <div class="sub">周二</div>
+        </div>
+        <div class="card">
+            <div class="label">🎯 今日开奖玩法</div>
+            <div class="value">6</div>
+            <div class="sub">种</div>
+        </div>
+        <div class="card">
+            <div class="label">🎉 中奖金额</div>
+            <div class="value">待开奖</div>
+            <div class="sub">今晚开奖后更新</div>
+        </div>
+        <div class="card">
+            <div class="label">💰 今日总预算</div>
+            <div class="value">¥52.0</div>
+            <div class="sub">按用户定制规则（KL8/PL5 3注、SSQ/PL3/3D/QXC/QLC≤¥10、DLT≤¥20）</div>
+        </div>
+    </div>
+
+    <div class="status status-pending">🕒 今日开奖尚未全部进行，开奖结果稍后更新</div>
+
+    <div class="section">
+        <h2>🎫 今日投注方案（预测 = 投注号码，共 6 种玩法）</h2>
+        
+        <div class="detail-game">
+            <h4>
+                <span class="badge badge-福彩">福彩</span>
+                双色球
+                <span class="grp-stat">投入 ¥10.0 ｜ 5 注（方案）</span>
+            </h4>
+            <div class="compound-plan">🎫 投注方案：<b>双色球 直选 5注（¥10，≤¥10）</b>（5 注 × ¥2.0 = <b>¥10.0</b>）<div class="cp-desc">红 4 9 12 14 30 32 + 蓝 7；红 2 14 17 29 30 32 + 蓝 5；红 5 7 17 20 30 32 + 蓝 12；红 11 16 19 24 32 33 + 蓝 10；红 5 9 13 21 22 32 + 蓝 5</div><div class="cp-bets"><span class="bet"><span class="bn">4</span><span class="bn">9</span><span class="bn">12</span><span class="bn">14</span><span class="bn">30</span><span class="bn">32</span><span class="bn">7</span></span><span class="bet"><span class="bn">2</span><span class="bn">14</span><span class="bn">17</span><span class="bn">29</span><span class="bn">30</span><span class="bn">32</span><span class="bn">5</span></span><span class="bet"><span class="bn">5</span><span class="bn">7</span><span class="bn">17</span><span class="bn">20</span><span class="bn">30</span><span class="bn">32</span><span class="bn">12</span></span><span class="bet"><span class="bn">11</span><span class="bn">16</span><span class="bn">19</span><span class="bn">24</span><span class="bn">32</span><span class="bn">33</span><span class="bn">10</span></span><span class="bet"><span class="bn">5</span><span class="bn">9</span><span class="bn">13</span><span class="bn">21</span><span class="bn">22</span><span class="bn">32</span><span class="bn">5</span></span></div></div>
+            
+            <div class="win-block pending">
+                <div class="win-label">🕒 今日开奖尚未进行</div>
+                <div class="win-meta">开奖结果将于今晚开奖后更新，以下为今日预测号码</div>
+            </div>
+        </div>
+        <div class="detail-game">
+            <h4>
+                <span class="badge badge-体彩">体彩</span>
+                排列三
+                <span class="grp-stat">投入 ¥10.0 ｜ 5 注（方案）</span>
+            </h4>
+            <div class="compound-plan">🎫 投注方案：<b>排列三 直选 5注（¥10，≤¥10）</b>（5 注 × ¥2.0 = <b>¥10.0</b>）<div class="cp-desc">356；124；177；692；806</div><div class="cp-bets"><span class="bet"><span class="bn">3</span><span class="bn">5</span><span class="bn">6</span></span><span class="bet"><span class="bn">1</span><span class="bn">2</span><span class="bn">4</span></span><span class="bet"><span class="bn">1</span><span class="bn">7</span><span class="bn">7</span></span><span class="bet"><span class="bn">6</span><span class="bn">9</span><span class="bn">2</span></span><span class="bet"><span class="bn">8</span><span class="bn">0</span><span class="bn">6</span></span></div></div>
+            
+            <div class="win-block pending">
+                <div class="win-label">🕒 今日开奖尚未进行</div>
+                <div class="win-meta">开奖结果将于今晚开奖后更新，以下为今日预测号码</div>
+            </div>
+        </div>
+        <div class="detail-game">
+            <h4>
+                <span class="badge badge-福彩">福彩</span>
+                福彩3D
+                <span class="grp-stat">投入 ¥10.0 ｜ 5 注（方案）</span>
+            </h4>
+            <div class="compound-plan">🎫 投注方案：<b>3D 直选 5注（¥10，≤¥10）</b>（5 注 × ¥2.0 = <b>¥10.0</b>）<div class="cp-desc">920；648；482；336；444</div><div class="cp-bets"><span class="bet"><span class="bn">9</span><span class="bn">2</span><span class="bn">0</span></span><span class="bet"><span class="bn">6</span><span class="bn">4</span><span class="bn">8</span></span><span class="bet"><span class="bn">4</span><span class="bn">8</span><span class="bn">2</span></span><span class="bet"><span class="bn">3</span><span class="bn">3</span><span class="bn">6</span></span><span class="bet"><span class="bn">4</span><span class="bn">4</span><span class="bn">4</span></span></div></div>
+            
+            <div class="win-block pending">
+                <div class="win-label">🕒 今日开奖尚未进行</div>
+                <div class="win-meta">开奖结果将于今晚开奖后更新，以下为今日预测号码</div>
+            </div>
+        </div>
+        <div class="detail-game">
+            <h4>
+                <span class="badge badge-体彩">体彩</span>
+                排列五
+                <span class="grp-stat">投入 ¥6.0 ｜ 3 注（方案）</span>
+            </h4>
+            <div class="compound-plan">🎫 投注方案：<b>排列五 直选 3注（¥6）</b>（3 注 × ¥2.0 = <b>¥6.0</b>）<div class="cp-desc">73684；72414；13384</div><div class="cp-bets"><span class="bet"><span class="bn">7</span><span class="bn">3</span><span class="bn">6</span><span class="bn">8</span><span class="bn">4</span></span><span class="bet"><span class="bn">7</span><span class="bn">2</span><span class="bn">4</span><span class="bn">1</span><span class="bn">4</span></span><span class="bet"><span class="bn">1</span><span class="bn">3</span><span class="bn">3</span><span class="bn">8</span><span class="bn">4</span></span></div></div>
+            
+            <div class="win-block pending">
+                <div class="win-label">🕒 今日开奖尚未进行</div>
+                <div class="win-meta">开奖结果将于今晚开奖后更新，以下为今日预测号码</div>
+            </div>
+        </div>
+        <div class="detail-game">
+            <h4>
+                <span class="badge badge-体彩">体彩</span>
+                七星彩
+                <span class="grp-stat">投入 ¥10.0 ｜ 5 注（方案）</span>
+            </h4>
+            <div class="compound-plan">🎫 投注方案：<b>七星彩 直选 5注（¥10，≤¥10）</b>（5 注 × ¥2.0 = <b>¥10.0</b>）<div class="cp-desc">主 0 9 7 9 3 2 特 1；主 0 8 2 8 2 5 特 8；主 6 2 9 1 9 6 特 12；主 3 0 2 7 3 1 特 7；主 9 1 4 7 3 1 特 11</div><div class="cp-bets"><span class="bet"><span class="bn">0</span><span class="bn">9</span><span class="bn">7</span><span class="bn">9</span><span class="bn">3</span><span class="bn">2</span><span class="bn">1</span></span><span class="bet"><span class="bn">0</span><span class="bn">8</span><span class="bn">2</span><span class="bn">8</span><span class="bn">2</span><span class="bn">5</span><span class="bn">8</span></span><span class="bet"><span class="bn">6</span><span class="bn">2</span><span class="bn">9</span><span class="bn">1</span><span class="bn">9</span><span class="bn">6</span><span class="bn">12</span></span><span class="bet"><span class="bn">3</span><span class="bn">0</span><span class="bn">2</span><span class="bn">7</span><span class="bn">3</span><span class="bn">1</span><span class="bn">7</span></span><span class="bet"><span class="bn">9</span><span class="bn">1</span><span class="bn">4</span><span class="bn">7</span><span class="bn">3</span><span class="bn">1</span><span class="bn">11</span></span></div></div>
+            
+            <div class="win-block pending">
+                <div class="win-label">🕒 今日开奖尚未进行</div>
+                <div class="win-meta">开奖结果将于今晚开奖后更新，以下为今日预测号码</div>
+            </div>
+        </div>
+        <div class="detail-game">
+            <h4>
+                <span class="badge badge-福彩">福彩</span>
+                快乐8
+                <span class="grp-stat">投入 ¥6.0 ｜ 3 注（方案）</span>
+            </h4>
+            <div class="compound-plan">🎫 投注方案：<b>快乐8 选十 3注（单式，¥6）</b>（3 注 × ¥2.0 = <b>¥6.0</b>）<div class="cp-desc">每注选 10 码（候选池覆盖，去重+结构过滤），共 3 注</div><div class="cp-bets"><span class="bet"><span class="bn">8</span><span class="bn">14</span><span class="bn">16</span><span class="bn">34</span><span class="bn">36</span><span class="bn">43</span><span class="bn">52</span><span class="bn">67</span><span class="bn">70</span><span class="bn">77</span></span><span class="bet"><span class="bn">12</span><span class="bn">13</span><span class="bn">17</span><span class="bn">21</span><span class="bn">40</span><span class="bn">48</span><span class="bn">57</span><span class="bn">71</span><span class="bn">76</span><span class="bn">77</span></span><span class="bet"><span class="bn">12</span><span class="bn">13</span><span class="bn">19</span><span class="bn">35</span><span class="bn">48</span><span class="bn">50</span><span class="bn">52</span><span class="bn">65</span><span class="bn">71</span><span class="bn">76</span></span></div></div>
+            
+            <div class="win-block pending">
+                <div class="win-label">🕒 今日开奖尚未进行</div>
+                <div class="win-meta">开奖结果将于今晚开奖后更新，以下为今日预测号码</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="disclaimer">
+        ⚠️ <strong>免责声明：</strong>本日报中的预测基于历史数据的统计分析，仅供娱乐参考，不构成任何购彩建议。
+        彩票开奖是独立随机事件，历史规律不代表未来走势。请理性购彩，量力而行，未满18周岁不得购彩。
+        中奖金额为理论估算值，实际奖金以官方公布为准。
+    </div>
+</div>
+
+<div class="footer">
+    <p>Powered by WorkBuddy 彩票预测系统 ｜ 数据来源：中国福利彩票官网(cwl.gov.cn) & 体彩官方数据</p>
+</div>
+
+</body>
+</html>
