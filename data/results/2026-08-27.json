@@ -1,0 +1,70 @@
+{
+  "date": "2026-08-27",
+  "note": "今日彩票开奖尚未进行（开奖时间：20:25-21:30），数据暂不可用",
+  "games": {
+    "SSQ": {
+      "game_type": "SSQ",
+      "game_name": "双色球",
+      "period": "N/A",
+      "draw_date": "2026-08-27",
+      "no_draw": true,
+      "note": "双色球第2026099期开奖时间21:15，数据尚未发布"
+    },
+    "DLT": {
+      "game_type": "DLT",
+      "game_name": "大乐透",
+      "period": "N/A",
+      "draw_date": "2026-08-27",
+      "no_draw": true,
+      "note": "大乐透每周一、三、六开奖，今日无开奖"
+    },
+    "FC3D": {
+      "game_type": "FC3D",
+      "game_name": "福彩3D",
+      "period": "N/A",
+      "draw_date": "2026-08-27",
+      "no_draw": true,
+      "note": "福彩3D第2026229期开奖时间21:15，数据尚未发布"
+    },
+    "KL8": {
+      "game_type": "KL8",
+      "game_name": "快乐8",
+      "period": "N/A",
+      "draw_date": "2026-08-27",
+      "no_draw": true,
+      "note": "快乐8第2026229期开奖时间21:30，数据尚未发布"
+    },
+    "PL3": {
+      "game_type": "PL3",
+      "game_name": "排列三",
+      "period": "N/A",
+      "draw_date": "2026-08-27",
+      "no_draw": true,
+      "note": "排列三第26229期开奖时间20:25，数据尚未发布"
+    },
+    "PL5": {
+      "game_type": "PL5",
+      "game_name": "排列五",
+      "period": "N/A",
+      "draw_date": "2026-08-27",
+      "no_draw": true,
+      "note": "排列五第26229期开奖时间20:25，数据尚未发布"
+    },
+    "QXC": {
+      "game_type": "QXC",
+      "game_name": "七星彩",
+      "period": "N/A",
+      "draw_date": "2026-08-27",
+      "no_draw": true,
+      "note": "七星彩每周二、五、日开奖，今日无开奖"
+    },
+    "QLC": {
+      "game_type": "QLC",
+      "game_name": "七乐彩",
+      "period": "N/A",
+      "draw_date": "2026-08-27",
+      "no_draw": true,
+      "note": "七乐彩每周一、三、五开奖，今日无开奖"
+    }
+  }
+}
