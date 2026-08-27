@@ -37,25 +37,25 @@ td.l{text-align:left;}
 <div class="container">
 <div class="card">
   <h2>🧭 竞猜失误累计优化闭环</h2>
-  <p class="sub">机制：单场预测"失误（未命中）"累计达 <b>50 场</b>即自动分析归因 + 多策略回测 + 输出改进建议。触发状态：✅ 已触发（失误累计达阈值） ｜ 生成时间 2026-08-26 14:07</p>
+  <p class="sub">机制：单场预测"失误（未命中）"累计达 <b>50 场</b>即自动分析归因 + 多策略回测 + 输出改进建议。触发状态：✅ 已触发（失误累计达阈值） ｜ 生成时间 2026-08-27 12:50</p>
   <div class="kpis">
-    <div class="kpi "><div>已开赛样本</div><b>216</b><small>本系统预测 vs 赛果配对</small></div>
-    <div class="kpi green"><div>命中</div><b>115</b><small>命中率 53.2%</small></div>
-    <div class="kpi red"><div>失误累计</div><b>101</b><small>触发阈值 50</small></div>
-    <div class="kpi amber"><div>总体准确率</div><b>53.2%</b><small>胜平负/让球二选一口径</small></div>
+    <div class="kpi "><div>已开赛样本</div><b>240</b><small>本系统预测 vs 赛果配对</small></div>
+    <div class="kpi green"><div>命中</div><b>130</b><small>命中率 54.2%</small></div>
+    <div class="kpi red"><div>失误累计</div><b>110</b><small>触发阈值 50</small></div>
+    <div class="kpi amber"><div>总体准确率</div><b>54.2%</b><small>胜平负/让球二选一口径</small></div>
   </div>
-  <p class="sub">📌 <b>推荐改进</b>：回测中「仅低冷门」相对基线提升 <b>+12.7pp</b>（准确率 65.9%，覆盖 41/216 场）。建议在预测生成/投注层应用该过滤策略，可显著提升命中率。</p>
+  <p class="sub">📌 <b>推荐改进</b>：回测中「信心≥0.55」相对基线提升 <b>+10.5pp</b>（准确率 64.7%，覆盖 85/240 场）。建议在预测生成/投注层应用该过滤策略，可显著提升命中率。</p>
 </div>
 
 <div class="card">
   <h2>📊 失误归因（多角度）</h2>
   <div class="wrap"><table>
     <tr><th>维度</th><th>样本</th><th>失误</th><th>准确率</th></tr>
-    <tr><td class="l" colspan="4"><b>按运动</b></td></tr><tr><td>足球</td><td>188</td><td>89</td><td><b>52.7%</b></td></tr><tr><td>篮球</td><td>28</td><td>12</td><td><b>57.1%</b></td></tr>
-    <tr><td class="l" colspan="4"><b>按玩法（胜平负/让球二选一）</b></td></tr><tr><td>胜平负</td><td>18</td><td>11</td><td><b>38.9%</b></td></tr><tr><td>让球</td><td>170</td><td>78</td><td><b>54.1%</b></td></tr><tr><td>让分</td><td>28</td><td>12</td><td><b>57.1%</b></td></tr>
-    <tr><td class="l" colspan="4"><b>按冷门等级</b></td></tr><tr><td>低</td><td>41</td><td>14</td><td><b>65.9%</b></td></tr><tr><td>中</td><td>92</td><td>40</td><td><b>56.5%</b></td></tr><tr><td>高</td><td>83</td><td>47</td><td><b>43.4%</b></td></tr>
-    <tr><td class="l" colspan="4"><b>按信心区间</b></td></tr><tr><td><50%</td><td>93</td><td>51</td><td><b>45.2%</b></td></tr><tr><td>50-55%</td><td>45</td><td>22</td><td><b>51.1%</b></td></tr><tr><td>55-60%</td><td>20</td><td>7</td><td><b>65.0%</b></td></tr><tr><td>60-65%</td><td>12</td><td>4</td><td><b>66.7%</b></td></tr><tr><td>≥65%</td><td>46</td><td>17</td><td><b>63.0%</b></td></tr>
-    <tr><td class="l" colspan="4"><b>按预测方向</b></td></tr><tr><td>胜</td><td>15</td><td>9</td><td><b>40.0%</b></td></tr><tr><td>平</td><td>3</td><td>2</td><td><b>33.3%</b></td></tr><tr><td>让胜</td><td>91</td><td>47</td><td><b>48.4%</b></td></tr><tr><td>让平</td><td>52</td><td>16</td><td><b>69.2%</b></td></tr><tr><td>让负</td><td>55</td><td>27</td><td><b>50.9%</b></td></tr>
+    <tr><td class="l" colspan="4"><b>按运动</b></td></tr><tr><td>足球</td><td>207</td><td>96</td><td><b>53.6%</b></td></tr><tr><td>篮球</td><td>33</td><td>14</td><td><b>57.6%</b></td></tr>
+    <tr><td class="l" colspan="4"><b>按玩法（胜平负/让球二选一）</b></td></tr><tr><td>胜平负</td><td>18</td><td>11</td><td><b>38.9%</b></td></tr><tr><td>让球</td><td>189</td><td>85</td><td><b>55.0%</b></td></tr><tr><td>让分</td><td>33</td><td>14</td><td><b>57.6%</b></td></tr>
+    <tr><td class="l" colspan="4"><b>按冷门等级</b></td></tr><tr><td>低</td><td>45</td><td>16</td><td><b>64.4%</b></td></tr><tr><td>中</td><td>101</td><td>40</td><td><b>60.4%</b></td></tr><tr><td>高</td><td>94</td><td>54</td><td><b>42.6%</b></td></tr>
+    <tr><td class="l" colspan="4"><b>按信心区间</b></td></tr><tr><td><50%</td><td>106</td><td>58</td><td><b>45.3%</b></td></tr><tr><td>50-55%</td><td>49</td><td>22</td><td><b>55.1%</b></td></tr><tr><td>55-60%</td><td>22</td><td>7</td><td><b>68.2%</b></td></tr><tr><td>60-65%</td><td>14</td><td>4</td><td><b>71.4%</b></td></tr><tr><td>≥65%</td><td>49</td><td>19</td><td><b>61.2%</b></td></tr>
+    <tr><td class="l" colspan="4"><b>按预测方向</b></td></tr><tr><td>胜</td><td>15</td><td>9</td><td><b>40.0%</b></td></tr><tr><td>平</td><td>3</td><td>2</td><td><b>33.3%</b></td></tr><tr><td>让胜</td><td>104</td><td>53</td><td><b>49.0%</b></td></tr><tr><td>让平</td><td>55</td><td>16</td><td><b>70.9%</b></td></tr><tr><td>让负</td><td>63</td><td>30</td><td><b>52.4%</b></td></tr>
   </table></div>
 </div>
 
@@ -63,7 +63,7 @@ td.l{text-align:left;}
   <h2>🏆 联赛失误排行</h2>
   <div class="wrap"><table>
     <tr><th>联赛</th><th>样本</th><th>失误</th><th>准确率</th></tr>
-    <tr><td class="l">美职女篮</td><td>28</td><td>12</td><td><b>57.1%</b></td></tr><tr><td class="l">西甲</td><td>15</td><td>7</td><td><b>53.3%</b></td></tr><tr><td class="l">葡超</td><td>14</td><td>6</td><td><b>57.1%</b></td></tr><tr><td class="l">瑞超</td><td>12</td><td>6</td><td><b>50.0%</b></td></tr><tr><td class="l">沙职</td><td>13</td><td>5</td><td><b>61.5%</b></td></tr><tr><td class="l">韩职</td><td>10</td><td>5</td><td><b>50.0%</b></td></tr><tr><td class="l">英超</td><td>9</td><td>5</td><td><b>44.4%</b></td></tr><tr><td class="l">英冠</td><td>7</td><td>5</td><td><b>28.6%</b></td></tr><tr><td class="l">芬超</td><td>6</td><td>5</td><td><b>16.7%</b></td></tr><tr><td class="l">巴甲</td><td>5</td><td>5</td><td><b>0.0%</b></td></tr><tr><td class="l">欧罗巴</td><td>12</td><td>4</td><td><b>66.7%</b></td></tr><tr><td class="l">意甲</td><td>10</td><td>4</td><td><b>60.0%</b></td></tr><tr><td class="l">欧冠</td><td>7</td><td>4</td><td><b>42.9%</b></td></tr><tr><td class="l">解放者杯</td><td>6</td><td>4</td><td><b>33.3%</b></td></tr><tr><td class="l">荷甲</td><td>13</td><td>3</td><td><b>76.9%</b></td></tr><tr><td class="l">挪超</td><td>6</td><td>3</td><td><b>50.0%</b></td></tr><tr><td class="l">日乙</td><td>5</td><td>3</td><td><b>40.0%</b></td></tr><tr><td class="l">法乙</td><td>5</td><td>3</td><td><b>40.0%</b></td></tr><tr><td class="l">美职</td><td>4</td><td>3</td><td><b>25.0%</b></td></tr><tr><td class="l">法甲</td><td>6</td><td>2</td><td><b>66.7%</b></td></tr><tr><td class="l">德乙</td><td>3</td><td>2</td><td><b>33.3%</b></td></tr><tr><td class="l">日职</td><td>10</td><td>1</td><td><b>90.0%</b></td></tr><tr><td class="l">荷乙</td><td>3</td><td>1</td><td><b>66.7%</b></td></tr><tr><td class="l">英联赛杯</td><td>1</td><td>1</td><td><b>0.0%</b></td></tr><tr><td class="l">英社区盾</td><td>1</td><td>1</td><td><b>0.0%</b></td></tr><tr><td class="l">韩国杯</td><td>1</td><td>1</td><td><b>0.0%</b></td></tr><tr><td class="l">德国杯</td><td>2</td><td>0</td><td><b>100.0%</b></td></tr><tr><td class="l">欧超杯</td><td>1</td><td>0</td><td><b>100.0%</b></td></tr><tr><td class="l">德超杯</td><td>1</td><td>0</td><td><b>100.0%</b></td></tr>
+    <tr><td class="l">美职女篮</td><td>33</td><td>14</td><td><b>57.6%</b></td></tr><tr><td class="l">韩职</td><td>14</td><td>8</td><td><b>42.9%</b></td></tr><tr><td class="l">西甲</td><td>17</td><td>7</td><td><b>58.8%</b></td></tr><tr><td class="l">葡超</td><td>14</td><td>6</td><td><b>57.1%</b></td></tr><tr><td class="l">欧冠</td><td>13</td><td>6</td><td><b>53.8%</b></td></tr><tr><td class="l">瑞超</td><td>12</td><td>6</td><td><b>50.0%</b></td></tr><tr><td class="l">沙职</td><td>14</td><td>5</td><td><b>64.3%</b></td></tr><tr><td class="l">英超</td><td>9</td><td>5</td><td><b>44.4%</b></td></tr><tr><td class="l">英冠</td><td>7</td><td>5</td><td><b>28.6%</b></td></tr><tr><td class="l">芬超</td><td>6</td><td>5</td><td><b>16.7%</b></td></tr><tr><td class="l">巴甲</td><td>5</td><td>5</td><td><b>0.0%</b></td></tr><tr><td class="l">欧罗巴</td><td>12</td><td>4</td><td><b>66.7%</b></td></tr><tr><td class="l">意甲</td><td>10</td><td>4</td><td><b>60.0%</b></td></tr><tr><td class="l">解放者杯</td><td>6</td><td>4</td><td><b>33.3%</b></td></tr><tr><td class="l">荷甲</td><td>13</td><td>3</td><td><b>76.9%</b></td></tr><tr><td class="l">英联赛杯</td><td>7</td><td>3</td><td><b>57.1%</b></td></tr><tr><td class="l">挪超</td><td>6</td><td>3</td><td><b>50.0%</b></td></tr><tr><td class="l">日乙</td><td>5</td><td>3</td><td><b>40.0%</b></td></tr><tr><td class="l">法乙</td><td>5</td><td>3</td><td><b>40.0%</b></td></tr><tr><td class="l">美职</td><td>4</td><td>3</td><td><b>25.0%</b></td></tr><tr><td class="l">法甲</td><td>6</td><td>2</td><td><b>66.7%</b></td></tr><tr><td class="l">德乙</td><td>3</td><td>2</td><td><b>33.3%</b></td></tr><tr><td class="l">日职</td><td>10</td><td>1</td><td><b>90.0%</b></td></tr><tr><td class="l">荷乙</td><td>3</td><td>1</td><td><b>66.7%</b></td></tr><tr><td class="l">英社区盾</td><td>1</td><td>1</td><td><b>0.0%</b></td></tr><tr><td class="l">韩国杯</td><td>1</td><td>1</td><td><b>0.0%</b></td></tr><tr><td class="l">德国杯</td><td>2</td><td>0</td><td><b>100.0%</b></td></tr><tr><td class="l">欧超杯</td><td>1</td><td>0</td><td><b>100.0%</b></td></tr><tr><td class="l">德超杯</td><td>1</td><td>0</td><td><b>100.0%</b></td></tr>
   </table></div>
 </div>
 
@@ -72,7 +72,7 @@ td.l{text-align:left;}
   <p class="sub">用同一批历史配对样本，回测各策略 vs 基线准确率；正数=提升，负数=退步。样本 n 越小结论越不可靠（需 ≥20 场才具参考意义）。</p>
   <div class="wrap"><table>
     <tr><th>策略</th><th>样本</th><th>准确率</th><th>相对基线</th></tr>
-    <tr><td class="l">基线（当前全预测）</td><td>216</td><td>53.2%</td><td class="">0.0pp</td></tr><tr><td class="l">信心≥0.55</td><td>78</td><td>64.1%</td><td class="pos">+10.9pp</td></tr><tr><td class="l">信心≥0.60</td><td>58</td><td>63.8%</td><td class="pos">+10.6pp</td></tr><tr><td class="l">信心≥0.65</td><td>46</td><td>63.0%</td><td class="pos">+9.8pp</td></tr><tr><td class="l">排除高冷门</td><td>133</td><td>59.4%</td><td class="pos">+6.2pp</td></tr><tr><td class="l">仅低冷门</td><td>41</td><td>65.9%</td><td class="pos">+12.7pp</td></tr><tr><td class="l">信心≥0.60 且排除高冷门</td><td>55</td><td>61.8%</td><td class="pos">+8.6pp</td></tr><tr><td class="l">弱方向空仓(让负/让平)</td><td>109</td><td>46.8%</td><td class="neg">-6.4pp</td></tr><tr><td class="l">足球</td><td>188</td><td>52.7%</td><td class="neg">-0.5pp</td></tr><tr><td class="l">篮球</td><td>28</td><td>57.1%</td><td class="pos">+3.9pp</td></tr><tr><td class="l">排除高失误联赛</td><td>159</td><td>61.0%</td><td class="pos">+7.8pp</td></tr>
+    <tr><td class="l">基线（当前全预测）</td><td>240</td><td>54.2%</td><td class="">0.0pp</td></tr><tr><td class="l">信心≥0.55</td><td>85</td><td>64.7%</td><td class="pos">+10.5pp</td></tr><tr><td class="l">信心≥0.60</td><td>63</td><td>63.5%</td><td class="pos">+9.3pp</td></tr><tr><td class="l">信心≥0.65</td><td>49</td><td>61.2%</td><td class="pos">+7.0pp</td></tr><tr><td class="l">排除高冷门</td><td>146</td><td>61.6%</td><td class="pos">+7.4pp</td></tr><tr><td class="l">仅低冷门</td><td>45</td><td>64.4%</td><td class="pos">+10.2pp</td></tr><tr><td class="l">信心≥0.60 且排除高冷门</td><td>60</td><td>61.7%</td><td class="pos">+7.5pp</td></tr><tr><td class="l">弱方向空仓(让负/让平)</td><td>122</td><td>47.5%</td><td class="neg">-6.7pp</td></tr><tr><td class="l">足球</td><td>207</td><td>53.6%</td><td class="neg">-0.6pp</td></tr><tr><td class="l">篮球</td><td>33</td><td>57.6%</td><td class="pos">+3.4pp</td></tr><tr><td class="l">排除高失误联赛</td><td>176</td><td>61.9%</td><td class="pos">+7.7pp</td></tr>
   </table></div>
 </div>
 
