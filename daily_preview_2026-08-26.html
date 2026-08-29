@@ -1,0 +1,152 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>今日预测 - 2026-08-26（周三）</title>
+<style>
+  .portal-nav{background:linear-gradient(135deg,#0b2a4a,#1e4a7a);color:#fff;padding:0 16px;
+    position:sticky;top:0;z-index:99;display:flex;align-items:center;gap:4px;flex-wrap:wrap;min-height:50px;
+    font-family:"Microsoft YaHei","PingFang SC",sans-serif;box-shadow:0 2px 10px rgba(11,42,74,.25);}
+  .portal-nav .bn{font-weight:700;margin-right:14px;font-size:15px;letter-spacing:.4px;}
+  .portal-nav a{color:#dbe7f5;text-decoration:none;padding:7px 15px;border-radius:8px;font-size:13px;transition:all .18s;}
+  .portal-nav a:hover{background:rgba(255,255,255,.15);color:#fff;}
+  .portal-nav a.on{background:linear-gradient(135deg,#e53935,#d32f2f);color:#fff;font-weight:600;box-shadow:0 2px 8px rgba(229,57,53,.4);}
+  .portal-nav select{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.3);
+    border-radius:6px;padding:5px 8px;font-size:12px;margin-left:auto;}
+  .portal-nav select option{color:#1f2937;}
+  *{box-sizing:border-box}
+  body{font-family:"Microsoft YaHei","PingFang SC","Helvetica Neue",sans-serif;margin:0;background:#f0f4f9;color:#1f2937;}
+  .nav{background:linear-gradient(135deg,#0b2a4a,#1e4a7a);color:#fff;position:sticky;top:0;z-index:10;box-shadow:0 2px 12px rgba(11,42,74,.28);}
+  .nav-inner{max-width:1120px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-height:56px;}
+  .nav .brand{font-weight:700;font-size:17px;margin-right:18px;letter-spacing:.5px;}
+  .nav a{color:#dbe7f5;text-decoration:none;padding:8px 16px;border-radius:8px;font-size:14px;transition:all .18s;}
+  .nav a:hover{background:rgba(255,255,255,.15);color:#fff;}
+  .nav a.active{background:linear-gradient(135deg,#e53935,#d32f2f);color:#fff;font-weight:600;box-shadow:0 2px 8px rgba(229,57,53,.4);}
+  .container{max-width:1120px;margin:0 auto;padding:20px 20px 44px;}
+  .card{background:#fff;border:1px solid #e5eaf1;border-radius:14px;padding:20px 22px;margin:16px 0;box-shadow:0 1px 4px rgba(16,42,84,.05);transition:box-shadow .2s;}
+  .card:hover{box-shadow:0 6px 20px rgba(16,42,84,.1);}
+  h2{margin:0 0 6px;font-size:18px;color:#0b2a4a;font-weight:600;}
+  .sub{color:#6b7280;font-size:13px;margin:6px 0 14px;line-height:1.6;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th{background:linear-gradient(135deg,#0b2a4a,#17406e);color:#fff;padding:10px 9px;font-weight:600;white-space:nowrap;}
+  td{border-bottom:1px solid #edf1f6;padding:9px 8px;text-align:center;}
+  tr:nth-child(even) td{background:#f8fafd;}
+  tbody tr:hover td{background:#eef4fb;}
+  td.l{text-align:left;} td.small{font-size:12px;color:#57606f;}
+  .badge{display:inline-block;border-radius:20px;padding:2px 11px;font-size:11px;font-weight:700;}
+  .badge.rh{background:#fdeaea;color:#d64545;} .badge.rm{background:#fdf3e2;color:#d97706;} .badge.rl{background:#e5f6ee;color:#0e9f6e;}
+  .ud-wrap{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px;max-width:280px;}
+  .ud{display:inline-block;font-size:10px;border-radius:4px;padding:1px 6px;color:#1f2937;background:#eef1f6;border:1px solid #dbe2ea;cursor:help;transition:.15s;}
+  .ud:hover{transform:translateY(-1px);}
+  .ud.rh{background:#fdeaea;color:#d64545;border-color:#f5c2c2;} .ud.rm{background:#fdf3e2;color:#d97706;border-color:#f0d9a8;} .ud.rl{background:#e5f6ee;color:#0e9f6e;border-color:#b8e6d3;}
+  .parlay{border:1px solid #e2e8f0;border-radius:12px;padding:14px 18px;margin:12px 0;background:linear-gradient(135deg,#fafcff,#f4f8ff);box-shadow:0 1px 3px rgba(16,42,84,.04);transition:.2s;}
+  .parlay:hover{box-shadow:0 4px 14px rgba(16,42,84,.1);transform:translateY(-1px);}
+  .parlay.t3{background:linear-gradient(135deg,#fbfaff,#f5f0fb);}
+  .ph{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;margin-bottom:9px;align-items:center;}
+  .ph b{color:#0b2a4a;font-size:16px;}
+  .ph .pot{color:#0e9f6e;font-weight:700;}
+  .ph .pscore{color:#e53935;font-weight:700;}
+  .pnote{margin-top:7px;font-size:12px;color:#64748b;border-top:1px dashed #e2e8f0;padding-top:6px;}
+  .pt{color:#1f2937;} .pp{color:#1565c0;font-weight:700;background:#e8f1fb;border-radius:5px;padding:1px 8px;font-size:12px;}
+  .podd{color:#b45309;font-weight:700;font-size:12px;}
+  .plays{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;justify-content:center;}
+  .pl{display:inline-flex;align-items:center;gap:4px;white-space:nowrap;}
+  .pl .tg{font-style:normal;color:#64748b;background:#eef1f6;border:1px solid #e2e8f0;border-radius:5px;padding:0 6px;font-size:11px;line-height:1.8;}
+  .pl b{color:#0b2a4a;font-weight:700;font-size:12.5px;}
+  .wrap{overflow-x:auto;}
+  .foot{margin:24px 0 0;padding:16px 22px;background:linear-gradient(135deg,#0b2a4a,#123a63);border-radius:12px;color:#c9d8ea;font-size:12px;line-height:2;}
+  .foot b{color:#fff;}
+  @media(max-width:720px){.nav .brand{width:100%;margin-bottom:4px;}}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:24px 20px 60px;}
+  .hd{text-align:center;margin-bottom:26px;}
+  .hd h1{font-size:26px;margin:0 0 8px;color:#0b2a4a;}
+  .hd .sub{color:#6b7280;font-size:14px;}
+  .kpi{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:18px 0 26px;}
+  .kpi .k{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:12px 22px;min-width:120px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04);}
+  .kpi .k .v{font-size:22px;font-weight:700;color:#d32f2f;}
+  .kpi .k .l{font-size:12px;color:#6b7280;margin-top:3px;}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;}
+  .card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:16px 18px;box-shadow:0 1px 5px rgba(0,0,0,.05);}
+  .card-hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;border-bottom:1px dashed #e5e7eb;padding-bottom:8px;}
+  .gname{font-size:17px;font-weight:700;color:#0b2a4a;}
+  .meta{font-size:13px;color:#6b7280;}
+  .bets{display:flex;flex-direction:column;gap:6px;}
+  .bet{display:flex;align-items:center;gap:10px;background:#f8fafc;border-radius:8px;padding:7px 11px;}
+  .bet-no{display:inline-flex;width:22px;height:22px;align-items:center;justify-content:center;background:#0b2a4a;color:#fff;border-radius:50%;font-size:12px;flex:none;}
+  .bet-nums{font-family:'Courier New',monospace;font-size:15px;letter-spacing:1.5px;color:#1f2937;}
+  .wei .wei-lbl{display:inline-block;background:#fef3c7;color:#92400e;font-size:12px;padding:2px 9px;border-radius:6px;margin-bottom:8px;}
+  .wei-row{display:flex;align-items:center;gap:9px;margin:5px 0;font-size:14px;}
+  .wei-row b{color:#0b2a4a;flex:none;width:46px;}
+  .wei-row span{font-family:'Courier New',monospace;letter-spacing:1.2px;}
+  .wei-note{font-size:12px;color:#6b7280;margin-top:8px;}
+  .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:14px 18px;margin:0 0 24px;color:#92400e;font-size:13.5px;line-height:1.7;}
+  .disc{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:12px;padding:14px 18px;margin-top:26px;color:#475569;font-size:13px;line-height:1.7;}
+</style></head><body>
+<div class="portal-nav"><span class="bn">🎱 彩票预测门户</span><a href="daily_today.html" class="on">今日预测</a><a href="index.html" class="">竞猜</a><a href="daily.html" class="">日报</a><a href="weekly.html" class="">周报</a><a href="jc_weekly.html" class="">竞猜周报</a><a href="jc_daily.html" class="">竞猜日报</a><select onchange="location.href=this.value"><option value="daily_preview_2026-08-29.html">📅 2026-08-29</option><option value="daily_preview_2026-08-28.html">📅 2026-08-28</option><option value="daily_preview_2026-08-27.html">📅 2026-08-27</option><option value="daily_preview_2026-08-26.html" selected>📅 2026-08-26</option><option value="daily_preview_2026-08-25.html">📅 2026-08-25</option><option value="daily_preview_2026-08-24.html">📅 2026-08-24</option><option value="daily_preview_2026-08-23.html">📅 2026-08-23</option><option value="daily_preview_2026-08-22.html">📅 2026-08-22</option><option value="daily_preview_2026-08-21.html">📅 2026-08-21</option><option value="daily_preview_2026-08-20.html">📅 2026-08-20</option><option value="daily_preview_2026-08-19.html">📅 2026-08-19</option><option value="daily_preview_2026-08-18.html">📅 2026-08-18</option><option value="daily_preview_2026-08-17.html">📅 2026-08-17</option><option value="daily_preview_2026-08-16.html">📅 2026-08-16</option><option value="daily_preview_2026-08-15.html">📅 2026-08-15</option><option value="daily_preview_2026-08-14.html">📅 2026-08-14</option><option value="daily_preview_2026-08-13.html">📅 2026-08-13</option><option value="daily_preview_2026-08-12.html">📅 2026-08-12</option><option value="daily_preview_2026-08-11.html">📅 2026-08-11</option><option value="daily_preview_2026-08-10.html">📅 2026-08-10</option><option value="daily_preview_2026-08-09.html">📅 2026-08-09</option><option value="daily_preview_2026-08-08.html">📅 2026-08-08</option><option value="daily_preview_2026-08-07.html">📅 2026-08-07</option><option value="daily_preview_2026-08-06.html">📅 2026-08-06</option><option value="daily_preview_2026-08-05.html">📅 2026-08-05</option><option value="daily_preview_2026-08-04.html">📅 2026-08-04</option><option value="daily_preview_2026-08-03.html">📅 2026-08-03</option><option value="daily_preview_2026-08-02.html">📅 2026-08-02</option><option value="daily_preview_2026-08-01.html">📅 2026-08-01</option><option value="daily_preview_2026-07-31.html">📅 2026-07-31</option><option value="daily_preview_2026-07-30.html">📅 2026-07-30</option></select></div>
+<div class="wrap">
+  <div class="hd">
+    <h1>🎱 今日预测 · 2026-08-26（周三）</h1>
+    <div class="sub">number_framework v1.3（软杀号 + 日期杀号） · 预测号码 = 投注号码</div>
+  </div>
+
+  <div class="kpi">
+    <div class="k"><div class="v">6</div><div class="l">今日玩法</div></div>
+    <div class="k"><div class="v">29</div><div class="l">总注数</div></div>
+    <div class="k"><div class="v">¥58</div><div class="l">总投入</div></div>
+  </div>
+
+  <div class="tip">
+    ⏰ <b>本页为「今日预测展示」</b>，仅展示当日预测号码与投注方案，<b>不含开奖核对</b>。<br>
+    当日开奖于晚间进行，开奖后由次日自动化生成正式《日报》<code>daily_report_2026-08-26.html</code>，届时在「日报」页查看逐注中奖与收益。
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-hd">
+        <span class="gname">大乐透</span>
+        <span class="meta">6 注 · ¥12</span>
+      </div>
+      <div class='bets'><div class='bet'><span class='bet-no'>1</span><span class='bet-nums'>09 14 21 24 27 05 10</span></div><div class='bet'><span class='bet-no'>2</span><span class='bet-nums'>03 07 19 34 35 04 09</span></div><div class='bet'><span class='bet-no'>3</span><span class='bet-nums'>10 16 19 24 29 06 09</span></div><div class='bet'><span class='bet-no'>4</span><span class='bet-nums'>03 06 12 19 31 03 10</span></div><div class='bet'><span class='bet-no'>5</span><span class='bet-nums'>03 15 25 30 32 01 06</span></div><div class='bet'><span class='bet-no'>6</span><span class='bet-nums'>18 23 26 31 35 05 07</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-hd">
+        <span class="gname">福彩3D</span>
+        <span class="meta">5 注 · ¥10</span>
+      </div>
+      <div class='bets'><div class='bet'><span class='bet-no'>1</span><span class='bet-nums'>08 02 00</span></div><div class='bet'><span class='bet-no'>2</span><span class='bet-nums'>08 02 08</span></div><div class='bet'><span class='bet-no'>3</span><span class='bet-nums'>06 06 08</span></div><div class='bet'><span class='bet-no'>4</span><span class='bet-nums'>09 02 04</span></div><div class='bet'><span class='bet-no'>5</span><span class='bet-nums'>07 08 03</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-hd">
+        <span class="gname">排列三</span>
+        <span class="meta">5 注 · ¥10</span>
+      </div>
+      <div class='bets'><div class='bet'><span class='bet-no'>1</span><span class='bet-nums'>00 00 04</span></div><div class='bet'><span class='bet-no'>2</span><span class='bet-nums'>01 03 00</span></div><div class='bet'><span class='bet-no'>3</span><span class='bet-nums'>00 00 00</span></div><div class='bet'><span class='bet-no'>4</span><span class='bet-nums'>04 01 06</span></div><div class='bet'><span class='bet-no'>5</span><span class='bet-nums'>00 08 00</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-hd">
+        <span class="gname">排列五</span>
+        <span class="meta">3 注 · ¥6</span>
+      </div>
+      <div class='bets'><div class='bet'><span class='bet-no'>1</span><span class='bet-nums'>01 07 00 00 03</span></div><div class='bet'><span class='bet-no'>2</span><span class='bet-nums'>09 07 07 09 04</span></div><div class='bet'><span class='bet-no'>3</span><span class='bet-nums'>04 07 01 05 01</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-hd">
+        <span class="gname">七乐彩</span>
+        <span class="meta">5 注 · ¥10</span>
+      </div>
+      <div class='bets'><div class='bet'><span class='bet-no'>1</span><span class='bet-nums'>01 03 05 14 24 27 29 07</span></div><div class='bet'><span class='bet-no'>2</span><span class='bet-nums'>14 23 24 25 27 28 29 19</span></div><div class='bet'><span class='bet-no'>3</span><span class='bet-nums'>01 06 08 13 20 24 27 17</span></div><div class='bet'><span class='bet-no'>4</span><span class='bet-nums'>03 07 13 18 25 26 28 02</span></div><div class='bet'><span class='bet-no'>5</span><span class='bet-nums'>01 02 03 09 17 23 26 25</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-hd">
+        <span class="gname">快乐8</span>
+        <span class="meta">5 注 · ¥10</span>
+      </div>
+      <div class='bets'><div class='bet'><span class='bet-no'>1</span><span class='bet-nums'>02 11 24 53 54</span></div><div class='bet'><span class='bet-no'>2</span><span class='bet-nums'>02 11 24 37 54</span></div><div class='bet'><span class='bet-no'>3</span><span class='bet-nums'>11 20 54 57 62</span></div><div class='bet'><span class='bet-no'>4</span><span class='bet-nums'>02 39 62 66 69</span></div><div class='bet'><span class='bet-no'>5</span><span class='bet-nums'>07 20 29 32 39 40 44 50 59 65</span></div></div>
+    </div></div>
+
+  <div class="disc">
+    ⚠️ <b>免责声明</b>：彩票是<b>独立随机事件</b>，每期开奖互不影响，任何预测都无法改变单注中奖概率。
+    本页号码仅供娱乐参考，请勿作为购彩依据，理性购彩、量力而行，切勿追号或加注。
+  </div>
+</div>
+</body></html>
