@@ -72,6 +72,14 @@ td.ok{color:#059669;font-weight:700;} td.bad{color:#d64545;font-weight:700;}
   .probs span{white-space:nowrap;} .probs b{color:#0b2a4a;}
   .h2h{font-size:11px;color:#6b21a8;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:4px;
         padding:1px 6px;margin-top:3px;display:inline-block;cursor:help;}
+  @media(max-width:720px){
+    th.prob,td.prob{display:none;}
+    th.vnote,td.vnote{display:none;}
+    td.udcell .ud{display:none;}
+    td.udcell{white-space:nowrap;}
+    .plays{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;padding-bottom:2px;-webkit-overflow-scrolling:touch;}
+    .probs{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;padding-bottom:2px;}
+  }
 </style>
 </head>
 <body>
@@ -103,7 +111,7 @@ td.ok{color:#059669;font-weight:700;} td.bad{color:#d64545;font-weight:700;}
   <h2>📋 逐场明细（预测 vs 赛果）</h2>
   <div class="wrap"><table>
     <tr><th>对阵（比赛时间）</th><th>玩法预测</th><th>实际比分</th><th>命中</th>
-        <th>信心</th><th>概率拆解（市场/自研/H2H）</th><th>爆冷（5维）</th><th>价值注记</th><th>投注/类型</th><th>奖金</th></tr>
+        <th>信心</th><th class="prob">概率拆解（市场/自研/H2H）</th><th class="udcell">爆冷（5维）</th><th class="vnote">价值注记</th><th>投注/类型</th><th>奖金</th></tr>
     <tr><td colspan="9" class="empty">无场次数据</td></tr>
   </table></div>
 </div>
