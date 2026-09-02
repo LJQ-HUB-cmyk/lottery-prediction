@@ -15,6 +15,12 @@
   .portal-nav select{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.3);
     border-radius:6px;padding:5px 8px;font-size:12px;margin-left:auto;}
   .portal-nav select option{color:#1f2937;}
+  @media(max-width:720px){
+    .portal-nav{padding:6px 8px;gap:3px;min-height:auto;}
+    .portal-nav .bn{width:100%;margin-right:0;font-size:14px;}
+    .portal-nav a{padding:6px 10px;font-size:12.5px;}
+    .portal-nav select{margin-left:0;margin-top:2px;max-width:100%;}
+  }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #f0f2f5; color: #1a1a2e; line-height: 1.6; }
@@ -102,11 +108,11 @@ tr:hover td { background: #fafafa; }
 }
 </style>
 </head>
-<body><div class="portal-nav"><span class="bn">🎱 彩票预测门户</span><a href="daily_today.html" class="">今日预测</a><a href="index.html" class="">竞猜</a><a href="daily.html" class="">日报</a><a href="weekly.html" class="on">周报</a><a href="jc_weekly.html" class="">竞猜周报</a><a href="jc_daily.html" class="">竞猜日报</a></div><div style="max-width:1120px;margin:12px auto 0;padding:0 20px;"><div class="switch" style="display:inline-flex;border:1px solid #cbd5e1;border-radius:8px;overflow:hidden;font-size:13px;background:#fff;"><a href="weekly.html" style="padding:7px 18px;text-decoration:none;color:#fff;background:#e53935;font-weight:600;">📊 彩票周报</a><a href="jc_weekly.html" style="padding:7px 18px;text-decoration:none;color:#0b2a4a;">⚽ 竞猜周报</a></div></div>
+<body><div class="portal-nav"><span class="bn">🎱 彩票预测门户</span><a href="daily_today.html" class="">今日预测</a><a href="index.html" class="">竞猜</a><a href="daily.html" class="">日报</a><a href="weekly.html" class="on">周报</a><a href="jc_weekly.html" class="">竞猜周报</a><a href="jc_daily.html" class="">竞猜日报</a><a href="jc_accuracy.html" class="">准确率</a></div><div style="max-width:1120px;margin:12px auto 0;padding:0 20px;"><div class="switch" style="display:inline-flex;border:1px solid #cbd5e1;border-radius:8px;overflow:hidden;font-size:13px;background:#fff;"><a href="weekly.html" style="padding:7px 18px;text-decoration:none;color:#fff;background:#e53935;font-weight:600;">📊 彩票周报</a><a href="jc_weekly.html" style="padding:7px 18px;text-decoration:none;color:#0b2a4a;">⚽ 竞猜周报</a></div></div>
 
 <div class="header">
     <h1>🎱 彩票预测追踪报告</h1>
-    <p>统计周期：2026-08-31 ~ 2026-09-06 ｜ 生成时间：2026-08-31 12:59</p><div style="margin-top:10px;">统计周期：<select onchange="location.href=this.value" style="margin-left:6px;padding:5px 10px;border-radius:6px;border:1px solid rgba(255,255,255,.5);font-size:13px;background:rgba(255,255,255,.18);color:#fff;"><option value="weekly.html" selected>本周 2026-08-31 ~ 2026-09-06</option><option value="weekly_w2026-08-24.html">上周 2026-08-24 ~ 2026-08-30</option><option value="weekly_w2026-08-17.html">2周前 2026-08-17 ~ 2026-08-23</option><option value="weekly_w2026-08-10.html">3周前 2026-08-10 ~ 2026-08-16</option></select></div>
+    <p>统计周期：2026-08-31 ~ 2026-09-06 ｜ 生成时间：2026-09-02 12:41</p><div style="margin-top:10px;">统计周期：<select onchange="location.href=this.value" style="margin-left:6px;padding:5px 10px;border-radius:6px;border:1px solid rgba(255,255,255,.5);font-size:13px;background:rgba(255,255,255,.18);color:#fff;"><option value="weekly.html" selected>本周 2026-08-31 ~ 2026-09-06</option><option value="weekly_w2026-08-24.html">上周 2026-08-24 ~ 2026-08-30</option><option value="weekly_w2026-08-17.html">2周前 2026-08-17 ~ 2026-08-23</option><option value="weekly_w2026-08-10.html">3周前 2026-08-10 ~ 2026-08-16</option></select></div>
 </div>
 
 <div class="container">
@@ -119,18 +125,18 @@ tr:hover td { background: #fafafa; }
         </div>
         <div class="card">
             <div class="label">💰 总投入</div>
-            <div class="value">¥0</div>
+            <div class="value">¥114.0</div>
             <div class="sub">各玩法每日预测</div>
         </div>
         <div class="card">
             <div class="label">🏆 总中奖</div>
-            <div class="value" style="color:#22c55e">¥0</div>
+            <div class="value" style="color:#22c55e">¥5</div>
             <div class="sub">累计奖金</div>
         </div>
         <div class="card">
             <div class="label">📊 净收益</div>
-            <div class="value" style="color:#666">¥0</div>
-            <div class="sub">回报率 0%</div>
+            <div class="value" style="color:#ef4444">¥-109.0</div>
+            <div class="sub">回报率 -95.61%</div>
         </div>
     </div>
 
@@ -138,6 +144,70 @@ tr:hover td { background: #fafafa; }
     <div class="section">
         <h2>🏅 各玩法中奖率排名（中奖率 = 有真实中奖的期数/参与期数）</h2>
         
+        <div class="rank-item">
+            <div class="rank-badge">🥇</div>
+            <div class="rank-info">
+                <div class="rank-name">七星彩</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:100.0%"></div></div>
+            </div>
+            <div class="rank-value">100.0%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">🥈</div>
+            <div class="rank-info">
+                <div class="rank-name">大乐透</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:0.0%"></div></div>
+            </div>
+            <div class="rank-value">0.0%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">🥉</div>
+            <div class="rank-info">
+                <div class="rank-name">排列三</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:0.0%"></div></div>
+            </div>
+            <div class="rank-value">0.0%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">#4</div>
+            <div class="rank-info">
+                <div class="rank-name">福彩3D</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:0.0%"></div></div>
+            </div>
+            <div class="rank-value">0.0%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">#5</div>
+            <div class="rank-info">
+                <div class="rank-name">排列五</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:0.0%"></div></div>
+            </div>
+            <div class="rank-value">0.0%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">#6</div>
+            <div class="rank-info">
+                <div class="rank-name">七乐彩</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:0.0%"></div></div>
+            </div>
+            <div class="rank-value">0.0%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">#7</div>
+            <div class="rank-info">
+                <div class="rank-name">快乐8</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:0.0%"></div></div>
+            </div>
+            <div class="rank-value">0.0%</div>
+        </div>
+        <div class="rank-item">
+            <div class="rank-badge">#8</div>
+            <div class="rank-info">
+                <div class="rank-name">双色球</div>
+                <div class="rank-bar-bg"><div class="rank-bar" style="width:0.0%"></div></div>
+            </div>
+            <div class="rank-value">0.0%</div>
+        </div>
         <p style="margin-top:12px;font-size:12px;color:#999;">评估口径（v1.1 收益制）：只认<b>真实中奖</b>——方案注命中官方奖级才算中奖，金额=官方奖金；号码"选中多但未中奖"不计入。核心指标：方案中奖注数、中奖金额、ROI。</p>
     </div>
 
@@ -160,6 +230,86 @@ tr:hover td { background: #fafafa; }
                 </thead>
                 <tbody>
                     
+        <tr>
+            <td><span class="badge badge-体彩">体彩</span> 大乐透</td>
+            <td>1期</td>
+            <td>¥12.0</td>
+            <td>¥0</td>
+            <td class="negative">¥-12.0</td>
+            <td>0.0%</td>
+            <td>0/6注 0.0%</td>
+            <td>-100.0%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-体彩">体彩</span> 排列三</td>
+            <td>2期</td>
+            <td>¥20.0</td>
+            <td>¥0</td>
+            <td class="negative">¥-20.0</td>
+            <td>0.0%</td>
+            <td>0/10注 0.0%</td>
+            <td>-100.0%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-福彩">福彩</span> 福彩3D</td>
+            <td>2期</td>
+            <td>¥20.0</td>
+            <td>¥0</td>
+            <td class="negative">¥-20.0</td>
+            <td>0.0%</td>
+            <td>0/10注 0.0%</td>
+            <td>-100.0%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-体彩">体彩</span> 排列五</td>
+            <td>2期</td>
+            <td>¥12.0</td>
+            <td>¥0</td>
+            <td class="negative">¥-12.0</td>
+            <td>0.0%</td>
+            <td>0/6注 0.0%</td>
+            <td>-100.0%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-福彩">福彩</span> 七乐彩</td>
+            <td>1期</td>
+            <td>¥10.0</td>
+            <td>¥0</td>
+            <td class="negative">¥-10.0</td>
+            <td>0.0%</td>
+            <td>0/5注 0.0%</td>
+            <td>-100.0%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-福彩">福彩</span> 快乐8</td>
+            <td>2期</td>
+            <td>¥20.0</td>
+            <td>¥0</td>
+            <td class="negative">¥-20.0</td>
+            <td>0.0%</td>
+            <td>0/10注 0.0%</td>
+            <td>-100.0%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-福彩">福彩</span> 双色球</td>
+            <td>1期</td>
+            <td>¥10.0</td>
+            <td>¥0</td>
+            <td class="negative">¥-10.0</td>
+            <td>0.0%</td>
+            <td>0/5注 0.0%</td>
+            <td>-100.0%</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-体彩">体彩</span> 七星彩</td>
+            <td>1期</td>
+            <td>¥10.0</td>
+            <td>¥5</td>
+            <td class="negative">¥-5.0</td>
+            <td>100.0%</td>
+            <td>1/5注 20.0%</td>
+            <td>-50.0%</td>
+        </tr>
                 </tbody>
             </table>
         </div>
