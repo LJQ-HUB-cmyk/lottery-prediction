@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="zh-CN"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>今日预测 - 2026-09-01（周二）</title>
+<title>今日预测 - 2026-09-02（周三）</title>
 <style>
   .portal-nav{background:linear-gradient(135deg,#0b2a4a,#1e4a7a);color:#fff;padding:0 16px;
     position:sticky;top:0;z-index:99;display:flex;align-items:center;gap:4px;flex-wrap:wrap;min-height:50px;
@@ -13,6 +13,12 @@
   .portal-nav select{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.3);
     border-radius:6px;padding:5px 8px;font-size:12px;margin-left:auto;}
   .portal-nav select option{color:#1f2937;}
+  @media(max-width:720px){
+    .portal-nav{padding:6px 8px;gap:3px;min-height:auto;}
+    .portal-nav .bn{width:100%;margin-right:0;font-size:14px;}
+    .portal-nav a{padding:6px 10px;font-size:12.5px;}
+    .portal-nav select{margin-left:0;margin-top:2px;max-width:100%;}
+  }
   *{box-sizing:border-box}
   body{font-family:"Microsoft YaHei","PingFang SC","Helvetica Neue",sans-serif;margin:0;background:#f0f4f9;color:#1f2937;}
   .nav{background:linear-gradient(135deg,#0b2a4a,#1e4a7a);color:#fff;position:sticky;top:0;z-index:10;box-shadow:0 2px 12px rgba(11,42,74,.28);}
@@ -41,6 +47,7 @@
   .parlay{border:1px solid #e2e8f0;border-radius:12px;padding:14px 18px;margin:12px 0;background:linear-gradient(135deg,#fafcff,#f4f8ff);box-shadow:0 1px 3px rgba(16,42,84,.04);transition:.2s;}
   .parlay:hover{box-shadow:0 4px 14px rgba(16,42,84,.1);transform:translateY(-1px);}
   .parlay.t3{background:linear-gradient(135deg,#fbfaff,#f5f0fb);}
+  .parlay.t4{background:linear-gradient(135deg,#f0faf8,#e3f3ee);}
   .ph{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;margin-bottom:9px;align-items:center;}
   .ph b{color:#0b2a4a;font-size:16px;}
   .ph .pot{color:#0e9f6e;font-weight:700;}
@@ -55,7 +62,34 @@
   .wrap{overflow-x:auto;}
   .foot{margin:24px 0 0;padding:16px 22px;background:linear-gradient(135deg,#0b2a4a,#123a63);border-radius:12px;color:#c9d8ea;font-size:12px;line-height:2;}
   .foot b{color:#fff;}
-  @media(max-width:720px){.nav .brand{width:100%;margin-bottom:4px;}}
+  @media(max-width:720px){
+    .nav-inner{padding:6px 10px;gap:4px;min-height:auto;}
+    .nav .brand{width:100%;margin-right:0;font-size:15px;padding-bottom:2px;}
+    .nav a{padding:6px 11px;font-size:13px;}
+    .nav select{max-width:100%!important;width:100%;margin-left:0!important;margin-top:4px;font-size:13px;}
+    .container{padding:12px 10px 32px;}
+    .card{padding:14px 12px;border-radius:12px;}
+    h2{font-size:16px;}
+    table{font-size:12px;}
+    th{padding:8px 6px;white-space:normal;}
+    td{padding:7px 5px;}
+    .parlay{padding:12px 12px;}
+    .ph{gap:6px 10px;font-size:12px;}
+    .ph b{font-size:15px;}
+    .plays{gap:4px 6px;}
+    .pl b{font-size:12px;}
+    .ud-wrap{max-width:100%;}
+    .foot{padding:14px 14px;font-size:11px;line-height:1.9;}
+    /* 竞猜表瘦身：联赛列隐藏，玩法标签单行横向滚动，爆冷只留风险徽章；
+       多角度分析列保留完整显示（用户反馈手机要看分析，仅隐藏联赛列） */
+    th.lg,td.lg{display:none;}
+    td.ud .ud-wrap{display:none;}
+    td.ud{white-space:nowrap;}
+    .plays{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;padding-bottom:2px;-webkit-overflow-scrolling:touch;}
+    .pl{white-space:nowrap;}
+    .ph .podd{display:inline;}
+    .pnote{font-size:11px;line-height:1.8;}
+  }
 
   .wrap{max-width:1120px;margin:0 auto;padding:24px 20px 60px;}
   .hd{text-align:center;margin-bottom:26px;}
@@ -82,66 +116,66 @@
   .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:14px 18px;margin:0 0 24px;color:#92400e;font-size:13.5px;line-height:1.7;}
   .disc{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:12px;padding:14px 18px;margin-top:26px;color:#475569;font-size:13px;line-height:1.7;}
 </style></head><body>
-<div class="portal-nav"><span class="bn">🎱 彩票预测门户</span><a href="daily_today.html" class="on">今日预测</a><a href="index.html" class="">竞猜</a><a href="daily.html" class="">日报</a><a href="weekly.html" class="">周报</a><a href="jc_weekly.html" class="">竞猜周报</a><a href="jc_daily.html" class="">竞猜日报</a><a href="jc_accuracy.html">准确率</a><select onchange="location.href=this.value"><option value="daily_preview_2026-09-01.html" selected>📅 2026-09-01</option><option value="daily_preview_2026-08-31.html">📅 2026-08-31</option><option value="daily_preview_2026-08-30.html">📅 2026-08-30</option><option value="daily_preview_2026-08-29.html">📅 2026-08-29</option><option value="daily_preview_2026-08-28.html">📅 2026-08-28</option><option value="daily_preview_2026-08-27.html">📅 2026-08-27</option><option value="daily_preview_2026-08-26.html">📅 2026-08-26</option><option value="daily_preview_2026-08-25.html">📅 2026-08-25</option><option value="daily_preview_2026-08-24.html">📅 2026-08-24</option><option value="daily_preview_2026-08-23.html">📅 2026-08-23</option><option value="daily_preview_2026-08-22.html">📅 2026-08-22</option><option value="daily_preview_2026-08-21.html">📅 2026-08-21</option><option value="daily_preview_2026-08-20.html">📅 2026-08-20</option><option value="daily_preview_2026-08-19.html">📅 2026-08-19</option><option value="daily_preview_2026-08-18.html">📅 2026-08-18</option><option value="daily_preview_2026-08-17.html">📅 2026-08-17</option><option value="daily_preview_2026-08-16.html">📅 2026-08-16</option><option value="daily_preview_2026-08-15.html">📅 2026-08-15</option><option value="daily_preview_2026-08-14.html">📅 2026-08-14</option><option value="daily_preview_2026-08-13.html">📅 2026-08-13</option><option value="daily_preview_2026-08-12.html">📅 2026-08-12</option><option value="daily_preview_2026-08-11.html">📅 2026-08-11</option><option value="daily_preview_2026-08-10.html">📅 2026-08-10</option><option value="daily_preview_2026-08-09.html">📅 2026-08-09</option><option value="daily_preview_2026-08-08.html">📅 2026-08-08</option><option value="daily_preview_2026-08-07.html">📅 2026-08-07</option><option value="daily_preview_2026-08-06.html">📅 2026-08-06</option><option value="daily_preview_2026-08-05.html">📅 2026-08-05</option><option value="daily_preview_2026-08-04.html">📅 2026-08-04</option><option value="daily_preview_2026-08-03.html">📅 2026-08-03</option><option value="daily_preview_2026-08-02.html">📅 2026-08-02</option><option value="daily_preview_2026-08-01.html">📅 2026-08-01</option><option value="daily_preview_2026-07-31.html">📅 2026-07-31</option><option value="daily_preview_2026-07-30.html">📅 2026-07-30</option></select></div>
+<div class="portal-nav"><span class="bn">🎱 彩票预测门户</span><a href="daily_today.html" class="on">今日预测</a><a href="index.html" class="">竞猜</a><a href="daily.html" class="">日报</a><a href="weekly.html" class="">周报</a><a href="jc_weekly.html" class="">竞猜周报</a><a href="jc_daily.html" class="">竞猜日报</a><a href="jc_accuracy.html" class="">准确率</a><select onchange="location.href=this.value"><option value="daily_preview_2026-09-02.html" selected>📅 2026-09-02</option><option value="daily_preview_2026-09-01.html">📅 2026-09-01</option><option value="daily_preview_2026-08-31.html">📅 2026-08-31</option><option value="daily_preview_2026-08-30.html">📅 2026-08-30</option><option value="daily_preview_2026-08-29.html">📅 2026-08-29</option><option value="daily_preview_2026-08-28.html">📅 2026-08-28</option><option value="daily_preview_2026-08-27.html">📅 2026-08-27</option><option value="daily_preview_2026-08-26.html">📅 2026-08-26</option><option value="daily_preview_2026-08-25.html">📅 2026-08-25</option><option value="daily_preview_2026-08-24.html">📅 2026-08-24</option><option value="daily_preview_2026-08-23.html">📅 2026-08-23</option><option value="daily_preview_2026-08-22.html">📅 2026-08-22</option><option value="daily_preview_2026-08-21.html">📅 2026-08-21</option><option value="daily_preview_2026-08-20.html">📅 2026-08-20</option><option value="daily_preview_2026-08-19.html">📅 2026-08-19</option><option value="daily_preview_2026-08-18.html">📅 2026-08-18</option><option value="daily_preview_2026-08-17.html">📅 2026-08-17</option><option value="daily_preview_2026-08-16.html">📅 2026-08-16</option><option value="daily_preview_2026-08-15.html">📅 2026-08-15</option><option value="daily_preview_2026-08-14.html">📅 2026-08-14</option><option value="daily_preview_2026-08-13.html">📅 2026-08-13</option><option value="daily_preview_2026-08-12.html">📅 2026-08-12</option><option value="daily_preview_2026-08-11.html">📅 2026-08-11</option><option value="daily_preview_2026-08-10.html">📅 2026-08-10</option><option value="daily_preview_2026-08-09.html">📅 2026-08-09</option><option value="daily_preview_2026-08-08.html">📅 2026-08-08</option><option value="daily_preview_2026-08-07.html">📅 2026-08-07</option><option value="daily_preview_2026-08-06.html">📅 2026-08-06</option><option value="daily_preview_2026-08-05.html">📅 2026-08-05</option><option value="daily_preview_2026-08-04.html">📅 2026-08-04</option><option value="daily_preview_2026-08-03.html">📅 2026-08-03</option><option value="daily_preview_2026-08-02.html">📅 2026-08-02</option><option value="daily_preview_2026-08-01.html">📅 2026-08-01</option><option value="daily_preview_2026-07-31.html">📅 2026-07-31</option><option value="daily_preview_2026-07-30.html">📅 2026-07-30</option></select></div>
 <div class="wrap">
   <div class="hd">
-    <h1>🎱 今日预测 · 2026-09-01（周二）</h1>
+    <h1>🎱 今日预测 · 2026-09-02（周三）</h1>
     <div class="sub">number_framework v1.3（软杀号 + 日期杀号） · 预测号码 = 投注号码</div>
   </div>
 
   <div class="kpi">
     <div class="k"><div class="v">6</div><div class="l">今日玩法</div></div>
-    <div class="k"><div class="v">28</div><div class="l">总注数</div></div>
-    <div class="k"><div class="v">¥56</div><div class="l">总投入</div></div>
+    <div class="k"><div class="v">29</div><div class="l">总注数</div></div>
+    <div class="k"><div class="v">¥58</div><div class="l">总投入</div></div>
   </div>
 
   <div class="tip">
     ⏰ <b>本页为「今日预测展示」</b>，仅展示当日预测号码与投注方案，<b>不含开奖核对</b>。<br>
-    当日开奖于晚间进行，开奖后由次日自动化生成正式《日报》<code>daily_report_2026-09-01.html</code>，届时在「日报」页查看逐注中奖与收益。
+    当日开奖于晚间进行，开奖后由次日自动化生成正式《日报》<code>daily_report_2026-09-02.html</code>，届时在「日报」页查看逐注中奖与收益。
   </div>
 
   <div class="cards">
     <div class="card">
       <div class="card-hd">
-        <span class="gname">双色球</span>
-        <span class="meta">5 注 · ¥10</span>
+        <span class="gname">大乐透</span>
+        <span class="meta">6 注 · ¥12</span>
       </div>
-      <div class='bets'><div class='bet'><span class='bet-no'>1</span><span class='bet-nums'>02 06 07 13 15 32 13</span></div><div class='bet'><span class='bet-no'>2</span><span class='bet-nums'>06 09 14 15 24 32 03</span></div><div class='bet'><span class='bet-no'>3</span><span class='bet-nums'>08 10 12 13 23 33 13</span></div><div class='bet'><span class='bet-no'>4</span><span class='bet-nums'>02 06 10 14 16 33 16</span></div><div class='bet'><span class='bet-no'>5</span><span class='bet-nums'>06 12 17 25 31 32 13</span></div></div>
+      <div class='bets'><div class='bet'><span class='bet-no'>1</span><span class='bet-nums'>04 08 10 21 34 03 10</span></div><div class='bet'><span class='bet-no'>2</span><span class='bet-nums'>06 11 13 26 27 04 11</span></div><div class='bet'><span class='bet-no'>3</span><span class='bet-nums'>07 10 15 26 33 04 11</span></div><div class='bet'><span class='bet-no'>4</span><span class='bet-nums'>12 14 16 21 32 07 08</span></div><div class='bet'><span class='bet-no'>5</span><span class='bet-nums'>03 07 19 22 34 01 12</span></div><div class='bet'><span class='bet-no'>6</span><span class='bet-nums'>04 11 12 24 25 04 11</span></div></div>
     </div>
     <div class="card">
       <div class="card-hd">
         <span class="gname">福彩3D</span>
         <span class="meta">5 注 · ¥10</span>
       </div>
-      <div class='bets'><div class='bet'><span class='bet-no'>1</span><span class='bet-nums'>08 05 06</span></div><div class='bet'><span class='bet-no'>2</span><span class='bet-nums'>05 05 02</span></div><div class='bet'><span class='bet-no'>3</span><span class='bet-nums'>05 02 00</span></div><div class='bet'><span class='bet-no'>4</span><span class='bet-nums'>07 03 00</span></div><div class='bet'><span class='bet-no'>5</span><span class='bet-nums'>09 02 01</span></div></div>
+      <div class='bets'><div class='bet'><span class='bet-no'>1</span><span class='bet-nums'>06 06 05</span></div><div class='bet'><span class='bet-no'>2</span><span class='bet-nums'>02 05 05</span></div><div class='bet'><span class='bet-no'>3</span><span class='bet-nums'>03 06 06</span></div><div class='bet'><span class='bet-no'>4</span><span class='bet-nums'>05 03 08</span></div><div class='bet'><span class='bet-no'>5</span><span class='bet-nums'>07 06 06</span></div></div>
     </div>
     <div class="card">
       <div class="card-hd">
         <span class="gname">排列三</span>
         <span class="meta">5 注 · ¥10</span>
       </div>
-      <div class='bets'><div class='bet'><span class='bet-no'>1</span><span class='bet-nums'>07 08 06</span></div><div class='bet'><span class='bet-no'>2</span><span class='bet-nums'>09 05 01</span></div><div class='bet'><span class='bet-no'>3</span><span class='bet-nums'>09 06 05</span></div><div class='bet'><span class='bet-no'>4</span><span class='bet-nums'>01 01 05</span></div><div class='bet'><span class='bet-no'>5</span><span class='bet-nums'>04 06 09</span></div></div>
+      <div class='bets'><div class='bet'><span class='bet-no'>1</span><span class='bet-nums'>01 05 07</span></div><div class='bet'><span class='bet-no'>2</span><span class='bet-nums'>08 03 00</span></div><div class='bet'><span class='bet-no'>3</span><span class='bet-nums'>09 08 00</span></div><div class='bet'><span class='bet-no'>4</span><span class='bet-nums'>00 05 02</span></div><div class='bet'><span class='bet-no'>5</span><span class='bet-nums'>08 00 07</span></div></div>
     </div>
     <div class="card">
       <div class="card-hd">
         <span class="gname">排列五</span>
         <span class="meta">3 注 · ¥6</span>
       </div>
-      <div class='bets'><div class='bet'><span class='bet-no'>1</span><span class='bet-nums'>09 06 02 04 06</span></div><div class='bet'><span class='bet-no'>2</span><span class='bet-nums'>00 04 01 04 05</span></div><div class='bet'><span class='bet-no'>3</span><span class='bet-nums'>04 03 04 09 03</span></div></div>
+      <div class='bets'><div class='bet'><span class='bet-no'>1</span><span class='bet-nums'>02 01 01 02 04</span></div><div class='bet'><span class='bet-no'>2</span><span class='bet-nums'>08 03 05 08 09</span></div><div class='bet'><span class='bet-no'>3</span><span class='bet-nums'>09 04 05 08 09</span></div></div>
     </div>
     <div class="card">
       <div class="card-hd">
-        <span class="gname">七星彩</span>
+        <span class="gname">七乐彩</span>
         <span class="meta">5 注 · ¥10</span>
       </div>
-      <div class='bets'><div class='bet'><span class='bet-no'>1</span><span class='bet-nums'>00 06 00 01 09 08 09</span></div><div class='bet'><span class='bet-no'>2</span><span class='bet-nums'>09 06 06 08 05 08 14</span></div><div class='bet'><span class='bet-no'>3</span><span class='bet-nums'>08 04 04 00 08 04 14</span></div><div class='bet'><span class='bet-no'>4</span><span class='bet-nums'>00 09 07 02 06 05 07</span></div><div class='bet'><span class='bet-no'>5</span><span class='bet-nums'>03 09 06 08 03 05 04</span></div></div>
+      <div class='bets'><div class='bet'><span class='bet-no'>1</span><span class='bet-nums'>03 10 12 13 14 15 29 11</span></div><div class='bet'><span class='bet-no'>2</span><span class='bet-nums'>04 07 08 13 22 29 30 25</span></div><div class='bet'><span class='bet-no'>3</span><span class='bet-nums'>01 05 18 20 24 27 28 19</span></div><div class='bet'><span class='bet-no'>4</span><span class='bet-nums'>08 13 16 25 27 29 30 22</span></div><div class='bet'><span class='bet-no'>5</span><span class='bet-nums'>01 05 07 12 23 26 27 21</span></div></div>
     </div>
     <div class="card">
       <div class="card-hd">
         <span class="gname">快乐8</span>
         <span class="meta">5 注 · ¥10</span>
       </div>
-      <div class='bets'><div class='bet'><span class='bet-no'>1</span><span class='bet-nums'>12 45 47 56 75</span></div><div class='bet'><span class='bet-no'>2</span><span class='bet-nums'>12 13 45 56 75</span></div><div class='bet'><span class='bet-no'>3</span><span class='bet-nums'>03 12 19 56 77</span></div><div class='bet'><span class='bet-no'>4</span><span class='bet-nums'>38 46 75 77 80</span></div><div class='bet'><span class='bet-no'>5</span><span class='bet-nums'>03 38 47 56 62</span></div></div>
+      <div class='bets'><div class='bet'><span class='bet-no'>1</span><span class='bet-nums'>33 37 54 57 59</span></div><div class='bet'><span class='bet-no'>2</span><span class='bet-nums'>13 37 54 57 59</span></div><div class='bet'><span class='bet-no'>3</span><span class='bet-nums'>12 18 37 43 54</span></div><div class='bet'><span class='bet-no'>4</span><span class='bet-nums'>06 14 18 57 64</span></div><div class='bet'><span class='bet-no'>5</span><span class='bet-nums'>14 25 33 43 54</span></div></div>
     </div></div>
 
   <div class="disc">
